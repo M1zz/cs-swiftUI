@@ -145,6 +145,41 @@
               </div>
             </div>
           </div>
+          <div class="code-preview">
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">struct CounterView: View {
+    @State private var count = 0
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("\(count)")
+                .font(.system(size: 60, weight: .bold))
+
+            Button("+ 1") {
+                count += 1
+            }
+            .buttonStyle(.borderedProminent)
+        }
+    }
+}</pre>
+            </div>
+            <div class="phone-preview">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="preview-label">Preview</div>
+                  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+                    <div style="font-size:48px;font-weight:700;color:#1A1D2A;">0</div>
+                    <div style="background:#007AFF;color:#fff;padding:8px 20px;border-radius:10px;font-size:14px;font-weight:600;">+ 1</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -177,6 +212,45 @@
               <div class="item-content">
                 <div class="item-title">단방향 데이터 흐름</div>
                 <div class="item-desc">상태는 위에서 아래로. View는 상태를 그릴 뿐, 상태를 소유하지 않는 것이 원칙</div>
+              </div>
+            </div>
+          </div>
+          <div class="code-preview">
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">struct ParentView: View {
+    @State private var name = ""
+
+    var body: some View {
+        VStack {
+            Text("이름: \(name)")
+            ChildView(name: $name)
+        }
+    }
+}
+
+struct ChildView: View {
+    @Binding var name: String
+
+    var body: some View {
+        TextField("이름 입력", text: $name)
+            .textFieldStyle(.roundedBorder)
+    }
+}</pre>
+            </div>
+            <div class="phone-preview">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="preview-label">Preview</div>
+                  <div style="flex:1;display:flex;flex-direction:column;gap:14px;padding-top:20px;">
+                    <div style="font-size:15px;color:#1A1D2A;text-align:center;">이름: </div>
+                    <div style="border:1px solid #D0D3DC;border-radius:8px;padding:10px 12px;font-size:13px;color:#999;background:#FAFAFA;">이름 입력</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -219,6 +293,43 @@
               </div>
             </div>
           </div>
+          <div class="code-preview">
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">struct InputView: View {
+    @State private var email = ""
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("이메일")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            TextField("example@email.com",
+                      text: $email)
+                .textFieldStyle(.roundedBorder)
+                .keyboardType(.emailAddress)
+        }
+        .padding()
+    }
+}</pre>
+            </div>
+            <div class="phone-preview">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="preview-label">Preview</div>
+                  <div style="flex:1;display:flex;flex-direction:column;gap:6px;padding-top:20px;">
+                    <div style="font-size:11px;color:#8E8E93;letter-spacing:.02em;">이메일</div>
+                    <div style="border:1px solid #D0D3DC;border-radius:8px;padding:10px 12px;font-size:13px;color:#999;background:#FAFAFA;">example@email.com</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -251,6 +362,53 @@
               <div class="item-content">
                 <div class="item-title">Picker</div>
                 <div class="item-desc">.pickerStyle(.segmented) / .menu / .wheel. ForEach로 옵션 생성</div>
+              </div>
+            </div>
+          </div>
+          <div class="code-preview">
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">struct SettingsView: View {
+    @State private var isDark = false
+    @State private var fontSize: Double = 16
+
+    var body: some View {
+        Form {
+            Toggle("다크 모드", isOn: $isDark)
+
+            VStack(alignment: .leading) {
+                Text("폰트 크기: \(Int(fontSize))")
+                Slider(value: $fontSize,
+                       in: 12...24, step: 1)
+            }
+        }
+    }
+}</pre>
+            </div>
+            <div class="phone-preview">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="preview-label">Preview</div>
+                  <div style="flex:1;display:flex;flex-direction:column;gap:16px;padding-top:16px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #E2E4EA;">
+                      <span style="font-size:13px;">다크 모드</span>
+                      <div style="width:42px;height:24px;border-radius:12px;background:#E2E4EA;position:relative;">
+                        <div style="width:20px;height:20px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;box-shadow:0 1px 3px rgba(0,0,0,.15);"></div>
+                      </div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:8px;">
+                      <span style="font-size:13px;">폰트 크기: 16</span>
+                      <div style="position:relative;height:4px;background:#E2E4EA;border-radius:2px;">
+                        <div style="position:absolute;left:0;top:0;width:33%;height:100%;background:#007AFF;border-radius:2px;"></div>
+                        <div style="position:absolute;left:33%;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid #007AFF;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -300,6 +458,61 @@
               </div>
             </div>
           </div>
+          <div class="code-preview">
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">struct Fruit: Identifiable {
+    let id = UUID()
+    let name: String
+    let emoji: String
+}
+
+struct FruitList: View {
+    @State private var fruits = [
+        Fruit(name: "사과", emoji: "🍎"),
+        Fruit(name: "바나나", emoji: "🍌"),
+        Fruit(name: "포도", emoji: "🍇"),
+    ]
+
+    var body: some View {
+        List {
+            ForEach(fruits) { fruit in
+                HStack {
+                    Text(fruit.emoji)
+                    Text(fruit.name)
+                }
+            }
+            .onDelete { fruits.remove(atOffsets: $0) }
+        }
+    }
+}</pre>
+            </div>
+            <div class="phone-preview">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="preview-label">Preview</div>
+                  <div style="flex:1;display:flex;flex-direction:column;padding-top:8px;">
+                    <div style="display:flex;align-items:center;gap:10px;padding:12px 4px;border-bottom:1px solid #E2E4EA;">
+                      <span style="font-size:18px;">🍎</span>
+                      <span style="font-size:14px;">사과</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;padding:12px 4px;border-bottom:1px solid #E2E4EA;">
+                      <span style="font-size:18px;">🍌</span>
+                      <span style="font-size:14px;">바나나</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;padding:12px 4px;border-bottom:1px solid #E2E4EA;">
+                      <span style="font-size:18px;">🍇</span>
+                      <span style="font-size:14px;">포도</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -332,6 +545,54 @@
               <div class="item-content">
                 <div class="item-title">.alert("제목", isPresented: $show)</div>
                 <div class="item-desc">확인/취소 다이얼로그. 삭제 확인 UX 패턴</div>
+              </div>
+            </div>
+          </div>
+          <div class="code-preview">
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">struct HomeView: View {
+    @State private var showSheet = false
+
+    var body: some View {
+        NavigationStack {
+            List {
+                NavigationLink("상세 보기") {
+                    Text("Detail View")
+                }
+            }
+            .navigationTitle("홈")
+            .toolbar {
+                Button("추가") {
+                    showSheet = true
+                }
+            }
+            .sheet(isPresented: $showSheet) {
+                Text("Sheet Content")
+            }
+        }
+    }
+}</pre>
+            </div>
+            <div class="phone-preview">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="preview-label">Preview</div>
+                  <div style="flex:1;display:flex;flex-direction:column;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0 12px;border-bottom:1px solid #E2E4EA;">
+                      <span style="font-size:20px;font-weight:700;">홈</span>
+                      <span style="font-size:13px;color:#007AFF;font-weight:500;">추가</span>
+                    </div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 4px;border-bottom:1px solid #E2E4EA;">
+                      <span style="font-size:14px;">상세 보기</span>
+                      <span style="font-size:12px;color:#C7C7CC;">&#9654;</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -374,6 +635,47 @@
               </div>
             </div>
           </div>
+          <div class="code-preview">
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">struct Todo: Identifiable, Codable {
+    let id: UUID
+    var title: String
+    var isCompleted: Bool
+
+    init(title: String) {
+        self.id = UUID()
+        self.title = title
+        self.isCompleted = false
+    }
+}</pre>
+            </div>
+            <div class="phone-preview">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="preview-label">Preview</div>
+                  <div style="flex:1;display:flex;flex-direction:column;padding-top:12px;gap:0;">
+                    <div style="display:flex;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid #E2E4EA;">
+                      <span style="font-size:16px;color:#007AFF;">&#9745;</span>
+                      <span style="font-size:13px;color:#999;text-decoration:line-through;">장보기</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid #E2E4EA;">
+                      <span style="font-size:16px;color:#D0D3DC;">&#9744;</span>
+                      <span style="font-size:13px;">SwiftUI 공부</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid #E2E4EA;">
+                      <span style="font-size:16px;color:#D0D3DC;">&#9744;</span>
+                      <span style="font-size:13px;">운동하기</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -409,6 +711,49 @@
               </div>
             </div>
           </div>
+          <div class="code-preview">
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">// 저장
+func save(_ todos: [Todo]) {
+    if let data = try? JSONEncoder()
+        .encode(todos) {
+        UserDefaults.standard
+            .set(data, forKey: "todos")
+    }
+}
+
+// 불러오기
+func load() -> [Todo] {
+    guard let data = UserDefaults.standard
+        .data(forKey: "todos"),
+        let todos = try? JSONDecoder()
+            .decode([Todo].self, from: data)
+    else { return [] }
+    return todos
+}</pre>
+            </div>
+            <div class="phone-preview">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="preview-label">Preview</div>
+                  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px 0;">
+                    <div style="background:#F0F1F5;border:1px solid #D0D3DC;border-radius:8px;padding:8px 12px;font-size:11px;font-weight:600;color:#1A1D2A;text-align:center;">[Todo]</div>
+                    <div style="font-size:10px;color:#007AFF;">&#9660; JSONEncoder</div>
+                    <div style="background:#F0F1F5;border:1px solid #D0D3DC;border-radius:8px;padding:8px 12px;font-size:11px;font-weight:600;color:#1A1D2A;text-align:center;">Data</div>
+                    <div style="font-size:10px;color:#007AFF;">&#9660; UserDefaults</div>
+                    <div style="background:#F0F1F5;border:1px solid #D0D3DC;border-radius:8px;padding:8px 12px;font-size:11px;font-weight:600;color:#1A1D2A;text-align:center;">Data</div>
+                    <div style="font-size:10px;color:#007AFF;">&#9660; JSONDecoder</div>
+                    <div style="background:#F0F1F5;border:1px solid #D0D3DC;border-radius:8px;padding:8px 12px;font-size:11px;font-weight:600;color:#1A1D2A;text-align:center;">[Todo]</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -436,6 +781,18 @@
 <script>
   function toggleCard(el) { el.classList.toggle('open'); }
   document.querySelector('.topic-card')?.classList.add('open');
+
+  function highlightSwift(el) {
+    let html = el.textContent;
+    html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    html = html.replace(/(\/\/.*)/gm, '<span class="cm">$1</span>');
+    html = html.replace(/"([^"]*?)"/g, '<span class="str">"$1"</span>');
+    html = html.replace(/@(\w+)/g, '<span class="pr">@$1</span>');
+    html = html.replace(/\b(struct|var|let|func|import|return|if|else|guard|for|in|case|enum|protocol|class|some|private|true|false|nil|self|mutating|static)\b/g, '<span class="kw">$1</span>');
+    html = html.replace(/\b(\d+\.?\d*)\b/g, '<span class="num">$1</span>');
+    el.innerHTML = html;
+  }
+  document.querySelectorAll('.swift-code').forEach(highlightSwift);
 </script>
 </body>
 </html>
