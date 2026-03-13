@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1-4 막히는 Swift 문법 | Stage 1 | 개발자리</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+  <style>
+    .ch-hero {
+      padding:56px 40px 48px; max-width:1100px; margin:0 auto;
+      position:relative; z-index:1;
+    }
+    .ch-hero::after {
+      content:''; position:absolute; top:-40px; right:-60px;
+      width:360px; height:360px;
+      background:radial-gradient(circle,#FFD1660D,transparent 65%);
+      pointer-events:none;
+    }
+    .ch-hero h1 {
+      font-family:'Syne',sans-serif; font-size:clamp(36px,6vw,64px);
+      font-weight:800; letter-spacing:-.03em; margin-bottom:12px;
+    }
+    .ch-hero h1 .accent { color:var(--yellow); }
+    .ch-hero .trigger {
+      font-size:14px; color:var(--muted); font-style:italic; margin-bottom:32px;
+    }
+    .ch-hero .trigger::before { content:'↳ '; color:var(--yellow); }
+    .content-wrap {
+      max-width:1100px; margin:0 auto; padding:0 40px 100px;
+      position:relative; z-index:1;
+    }
+    .topic-section { margin-bottom:48px; }
+    .topic-section > h2 {
+      font-family:'Syne',sans-serif; font-size:22px; font-weight:800;
+      letter-spacing:-.02em; margin-bottom:6px;
+    }
+    .topic-section > .ts-sub {
+      font-family:'DM Mono',monospace; font-size:11px;
+      color:var(--muted); font-style:italic; margin-bottom:20px;
+    }
+    .ch-nav {
+      display:flex; justify-content:space-between; gap:16px;
+      margin-bottom:80px; flex-wrap:wrap;
+    }
+    .ch-nav a {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--radius); padding:16px 24px;
+      text-decoration:none; display:flex; flex-direction:column; gap:4px;
+      flex:1; min-width:200px; transition:border-color .2s;
+    }
+    .ch-nav a:hover { border-color:var(--yellow); }
+    .ch-nav .nav-dir {
+      font-family:'DM Mono',monospace; font-size:10px;
+      letter-spacing:.08em; color:var(--muted);
+    }
+    .ch-nav .nav-title {
+      font-family:'Syne',sans-serif; font-size:15px; font-weight:700;
+    }
+    .ch-nav .next { text-align:right; }
+
+    /* error block */
+    .error-block {
+      background: #1A1010; border: 1px solid #FF5C5C33;
+      border-radius: 10px; padding: 14px 16px; margin-top: 10px;
+      font-family: 'DM Mono', monospace; font-size: 11px; color: #FF8080;
+      line-height: 1.6;
+    }
+
+    @media(max-width:768px){
+      .ch-hero{padding:36px 20px 36px;}
+      .content-wrap{padding:0 20px 80px;}
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../index.html" class="nav-logo">개발자<span>리</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">커리큘럼 맵</a></li>
+    <li><a href="index.html">Stage 1</a></li>
+    <li><a href="1-1.html">1-1</a></li>
+    <li><a href="1-2.html">1-2</a></li>
+    <li><a href="1-3.html">1-3</a></li>
+    <li><a href="1-4.html" class="active">1-4</a></li>
+  </ul>
+  <span class="nav-badge">Chapter 1-4</span>
+</nav>
+
+<div class="breadcrumb">
+  <a href="../index.html">커리큘럼 맵</a>
+  <span class="sep">/</span>
+  <a href="index.html">Stage 1</a>
+  <span class="sep">/</span>
+  <span class="current">1-4 막히는 Swift 문법</span>
+</div>
+
+<header class="ch-hero fade-in">
+  <div class="badge badge-yellow" style="margin-bottom:20px;">
+    <span class="badge-dot"></span>
+    Chapter 1-4 · 4 Topics
+  </div>
+  <h1>✏️ 막히는 <span class="accent">Swift 문법</span></h1>
+  <p class="trigger">컴파일 에러가 나는데 왜 나는지 모른다</p>
+  <div class="chip-row">
+    <span class="chip yellow">let vs var</span>
+    <span class="chip yellow">Optional · nil</span>
+    <span class="chip yellow">if let / guard let</span>
+    <span class="chip yellow">?? · !</span>
+    <span class="chip yellow">Array · Dictionary · Set</span>
+    <span class="chip yellow">map · filter · forEach</span>
+    <span class="chip yellow">Closure · [weak self]</span>
+    <span class="chip yellow">Fix-it</span>
+  </div>
+</header>
+
+<div class="content-wrap">
+
+  <!-- Topic 1: 타입과 옵셔널 -->
+  <div class="topic-section fade-in delay-1">
+    <h2>타입과 옵셔널</h2>
+    <p class="ts-sub">"must be unwrapped" 에러 해결</p>
+    <div class="topics-grid">
+
+      <div class="topic-card color-yellow" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-left">
+            <div class="topic-name">let vs var · 타입 추론</div>
+            <div class="topic-subtitle">상수와 변수, 타입을 명시하는 시점</div>
+          </div>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="topic-body">
+          <div class="topic-items">
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">let — 상수 (변경 불가)</div>
+                <div class="item-desc">한 번 할당하면 변경 불가. 컴파일러가 불필요한 변경을 막아줌. 기본적으로 let을 쓰고 필요할 때 var로 바꿈</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">타입 추론 vs 명시</div>
+                <div class="item-desc">let x = 42 (Int 추론) vs let x: Int = 42. 명시가 필요한 경우 — 타입이 모호하거나 다른 타입을 원할 때</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card color-yellow" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-left">
+            <div class="topic-name">Optional 완전 정복</div>
+            <div class="topic-subtitle">nil · if let · guard let · ?? · !</div>
+          </div>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="topic-body">
+          <div class="topic-items">
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">Optional이란</div>
+                <div class="item-desc">String? = "값이 있거나 없거나". Optional은 enum: case some(Wrapped), case none</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">if let name = optionalName</div>
+                <div class="item-desc">값이 있으면 블록 실행. 없으면 else. 블록 안에서만 언래핑된 값 사용 가능</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">guard let name = optionalName else { return }</div>
+                <div class="item-desc">없으면 early return. 이후 코드에서 언래핑된 값을 계속 사용. 들여쓰기 줄이는 효과</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">?. 옵셔널 체이닝</div>
+                <div class="item-desc">user?.profile?.name — 중간에 nil이면 전체가 nil. crash 없이 안전하게</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">?? nil 병합 · ! 강제 언래핑</div>
+                <div class="item-desc">name ?? "익명" — nil일 때 기본값. ! — nil이면 crash. ! 써도 되는 경우: nil이 절대 아님을 100% 확신할 때만</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Topic 2: 컬렉션 -->
+  <div class="topic-section fade-in delay-2">
+    <h2>컬렉션 핵심</h2>
+    <p class="ts-sub">"Index out of range" 에러 해결</p>
+    <div class="topics-grid">
+
+      <div class="topic-card color-yellow" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-left">
+            <div class="topic-name">Array · Dictionary · Set</div>
+            <div class="topic-subtitle">언제 무엇을 쓰는가</div>
+          </div>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="topic-body">
+          <div class="topic-items">
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">Array — 순서 있는 목록</div>
+                <div class="item-desc">인덱스로 접근. indices.contains(i)로 범위 확인 후 접근. array.indices로 안전한 반복</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">Dictionary — 키-값 쌍</div>
+                <div class="item-desc">dict["key"] 결과는 항상 Optional. 없는 키일 수 있으니까. dict["key", default: 0]으로 기본값</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">Set — 중복 없는 집합</div>
+                <div class="item-desc">순서 없음. contains()가 O(1). 포함 여부 확인이 Array보다 훨씬 빠름. Hashable 필요</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card color-yellow" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-left">
+            <div class="topic-name">고차 함수 — map · filter · forEach</div>
+            <div class="topic-subtitle">반복 대신 선언적으로</div>
+          </div>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="topic-body">
+          <div class="topic-items">
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">map — 변환</div>
+                <div class="item-desc">names.map { $0.uppercased() } — 각 요소를 변환해 새 배열 반환</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">filter — 걸러내기</div>
+                <div class="item-desc">items.filter { $0.isCompleted } — 조건에 맞는 요소만 새 배열로</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">compactMap — Optional 제거</div>
+                <div class="item-desc">map + nil 제거. strings.compactMap { Int($0) } — 변환 실패한 nil을 걸러냄</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">reduce — 합산</div>
+                <div class="item-desc">items.reduce(0) { $0 + $1.price } — 누적값 계산</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Topic 3: 클로저 -->
+  <div class="topic-section fade-in delay-3">
+    <h2>클로저 읽기</h2>
+    <p class="ts-sub">{ } 코드가 왜 이렇게 생겼는가</p>
+    <div class="topics-grid">
+
+      <div class="topic-card color-yellow" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-left">
+            <div class="topic-name">클로저 문법 단계별 줄이기</div>
+            <div class="topic-subtitle">기본 → 후행 → 단축 인자명</div>
+          </div>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="topic-body">
+          <div class="topic-items">
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">기본 문법</div>
+                <div class="item-desc">{ (name: String) -> String in return name.uppercased() }</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">타입 추론으로 줄이기</div>
+                <div class="item-desc">{ name in name.uppercased() } — 타입과 return 생략</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">단축 인자명 $0 · $1</div>
+                <div class="item-desc">{ $0.uppercased() } — 파라미터 이름까지 생략. 순서대로 $0, $1, ...</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">후행 클로저</div>
+                <div class="item-desc">마지막 파라미터가 클로저면 괄호 밖으로. Button { } / .onAppear { } 가 이 형태</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card color-yellow" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-left">
+            <div class="topic-name">[weak self] 캡처 리스트</div>
+            <div class="topic-subtitle">언제 필요하고 언제 없어도 되는가</div>
+          </div>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="topic-body">
+          <div class="topic-items">
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">클로저는 값을 캡처한다</div>
+                <div class="item-desc">클로저가 self를 참조하면 strong 캡처. self도 클로저를 참조하면 순환 참조 발생</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">[weak self] 필요한 경우</div>
+                <div class="item-desc">escape 클로저(비동기 콜백, 타이머 등)에서 self를 참조할 때. [weak self] guard let self else { return }</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">SwiftUI에서는 불필요</div>
+                <div class="item-desc">SwiftUI View는 struct — class가 아니므로 순환 참조 없음. map { } filter { } 등에서도 불필요</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Topic 4: 에러 읽기 -->
+  <div class="topic-section fade-in delay-4">
+    <h2>에러 읽기</h2>
+    <p class="ts-sub">Xcode 에러 메시지 해석하는 법</p>
+    <div class="topics-grid">
+
+      <div class="topic-card color-yellow" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-left">
+            <div class="topic-name">자주 만나는 에러 메시지 4종</div>
+            <div class="topic-subtitle">원인과 해결 패턴</div>
+          </div>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="topic-body">
+          <div class="topic-items">
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">Cannot convert value of type 'X' to expected argument type 'Y'</div>
+                <div class="item-desc">타입 불일치. Int를 String에 넣으려 할 때. String(number) 로 명시적 변환</div>
+                <div class="error-block">Cannot convert value of type 'Int' to<br>expected argument type 'String'</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">Value of optional type 'X?' must be unwrapped</div>
+                <div class="item-desc">Optional을 그대로 사용하려 할 때. if let / guard let / ?? 로 언래핑</div>
+                <div class="error-block">Value of optional type 'String?' must be<br>unwrapped to a value of type 'String'</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">Referencing operator function '==' requires ... 'Equatable'</div>
+                <div class="item-desc">커스텀 타입을 == 비교하려 할 때. Equatable 채택 필요</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">Fix-it 신뢰도</div>
+                <div class="item-desc">믿어도 되는 경우: 프로토콜 메서드 추가, import 추가. 무시해야 할 경우: 복잡한 타입 문제에서 엉뚱한 제안</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Chapter nav -->
+  <div class="ch-nav">
+    <a href="1-3.html">
+      <span class="nav-dir">← 이전 챕터</span>
+      <span class="nav-title">1-3 여러 화면과 공유 상태</span>
+    </a>
+    <a href="../index.html" class="next">
+      <span class="nav-dir">Stage 1 완료 →</span>
+      <span class="nav-title">커리큘럼 맵으로 돌아가기</span>
+    </a>
+  </div>
+
+</div>
+
+<footer class="footer">
+  개발자리 · Stage 1 — Chapter 1-4 · 막히는 Swift 문법 · Stage 1 완료 🎉
+</footer>
+
+<script>
+  function toggleCard(el) { el.classList.toggle('open'); }
+  document.querySelector('.topic-card')?.classList.add('open');
+</script>
+</body>
+</html>

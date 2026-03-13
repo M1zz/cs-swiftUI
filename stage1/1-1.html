@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1-1 화면에 뭔가 띄우기 | Stage 1 | 개발자리</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+  <style>
+    .ch-hero {
+      padding:56px 40px 48px; max-width:1100px; margin:0 auto;
+      position:relative; z-index:1;
+    }
+    .ch-hero::after {
+      content:''; position:absolute; top:-40px; right:-60px;
+      width:360px; height:360px;
+      background:radial-gradient(circle,#FF6B2B10,transparent 65%);
+      pointer-events:none;
+    }
+    .ch-hero h1 {
+      font-family:'Syne',sans-serif; font-size:clamp(36px,6vw,64px);
+      font-weight:800; letter-spacing:-.03em; margin-bottom:12px;
+    }
+    .ch-hero h1 .accent { color:var(--orange); }
+    .ch-hero .trigger {
+      font-size:14px; color:var(--muted); font-style:italic; margin-bottom:32px;
+    }
+    .ch-hero .trigger::before { content:'↳ '; color:var(--orange); }
+
+    .content-wrap {
+      max-width:1100px; margin:0 auto; padding:0 40px 100px;
+      position:relative; z-index:1;
+    }
+    .topic-section { margin-bottom:48px; }
+    .topic-section > h2 {
+      font-family:'Syne',sans-serif; font-size:22px; font-weight:800;
+      letter-spacing:-.02em; margin-bottom:6px;
+    }
+    .topic-section > .ts-sub {
+      font-family:'DM Mono',monospace; font-size:11px;
+      color:var(--muted); font-style:italic; margin-bottom:20px;
+    }
+
+    /* nav between chapters */
+    .ch-nav {
+      display:flex; justify-content:space-between; gap:16px;
+      margin-bottom:80px; flex-wrap:wrap;
+    }
+    .ch-nav a {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--radius); padding:16px 24px;
+      text-decoration:none; display:flex; flex-direction:column; gap:4px;
+      flex:1; min-width:200px;
+      transition:border-color .2s;
+    }
+    .ch-nav a:hover { border-color:var(--orange); }
+    .ch-nav .nav-dir {
+      font-family:'DM Mono',monospace; font-size:10px;
+      letter-spacing:.08em; color:var(--muted);
+    }
+    .ch-nav .nav-title {
+      font-family:'Syne',sans-serif; font-size:15px; font-weight:700;
+    }
+    .ch-nav .next { text-align:right; }
+
+    @media(max-width:768px){
+      .ch-hero{padding:36px 20px 36px;}
+      .content-wrap{padding:0 20px 80px;}
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../index.html" class="nav-logo">개발자<span>리</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">커리큘럼 맵</a></li>
+    <li><a href="index.html">Stage 1</a></li>
+    <li><a href="1-1.html" class="active">1-1</a></li>
+    <li><a href="1-2.html">1-2</a></li>
+    <li><a href="1-3.html">1-3</a></li>
+    <li><a href="1-4.html">1-4</a></li>
+  </ul>
+  <span class="nav-badge">Chapter 1-1</span>
+</nav>
+
+<div class="breadcrumb">
+  <a href="../index.html">커리큘럼 맵</a>
+  <span class="sep">/</span>
+  <a href="index.html">Stage 1</a>
+  <span class="sep">/</span>
+  <span class="current">1-1 화면에 뭔가 띄우기</span>
+</div>
+
+<header class="ch-hero fade-in">
+  <div class="badge badge-orange" style="margin-bottom:20px;">
+    <span class="badge-dot"></span>
+    Chapter 1-1 · 3 Topics
+  </div>
+  <h1>📱 화면에 <span class="accent">뭔가 띄우기</span></h1>
+  <p class="trigger">"Hello World"를 앱에서 보고 싶다</p>
+  <div class="chip-row">
+    <span class="chip orange">View</span>
+    <span class="chip orange">body</span>
+    <span class="chip orange">VStack / HStack / ZStack</span>
+    <span class="chip orange">modifier 체이닝</span>
+    <span class="chip orange">frame · padding · Spacer</span>
+    <span class="chip orange">@main · App · Scene</span>
+    <span class="chip orange">Xcode Preview</span>
+    <span class="chip orange">GeometryReader</span>
+  </div>
+</header>
+
+<div class="content-wrap">
+
+  <!-- Topic 1 -->
+  <div class="topic-section fade-in delay-1">
+    <h2>SwiftUI 첫 화면</h2>
+    <p class="ts-sub">View · body · preview</p>
+    <div class="topics-grid">
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-left">
+            <div class="topic-name">ContentView 구조</div>
+            <div class="topic-subtitle">앱 시작점, struct가 View를 채택하는 이유</div>
+          </div>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="topic-body">
+          <div class="topic-items">
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">struct ContentView: View</div>
+                <div class="item-desc">SwiftUI View는 struct다. class가 아닌 이유 — 값 타입의 불변성이 렌더링 시스템과 맞닿는 지점</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">var body: some View</div>
+                <div class="item-desc">View 프로토콜의 유일한 요구사항. some View — Opaque Type이 왜 필요한가</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">#Preview 매크로</div>
+                <div class="item-desc">iOS 17+ Preview 매크로. 빌드 없이 실시간 UI 확인. Canvas 활성화하는 법</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-left">
+            <div class="topic-name">기본 뷰 3종</div>
+            <div class="topic-subtitle">Text · Image · Button</div>
+          </div>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="topic-body">
+          <div class="topic-items">
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">Text("Hello")</div>
+                <div class="item-desc">문자열 표시. .font(), .foregroundStyle(), .bold() modifier 체이닝</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">Image(systemName:)</div>
+                <div class="item-desc">SF Symbols 사용. .resizable() + .scaledToFit() 조합. 크기 지정 패턴</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">Button(action:label:)</div>
+                <div class="item-desc">탭 액션 연결. 후행 클로저 문법 읽기. .buttonStyle() 커스터마이징</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-left">
+            <div class="topic-name">Stack 3종</div>
+            <div class="topic-subtitle">VStack · HStack · ZStack — 화면을 쌓는 3가지 방향</div>
+          </div>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="topic-body">
+          <div class="topic-items">
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">VStack — 수직 쌓기</div>
+                <div class="item-desc">alignment: .leading/.center/.trailing, spacing: 값 설정. 기본 alignment가 .center인 이유</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">HStack — 수평 쌓기</div>
+                <div class="item-desc">alignment: .top/.center/.bottom. 텍스트 baseline 정렬 .firstTextBaseline</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">ZStack — 겹치기</div>
+                <div class="item-desc">나중에 추가된 뷰가 위로. alignment 기준점. 오버레이 vs ZStack 선택 기준</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">Modifier 체이닝 순서</div>
+                <div class="item-desc">.padding().background() vs .background().padding() — 순서가 결과를 바꾸는 이유</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Topic 2 -->
+  <div class="topic-section fade-in delay-2">
+    <h2>레이아웃 시스템</h2>
+    <p class="ts-sub">내 맘대로 안 되는 이유</p>
+    <div class="topics-grid">
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-left">
+            <div class="topic-name">frame modifier</div>
+            <div class="topic-subtitle">크기를 직접 지정하는 방법</div>
+          </div>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="topic-body">
+          <div class="topic-items">
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">.frame(width:height:)</div>
+                <div class="item-desc">고정 크기 지정. 뷰 자체가 아닌 "뷰를 담는 프레임"에 크기를 주는 개념</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">maxWidth: .infinity</div>
+                <div class="item-desc">부모가 주는 최대 너비를 다 차지. 버튼 full-width 만들기 패턴</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">alignment 파라미터</div>
+                <div class="item-desc">frame 안에서 자식 뷰의 위치 결정. .frame(maxWidth:.infinity, alignment:.leading)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-left">
+            <div class="topic-name">padding · Spacer · offset</div>
+            <div class="topic-subtitle">여백과 위치 조정</div>
+          </div>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="topic-body">
+          <div class="topic-items">
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">.padding()</div>
+                <div class="item-desc">주변 여백 추가. .padding(.horizontal, 20) 방향별 지정. 레이아웃에 영향을 준다</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">Spacer()</div>
+                <div class="item-desc">남은 공간 전부 차지. Stack 안에서만 의미 있음. minLength 옵션</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">.offset(x:y:)</div>
+                <div class="item-desc">위치를 이동하지만 레이아웃 공간은 그대로 유지. padding과의 결정적 차이</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-left">
+            <div class="topic-name">GeometryReader</div>
+            <div class="topic-subtitle">부모 크기 읽어서 반응형으로</div>
+          </div>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="topic-body">
+          <div class="topic-items">
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">GeometryProxy</div>
+                <div class="item-desc">geo.size.width, geo.size.height로 부모 크기 접근. 비율로 크기 계산</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">주의사항</div>
+                <div class="item-desc">GeometryReader는 최대 크기를 차지하려 한다. 의도치 않은 레이아웃 변화 주의</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">언제 쓰는가</div>
+                <div class="item-desc">화면 크기에 비례한 뷰, 스크롤 오프셋 읽기, 커스텀 애니메이션</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Topic 3 -->
+  <div class="topic-section fade-in delay-3">
+    <h2>앱 구조 이해</h2>
+    <p class="ts-sub">@main · App · Scene · View 계층</p>
+    <div class="topics-grid">
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-left">
+            <div class="topic-name">@main · App · WindowGroup</div>
+            <div class="topic-subtitle">앱의 진입점과 Scene 구조</div>
+          </div>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="topic-body">
+          <div class="topic-items">
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">@main 어트리뷰트</div>
+                <div class="item-desc">진입점 마킹. 컴파일러가 main() 함수를 자동 생성. 하나의 타입에만 붙일 수 있다</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">App 프로토콜</div>
+                <div class="item-desc">body: some Scene 요구. SwiftUI 앱의 최상위 구조체</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">WindowGroup</div>
+                <div class="item-desc">기본 Scene 타입. iPad/Mac에서 여러 창을 지원하는 이유</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="topic-card" onclick="toggleCard(this)">
+        <div class="topic-header">
+          <div class="topic-left">
+            <div class="topic-name">View 계층과 레이아웃 영향</div>
+            <div class="topic-subtitle">부모/자식 관계가 레이아웃에 미치는 영향</div>
+          </div>
+          <button class="toggle-btn">+</button>
+        </div>
+        <div class="topic-body">
+          <div class="topic-items">
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">크기 협상 과정</div>
+                <div class="item-desc">부모가 자식에게 제안 크기 전달 → 자식이 자신의 크기를 결정 → 부모가 배치. SwiftUI 레이아웃의 핵심</div>
+              </div>
+            </div>
+            <div class="topic-item">
+              <div class="item-dot"></div>
+              <div class="item-content">
+                <div class="item-title">실기기 vs 시뮬레이터</div>
+                <div class="item-desc">렌더링 성능, Metal, 카메라/센서 차이. 시뮬레이터에서만 테스트하면 안 되는 이유</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Chapter nav -->
+  <div class="ch-nav">
+    <a href="index.html">
+      <span class="nav-dir">← Stage 1 목록</span>
+      <span class="nav-title">Stage 1 인덱스</span>
+    </a>
+    <a href="1-2.html" class="next">
+      <span class="nav-dir">다음 챕터 →</span>
+      <span class="nav-title">1-2 버튼 누르면 화면이 바뀌게</span>
+    </a>
+  </div>
+
+</div>
+
+<footer class="footer">
+  개발자리 · Stage 1 — Chapter 1-1 · 화면에 뭔가 띄우기
+</footer>
+
+<script>
+  function toggleCard(el) {
+    el.classList.toggle('open');
+  }
+  // Open first card
+  document.querySelector('.topic-card')?.classList.add('open');
+</script>
+</body>
+</html>
