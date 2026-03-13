@@ -34,24 +34,25 @@
 ## 🏗 파일 구조
 
 ```
-cs-curriculum/
-├── index.html              # 전체 커리큘럼 맵 (8 Stages 개요)
+cs-swiftUI/
 ├── README.md
-├── assets/
-│   └── style.css           # 공통 스타일
-└── stage1/
-    ├── index.html          # Stage 1 개요 (4챕터 목록)
-    ├── 1-1.html            # 화면에 뭔가 띄우기
-    ├── 1-2.html            # 버튼 누르면 화면이 바뀌게
-    ├── 1-3.html            # 여러 화면과 공유 상태
-    └── 1-4.html            # 막히는 Swift 문법
+└── docs/
+    ├── index.html              # 전체 커리큘럼 맵 (8 Stages 개요)
+    ├── assets/
+    │   └── style.css           # 공통 스타일
+    └── stage1/
+        ├── index.html          # Stage 1 개요 (4챕터 목록)
+        ├── 1-1.html            # 화면에 뭔가 띄우기
+        ├── 1-2.html            # 버튼 누르면 화면이 바뀌게
+        ├── 1-3.html            # 여러 화면과 공유 상태
+        └── 1-4.html            # 막히는 Swift 문법
 ```
 
 ---
 
 ## 🚀 GitHub Pages
 
-👉 **[https://m1zz.github.io/cs-curriculum/](https://m1zz.github.io/cs-curriculum/)**
+👉 **[https://m1zz.github.io/cs-swiftUI/](https://m1zz.github.io/cs-swiftUI/)**
 
 배포 방법:
 1. 이 레포를 GitHub에 push
