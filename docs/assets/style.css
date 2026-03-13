@@ -5,24 +5,24 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:        #0B0C0F;
-  --surface:   #13141A;
-  --surface2:  #181921;
-  --border:    #1E2030;
-  --border2:   #2A2D40;
-  --orange:    #FF6B2B;
-  --orange-dim:#FF6B2B22;
-  --blue:      #5AB4FF;
-  --blue-dim:  #5AB4FF18;
-  --green:     #4ADE80;
-  --green-dim: #4ADE8018;
-  --yellow:    #FFD166;
-  --yellow-dim:#FFD16618;
-  --purple:    #B794F4;
-  --red:       #FF5C5C;
-  --text:      #E4E6F0;
+  --bg:        #FFFFFF;
+  --surface:   #F7F8FA;
+  --surface2:  #EEF0F4;
+  --border:    #E2E4EA;
+  --border2:   #D0D3DC;
+  --orange:    #E85D1A;
+  --orange-dim:#E85D1A14;
+  --blue:      #2E8BD8;
+  --blue-dim:  #2E8BD812;
+  --green:     #2DA55D;
+  --green-dim: #2DA55D12;
+  --yellow:    #D4950A;
+  --yellow-dim:#D4950A12;
+  --purple:    #7C5DC7;
+  --red:       #DC3545;
+  --text:      #1A1D2A;
   --muted:     #6B7190;
-  --tag-bg:    #1A1D2A;
+  --tag-bg:    #F0F1F5;
   --radius:    14px;
   --radius-lg: 20px;
 }
@@ -41,14 +41,14 @@ body {
 body::before {
   content: '';
   position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.012'/%3E%3C/svg%3E");
   pointer-events: none; z-index: 0;
 }
 
 /* ── NAV ── */
 .nav {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(11,12,15,.88);
+  background: rgba(255,255,255,.88);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
   padding: 0 40px;
@@ -196,7 +196,7 @@ body::before {
 
 .card:hover {
   border-color: var(--border2);
-  box-shadow: 0 4px 24px #00000040;
+  box-shadow: 0 4px 24px #00000010;
 }
 
 /* ── DIVIDER ── */
@@ -242,7 +242,7 @@ body::before {
 }
 .topic-card.open .topic-header { border-bottom-color: var(--border); }
 
-.topic-header:hover { background: rgba(255,255,255,.01); }
+.topic-header:hover { background: rgba(0,0,0,.02); }
 
 .topic-left { display:flex; flex-direction:column; gap:4px; }
 
