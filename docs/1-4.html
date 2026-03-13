@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="assets/style.css" />
   <style>
     .ch-hero {
-      padding:56px 40px 48px; max-width:1100px; margin:0 auto;
+      padding:56px 40px 48px; max-width:1400px; margin:0 auto;
       position:relative; z-index:1;
     }
     .ch-hero::after {
@@ -27,22 +27,10 @@
       font-size:14px; color:var(--muted); font-style:italic; margin-bottom:32px;
     }
     .ch-hero .trigger::before { content:'↳ '; color:var(--yellow); }
-    .content-wrap {
-      max-width:1100px; margin:0 auto; padding:0 40px 100px;
-      position:relative; z-index:1;
-    }
-    .topic-section { margin-bottom:48px; }
-    .topic-section > h2 {
-      font-family:'Syne',sans-serif; font-size:22px; font-weight:800;
-      letter-spacing:-.02em; margin-bottom:6px;
-    }
-    .topic-section > .ts-sub {
-      font-family:'DM Mono',monospace; font-size:11px;
-      color:var(--muted); font-style:italic; margin-bottom:20px;
-    }
     .ch-nav {
       display:flex; justify-content:space-between; gap:16px;
-      margin-bottom:80px; flex-wrap:wrap;
+      max-width:1400px; margin:0 auto; padding:0 40px 80px;
+      flex-wrap:wrap; position:relative; z-index:1;
     }
     .ch-nav a {
       background:var(--surface); border:1px solid var(--border);
@@ -70,7 +58,7 @@
 
     @media(max-width:768px){
       .ch-hero{padding:36px 20px 36px;}
-      .content-wrap{padding:0 20px 80px;}
+      .ch-nav{padding:0 20px 60px;}
     }
   </style>
 </head>
@@ -96,7 +84,7 @@
 <header class="ch-hero fade-in">
   <div class="badge badge-yellow" style="margin-bottom:20px;">
     <span class="badge-dot"></span>
-    Chapter 1-4 · 4 Topics
+    Chapter 1-4 · 7 Topics
   </div>
   <h1>✏️ 막히는 <span class="accent">Swift 문법</span></h1>
   <p class="trigger">컴파일 에러가 나는데 왜 나는지 모른다</p>
@@ -112,54 +100,49 @@
   </div>
 </header>
 
-<div class="content-wrap">
+<div class="split-layout">
 
-  <!-- Topic 1: 타입과 옵셔널 -->
-  <div class="topic-section fade-in delay-1">
-    <h2>타입과 옵셔널</h2>
-    <p class="ts-sub">"must be unwrapped" 에러 해결</p>
-    <div class="topics-grid">
+  <!-- ========== LEFT: Content Column ========== -->
+  <div class="content-col">
 
-      <div class="topic-card color-yellow" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">let vs var · 타입 추론</div>
-            <div class="topic-subtitle">상수와 변수, 타입을 명시하는 시점</div>
+    <!-- Section 1: let vs var · 타입 추론 -->
+    <div class="content-section" data-preview="pv-1">
+      <div class="cs-label">Topic 01</div>
+      <h2 class="cs-title">let vs var · 타입 추론</h2>
+      <div class="cs-subtitle">상수와 변수, 타입을 명시하는 시점</div>
+
+      <div class="topic-questions yellow">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>let</code>으로 선언한 변수를 나중에 바꾸려고 하면 어떤 에러가 나는가?</li>
+          <li><code>let x = 42</code>에서 Swift가 타입을 <code>Int</code>로 추론하는 원리는 무엇인가?</li>
+          <li>타입을 명시적으로 적어야 하는 경우는 구체적으로 언제인가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">let — 상수 (변경 불가)</div>
+            <div class="item-desc">한 번 할당하면 변경 불가. 컴파일러가 불필요한 변경을 막아줌. 기본적으로 let을 쓰고 필요할 때 var로 바꿈</div>
           </div>
-          <button class="toggle-btn">+</button>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions yellow">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li><code>let</code>으로 선언한 변수를 나중에 바꾸려고 하면 어떤 에러가 나는가?</li>
-              <li><code>let x = 42</code>에서 Swift가 타입을 <code>Int</code>로 추론하는 원리는 무엇인가?</li>
-              <li>타입을 명시적으로 적어야 하는 경우는 구체적으로 언제인가?</li>
-            </ul>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">타입 추론 vs 명시</div>
+            <div class="item-desc">let x = 42 (Int 추론) vs let x: Int = 42. 명시가 필요한 경우 — 타입이 모호하거나 다른 타입을 원할 때</div>
           </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">let — 상수 (변경 불가)</div>
-                <div class="item-desc">한 번 할당하면 변경 불가. 컴파일러가 불필요한 변경을 막아줌. 기본적으로 let을 쓰고 필요할 때 var로 바꿈</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">타입 추론 vs 명시</div>
-                <div class="item-desc">let x = 42 (Int 추론) vs let x: Int = 42. 명시가 필요한 경우 — 타입이 모호하거나 다른 타입을 원할 때</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">let name = "개발자리"     // String 추론
+        </div>
+      </div>
+
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">let name = "개발자리"     // String 추론
 let age: Int = 10         // 명시적 타입
 var score = 0             // 변경 가능
 
@@ -168,78 +151,69 @@ score += 10
 
 print("이름: \(name)")
 print("점수: \(score)")</pre>
-            </div>
-            <div class="output-box">
-              <div class="output-header">Output</div>
-              <pre>이름: 개발자리
-점수: 10</pre>
-            </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Optional 완전 정복 -->
+    <div class="content-section" data-preview="pv-2">
+      <div class="cs-label">Topic 02</div>
+      <h2 class="cs-title">Optional 완전 정복</h2>
+      <div class="cs-subtitle">nil · if let · guard let · ?? · !</div>
+
+      <div class="topic-questions yellow">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>String</code>과 <code>String?</code>은 완전히 다른 타입인가? 둘의 관계는?</li>
+          <li><code>if let</code>과 <code>guard let</code>은 언래핑한 값을 사용할 수 있는 범위(scope)가 어떻게 다른가?</li>
+          <li><code>!</code> 강제 언래핑이 crash를 일으키는 정확한 조건은 무엇인가?</li>
+          <li><code>user?.profile?.name</code>에서 중간에 nil이 하나라도 있으면 결과는?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Optional이란</div>
+            <div class="item-desc">String? = "값이 있거나 없거나". Optional은 enum: case some(Wrapped), case none</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">if let name = optionalName</div>
+            <div class="item-desc">값이 있으면 블록 실행. 없으면 else. 블록 안에서만 언래핑된 값 사용 가능</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">guard let name = optionalName else { return }</div>
+            <div class="item-desc">없으면 early return. 이후 코드에서 언래핑된 값을 계속 사용. 들여쓰기 줄이는 효과</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">?. 옵셔널 체이닝</div>
+            <div class="item-desc">user?.profile?.name — 중간에 nil이면 전체가 nil. crash 없이 안전하게</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">?? nil 병합 · ! 강제 언래핑</div>
+            <div class="item-desc">name ?? "익명" — nil일 때 기본값. ! — nil이면 crash. ! 써도 되는 경우: nil이 절대 아님을 100% 확신할 때만</div>
           </div>
         </div>
       </div>
 
-      <div class="topic-card color-yellow" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">Optional 완전 정복</div>
-            <div class="topic-subtitle">nil · if let · guard let · ?? · !</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions yellow">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li><code>String</code>과 <code>String?</code>은 완전히 다른 타입인가? 둘의 관계는?</li>
-              <li><code>if let</code>과 <code>guard let</code>은 언래핑한 값을 사용할 수 있는 범위(scope)가 어떻게 다른가?</li>
-              <li><code>!</code> 강제 언래핑이 crash를 일으키는 정확한 조건은 무엇인가?</li>
-              <li><code>user?.profile?.name</code>에서 중간에 nil이 하나라도 있으면 결과는?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">Optional이란</div>
-                <div class="item-desc">String? = "값이 있거나 없거나". Optional은 enum: case some(Wrapped), case none</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">if let name = optionalName</div>
-                <div class="item-desc">값이 있으면 블록 실행. 없으면 else. 블록 안에서만 언래핑된 값 사용 가능</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">guard let name = optionalName else { return }</div>
-                <div class="item-desc">없으면 early return. 이후 코드에서 언래핑된 값을 계속 사용. 들여쓰기 줄이는 효과</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">?. 옵셔널 체이닝</div>
-                <div class="item-desc">user?.profile?.name — 중간에 nil이면 전체가 nil. crash 없이 안전하게</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">?? nil 병합 · ! 강제 언래핑</div>
-                <div class="item-desc">name ?? "익명" — nil일 때 기본값. ! — nil이면 crash. ! 써도 되는 경우: nil이 절대 아님을 100% 확신할 때만</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">var nickname: String? = nil
+        <pre class="swift-code">var nickname: String? = nil
 
 // if let 언래핑
 if let name = nickname {
@@ -255,75 +229,54 @@ print("표시: \(display)")
 // 옵셔널 체이닝
 let count = nickname?.count
 print("글자수: \(count)")</pre>
-            </div>
-            <div class="output-box">
-              <div class="output-header">Output</div>
-              <pre>닉네임 없음
-표시: 익명
-글자수: nil</pre>
-            </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Array · Dictionary · Set -->
+    <div class="content-section" data-preview="pv-3">
+      <div class="cs-label">Topic 03</div>
+      <h2 class="cs-title">Array · Dictionary · Set</h2>
+      <div class="cs-subtitle">언제 무엇을 쓰는가</div>
+
+      <div class="topic-questions yellow">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>array[5]</code>에서 배열 크기가 3이면 어떤 에러가 발생하는가?</li>
+          <li><code>Dictionary</code>에서 없는 키로 접근하면 crash가 나는가, nil이 나는가?</li>
+          <li><code>Set</code>의 <code>contains()</code>가 <code>Array</code>의 <code>contains()</code>보다 빠른 이유는 무엇인가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Array — 순서 있는 목록</div>
+            <div class="item-desc">인덱스로 접근. indices.contains(i)로 범위 확인 후 접근. array.indices로 안전한 반복</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Dictionary — 키-값 쌍</div>
+            <div class="item-desc">dict["key"] 결과는 항상 Optional. 없는 키일 수 있으니까. dict["key", default: 0]으로 기본값</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Set — 중복 없는 집합</div>
+            <div class="item-desc">순서 없음. contains()가 O(1). 포함 여부 확인이 Array보다 훨씬 빠름. Hashable 필요</div>
           </div>
         </div>
       </div>
 
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- Topic 2: 컬렉션 -->
-  <div class="topic-section fade-in delay-2">
-    <h2>컬렉션 핵심</h2>
-    <p class="ts-sub">"Index out of range" 에러 해결</p>
-    <div class="topics-grid">
-
-      <div class="topic-card color-yellow" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">Array · Dictionary · Set</div>
-            <div class="topic-subtitle">언제 무엇을 쓰는가</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions yellow">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li><code>array[5]</code>에서 배열 크기가 3이면 어떤 에러가 발생하는가?</li>
-              <li><code>Dictionary</code>에서 없는 키로 접근하면 crash가 나는가, nil이 나는가?</li>
-              <li><code>Set</code>의 <code>contains()</code>가 <code>Array</code>의 <code>contains()</code>보다 빠른 이유는 무엇인가?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">Array — 순서 있는 목록</div>
-                <div class="item-desc">인덱스로 접근. indices.contains(i)로 범위 확인 후 접근. array.indices로 안전한 반복</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">Dictionary — 키-값 쌍</div>
-                <div class="item-desc">dict["key"] 결과는 항상 Optional. 없는 키일 수 있으니까. dict["key", default: 0]으로 기본값</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">Set — 중복 없는 집합</div>
-                <div class="item-desc">순서 없음. contains()가 O(1). 포함 여부 확인이 Array보다 훨씬 빠름. Hashable 필요</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">// Array
+        <pre class="swift-code">// Array
 var fruits = ["사과", "바나나", "포도"]
 fruits.append("딸기")
 print(fruits[0])
@@ -339,72 +292,61 @@ print(scores["수학"] ?? 0)
 // Set
 let tags: Set = ["Swift", "iOS", "Swift"]
 print(tags.count)  // 중복 제거</pre>
-            </div>
-            <div class="output-box">
-              <div class="output-header">Output</div>
-              <pre>사과
-4
-90
-2</pre>
-            </div>
+      </div>
+    </div>
+
+    <!-- Section 4: 고차 함수 — map · filter · forEach -->
+    <div class="content-section" data-preview="pv-4">
+      <div class="cs-label">Topic 04</div>
+      <h2 class="cs-title">고차 함수 — map · filter · forEach</h2>
+      <div class="cs-subtitle">반복 대신 선언적으로</div>
+
+      <div class="topic-questions yellow">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>map</code>과 <code>forEach</code>의 차이는 무엇인가? 둘 다 각 요소를 순회하는데 왜 구분하는가?</li>
+          <li><code>compactMap</code>은 <code>map</code>과 어떻게 다른가? 언제 써야 하는가?</li>
+          <li><code>reduce(0, +)</code>에서 <code>0</code>과 <code>+</code>는 각각 무엇인가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">map — 변환</div>
+            <div class="item-desc">names.map { $0.uppercased() } — 각 요소를 변환해 새 배열 반환</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">filter — 걸러내기</div>
+            <div class="item-desc">items.filter { $0.isCompleted } — 조건에 맞는 요소만 새 배열로</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">compactMap — Optional 제거</div>
+            <div class="item-desc">map + nil 제거. strings.compactMap { Int($0) } — 변환 실패한 nil을 걸러냄</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">reduce — 합산</div>
+            <div class="item-desc">items.reduce(0) { $0 + $1.price } — 누적값 계산</div>
           </div>
         </div>
       </div>
 
-      <div class="topic-card color-yellow" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">고차 함수 — map · filter · forEach</div>
-            <div class="topic-subtitle">반복 대신 선언적으로</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions yellow">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li><code>map</code>과 <code>forEach</code>의 차이는 무엇인가? 둘 다 각 요소를 순회하는데 왜 구분하는가?</li>
-              <li><code>compactMap</code>은 <code>map</code>과 어떻게 다른가? 언제 써야 하는가?</li>
-              <li><code>reduce(0, +)</code>에서 <code>0</code>과 <code>+</code>는 각각 무엇인가?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">map — 변환</div>
-                <div class="item-desc">names.map { $0.uppercased() } — 각 요소를 변환해 새 배열 반환</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">filter — 걸러내기</div>
-                <div class="item-desc">items.filter { $0.isCompleted } — 조건에 맞는 요소만 새 배열로</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">compactMap — Optional 제거</div>
-                <div class="item-desc">map + nil 제거. strings.compactMap { Int($0) } — 변환 실패한 nil을 걸러냄</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">reduce — 합산</div>
-                <div class="item-desc">items.reduce(0) { $0 + $1.price } — 누적값 계산</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">let numbers = [1, 2, 3, 4, 5]
+        <pre class="swift-code">let numbers = [1, 2, 3, 4, 5]
 
 // map — 변환
 let doubled = numbers.map { $0 * 2 }
@@ -422,83 +364,61 @@ print(nums)
 // reduce — 합산
 let sum = numbers.reduce(0, +)
 print(sum)</pre>
-            </div>
-            <div class="output-box">
-              <div class="output-header">Output</div>
-              <pre>[2, 4, 6, 8, 10]
-[2, 4]
-[1, 3]
-15</pre>
-            </div>
+      </div>
+    </div>
+
+    <!-- Section 5: 클로저 문법 단계별 줄이기 -->
+    <div class="content-section" data-preview="pv-5">
+      <div class="cs-label">Topic 05</div>
+      <h2 class="cs-title">클로저 문법 단계별 줄이기</h2>
+      <div class="cs-subtitle">기본 → 후행 → 단축 인자명</div>
+
+      <div class="topic-questions yellow">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>{ (a: String, b: String) -> Bool in return a &lt; b }</code>를 가장 짧게 줄이면 어떻게 되는가?</li>
+          <li><code>$0</code>, <code>$1</code>은 무엇을 의미하는가? <code>$2</code>까지 있다면 파라미터가 몇 개인가?</li>
+          <li>후행 클로저(trailing closure)란 정확히 무엇인가? <code>Button { }</code> 문법이 가능한 이유는?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">기본 문법</div>
+            <div class="item-desc">{ (name: String) -> String in return name.uppercased() }</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">타입 추론으로 줄이기</div>
+            <div class="item-desc">{ name in name.uppercased() } — 타입과 return 생략</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">단축 인자명 $0 · $1</div>
+            <div class="item-desc">{ $0.uppercased() } — 파라미터 이름까지 생략. 순서대로 $0, $1, ...</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">후행 클로저</div>
+            <div class="item-desc">마지막 파라미터가 클로저면 괄호 밖으로. Button { } / .onAppear { } 가 이 형태</div>
           </div>
         </div>
       </div>
 
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- Topic 3: 클로저 -->
-  <div class="topic-section fade-in delay-3">
-    <h2>클로저 읽기</h2>
-    <p class="ts-sub">{ } 코드가 왜 이렇게 생겼는가</p>
-    <div class="topics-grid">
-
-      <div class="topic-card color-yellow" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">클로저 문법 단계별 줄이기</div>
-            <div class="topic-subtitle">기본 → 후행 → 단축 인자명</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions yellow">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li><code>{ (a: String, b: String) -> Bool in return a &lt; b }</code>를 가장 짧게 줄이면 어떻게 되는가?</li>
-              <li><code>$0</code>, <code>$1</code>은 무엇을 의미하는가? <code>$2</code>까지 있다면 파라미터가 몇 개인가?</li>
-              <li>후행 클로저(trailing closure)란 정확히 무엇인가? <code>Button { }</code> 문법이 가능한 이유는?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">기본 문법</div>
-                <div class="item-desc">{ (name: String) -> String in return name.uppercased() }</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">타입 추론으로 줄이기</div>
-                <div class="item-desc">{ name in name.uppercased() } — 타입과 return 생략</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">단축 인자명 $0 · $1</div>
-                <div class="item-desc">{ $0.uppercased() } — 파라미터 이름까지 생략. 순서대로 $0, $1, ...</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">후행 클로저</div>
-                <div class="item-desc">마지막 파라미터가 클로저면 괄호 밖으로. Button { } / .onAppear { } 가 이 형태</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">let names = ["Charlie", "Alice", "Bob"]
+        <pre class="swift-code">let names = ["Charlie", "Alice", "Bob"]
 
 // 1. 기본 형태
 let a = names.sorted(by: {
@@ -516,64 +436,54 @@ let c = names.sorted(by: { $0 < $1 })
 let d = names.sorted { $0 < $1 }
 
 print(d)</pre>
-            </div>
-            <div class="output-box">
-              <div class="output-header">Output</div>
-              <pre>["Alice", "Bob", "Charlie"]
+      </div>
+    </div>
 
-// 모두 같은 결과!</pre>
-            </div>
+    <!-- Section 6: [weak self] 캡처 리스트 -->
+    <div class="content-section" data-preview="pv-6">
+      <div class="cs-label">Topic 06</div>
+      <h2 class="cs-title">[weak self] 캡처 리스트</h2>
+      <div class="cs-subtitle">언제 필요하고 언제 없어도 되는가</div>
+
+      <div class="topic-questions yellow">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li>순환 참조(retain cycle)란 무엇이며, 왜 메모리 누수를 일으키는가?</li>
+          <li><code>[weak self]</code>를 붙이면 self가 어떤 상태가 될 수 있는가?</li>
+          <li>SwiftUI View에서 <code>[weak self]</code>가 필요 없는 이유는 무엇인가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">클로저는 값을 캡처한다</div>
+            <div class="item-desc">클로저가 self를 참조하면 strong 캡처. self도 클로저를 참조하면 순환 참조 발생</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">[weak self] 필요한 경우</div>
+            <div class="item-desc">escape 클로저(비동기 콜백, 타이머 등)에서 self를 참조할 때. [weak self] guard let self else { return }</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">SwiftUI에서는 불필요</div>
+            <div class="item-desc">SwiftUI View는 struct — class가 아니므로 순환 참조 없음. map { } filter { } 등에서도 불필요</div>
           </div>
         </div>
       </div>
 
-      <div class="topic-card color-yellow" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">[weak self] 캡처 리스트</div>
-            <div class="topic-subtitle">언제 필요하고 언제 없어도 되는가</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions yellow">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li>순환 참조(retain cycle)란 무엇이며, 왜 메모리 누수를 일으키는가?</li>
-              <li><code>[weak self]</code>를 붙이면 self가 어떤 상태가 될 수 있는가?</li>
-              <li>SwiftUI View에서 <code>[weak self]</code>가 필요 없는 이유는 무엇인가?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">클로저는 값을 캡처한다</div>
-                <div class="item-desc">클로저가 self를 참조하면 strong 캡처. self도 클로저를 참조하면 순환 참조 발생</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">[weak self] 필요한 경우</div>
-                <div class="item-desc">escape 클로저(비동기 콜백, 타이머 등)에서 self를 참조할 때. [weak self] guard let self else { return }</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">SwiftUI에서는 불필요</div>
-                <div class="item-desc">SwiftUI View는 struct — class가 아니므로 순환 참조 없음. map { } filter { } 등에서도 불필요</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">class DataLoader {
+        <pre class="swift-code">class DataLoader {
     var data: String?
 
     func load() {
@@ -598,83 +508,63 @@ struct MyView: View {
         }
     }
 }</pre>
-            </div>
-            <div class="output-box">
-              <div class="output-header">Output</div>
-              <pre>class → [weak self] 필요
-struct → 불필요 (값 타입)</pre>
-            </div>
+      </div>
+    </div>
+
+    <!-- Section 7: 자주 만나는 에러 메시지 4종 -->
+    <div class="content-section" data-preview="pv-7">
+      <div class="cs-label">Topic 07</div>
+      <h2 class="cs-title">자주 만나는 에러 메시지 4종</h2>
+      <div class="cs-subtitle">원인과 해결 패턴</div>
+
+      <div class="topic-questions yellow">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li>"Cannot convert value of type" 에러를 만났을 때 가장 먼저 확인할 것은?</li>
+          <li>Xcode의 Fix-it 제안을 무조건 따르면 안 되는 이유는 무엇인가?</li>
+          <li><code>String?</code>를 <code>String</code>이 필요한 곳에 넣으면 어떤 에러가 나는가? 해결 방법 3가지는?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Cannot convert value of type 'X' to expected argument type 'Y'</div>
+            <div class="item-desc">타입 불일치. Int를 String에 넣으려 할 때. String(number) 로 명시적 변환</div>
+            <div class="error-block">Cannot convert value of type 'Int' to<br>expected argument type 'String'</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Value of optional type 'X?' must be unwrapped</div>
+            <div class="item-desc">Optional을 그대로 사용하려 할 때. if let / guard let / ?? 로 언래핑</div>
+            <div class="error-block">Value of optional type 'String?' must be<br>unwrapped to a value of type 'String'</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Referencing operator function '==' requires ... 'Equatable'</div>
+            <div class="item-desc">커스텀 타입을 == 비교하려 할 때. Equatable 채택 필요</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Fix-it 신뢰도</div>
+            <div class="item-desc">믿어도 되는 경우: 프로토콜 메서드 추가, import 추가. 무시해야 할 경우: 복잡한 타입 문제에서 엉뚱한 제안</div>
           </div>
         </div>
       </div>
 
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- Topic 4: 에러 읽기 -->
-  <div class="topic-section fade-in delay-4">
-    <h2>에러 읽기</h2>
-    <p class="ts-sub">Xcode 에러 메시지 해석하는 법</p>
-    <div class="topics-grid">
-
-      <div class="topic-card color-yellow" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">자주 만나는 에러 메시지 4종</div>
-            <div class="topic-subtitle">원인과 해결 패턴</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions yellow">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li>"Cannot convert value of type" 에러를 만났을 때 가장 먼저 확인할 것은?</li>
-              <li>Xcode의 Fix-it 제안을 무조건 따르면 안 되는 이유는 무엇인가?</li>
-              <li><code>String?</code>를 <code>String</code>이 필요한 곳에 넣으면 어떤 에러가 나는가? 해결 방법 3가지는?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">Cannot convert value of type 'X' to expected argument type 'Y'</div>
-                <div class="item-desc">타입 불일치. Int를 String에 넣으려 할 때. String(number) 로 명시적 변환</div>
-                <div class="error-block">Cannot convert value of type 'Int' to<br>expected argument type 'String'</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">Value of optional type 'X?' must be unwrapped</div>
-                <div class="item-desc">Optional을 그대로 사용하려 할 때. if let / guard let / ?? 로 언래핑</div>
-                <div class="error-block">Value of optional type 'String?' must be<br>unwrapped to a value of type 'String'</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">Referencing operator function '==' requires ... 'Equatable'</div>
-                <div class="item-desc">커스텀 타입을 == 비교하려 할 때. Equatable 채택 필요</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">Fix-it 신뢰도</div>
-                <div class="item-desc">믿어도 되는 경우: 프로토콜 메서드 추가, import 추가. 무시해야 할 경우: 복잡한 타입 문제에서 엉뚱한 제안</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">// ❌ 타입 불일치
+        <pre class="swift-code">// ❌ 타입 불일치
 let num: Int = 42
 // let text: String = num
 
@@ -689,36 +579,107 @@ let name: String? = "Kim"
 if let name {
     print("Hello " + name)
 }</pre>
-            </div>
-            <div class="output-box">
-              <div class="output-header">Output</div>
-              <pre>// 에러:
-Cannot convert value of type
-'Int' to expected 'String'
+      </div>
+    </div>
 
-// 에러:
-Value of optional type
-'String?' must be unwrapped</pre>
+  </div>
+
+  <!-- ========== RIGHT: Preview Column (Terminal Output) ========== -->
+  <div class="preview-col">
+    <div class="sticky-phone">
+      <div style="width:320px;background:var(--surface);border:2px solid var(--border);border-radius:16px;overflow:hidden;">
+        <div style="padding:10px 16px;background:#F0F1F5;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;">
+          <div style="display:flex;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#FF5F57;"></span><span style="width:10px;height:10px;border-radius:50%;background:#FEBC2E;"></span><span style="width:10px;height:10px;border-radius:50%;background:#28C840;"></span></div>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);">Output</span>
+        </div>
+        <div style="padding:16px;min-height:400px;">
+
+          <!-- Preview 1: let vs var -->
+          <div id="pv-1" class="preview-content active">
+            <div class="preview-label">Output</div>
+            <div style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.8;color:var(--text);">
+              이름: 개발자리<br>
+              점수: 10
             </div>
           </div>
+
+          <!-- Preview 2: Optional -->
+          <div id="pv-2" class="preview-content">
+            <div class="preview-label">Output</div>
+            <div style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.8;color:var(--text);">
+              닉네임 없음<br>
+              표시: 익명<br>
+              글자수: nil
+            </div>
+          </div>
+
+          <!-- Preview 3: Array · Dictionary · Set -->
+          <div id="pv-3" class="preview-content">
+            <div class="preview-label">Output</div>
+            <div style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.8;color:var(--text);">
+              사과<br>
+              4<br>
+              90<br>
+              2
+            </div>
+          </div>
+
+          <!-- Preview 4: 고차 함수 -->
+          <div id="pv-4" class="preview-content">
+            <div class="preview-label">Output</div>
+            <div style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.8;color:var(--text);">
+              [2, 4, 6, 8, 10]<br>
+              [2, 4]<br>
+              [1, 3]<br>
+              15
+            </div>
+          </div>
+
+          <!-- Preview 5: 클로저 -->
+          <div id="pv-5" class="preview-content">
+            <div class="preview-label">Output</div>
+            <div style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.8;color:var(--text);">
+              ["Alice", "Bob", "Charlie"]<br>
+              <span style="color:var(--muted);">// 모두 같은 결과!</span>
+            </div>
+          </div>
+
+          <!-- Preview 6: [weak self] -->
+          <div id="pv-6" class="preview-content">
+            <div class="preview-label">Output</div>
+            <div style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.8;color:var(--text);">
+              class → [weak self] 필요<br>
+              struct → 불필요 (값 타입)
+            </div>
+          </div>
+
+          <!-- Preview 7: 에러 메시지 -->
+          <div id="pv-7" class="preview-content">
+            <div class="preview-label">Output</div>
+            <div style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.8;color:var(--text);">
+              <div class="error-block">Cannot convert value of type 'Int' to<br>expected argument type 'String'</div>
+              <div class="error-block">Value of optional type 'String?' must be<br>unwrapped to a value of type 'String'</div>
+              <div class="error-block" style="margin-top:10px;">Referencing operator function '=='<br>requires that 'MyType' conform to 'Equatable'</div>
+            </div>
+          </div>
+
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- Chapter nav -->
-  <div class="ch-nav">
-    <a href="1-3.html">
-      <span class="nav-dir">← 이전 챕터</span>
-      <span class="nav-title">1-3 여러 화면과 공유 상태</span>
-    </a>
-    <a href="index.html" class="next">
-      <span class="nav-dir">Stage 1 완료 →</span>
-      <span class="nav-title">Stage 1 목록으로 돌아가기</span>
-    </a>
-  </div>
+</div>
 
+<!-- Chapter nav -->
+<div class="ch-nav">
+  <a href="1-3.html">
+    <span class="nav-dir">← 이전 챕터</span>
+    <span class="nav-title">1-3 여러 화면과 공유 상태</span>
+  </a>
+  <a href="index.html" class="next">
+    <span class="nav-dir">Stage 1 완료 →</span>
+    <span class="nav-title">Stage 1 목록으로 돌아가기</span>
+  </a>
 </div>
 
 <footer class="footer">
@@ -726,9 +687,7 @@ Value of optional type
 </footer>
 
 <script>
-  function toggleCard(el) { el.classList.toggle('open'); }
-  document.querySelector('.topic-card')?.classList.add('open');
-
+  // Syntax highlighting
   function highlightSwift(el) {
     let html = el.textContent;
     html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -740,6 +699,26 @@ Value of optional type
     el.innerHTML = html;
   }
   document.querySelectorAll('.swift-code').forEach(highlightSwift);
+
+  // Preview switching on scroll
+  const sections = document.querySelectorAll('.content-section');
+  const previews = document.querySelectorAll('.preview-content');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.dataset.preview;
+        previews.forEach(p => p.classList.remove('active'));
+        const target = document.getElementById(id);
+        if (target) target.classList.add('active');
+      }
+    });
+  }, {
+    rootMargin: '-20% 0px -60% 0px',
+    threshold: 0
+  });
+
+  sections.forEach(s => observer.observe(s));
 </script>
 </body>
 </html>

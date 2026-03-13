@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="assets/style.css" />
   <style>
     .ch-hero {
-      padding:56px 40px 48px; max-width:1100px; margin:0 auto;
+      padding:56px 40px 48px; max-width:1400px; margin:0 auto;
       position:relative; z-index:1;
     }
     .ch-hero::after {
@@ -27,22 +27,10 @@
       font-size:14px; color:var(--muted); font-style:italic; margin-bottom:32px;
     }
     .ch-hero .trigger::before { content:'↳ '; color:var(--green); }
-    .content-wrap {
-      max-width:1100px; margin:0 auto; padding:0 40px 100px;
-      position:relative; z-index:1;
-    }
-    .topic-section { margin-bottom:48px; }
-    .topic-section > h2 {
-      font-family:'Syne',sans-serif; font-size:22px; font-weight:800;
-      letter-spacing:-.02em; margin-bottom:6px;
-    }
-    .topic-section > .ts-sub {
-      font-family:'DM Mono',monospace; font-size:11px;
-      color:var(--muted); font-style:italic; margin-bottom:20px;
-    }
     .ch-nav {
       display:flex; justify-content:space-between; gap:16px;
-      margin-bottom:80px; flex-wrap:wrap;
+      max-width:1400px; margin:0 auto; padding:0 40px 80px;
+      flex-wrap:wrap; position:relative; z-index:1;
     }
     .ch-nav a {
       background:var(--surface); border:1px solid var(--border);
@@ -61,7 +49,7 @@
     .ch-nav .next { text-align:right; }
     @media(max-width:768px){
       .ch-hero{padding:36px 20px 36px;}
-      .content-wrap{padding:0 20px 80px;}
+      .ch-nav{padding:0 20px 60px;}
     }
   </style>
 </head>
@@ -87,7 +75,7 @@
 <header class="ch-hero fade-in">
   <div class="badge badge-green" style="margin-bottom:20px;">
     <span class="badge-dot"></span>
-    Chapter 1-3 · 3 Topics
+    Chapter 1-3 · 5 Topics
   </div>
   <h1>🗂 여러 화면과 <span class="accent">공유 상태</span></h1>
   <p class="trigger">화면이 2개인데 데이터를 어떻게 공유하는가</p>
@@ -103,61 +91,56 @@
   </div>
 </header>
 
-<div class="content-wrap">
+<div class="split-layout">
 
-  <!-- Topic 1: 화면 전환 -->
-  <div class="topic-section fade-in delay-1">
-    <h2>화면 전환 패턴</h2>
-    <p class="ts-sub">NavigationStack · Sheet · FullScreenCover</p>
-    <div class="topics-grid">
+  <!-- ========== LEFT: Content Column ========== -->
+  <div class="content-col">
 
-      <div class="topic-card color-green" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">NavigationStack + NavigationPath</div>
-            <div class="topic-subtitle">스택 기반 이동과 프로그래밍 방식 제어</div>
+    <!-- Section 1: NavigationStack + NavigationPath -->
+    <div class="content-section" data-preview="pv-1">
+      <div class="cs-label">Topic 01</div>
+      <h2 class="cs-title">NavigationStack + NavigationPath</h2>
+      <div class="cs-subtitle">스택 기반 이동과 프로그래밍 방식 제어</div>
+
+      <div class="topic-questions green">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>NavigationLink(destination:)</code>과 <code>.navigationDestination(for:)</code>의 차이는 무엇인가?</li>
+          <li><code>NavigationPath</code>를 <code>@State</code>로 관리하면 어떤 것이 가능해지는가?</li>
+          <li>코드로 특정 화면으로 바로 이동하려면 NavigationPath를 어떻게 조작하는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">NavigationLink(destination:)</div>
+            <div class="item-desc">탭하면 화면 push. 뒤로 가기는 자동. .navigationDestination(for:) 패턴 (iOS 16+)</div>
           </div>
-          <button class="toggle-btn">+</button>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions green">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li><code>NavigationLink(destination:)</code>과 <code>.navigationDestination(for:)</code>의 차이는 무엇인가?</li>
-              <li><code>NavigationPath</code>를 <code>@State</code>로 관리하면 어떤 것이 가능해지는가?</li>
-              <li>코드로 특정 화면으로 바로 이동하려면 NavigationPath를 어떻게 조작하는가?</li>
-            </ul>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">NavigationPath</div>
+            <div class="item-desc">@State로 path를 관리해 코드로 화면 이동. path.append() / path.removeLast() / path.removeAll()</div>
           </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">NavigationLink(destination:)</div>
-                <div class="item-desc">탭하면 화면 push. 뒤로 가기는 자동. .navigationDestination(for:) 패턴 (iOS 16+)</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">NavigationPath</div>
-                <div class="item-desc">@State로 path를 관리해 코드로 화면 이동. path.append() / path.removeLast() / path.removeAll()</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">딥링크 처리</div>
-                <div class="item-desc">onOpenURL에서 NavigationPath를 조작해 특정 화면으로 바로 이동</div>
-              </div>
-            </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">딥링크 처리</div>
+            <div class="item-desc">onOpenURL에서 NavigationPath를 조작해 특정 화면으로 바로 이동</div>
           </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">struct RootView: View {
+        </div>
+      </div>
+
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">struct RootView: View {
     @State private var path = NavigationPath()
 
     var body: some View {
@@ -177,77 +160,54 @@
         }
     }
 }</pre>
-            </div>
-            <div class="phone-preview">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                  <div class="preview-label">Preview</div>
-                  <div style="font-size:20px;font-weight:700;margin-bottom:16px;padding:0 4px;">메뉴</div>
-                  <div style="border-top:1px solid #E2E4EA;">
-                    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 4px;border-bottom:1px solid #E2E4EA;">
-                      <span style="font-size:13px;">프로필</span>
-                      <span style="color:#C7C7CC;font-size:13px;">›</span>
-                    </div>
-                    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 4px;border-bottom:1px solid #E2E4EA;">
-                      <span style="font-size:13px;">설정</span>
-                      <span style="color:#C7C7CC;font-size:13px;">›</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+    </div>
+
+    <!-- Section 2: sheet vs fullScreenCover -->
+    <div class="content-section" data-preview="pv-2">
+      <div class="cs-label">Topic 02</div>
+      <h2 class="cs-title">sheet vs fullScreenCover</h2>
+      <div class="cs-subtitle">모달 종류와 선택 기준</div>
+
+      <div class="topic-questions green">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>.sheet()</code>과 <code>.fullScreenCover()</code>는 시각적으로 어떻게 다른가?</li>
+          <li>sheet를 띄운 화면에서 dismiss하려면 어떤 환경 변수를 사용하는가?</li>
+          <li><code>.presentationDetents([.medium, .large])</code>는 무엇을 조절하는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">.sheet(isPresented: $show)</div>
+            <div class="item-desc">아래에서 올라오는 카드 형태. 뒤 화면이 살짝 보임. 가장 일반적인 모달</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">.fullScreenCover(isPresented: $show)</div>
+            <div class="item-desc">전체 화면 덮음. 카메라, 온보딩 등 완전한 새 컨텍스트를 줄 때</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">dismiss 환경 변수</div>
+            <div class="item-desc">@Environment(\.dismiss) var dismiss — 자식 View에서 모달 닫기</div>
           </div>
         </div>
       </div>
 
-      <div class="topic-card color-green" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">sheet vs fullScreenCover</div>
-            <div class="topic-subtitle">모달 종류와 선택 기준</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions green">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li><code>.sheet()</code>과 <code>.fullScreenCover()</code>는 시각적으로 어떻게 다른가?</li>
-              <li>sheet를 띄운 화면에서 dismiss하려면 어떤 환경 변수를 사용하는가?</li>
-              <li><code>.presentationDetents([.medium, .large])</code>는 무엇을 조절하는가?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">.sheet(isPresented: $show)</div>
-                <div class="item-desc">아래에서 올라오는 카드 형태. 뒤 화면이 살짝 보임. 가장 일반적인 모달</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">.fullScreenCover(isPresented: $show)</div>
-                <div class="item-desc">전체 화면 덮음. 카메라, 온보딩 등 완전한 새 컨텍스트를 줄 때</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">dismiss 환경 변수</div>
-                <div class="item-desc">@Environment(\.dismiss) var dismiss — 자식 View에서 모달 닫기</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">struct ModalDemo: View {
+        <pre class="swift-code">struct ModalDemo: View {
     @State private var showSheet = false
     @State private var showFull = false
 
@@ -272,89 +232,62 @@
         }
     }
 }</pre>
-            </div>
-            <div class="phone-preview">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                  <div class="preview-label">Preview</div>
-                  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;">
-                    <div style="background:#007AFF;color:#fff;padding:10px 28px;border-radius:10px;font-size:13px;font-weight:500;text-align:center;">Sheet 열기</div>
-                    <div style="background:#007AFF;color:#fff;padding:10px 28px;border-radius:10px;font-size:13px;font-weight:500;text-align:center;">FullScreen 열기</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+    </div>
+
+    <!-- Section 3: @StateObject vs @ObservedObject -->
+    <div class="content-section" data-preview="pv-3">
+      <div class="cs-label">Topic 03</div>
+      <h2 class="cs-title">@StateObject vs @ObservedObject</h2>
+      <div class="cs-subtitle">소유 vs 구독의 차이</div>
+
+      <div class="topic-questions green">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>@StateObject</code>와 <code>@ObservedObject</code>는 언제 각각 사용하는가?</li>
+          <li>자식 View에서 <code>@StateObject</code>를 쓰면 왜 위험한가?</li>
+          <li><code>ObservableObject</code>의 <code>@Published</code> 프로퍼티가 변경되면 어떤 일이 일어나는가?</li>
+          <li>class를 쓰는 이유는 무엇인가? struct로는 왜 안 되는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">ObservableObject + @Published</div>
+            <div class="item-desc">class에 채택. @Published 프로퍼티가 변경되면 구독 중인 View 재렌더</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@StateObject — 소유자</div>
+            <div class="item-desc">객체를 처음 생성하고 소유. View가 재생성되어도 객체는 유지. 최상위 View에서 사용</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@ObservedObject — 구독자</div>
+            <div class="item-desc">외부에서 주입받아 구독. View가 재생성되면 새로운 객체로 교체될 수 있음</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">실수 패턴</div>
+            <div class="item-desc">자식 View에서 @StateObject를 사용하면 부모 재렌더 시 객체가 리셋된다</div>
           </div>
         </div>
       </div>
 
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- Topic 2: 공유 상태 -->
-  <div class="topic-section fade-in delay-2">
-    <h2>공유 상태 관리</h2>
-    <p class="ts-sub">화면이 바뀌어도 데이터가 유지되게</p>
-    <div class="topics-grid">
-
-      <div class="topic-card color-green" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">@StateObject vs @ObservedObject</div>
-            <div class="topic-subtitle">소유 vs 구독의 차이</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions green">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li><code>@StateObject</code>와 <code>@ObservedObject</code>는 언제 각각 사용하는가?</li>
-              <li>자식 View에서 <code>@StateObject</code>를 쓰면 왜 위험한가?</li>
-              <li><code>ObservableObject</code>의 <code>@Published</code> 프로퍼티가 변경되면 어떤 일이 일어나는가?</li>
-              <li>class를 쓰는 이유는 무엇인가? struct로는 왜 안 되는가?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">ObservableObject + @Published</div>
-                <div class="item-desc">class에 채택. @Published 프로퍼티가 변경되면 구독 중인 View 재렌더</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">@StateObject — 소유자</div>
-                <div class="item-desc">객체를 처음 생성하고 소유. View가 재생성되어도 객체는 유지. 최상위 View에서 사용</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">@ObservedObject — 구독자</div>
-                <div class="item-desc">외부에서 주입받아 구독. View가 재생성되면 새로운 객체로 교체될 수 있음</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">실수 패턴</div>
-                <div class="item-desc">자식 View에서 @StateObject를 사용하면 부모 재렌더 시 객체가 리셋된다</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">class TodoStore: ObservableObject {
+        <pre class="swift-code">class TodoStore: ObservableObject {
     @Published var items: [String] = []
 
     func add(_ item: String) {
@@ -379,77 +312,54 @@ struct ChildView: View {
         }
     }
 }</pre>
-            </div>
-            <div class="phone-preview">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                  <div class="preview-label">Preview</div>
-                  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;padding:8px;">
-                    <div style="border:2px solid #2DA55D;border-radius:10px;padding:14px 12px;width:100%;text-align:center;">
-                      <div style="font-size:9px;color:#2DA55D;font-weight:600;letter-spacing:.05em;margin-bottom:6px;">ParentView</div>
-                      <div style="font-size:10px;color:#7C5DC7;font-weight:600;background:#7C5DC710;padding:4px 8px;border-radius:6px;display:inline-block;">@StateObject</div>
-                    </div>
-                    <div style="font-size:18px;color:#6B7190;">&#8595;</div>
-                    <div style="border:2px solid #2E8BD8;border-radius:10px;padding:14px 12px;width:100%;text-align:center;">
-                      <div style="font-size:9px;color:#2E8BD8;font-weight:600;letter-spacing:.05em;margin-bottom:6px;">ChildView</div>
-                      <div style="font-size:10px;color:#7C5DC7;font-weight:600;background:#7C5DC710;padding:4px 8px;border-radius:6px;display:inline-block;">@ObservedObject</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+    </div>
+
+    <!-- Section 4: @Observable · @EnvironmentObject -->
+    <div class="content-section" data-preview="pv-4">
+      <div class="cs-label">Topic 04</div>
+      <h2 class="cs-title">@Observable · @EnvironmentObject</h2>
+      <div class="cs-subtitle">iOS 17+ 새 방법과 환경 주입</div>
+
+      <div class="topic-questions green">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>@Observable</code> 매크로(iOS 17+)를 쓰면 <code>@Published</code>가 왜 필요 없어지는가?</li>
+          <li><code>@EnvironmentObject</code>는 어떤 문제를 해결하기 위해 존재하는가? (prop drilling이란?)</li>
+          <li><code>@Environment(\.dismiss)</code>에서 <code>\.dismiss</code>는 어디에 정의되어 있는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@Observable 매크로 (iOS 17+)</div>
+            <div class="item-desc">class에 붙이면 ObservableObject + @Published 없이도 동작. 훨씬 단순</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@EnvironmentObject</div>
+            <div class="item-desc">부모에서 .environmentObject() 주입. 깊은 자식이 바로 꺼내 씀. prop drilling 해결</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@Environment(\.store)</div>
+            <div class="item-desc">@Observable + @Environment 조합 (iOS 17+). 더 명시적이고 타입 안전한 방법</div>
           </div>
         </div>
       </div>
 
-      <div class="topic-card color-green" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">@Observable · @EnvironmentObject</div>
-            <div class="topic-subtitle">iOS 17+ 새 방법과 환경 주입</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions green">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li><code>@Observable</code> 매크로(iOS 17+)를 쓰면 <code>@Published</code>가 왜 필요 없어지는가?</li>
-              <li><code>@EnvironmentObject</code>는 어떤 문제를 해결하기 위해 존재하는가? (prop drilling이란?)</li>
-              <li><code>@Environment(\.dismiss)</code>에서 <code>\.dismiss</code>는 어디에 정의되어 있는가?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">@Observable 매크로 (iOS 17+)</div>
-                <div class="item-desc">class에 붙이면 ObservableObject + @Published 없이도 동작. 훨씬 단순</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">@EnvironmentObject</div>
-                <div class="item-desc">부모에서 .environmentObject() 주입. 깊은 자식이 바로 꺼내 씀. prop drilling 해결</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">@Environment(\.store)</div>
-                <div class="item-desc">@Observable + @Environment 조합 (iOS 17+). 더 명시적이고 타입 안전한 방법</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">// iOS 17+ 방식
+        <pre class="swift-code">// iOS 17+ 방식
 @Observable
 class UserSettings {
     var username = "개발자리"
@@ -473,81 +383,54 @@ struct SettingsView: View {
         Text(settings.username)
     }
 }</pre>
-            </div>
-            <div class="phone-preview">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                  <div class="preview-label">Preview</div>
-                  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;">
-                    <div style="font-size:10px;color:#6B7190;font-family:'DM Mono',monospace;letter-spacing:.03em;">@Environment</div>
-                    <div style="font-size:17px;font-weight:600;color:#1A1D2A;">개발자리</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+    </div>
+
+    <!-- Section 5: TabView 기본 구성 -->
+    <div class="content-section" data-preview="pv-5">
+      <div class="cs-label">Topic 05</div>
+      <h2 class="cs-title">TabView 기본 구성</h2>
+      <div class="cs-subtitle">tabItem · 탭별 NavigationStack</div>
+
+      <div class="topic-questions green">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li>TabView 안의 각 탭에 NavigationStack을 넣는 이유는 무엇인가?</li>
+          <li><code>TabView(selection: $selectedTab)</code>으로 프로그래밍 방식 탭 전환이 필요한 경우는 언제인가?</li>
+          <li><code>.tabItem { }</code>에 넣을 수 있는 View의 종류에 제한이 있는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">.tabItem { Label("홈", systemImage: "house") }</div>
+            <div class="item-desc">각 탭의 아이콘과 레이블. SF Symbols 이름 사용</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">탭별 독립 NavigationStack</div>
+            <div class="item-desc">각 탭 안에 NavigationStack을 넣으면 탭 전환 시 navigation 상태가 각자 유지</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Programmatic 탭 전환</div>
+            <div class="item-desc">TabView(selection: $selectedTab). 푸시 알림 등에서 특정 탭으로 이동할 때</div>
           </div>
         </div>
       </div>
 
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- Topic 3: TabView -->
-  <div class="topic-section fade-in delay-3">
-    <h2>TabView</h2>
-    <p class="ts-sub">하단 탭 바 앱 구성</p>
-    <div class="topics-grid">
-
-      <div class="topic-card color-green" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">TabView 기본 구성</div>
-            <div class="topic-subtitle">tabItem · 탭별 NavigationStack</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions green">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li>TabView 안의 각 탭에 NavigationStack을 넣는 이유는 무엇인가?</li>
-              <li><code>TabView(selection: $selectedTab)</code>으로 프로그래밍 방식 탭 전환이 필요한 경우는 언제인가?</li>
-              <li><code>.tabItem { }</code>에 넣을 수 있는 View의 종류에 제한이 있는가?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">.tabItem { Label("홈", systemImage: "house") }</div>
-                <div class="item-desc">각 탭의 아이콘과 레이블. SF Symbols 이름 사용</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">탭별 독립 NavigationStack</div>
-                <div class="item-desc">각 탭 안에 NavigationStack을 넣으면 탭 전환 시 navigation 상태가 각자 유지</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">Programmatic 탭 전환</div>
-                <div class="item-desc">TabView(selection: $selectedTab). 푸시 알림 등에서 특정 탭으로 이동할 때</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">struct MainTabView: View {
+        <pre class="swift-code">struct MainTabView: View {
     var body: some View {
         TabView {
             HomeView()
@@ -571,51 +454,107 @@ struct SettingsView: View {
         }
     }
 }</pre>
-            </div>
-            <div class="phone-preview">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen" style="justify-content:space-between;">
-                  <div class="preview-label">Preview</div>
-                  <div style="flex:1;display:flex;justify-content:center;align-items:center;">
-                    <span style="font-size:15px;color:#6B7190;">홈 화면</span>
-                  </div>
-                  <div style="border-top:1px solid #E2E4EA;display:flex;justify-content:space-around;padding:8px 0 4px;">
-                    <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
-                      <span style="font-size:16px;">&#127968;</span>
-                      <span style="font-size:9px;color:#007AFF;font-weight:600;">홈</span>
-                    </div>
-                    <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
-                      <span style="font-size:16px;">&#128269;</span>
-                      <span style="font-size:9px;color:#8E8E93;">검색</span>
-                    </div>
-                    <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
-                      <span style="font-size:16px;">&#128100;</span>
-                      <span style="font-size:9px;color:#8E8E93;">프로필</span>
-                    </div>
-                  </div>
-                </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========== RIGHT: Preview Column ========== -->
+  <div class="preview-col">
+    <div class="sticky-phone">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <!-- Preview 1: NavigationStack menu list -->
+          <div id="pv-1" class="preview-content active">
+            <div class="preview-label">Preview</div>
+            <div style="font-size:20px;font-weight:700;margin-bottom:16px;padding:0 4px;">메뉴</div>
+            <div style="border-top:1px solid #E2E4EA;">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 4px;border-bottom:1px solid #E2E4EA;">
+                <span style="font-size:13px;">프로필</span>
+                <span style="color:#C7C7CC;font-size:13px;">&#8250;</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 4px;border-bottom:1px solid #E2E4EA;">
+                <span style="font-size:13px;">설정</span>
+                <span style="color:#C7C7CC;font-size:13px;">&#8250;</span>
               </div>
             </div>
           </div>
+
+          <!-- Preview 2: sheet vs fullScreenCover buttons -->
+          <div id="pv-2" class="preview-content">
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;">
+              <div style="background:#007AFF;color:#fff;padding:10px 28px;border-radius:10px;font-size:13px;font-weight:500;text-align:center;">Sheet 열기</div>
+              <div style="background:#007AFF;color:#fff;padding:10px 28px;border-radius:10px;font-size:13px;font-weight:500;text-align:center;">FullScreen 열기</div>
+            </div>
+          </div>
+
+          <!-- Preview 3: @StateObject vs @ObservedObject diagram -->
+          <div id="pv-3" class="preview-content">
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;padding:8px;">
+              <div style="border:2px solid #2DA55D;border-radius:10px;padding:14px 12px;width:100%;text-align:center;">
+                <div style="font-size:9px;color:#2DA55D;font-weight:600;letter-spacing:.05em;margin-bottom:6px;">ParentView</div>
+                <div style="font-size:10px;color:#7C5DC7;font-weight:600;background:#7C5DC710;padding:4px 8px;border-radius:6px;display:inline-block;">@StateObject</div>
+              </div>
+              <div style="font-size:18px;color:#6B7190;">&#8595;</div>
+              <div style="border:2px solid #2E8BD8;border-radius:10px;padding:14px 12px;width:100%;text-align:center;">
+                <div style="font-size:9px;color:#2E8BD8;font-weight:600;letter-spacing:.05em;margin-bottom:6px;">ChildView</div>
+                <div style="font-size:10px;color:#7C5DC7;font-weight:600;background:#7C5DC710;padding:4px 8px;border-radius:6px;display:inline-block;">@ObservedObject</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview 4: @Environment text -->
+          <div id="pv-4" class="preview-content">
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;">
+              <div style="font-size:10px;color:#6B7190;font-family:'DM Mono',monospace;letter-spacing:.03em;">@Environment</div>
+              <div style="font-size:17px;font-weight:600;color:#1A1D2A;">개발자리</div>
+            </div>
+          </div>
+
+          <!-- Preview 5: TabView with tab bar -->
+          <div id="pv-5" class="preview-content">
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;justify-content:center;align-items:center;">
+              <span style="font-size:15px;color:#6B7190;">홈 화면</span>
+            </div>
+            <div style="border-top:1px solid #E2E4EA;display:flex;justify-content:space-around;padding:8px 0 4px;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+                <span style="font-size:16px;">&#127968;</span>
+                <span style="font-size:9px;color:#007AFF;font-weight:600;">홈</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+                <span style="font-size:16px;">&#128269;</span>
+                <span style="font-size:9px;color:#8E8E93;">검색</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+                <span style="font-size:16px;">&#128100;</span>
+                <span style="font-size:9px;color:#8E8E93;">프로필</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- Chapter nav -->
-  <div class="ch-nav">
-    <a href="1-2.html">
-      <span class="nav-dir">← 이전 챕터</span>
-      <span class="nav-title">1-2 버튼 누르면 화면이 바뀌게</span>
-    </a>
-    <a href="1-4.html" class="next">
-      <span class="nav-dir">다음 챕터 →</span>
-      <span class="nav-title">1-4 막히는 Swift 문법</span>
-    </a>
-  </div>
+</div>
 
+<!-- Chapter nav -->
+<div class="ch-nav">
+  <a href="1-2.html">
+    <span class="nav-dir">← 이전 챕터</span>
+    <span class="nav-title">1-2 버튼 누르면 화면이 바뀌게</span>
+  </a>
+  <a href="1-4.html" class="next">
+    <span class="nav-dir">다음 챕터 →</span>
+    <span class="nav-title">1-4 막히는 Swift 문법</span>
+  </a>
 </div>
 
 <footer class="footer">
@@ -623,9 +562,7 @@ struct SettingsView: View {
 </footer>
 
 <script>
-  function toggleCard(el) { el.classList.toggle('open'); }
-  document.querySelector('.topic-card')?.classList.add('open');
-
+  // Syntax highlighting
   function highlightSwift(el) {
     let html = el.textContent;
     html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -637,6 +574,26 @@ struct SettingsView: View {
     el.innerHTML = html;
   }
   document.querySelectorAll('.swift-code').forEach(highlightSwift);
+
+  // Preview switching on scroll
+  const sections = document.querySelectorAll('.content-section');
+  const previews = document.querySelectorAll('.preview-content');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.dataset.preview;
+        previews.forEach(p => p.classList.remove('active'));
+        const target = document.getElementById(id);
+        if (target) target.classList.add('active');
+      }
+    });
+  }, {
+    rootMargin: '-20% 0px -60% 0px',
+    threshold: 0
+  });
+
+  sections.forEach(s => observer.observe(s));
 </script>
 </body>
 </html>
