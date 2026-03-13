@@ -129,6 +129,14 @@
           <button class="toggle-btn">+</button>
         </div>
         <div class="topic-body">
+          <div class="topic-questions yellow">
+            <div class="tq-label">생각해보기</div>
+            <ul>
+              <li><code>let</code>으로 선언한 변수를 나중에 바꾸려고 하면 어떤 에러가 나는가?</li>
+              <li><code>let x = 42</code>에서 Swift가 타입을 <code>Int</code>로 추론하는 원리는 무엇인가?</li>
+              <li>타입을 명시적으로 적어야 하는 경우는 구체적으로 언제인가?</li>
+            </ul>
+          </div>
           <div class="topic-items">
             <div class="topic-item">
               <div class="item-dot"></div>
@@ -179,6 +187,15 @@ print("점수: \(score)")</pre>
           <button class="toggle-btn">+</button>
         </div>
         <div class="topic-body">
+          <div class="topic-questions yellow">
+            <div class="tq-label">생각해보기</div>
+            <ul>
+              <li><code>String</code>과 <code>String?</code>은 완전히 다른 타입인가? 둘의 관계는?</li>
+              <li><code>if let</code>과 <code>guard let</code>은 언래핑한 값을 사용할 수 있는 범위(scope)가 어떻게 다른가?</li>
+              <li><code>!</code> 강제 언래핑이 crash를 일으키는 정확한 조건은 무엇인가?</li>
+              <li><code>user?.profile?.name</code>에서 중간에 nil이 하나라도 있으면 결과는?</li>
+            </ul>
+          </div>
           <div class="topic-items">
             <div class="topic-item">
               <div class="item-dot"></div>
@@ -269,6 +286,14 @@ print("글자수: \(count)")</pre>
           <button class="toggle-btn">+</button>
         </div>
         <div class="topic-body">
+          <div class="topic-questions yellow">
+            <div class="tq-label">생각해보기</div>
+            <ul>
+              <li><code>array[5]</code>에서 배열 크기가 3이면 어떤 에러가 발생하는가?</li>
+              <li><code>Dictionary</code>에서 없는 키로 접근하면 crash가 나는가, nil이 나는가?</li>
+              <li><code>Set</code>의 <code>contains()</code>가 <code>Array</code>의 <code>contains()</code>보다 빠른 이유는 무엇인가?</li>
+            </ul>
+          </div>
           <div class="topic-items">
             <div class="topic-item">
               <div class="item-dot"></div>
@@ -335,6 +360,14 @@ print(tags.count)  // 중복 제거</pre>
           <button class="toggle-btn">+</button>
         </div>
         <div class="topic-body">
+          <div class="topic-questions yellow">
+            <div class="tq-label">생각해보기</div>
+            <ul>
+              <li><code>map</code>과 <code>forEach</code>의 차이는 무엇인가? 둘 다 각 요소를 순회하는데 왜 구분하는가?</li>
+              <li><code>compactMap</code>은 <code>map</code>과 어떻게 다른가? 언제 써야 하는가?</li>
+              <li><code>reduce(0, +)</code>에서 <code>0</code>과 <code>+</code>는 각각 무엇인가?</li>
+            </ul>
+          </div>
           <div class="topic-items">
             <div class="topic-item">
               <div class="item-dot"></div>
@@ -421,6 +454,14 @@ print(sum)</pre>
           <button class="toggle-btn">+</button>
         </div>
         <div class="topic-body">
+          <div class="topic-questions yellow">
+            <div class="tq-label">생각해보기</div>
+            <ul>
+              <li><code>{ (a: String, b: String) -> Bool in return a &lt; b }</code>를 가장 짧게 줄이면 어떻게 되는가?</li>
+              <li><code>$0</code>, <code>$1</code>은 무엇을 의미하는가? <code>$2</code>까지 있다면 파라미터가 몇 개인가?</li>
+              <li>후행 클로저(trailing closure)란 정확히 무엇인가? <code>Button { }</code> 문법이 가능한 이유는?</li>
+            </ul>
+          </div>
           <div class="topic-items">
             <div class="topic-item">
               <div class="item-dot"></div>
@@ -495,6 +536,14 @@ print(d)</pre>
           <button class="toggle-btn">+</button>
         </div>
         <div class="topic-body">
+          <div class="topic-questions yellow">
+            <div class="tq-label">생각해보기</div>
+            <ul>
+              <li>순환 참조(retain cycle)란 무엇이며, 왜 메모리 누수를 일으키는가?</li>
+              <li><code>[weak self]</code>를 붙이면 self가 어떤 상태가 될 수 있는가?</li>
+              <li>SwiftUI View에서 <code>[weak self]</code>가 필요 없는 이유는 무엇인가?</li>
+            </ul>
+          </div>
           <div class="topic-items">
             <div class="topic-item">
               <div class="item-dot"></div>
@@ -579,6 +628,14 @@ struct → 불필요 (값 타입)</pre>
           <button class="toggle-btn">+</button>
         </div>
         <div class="topic-body">
+          <div class="topic-questions yellow">
+            <div class="tq-label">생각해보기</div>
+            <ul>
+              <li>"Cannot convert value of type" 에러를 만났을 때 가장 먼저 확인할 것은?</li>
+              <li>Xcode의 Fix-it 제안을 무조건 따르면 안 되는 이유는 무엇인가?</li>
+              <li><code>String?</code>를 <code>String</code>이 필요한 곳에 넣으면 어떤 에러가 나는가? 해결 방법 3가지는?</li>
+            </ul>
+          </div>
           <div class="topic-items">
             <div class="topic-item">
               <div class="item-dot"></div>

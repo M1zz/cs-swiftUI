@@ -125,6 +125,14 @@
           <button class="toggle-btn">+</button>
         </div>
         <div class="topic-body">
+          <div class="topic-questions">
+            <div class="tq-label">생각해보기</div>
+            <ul>
+              <li>SwiftUI에서 View를 class가 아닌 struct로 만드는 이유는 무엇인가?</li>
+              <li><code>some View</code>에서 <code>some</code>을 빼면 어떤 에러가 나는가? 왜 필요한가?</li>
+              <li><code>#Preview</code>와 시뮬레이터 빌드의 차이는 무엇인가?</li>
+            </ul>
+          </div>
           <div class="topic-items">
             <div class="topic-item">
               <div class="item-dot"></div>
@@ -186,6 +194,14 @@
           <button class="toggle-btn">+</button>
         </div>
         <div class="topic-body">
+          <div class="topic-questions">
+            <div class="tq-label">생각해보기</div>
+            <ul>
+              <li><code>Text("Hello").font(.title).bold()</code>에서 <code>.font()</code>과 <code>.bold()</code>의 순서를 바꾸면 결과가 달라지는가?</li>
+              <li><code>Image(systemName:)</code>과 <code>Image("이미지이름")</code>의 차이는 무엇인가?</li>
+              <li><code>Button</code>의 action 클로저 안에서 <code>print()</code>를 호출하면 Preview에서 출력을 볼 수 있는가?</li>
+            </ul>
+          </div>
           <div class="topic-items">
             <div class="topic-item">
               <div class="item-dot"></div>
@@ -256,6 +272,14 @@
           <button class="toggle-btn">+</button>
         </div>
         <div class="topic-body">
+          <div class="topic-questions">
+            <div class="tq-label">생각해보기</div>
+            <ul>
+              <li><code>VStack(alignment: .leading)</code>에서 alignment를 생략하면 기본값은 무엇인가?</li>
+              <li><code>HStack</code> 안에 <code>Spacer()</code>를 넣으면 어떻게 되는가? 두 개 넣으면?</li>
+              <li><code>.padding().background(.blue)</code> vs <code>.background(.blue).padding()</code> 결과는 왜 다른가?</li>
+            </ul>
+          </div>
           <div class="topic-items">
             <div class="topic-item">
               <div class="item-dot"></div>
@@ -352,6 +376,14 @@
           <button class="toggle-btn">+</button>
         </div>
         <div class="topic-body">
+          <div class="topic-questions">
+            <div class="tq-label">생각해보기</div>
+            <ul>
+              <li><code>.frame(width: 200)</code>은 뷰 자체의 크기를 바꾸는 것인가, 뷰를 감싸는 프레임의 크기를 바꾸는 것인가?</li>
+              <li><code>maxWidth: .infinity</code>는 어떤 상황에서 쓰는가? 버튼을 화면 전체 너비로 만들려면?</li>
+              <li><code>.frame()</code> 안의 <code>alignment</code> 파라미터는 무엇을 정렬하는가?</li>
+            </ul>
+          </div>
           <div class="topic-items">
             <div class="topic-item">
               <div class="item-dot"></div>
@@ -423,6 +455,14 @@
           <button class="toggle-btn">+</button>
         </div>
         <div class="topic-body">
+          <div class="topic-questions">
+            <div class="tq-label">생각해보기</div>
+            <ul>
+              <li><code>padding()</code>에 값을 안 주면 기본 여백은 몇 pt인가?</li>
+              <li><code>Spacer()</code>는 Stack 밖에서도 동작하는가?</li>
+              <li><code>.offset(x: 20)</code>과 <code>.padding(.leading, 20)</code>의 결정적 차이는 무엇인가?</li>
+            </ul>
+          </div>
           <div class="topic-items">
             <div class="topic-item">
               <div class="item-dot"></div>
@@ -489,6 +529,14 @@
           <button class="toggle-btn">+</button>
         </div>
         <div class="topic-body">
+          <div class="topic-questions">
+            <div class="tq-label">생각해보기</div>
+            <ul>
+              <li><code>GeometryReader</code>를 쓰면 왜 레이아웃이 예상과 다르게 변하는가?</li>
+              <li>부모의 크기를 몰라도 되는 상황에서 GeometryReader를 쓰면 어떤 문제가 있는가?</li>
+              <li>화면 너비의 30%만큼 너비를 주려면 어떻게 하는가?</li>
+            </ul>
+          </div>
           <div class="topic-items">
             <div class="topic-item">
               <div class="item-dot"></div>
@@ -566,6 +614,14 @@
           <button class="toggle-btn">+</button>
         </div>
         <div class="topic-body">
+          <div class="topic-questions">
+            <div class="tq-label">생각해보기</div>
+            <ul>
+              <li><code>@main</code>을 두 개의 struct에 붙이면 어떻게 되는가?</li>
+              <li><code>WindowGroup</code>은 왜 단순히 "Window"가 아니라 "Group"인가?</li>
+              <li>App → Scene → View 계층에서 각각의 역할은 무엇인가?</li>
+            </ul>
+          </div>
           <div class="topic-items">
             <div class="topic-item">
               <div class="item-dot"></div>
@@ -632,6 +688,14 @@ struct MyApp: App {
           <button class="toggle-btn">+</button>
         </div>
         <div class="topic-body">
+          <div class="topic-questions">
+            <div class="tq-label">생각해보기</div>
+            <ul>
+              <li>SwiftUI에서 부모와 자식의 크기 협상은 어떤 순서로 이루어지는가?</li>
+              <li>자식 View가 부모가 제안한 크기보다 더 큰 크기를 원하면 어떻게 되는가?</li>
+              <li>시뮬레이터에서는 정상인데 실기기에서 다르게 보이는 경우는 언제인가?</li>
+            </ul>
+          </div>
           <div class="topic-items">
             <div class="topic-item">
               <div class="item-dot"></div>
