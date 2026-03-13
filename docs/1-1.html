@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="assets/style.css" />
   <style>
     .ch-hero {
-      padding:56px 40px 48px; max-width:1100px; margin:0 auto;
+      padding:56px 40px 48px; max-width:1400px; margin:0 auto;
       position:relative; z-index:1;
     }
     .ch-hero::after {
@@ -27,32 +27,16 @@
       font-size:14px; color:var(--muted); font-style:italic; margin-bottom:32px;
     }
     .ch-hero .trigger::before { content:'↳ '; color:var(--orange); }
-
-    .content-wrap {
-      max-width:1100px; margin:0 auto; padding:0 40px 100px;
-      position:relative; z-index:1;
-    }
-    .topic-section { margin-bottom:48px; }
-    .topic-section > h2 {
-      font-family:'Syne',sans-serif; font-size:22px; font-weight:800;
-      letter-spacing:-.02em; margin-bottom:6px;
-    }
-    .topic-section > .ts-sub {
-      font-family:'DM Mono',monospace; font-size:11px;
-      color:var(--muted); font-style:italic; margin-bottom:20px;
-    }
-
-    /* nav between chapters */
     .ch-nav {
       display:flex; justify-content:space-between; gap:16px;
-      margin-bottom:80px; flex-wrap:wrap;
+      max-width:1400px; margin:0 auto; padding:0 40px 80px;
+      flex-wrap:wrap; position:relative; z-index:1;
     }
     .ch-nav a {
       background:var(--surface); border:1px solid var(--border);
       border-radius:var(--radius); padding:16px 24px;
       text-decoration:none; display:flex; flex-direction:column; gap:4px;
-      flex:1; min-width:200px;
-      transition:border-color .2s;
+      flex:1; min-width:200px; transition:border-color .2s;
     }
     .ch-nav a:hover { border-color:var(--orange); }
     .ch-nav .nav-dir {
@@ -63,10 +47,9 @@
       font-family:'Syne',sans-serif; font-size:15px; font-weight:700;
     }
     .ch-nav .next { text-align:right; }
-
     @media(max-width:768px){
       .ch-hero{padding:36px 20px 36px;}
-      .content-wrap{padding:0 20px 80px;}
+      .ch-nav{padding:0 20px 60px;}
     }
   </style>
 </head>
@@ -92,7 +75,7 @@
 <header class="ch-hero fade-in">
   <div class="badge badge-orange" style="margin-bottom:20px;">
     <span class="badge-dot"></span>
-    Chapter 1-1 · 3 Topics
+    Chapter 1-1 · 8 Topics
   </div>
   <h1>📱 화면에 <span class="accent">뭔가 띄우기</span></h1>
   <p class="trigger">"Hello World"를 앱에서 보고 싶다</p>
@@ -108,130 +91,110 @@
   </div>
 </header>
 
-<div class="content-wrap">
+<div class="split-layout">
 
-  <!-- Topic 1 -->
-  <div class="topic-section fade-in delay-1">
-    <h2>SwiftUI 첫 화면</h2>
-    <p class="ts-sub">View · body · preview</p>
-    <div class="topics-grid">
+  <!-- ========== LEFT: Content Column ========== -->
+  <div class="content-col">
 
-      <div class="topic-card" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">ContentView 구조</div>
-            <div class="topic-subtitle">앱 시작점, struct가 View를 채택하는 이유</div>
+    <!-- Section 1: ContentView 구조 -->
+    <div class="content-section" data-preview="pv-1">
+      <div class="cs-label">Topic 01</div>
+      <h2 class="cs-title">ContentView 구조</h2>
+      <div class="cs-subtitle">앱 시작점, struct가 View를 채택하는 이유</div>
+
+      <div class="topic-questions">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li>SwiftUI에서 View를 class가 아닌 struct로 만드는 이유는 무엇인가?</li>
+          <li><code>some View</code>에서 <code>some</code>을 빼면 어떤 에러가 나는가? 왜 필요한가?</li>
+          <li><code>#Preview</code>와 시뮬레이터 빌드의 차이는 무엇인가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">struct ContentView: View</div>
+            <div class="item-desc">SwiftUI View는 struct다. class가 아닌 이유 — 값 타입의 불변성이 렌더링 시스템과 맞닿는 지점</div>
           </div>
-          <button class="toggle-btn">+</button>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li>SwiftUI에서 View를 class가 아닌 struct로 만드는 이유는 무엇인가?</li>
-              <li><code>some View</code>에서 <code>some</code>을 빼면 어떤 에러가 나는가? 왜 필요한가?</li>
-              <li><code>#Preview</code>와 시뮬레이터 빌드의 차이는 무엇인가?</li>
-            </ul>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">var body: some View</div>
+            <div class="item-desc">View 프로토콜의 유일한 요구사항. some View — Opaque Type이 왜 필요한가</div>
           </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">struct ContentView: View</div>
-                <div class="item-desc">SwiftUI View는 struct다. class가 아닌 이유 — 값 타입의 불변성이 렌더링 시스템과 맞닿는 지점</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">var body: some View</div>
-                <div class="item-desc">View 프로토콜의 유일한 요구사항. some View — Opaque Type이 왜 필요한가</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">#Preview 매크로</div>
-                <div class="item-desc">iOS 17+ Preview 매크로. 빌드 없이 실시간 UI 확인. Canvas 활성화하는 법</div>
-              </div>
-            </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">#Preview 매크로</div>
+            <div class="item-desc">iOS 17+ Preview 매크로. 빌드 없이 실시간 UI 확인. Canvas 활성화하는 법</div>
           </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">struct ContentView: View {
+        </div>
+      </div>
+
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">struct ContentView: View {
     var body: some View {
         Text("Hello, World!")
             .font(.largeTitle)
             .foregroundStyle(.orange)
     }
 }</pre>
-            </div>
-            <div class="phone-preview">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                  <div class="preview-label">Preview</div>
-                  <div style="flex:1;display:flex;align-items:center;justify-content:center;">
-                    <span style="font-size:24px;font-weight:700;color:#E85D1A;">Hello, World!</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+    </div>
+
+    <!-- Section 2: 기본 뷰 3종 -->
+    <div class="content-section" data-preview="pv-2">
+      <div class="cs-label">Topic 02</div>
+      <h2 class="cs-title">기본 뷰 3종</h2>
+      <div class="cs-subtitle">Text · Image · Button</div>
+
+      <div class="topic-questions">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>Text("Hello").font(.title).bold()</code>에서 <code>.font()</code>과 <code>.bold()</code>의 순서를 바꾸면 결과가 달라지는가?</li>
+          <li><code>Image(systemName:)</code>과 <code>Image("이미지이름")</code>의 차이는 무엇인가?</li>
+          <li><code>Button</code>의 action 클로저 안에서 <code>print()</code>를 호출하면 Preview에서 출력을 볼 수 있는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Text("Hello")</div>
+            <div class="item-desc">문자열 표시. .font(), .foregroundStyle(), .bold() modifier 체이닝</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Image(systemName:)</div>
+            <div class="item-desc">SF Symbols 사용. .resizable() + .scaledToFit() 조합. 크기 지정 패턴</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Button(action:label:)</div>
+            <div class="item-desc">탭 액션 연결. 후행 클로저 문법 읽기. .buttonStyle() 커스터마이징</div>
           </div>
         </div>
       </div>
 
-      <div class="topic-card" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">기본 뷰 3종</div>
-            <div class="topic-subtitle">Text · Image · Button</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li><code>Text("Hello").font(.title).bold()</code>에서 <code>.font()</code>과 <code>.bold()</code>의 순서를 바꾸면 결과가 달라지는가?</li>
-              <li><code>Image(systemName:)</code>과 <code>Image("이미지이름")</code>의 차이는 무엇인가?</li>
-              <li><code>Button</code>의 action 클로저 안에서 <code>print()</code>를 호출하면 Preview에서 출력을 볼 수 있는가?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">Text("Hello")</div>
-                <div class="item-desc">문자열 표시. .font(), .foregroundStyle(), .bold() modifier 체이닝</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">Image(systemName:)</div>
-                <div class="item-desc">SF Symbols 사용. .resizable() + .scaledToFit() 조합. 크기 지정 패턴</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">Button(action:label:)</div>
-                <div class="item-desc">탭 액션 연결. 후행 클로저 문법 읽기. .buttonStyle() 커스터마이징</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">VStack(spacing: 16) {
+        <pre class="swift-code">VStack(spacing: 16) {
     Text("개발자리")
         .font(.title)
         .bold()
@@ -245,78 +208,61 @@
     }
     .buttonStyle(.borderedProminent)
 }</pre>
-            </div>
-            <div class="phone-preview">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                  <div class="preview-label">Preview</div>
-                  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
-                    <span style="font-size:20px;font-weight:700;color:#1A1D2A;">개발자리</span>
-                    <span style="font-size:40px;color:#FFD60A;">&#9733;</span>
-                    <span style="display:inline-block;padding:8px 20px;background:#007AFF;color:#fff;border-radius:8px;font-size:14px;font-weight:500;">시작하기</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+    </div>
+
+    <!-- Section 3: Stack 3종 -->
+    <div class="content-section" data-preview="pv-3">
+      <div class="cs-label">Topic 03</div>
+      <h2 class="cs-title">Stack 3종</h2>
+      <div class="cs-subtitle">VStack · HStack · ZStack — 화면을 쌓는 3가지 방향</div>
+
+      <div class="topic-questions">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>VStack(alignment: .leading)</code>에서 alignment를 생략하면 기본값은 무엇인가?</li>
+          <li><code>HStack</code> 안에 <code>Spacer()</code>를 넣으면 어떻게 되는가? 두 개 넣으면?</li>
+          <li><code>.padding().background(.blue)</code> vs <code>.background(.blue).padding()</code> 결과는 왜 다른가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">VStack — 수직 쌓기</div>
+            <div class="item-desc">alignment: .leading/.center/.trailing, spacing: 값 설정. 기본 alignment가 .center인 이유</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">HStack — 수평 쌓기</div>
+            <div class="item-desc">alignment: .top/.center/.bottom. 텍스트 baseline 정렬 .firstTextBaseline</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">ZStack — 겹치기</div>
+            <div class="item-desc">나중에 추가된 뷰가 위로. alignment 기준점. 오버레이 vs ZStack 선택 기준</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Modifier 체이닝 순서</div>
+            <div class="item-desc">.padding().background() vs .background().padding() — 순서가 결과를 바꾸는 이유</div>
           </div>
         </div>
       </div>
 
-      <div class="topic-card" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">Stack 3종</div>
-            <div class="topic-subtitle">VStack · HStack · ZStack — 화면을 쌓는 3가지 방향</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li><code>VStack(alignment: .leading)</code>에서 alignment를 생략하면 기본값은 무엇인가?</li>
-              <li><code>HStack</code> 안에 <code>Spacer()</code>를 넣으면 어떻게 되는가? 두 개 넣으면?</li>
-              <li><code>.padding().background(.blue)</code> vs <code>.background(.blue).padding()</code> 결과는 왜 다른가?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">VStack — 수직 쌓기</div>
-                <div class="item-desc">alignment: .leading/.center/.trailing, spacing: 값 설정. 기본 alignment가 .center인 이유</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">HStack — 수평 쌓기</div>
-                <div class="item-desc">alignment: .top/.center/.bottom. 텍스트 baseline 정렬 .firstTextBaseline</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">ZStack — 겹치기</div>
-                <div class="item-desc">나중에 추가된 뷰가 위로. alignment 기준점. 오버레이 vs ZStack 선택 기준</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">Modifier 체이닝 순서</div>
-                <div class="item-desc">.padding().background() vs .background().padding() — 순서가 결과를 바꾸는 이유</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">VStack(spacing: 20) {
+        <pre class="swift-code">VStack(spacing: 20) {
     HStack {
         Text("왼쪽")
         Spacer()
@@ -333,87 +279,54 @@
         Text("ZStack 겹침")
     }
 }</pre>
-            </div>
-            <div class="phone-preview">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                  <div class="preview-label">Preview</div>
-                  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:20px;padding:0 4px;">
-                    <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:rgba(128,128,128,0.1);border-radius:8px;">
-                      <span style="font-size:13px;color:#1A1D2A;">왼쪽</span>
-                      <span style="font-size:13px;color:#1A1D2A;">오른쪽</span>
-                    </div>
-                    <div style="position:relative;display:flex;align-items:center;justify-content:center;height:60px;">
-                      <div style="position:absolute;inset:0;background:rgba(0,122,255,0.15);border-radius:12px;"></div>
-                      <span style="position:relative;font-size:13px;color:#1A1D2A;">ZStack 겹침</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+    </div>
+
+    <!-- Section 4: frame modifier -->
+    <div class="content-section" data-preview="pv-4">
+      <div class="cs-label">Topic 04</div>
+      <h2 class="cs-title">frame modifier</h2>
+      <div class="cs-subtitle">크기를 직접 지정하는 방법</div>
+
+      <div class="topic-questions">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>.frame(width: 200)</code>은 뷰 자체의 크기를 바꾸는 것인가, 뷰를 감싸는 프레임의 크기를 바꾸는 것인가?</li>
+          <li><code>maxWidth: .infinity</code>는 어떤 상황에서 쓰는가? 버튼을 화면 전체 너비로 만들려면?</li>
+          <li><code>.frame()</code> 안의 <code>alignment</code> 파라미터는 무엇을 정렬하는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">.frame(width:height:)</div>
+            <div class="item-desc">고정 크기 지정. 뷰 자체가 아닌 "뷰를 담는 프레임"에 크기를 주는 개념</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">maxWidth: .infinity</div>
+            <div class="item-desc">부모가 주는 최대 너비를 다 차지. 버튼 full-width 만들기 패턴</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">alignment 파라미터</div>
+            <div class="item-desc">frame 안에서 자식 뷰의 위치 결정. .frame(maxWidth:.infinity, alignment:.leading)</div>
           </div>
         </div>
       </div>
 
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- Topic 2 -->
-  <div class="topic-section fade-in delay-2">
-    <h2>레이아웃 시스템</h2>
-    <p class="ts-sub">내 맘대로 안 되는 이유</p>
-    <div class="topics-grid">
-
-      <div class="topic-card" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">frame modifier</div>
-            <div class="topic-subtitle">크기를 직접 지정하는 방법</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li><code>.frame(width: 200)</code>은 뷰 자체의 크기를 바꾸는 것인가, 뷰를 감싸는 프레임의 크기를 바꾸는 것인가?</li>
-              <li><code>maxWidth: .infinity</code>는 어떤 상황에서 쓰는가? 버튼을 화면 전체 너비로 만들려면?</li>
-              <li><code>.frame()</code> 안의 <code>alignment</code> 파라미터는 무엇을 정렬하는가?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">.frame(width:height:)</div>
-                <div class="item-desc">고정 크기 지정. 뷰 자체가 아닌 "뷰를 담는 프레임"에 크기를 주는 개념</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">maxWidth: .infinity</div>
-                <div class="item-desc">부모가 주는 최대 너비를 다 차지. 버튼 full-width 만들기 패턴</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">alignment 파라미터</div>
-                <div class="item-desc">frame 안에서 자식 뷰의 위치 결정. .frame(maxWidth:.infinity, alignment:.leading)</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">VStack(spacing: 12) {
+        <pre class="swift-code">VStack(spacing: 12) {
     Text("고정 크기")
         .frame(width: 120, height: 40)
         .background(.orange.opacity(0.2))
@@ -425,74 +338,54 @@
         .background(.blue.opacity(0.15))
         .cornerRadius(8)
 }</pre>
-            </div>
-            <div class="phone-preview">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                  <div class="preview-label">Preview</div>
-                  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:0 4px;">
-                    <div style="width:120px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(232,93,26,0.2);border-radius:8px;">
-                      <span style="font-size:13px;color:#1A1D2A;">고정 크기</span>
-                    </div>
-                    <div style="width:100%;padding:12px;display:flex;align-items:center;justify-content:center;background:rgba(0,122,255,0.15);border-radius:8px;">
-                      <span style="font-size:13px;color:#1A1D2A;">최대 너비</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+    </div>
+
+    <!-- Section 5: padding · Spacer · offset -->
+    <div class="content-section" data-preview="pv-5">
+      <div class="cs-label">Topic 05</div>
+      <h2 class="cs-title">padding · Spacer · offset</h2>
+      <div class="cs-subtitle">여백과 위치 조정</div>
+
+      <div class="topic-questions">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>padding()</code>에 값을 안 주면 기본 여백은 몇 pt인가?</li>
+          <li><code>Spacer()</code>는 Stack 밖에서도 동작하는가?</li>
+          <li><code>.offset(x: 20)</code>과 <code>.padding(.leading, 20)</code>의 결정적 차이는 무엇인가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">.padding()</div>
+            <div class="item-desc">주변 여백 추가. .padding(.horizontal, 20) 방향별 지정. 레이아웃에 영향을 준다</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Spacer()</div>
+            <div class="item-desc">남은 공간 전부 차지. Stack 안에서만 의미 있음. minLength 옵션</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">.offset(x:y:)</div>
+            <div class="item-desc">위치를 이동하지만 레이아웃 공간은 그대로 유지. padding과의 결정적 차이</div>
           </div>
         </div>
       </div>
 
-      <div class="topic-card" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">padding · Spacer · offset</div>
-            <div class="topic-subtitle">여백과 위치 조정</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li><code>padding()</code>에 값을 안 주면 기본 여백은 몇 pt인가?</li>
-              <li><code>Spacer()</code>는 Stack 밖에서도 동작하는가?</li>
-              <li><code>.offset(x: 20)</code>과 <code>.padding(.leading, 20)</code>의 결정적 차이는 무엇인가?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">.padding()</div>
-                <div class="item-desc">주변 여백 추가. .padding(.horizontal, 20) 방향별 지정. 레이아웃에 영향을 준다</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">Spacer()</div>
-                <div class="item-desc">남은 공간 전부 차지. Stack 안에서만 의미 있음. minLength 옵션</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">.offset(x:y:)</div>
-                <div class="item-desc">위치를 이동하지만 레이아웃 공간은 그대로 유지. padding과의 결정적 차이</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">VStack {
+        <pre class="swift-code">VStack {
     Spacer()
 
     Text("가운데 정렬")
@@ -502,71 +395,54 @@
 
     Spacer()
 }</pre>
-            </div>
-            <div class="phone-preview">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                  <div class="preview-label">Preview</div>
-                  <div style="flex:1;display:flex;align-items:center;justify-content:center;">
-                    <div style="padding:12px 16px;background:rgba(232,93,26,0.15);border-radius:8px;">
-                      <span style="font-size:13px;color:#1A1D2A;">가운데 정렬</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+    </div>
+
+    <!-- Section 6: GeometryReader -->
+    <div class="content-section" data-preview="pv-6">
+      <div class="cs-label">Topic 06</div>
+      <h2 class="cs-title">GeometryReader</h2>
+      <div class="cs-subtitle">부모 크기 읽어서 반응형으로</div>
+
+      <div class="topic-questions">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>GeometryReader</code>를 쓰면 왜 레이아웃이 예상과 다르게 변하는가?</li>
+          <li>부모의 크기를 몰라도 되는 상황에서 GeometryReader를 쓰면 어떤 문제가 있는가?</li>
+          <li>화면 너비의 30%만큼 너비를 주려면 어떻게 하는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">GeometryProxy</div>
+            <div class="item-desc">geo.size.width, geo.size.height로 부모 크기 접근. 비율로 크기 계산</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">주의사항</div>
+            <div class="item-desc">GeometryReader는 최대 크기를 차지하려 한다. 의도치 않은 레이아웃 변화 주의</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">언제 쓰는가</div>
+            <div class="item-desc">화면 크기에 비례한 뷰, 스크롤 오프셋 읽기, 커스텀 애니메이션</div>
           </div>
         </div>
       </div>
 
-      <div class="topic-card" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">GeometryReader</div>
-            <div class="topic-subtitle">부모 크기 읽어서 반응형으로</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li><code>GeometryReader</code>를 쓰면 왜 레이아웃이 예상과 다르게 변하는가?</li>
-              <li>부모의 크기를 몰라도 되는 상황에서 GeometryReader를 쓰면 어떤 문제가 있는가?</li>
-              <li>화면 너비의 30%만큼 너비를 주려면 어떻게 하는가?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">GeometryProxy</div>
-                <div class="item-desc">geo.size.width, geo.size.height로 부모 크기 접근. 비율로 크기 계산</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">주의사항</div>
-                <div class="item-desc">GeometryReader는 최대 크기를 차지하려 한다. 의도치 않은 레이아웃 변화 주의</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">언제 쓰는가</div>
-                <div class="item-desc">화면 크기에 비례한 뷰, 스크롤 오프셋 읽기, 커스텀 애니메이션</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">GeometryReader { geo in
+        <pre class="swift-code">GeometryReader { geo in
     HStack(spacing: 0) {
         Color.orange
             .frame(width: geo.size.width * 0.3)
@@ -575,83 +451,54 @@
 }
 .frame(height: 60)
 .cornerRadius(12)</pre>
-            </div>
-            <div class="phone-preview">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                  <div class="preview-label">Preview</div>
-                  <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:0 4px;">
-                    <div style="width:100%;height:60px;border-radius:12px;overflow:hidden;display:flex;">
-                      <div style="width:30%;background:#E85D1A;"></div>
-                      <div style="width:70%;background:#2E8BD8;"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+    </div>
+
+    <!-- Section 7: @main · App · WindowGroup -->
+    <div class="content-section" data-preview="pv-7">
+      <div class="cs-label">Topic 07</div>
+      <h2 class="cs-title">@main · App · WindowGroup</h2>
+      <div class="cs-subtitle">앱의 진입점과 Scene 구조</div>
+
+      <div class="topic-questions">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>@main</code>을 두 개의 struct에 붙이면 어떻게 되는가?</li>
+          <li><code>WindowGroup</code>은 왜 단순히 "Window"가 아니라 "Group"인가?</li>
+          <li>App → Scene → View 계층에서 각각의 역할은 무엇인가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@main 어트리뷰트</div>
+            <div class="item-desc">진입점 마킹. 컴파일러가 main() 함수를 자동 생성. 하나의 타입에만 붙일 수 있다</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">App 프로토콜</div>
+            <div class="item-desc">body: some Scene 요구. SwiftUI 앱의 최상위 구조체</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">WindowGroup</div>
+            <div class="item-desc">기본 Scene 타입. iPad/Mac에서 여러 창을 지원하는 이유</div>
           </div>
         </div>
       </div>
 
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- Topic 3 -->
-  <div class="topic-section fade-in delay-3">
-    <h2>앱 구조 이해</h2>
-    <p class="ts-sub">@main · App · Scene · View 계층</p>
-    <div class="topics-grid">
-
-      <div class="topic-card" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">@main · App · WindowGroup</div>
-            <div class="topic-subtitle">앱의 진입점과 Scene 구조</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li><code>@main</code>을 두 개의 struct에 붙이면 어떻게 되는가?</li>
-              <li><code>WindowGroup</code>은 왜 단순히 "Window"가 아니라 "Group"인가?</li>
-              <li>App → Scene → View 계층에서 각각의 역할은 무엇인가?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">@main 어트리뷰트</div>
-                <div class="item-desc">진입점 마킹. 컴파일러가 main() 함수를 자동 생성. 하나의 타입에만 붙일 수 있다</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">App 프로토콜</div>
-                <div class="item-desc">body: some Scene 요구. SwiftUI 앱의 최상위 구조체</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">WindowGroup</div>
-                <div class="item-desc">기본 Scene 타입. iPad/Mac에서 여러 창을 지원하는 이유</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">@main
+        <pre class="swift-code">@main
 struct MyApp: App {
     var body: some Scene {
         WindowGroup {
@@ -659,66 +506,47 @@ struct MyApp: App {
         }
     }
 }</pre>
-            </div>
-            <div class="phone-preview">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                  <div class="preview-label">Preview</div>
-                  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:0 8px;">
-                    <div style="border:2px solid #E85D1A;border-radius:10px;padding:10px 18px;font-size:12px;font-weight:600;color:#E85D1A;text-align:center;">App</div>
-                    <div style="width:2px;height:16px;background:#D0D3DC;"></div>
-                    <div style="border:2px solid #2E8BD8;border-radius:10px;padding:10px 14px;font-size:11px;font-weight:600;color:#2E8BD8;text-align:center;">WindowGroup</div>
-                    <div style="width:2px;height:16px;background:#D0D3DC;"></div>
-                    <div style="border:2px solid #2DA55D;border-radius:10px;padding:10px 14px;font-size:11px;font-weight:600;color:#2DA55D;text-align:center;">ContentView</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+    </div>
+
+    <!-- Section 8: View 계층과 레이아웃 영향 -->
+    <div class="content-section" data-preview="pv-8">
+      <div class="cs-label">Topic 08</div>
+      <h2 class="cs-title">View 계층과 레이아웃 영향</h2>
+      <div class="cs-subtitle">부모/자식 관계가 레이아웃에 미치는 영향</div>
+
+      <div class="topic-questions">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li>SwiftUI에서 부모와 자식의 크기 협상은 어떤 순서로 이루어지는가?</li>
+          <li>자식 View가 부모가 제안한 크기보다 더 큰 크기를 원하면 어떻게 되는가?</li>
+          <li>시뮬레이터에서는 정상인데 실기기에서 다르게 보이는 경우는 언제인가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">크기 협상 과정</div>
+            <div class="item-desc">부모가 자식에게 제안 크기 전달 → 자식이 자신의 크기를 결정 → 부모가 배치. SwiftUI 레이아웃의 핵심</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">실기기 vs 시뮬레이터</div>
+            <div class="item-desc">렌더링 성능, Metal, 카메라/센서 차이. 시뮬레이터에서만 테스트하면 안 되는 이유</div>
           </div>
         </div>
       </div>
 
-      <div class="topic-card" onclick="toggleCard(this)">
-        <div class="topic-header">
-          <div class="topic-left">
-            <div class="topic-name">View 계층과 레이아웃 영향</div>
-            <div class="topic-subtitle">부모/자식 관계가 레이아웃에 미치는 영향</div>
-          </div>
-          <button class="toggle-btn">+</button>
+      <div class="code-block" style="margin-top:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
         </div>
-        <div class="topic-body">
-          <div class="topic-questions">
-            <div class="tq-label">생각해보기</div>
-            <ul>
-              <li>SwiftUI에서 부모와 자식의 크기 협상은 어떤 순서로 이루어지는가?</li>
-              <li>자식 View가 부모가 제안한 크기보다 더 큰 크기를 원하면 어떻게 되는가?</li>
-              <li>시뮬레이터에서는 정상인데 실기기에서 다르게 보이는 경우는 언제인가?</li>
-            </ul>
-          </div>
-          <div class="topic-items">
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">크기 협상 과정</div>
-                <div class="item-desc">부모가 자식에게 제안 크기 전달 → 자식이 자신의 크기를 결정 → 부모가 배치. SwiftUI 레이아웃의 핵심</div>
-              </div>
-            </div>
-            <div class="topic-item">
-              <div class="item-dot"></div>
-              <div class="item-content">
-                <div class="item-title">실기기 vs 시뮬레이터</div>
-                <div class="item-desc">렌더링 성능, Metal, 카메라/센서 차이. 시뮬레이터에서만 테스트하면 안 되는 이유</div>
-              </div>
-            </div>
-          </div>
-          <div class="code-preview">
-            <div class="code-block">
-              <div class="code-header">
-                <div class="code-dots"><span></span><span></span><span></span></div>
-                <span class="code-lang">Swift</span>
-              </div>
-              <pre class="swift-code">// 부모가 크기 제안 → 자식이 결정
+        <pre class="swift-code">// 부모가 크기 제안 → 자식이 결정
 VStack {
     Text("padding 먼저")
         .padding()
@@ -728,42 +556,133 @@ VStack {
         .background(.blue.opacity(0.2))
         .padding()
 }</pre>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========== RIGHT: Preview Column ========== -->
+  <div class="preview-col">
+    <div class="sticky-phone">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <!-- Preview 1: ContentView -->
+          <div id="pv-1" class="preview-content active">
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:28px;font-weight:700;color:#E85D1A;">Hello, World!</span>
             </div>
-            <div class="phone-preview">
-              <div class="phone-frame">
-                <div class="phone-notch"></div>
-                <div class="phone-screen">
-                  <div class="preview-label">Preview</div>
-                  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:0 4px;">
-                    <div style="padding:12px 16px;background:rgba(232,93,26,0.2);border-radius:4px;">
-                      <span style="font-size:13px;color:#1A1D2A;">padding 먼저</span>
-                    </div>
-                    <div style="padding:12px 16px;">
-                      <span style="font-size:13px;color:#1A1D2A;background:rgba(0,122,255,0.2);padding:2px 4px;border-radius:2px;">background 먼저</span>
-                    </div>
-                  </div>
+          </div>
+
+          <!-- Preview 2: Text, Image, Button -->
+          <div id="pv-2" class="preview-content">
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;">
+              <span style="font-size:22px;font-weight:700;color:#1A1D2A;">개발자리</span>
+              <span style="font-size:48px;color:#FFD60A;">&#9733;</span>
+              <span style="display:inline-block;padding:10px 28px;background:#007AFF;color:#fff;border-radius:10px;font-size:16px;font-weight:500;">시작하기</span>
+            </div>
+          </div>
+
+          <!-- Preview 3: Stacks -->
+          <div id="pv-3" class="preview-content">
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:24px;padding:0 8px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:rgba(128,128,128,0.08);border-radius:10px;">
+                <span style="font-size:15px;">왼쪽</span>
+                <span style="font-size:15px;">오른쪽</span>
+              </div>
+              <div style="position:relative;display:flex;align-items:center;justify-content:center;height:70px;">
+                <div style="position:absolute;inset:0;background:rgba(0,122,255,0.12);border-radius:12px;"></div>
+                <span style="position:relative;font-size:15px;">ZStack 겹침</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview 4: frame -->
+          <div id="pv-4" class="preview-content">
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:0 8px;">
+              <div style="width:130px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(232,93,26,0.15);border-radius:10px;">
+                <span style="font-size:14px;">고정 크기</span>
+              </div>
+              <div style="width:100%;padding:14px;display:flex;align-items:center;justify-content:center;background:rgba(0,122,255,0.12);border-radius:10px;">
+                <span style="font-size:14px;">최대 너비</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview 5: padding / Spacer -->
+          <div id="pv-5" class="preview-content">
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;">
+              <div style="padding:14px 20px;background:rgba(232,93,26,0.12);border-radius:10px;">
+                <span style="font-size:15px;">가운데 정렬</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview 6: GeometryReader -->
+          <div id="pv-6" class="preview-content">
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:0 8px;">
+              <div style="width:100%;height:70px;border-radius:14px;overflow:hidden;display:flex;">
+                <div style="width:30%;background:#E85D1A;"></div>
+                <div style="width:70%;background:#2E8BD8;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview 7: App structure -->
+          <div id="pv-7" class="preview-content">
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;">
+              <div style="border:2px solid #E85D1A;border-radius:12px;padding:12px 24px;font-size:14px;font-weight:700;color:#E85D1A;">@main App</div>
+              <div style="width:2px;height:20px;background:#D0D3DC;"></div>
+              <div style="border:2px solid #2E8BD8;border-radius:12px;padding:12px 20px;font-size:13px;font-weight:600;color:#2E8BD8;">WindowGroup</div>
+              <div style="width:2px;height:20px;background:#D0D3DC;"></div>
+              <div style="border:2px solid #2DA55D;border-radius:12px;padding:12px 20px;font-size:13px;font-weight:600;color:#2DA55D;">ContentView</div>
+            </div>
+          </div>
+
+          <!-- Preview 8: Modifier order -->
+          <div id="pv-8" class="preview-content">
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:0 8px;">
+              <div>
+                <div style="font-size:10px;color:#999;margin-bottom:6px;font-family:'DM Mono',monospace;">.padding().background()</div>
+                <div style="padding:14px 18px;background:rgba(232,93,26,0.18);border-radius:6px;">
+                  <span style="font-size:14px;">padding 먼저</span>
+                </div>
+              </div>
+              <div>
+                <div style="font-size:10px;color:#999;margin-bottom:6px;font-family:'DM Mono',monospace;">.background().padding()</div>
+                <div style="padding:14px 18px;">
+                  <span style="font-size:14px;background:rgba(0,122,255,0.18);padding:4px 6px;border-radius:4px;">background 먼저</span>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- Chapter nav -->
-  <div class="ch-nav">
-    <a href="index.html">
-      <span class="nav-dir">← Stage 1 목록</span>
-      <span class="nav-title">Stage 1 인덱스</span>
-    </a>
-    <a href="1-2.html" class="next">
-      <span class="nav-dir">다음 챕터 →</span>
-      <span class="nav-title">1-2 버튼 누르면 화면이 바뀌게</span>
-    </a>
-  </div>
+</div>
 
+<!-- Chapter nav -->
+<div class="ch-nav">
+  <a href="index.html">
+    <span class="nav-dir">← Stage 1 목록</span>
+    <span class="nav-title">Stage 1 인덱스</span>
+  </a>
+  <a href="1-2.html" class="next">
+    <span class="nav-dir">다음 챕터 →</span>
+    <span class="nav-title">1-2 버튼 누르면 화면이 바뀌게</span>
+  </a>
 </div>
 
 <footer class="footer">
@@ -771,12 +690,7 @@ VStack {
 </footer>
 
 <script>
-  function toggleCard(el) {
-    el.classList.toggle('open');
-  }
-  // Open first card
-  document.querySelector('.topic-card')?.classList.add('open');
-
+  // Syntax highlighting
   function highlightSwift(el) {
     let html = el.textContent;
     html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -788,6 +702,26 @@ VStack {
     el.innerHTML = html;
   }
   document.querySelectorAll('.swift-code').forEach(highlightSwift);
+
+  // Preview switching on scroll
+  const sections = document.querySelectorAll('.content-section');
+  const previews = document.querySelectorAll('.preview-content');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.dataset.preview;
+        previews.forEach(p => p.classList.remove('active'));
+        const target = document.getElementById(id);
+        if (target) target.classList.add('active');
+      }
+    });
+  }, {
+    rootMargin: '-20% 0px -60% 0px',
+    threshold: 0
+  });
+
+  sections.forEach(s => observer.observe(s));
 </script>
 </body>
 </html>
