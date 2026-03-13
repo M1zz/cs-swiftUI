@@ -3,395 +3,260 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>개발자리 CS 커리큘럼 — Top-Down · Problem-Driven · App-First</title>
+  <title>Stage 1 — 일단 만든다 | 개발자리 CS 커리큘럼</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
   <style>
-    /* ─── HERO ─── */
     .hero {
-      padding: 80px 40px 64px;
-      max-width: 1100px;
-      margin: 0 auto;
+      padding: 64px 40px 56px;
+      max-width: 1100px; margin: 0 auto;
       position: relative; z-index: 1;
     }
     .hero::after {
       content:''; position:absolute;
       top:-60px; right:-80px;
-      width:500px; height:500px;
-      background: radial-gradient(circle, #FF6B2B14 0%, transparent 65%);
+      width:420px; height:420px;
+      background: radial-gradient(circle, #FF6B2B12 0%, transparent 65%);
       pointer-events:none;
-    }
-    .hero-eyebrow {
-      font-family:'DM Mono',monospace;
-      font-size:10px; letter-spacing:.15em; text-transform:uppercase;
-      color:var(--muted); margin-bottom:20px;
     }
     .hero-title {
       font-family:'Syne',sans-serif;
-      font-size:clamp(48px,8vw,96px);
-      font-weight:800; line-height:1;
-      letter-spacing:-.04em; margin-bottom:20px;
+      font-size:clamp(48px,7vw,80px);
+      font-weight:800; line-height:1.0;
+      letter-spacing:-.035em; margin-bottom:16px;
     }
-    .hero-title .line2 { color:var(--orange); }
-    .hero-desc {
-      font-size:16px; color:var(--muted);
-      line-height:1.75; max-width:520px; margin-bottom:48px;
+    .hero-title .accent { color:var(--orange); }
+    .hero-sub {
+      font-size:15px; color:var(--muted);
+      max-width:520px; line-height:1.75; margin-bottom:36px;
     }
-    .hero-stats {
-      display:flex; gap:48px; flex-wrap:wrap;
-    }
-    .stat-item { display:flex; flex-direction:column; gap:4px; }
-    .stat-num {
-      font-family:'Syne',sans-serif;
-      font-size:32px; font-weight:800; letter-spacing:-.02em;
-    }
-    .stat-num .unit {
-      font-size:16px; color:var(--muted); font-weight:600; margin-left:2px;
-    }
-    .stat-label {
-      font-family:'DM Mono',monospace;
-      font-size:10px; letter-spacing:.08em; text-transform:uppercase;
-      color:var(--muted);
-    }
-
-    /* ─── PHILOSOPHY ─── */
-    .philosophy {
-      max-width:1100px; margin:0 auto 72px; padding:0 40px;
-      position:relative; z-index:1;
-    }
-    .philosophy-grid {
-      display:grid; grid-template-columns:repeat(3,1fr); gap:12px;
-    }
-    .phil-card {
-      background:var(--surface); border:1px solid var(--border);
-      border-radius:var(--radius-lg); padding:28px 24px;
-    }
-    .phil-icon { font-size:28px; margin-bottom:12px; display:block; }
-    .phil-title {
-      font-family:'Syne',sans-serif; font-size:16px; font-weight:700;
-      margin-bottom:8px;
-    }
-    .phil-desc { font-size:13px; color:var(--muted); line-height:1.65; }
-
-    /* ─── STAGES ─── */
-    .stages {
-      max-width:1100px; margin:0 auto; padding:0 40px 100px;
-      position:relative; z-index:1;
-    }
-    .stages-label {
+    .hero-meta { display:flex; gap:36px; flex-wrap:wrap; }
+    .meta-item { display:flex; flex-direction:column; gap:4px; }
+    .meta-label {
       font-family:'DM Mono',monospace; font-size:10px;
-      letter-spacing:.15em; text-transform:uppercase; color:var(--muted);
-      margin-bottom:24px;
+      letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
     }
-    .stage-grid {
+    .meta-value {
+      font-family:'Syne',sans-serif; font-weight:700; font-size:16px;
+    }
+
+    /* Chapter cards */
+    .chapters {
+      max-width:1100px; margin:0 auto; padding:0 40px;
+      position:relative; z-index:1;
+    }
+    .chapters-label {
+      font-family:'DM Mono',monospace; font-size:10px;
+      letter-spacing:.15em; text-transform:uppercase;
+      color:var(--muted); margin-bottom:20px;
+    }
+    .chapter-grid {
       display:grid; grid-template-columns:repeat(2,1fr); gap:14px;
+      margin-bottom:60px;
     }
-    .stage-card {
+    .chapter-card {
       background:var(--surface); border:1px solid var(--border);
       border-radius:var(--radius-lg); padding:28px;
       text-decoration:none; display:block;
       transition:border-color .2s, transform .2s, box-shadow .2s;
       position:relative; overflow:hidden;
     }
-    .stage-card::before {
-      content:''; position:absolute;
-      inset:0; opacity:0;
-      transition:opacity .3s;
-    }
-    .stage-card:hover {
+    .chapter-card:hover {
+      border-color:var(--orange);
       transform:translateY(-3px);
-      box-shadow:0 12px 40px #00000050;
+      box-shadow:0 10px 36px #FF6B2B16;
     }
-    .stage-card.available:hover { border-color:var(--orange); }
-    .stage-card.available:hover::before {
-      background:radial-gradient(ellipse at top left, #FF6B2B08, transparent 60%);
-      opacity:1;
-    }
-    .stage-card.locked { opacity:.5; cursor:default; }
-    .stage-card.locked:hover { transform:none; box-shadow:none; }
-
-    .stage-top {
-      display:flex; align-items:center; justify-content:space-between;
-      margin-bottom:16px;
-    }
-    .stage-num {
+    .ch-num {
       font-family:'DM Mono',monospace; font-size:11px;
-      letter-spacing:.08em; color:var(--muted);
+      letter-spacing:.08em; color:var(--muted); margin-bottom:12px;
     }
-    .stage-status {
-      font-family:'DM Mono',monospace; font-size:10px;
-      padding:3px 10px; border-radius:100px;
-    }
-    .status-open {
-      background:var(--orange-dim); color:var(--orange);
-      border:1px solid #FF6B2B44;
-    }
-    .status-soon {
-      background:var(--border); color:var(--muted);
-      border:1px solid var(--border2);
-    }
-    .stage-emoji { font-size:36px; display:block; margin-bottom:14px; }
-    .stage-title {
-      font-family:'Syne',sans-serif; font-size:20px; font-weight:800;
+    .ch-emoji { font-size:32px; display:block; margin-bottom:14px; }
+    .ch-title {
+      font-family:'Syne',sans-serif; font-size:19px; font-weight:800;
       color:var(--text); margin-bottom:6px; letter-spacing:-.02em;
     }
-    .stage-problem {
-      font-size:12px; color:var(--muted); line-height:1.6; margin-bottom:16px;
-      font-style:italic;
+    .ch-problem {
+      font-size:12px; color:var(--muted); line-height:1.6;
+      font-style:italic; margin-bottom:16px;
     }
-    .stage-topics {
-      display:flex; flex-wrap:wrap; gap:6px;
+    .ch-topics {
+      display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;
     }
-    .stage-topic {
+    .ch-topic {
       font-family:'DM Mono',monospace; font-size:10px;
       padding:3px 8px; border-radius:6px;
       background:var(--tag-bg); color:var(--muted);
       border:1px solid var(--border2); letter-spacing:.03em;
     }
-    .stage-arrow {
-      position:absolute; bottom:24px; right:24px;
-      font-size:18px; color:var(--orange); opacity:0;
-      transition:opacity .2s, transform .2s;
+    .ch-link {
+      font-family:'DM Mono',monospace; font-size:11px;
+      color:var(--orange); letter-spacing:.06em;
+      display:inline-flex; align-items:center; gap:6px;
+      transition:gap .2s;
     }
-    .stage-card.available:hover .stage-arrow {
-      opacity:1; transform:translateX(4px);
+    .chapter-card:hover .ch-link { gap:10px; }
+
+    /* Progress strip */
+    .progress-strip {
+      max-width:1100px; margin:0 auto 56px; padding:0 40px;
+      position:relative; z-index:1;
     }
+    .progress-card {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--radius-lg); padding:24px 28px;
+      display:flex; align-items:center; gap:28px;
+    }
+    .prog-label {
+      font-family:'DM Mono',monospace; font-size:11px;
+      letter-spacing:.08em; text-transform:uppercase; color:var(--muted);
+      white-space:nowrap;
+    }
+    .prog-track {
+      flex:1; height:4px; background:var(--border2);
+      border-radius:100px; overflow:hidden;
+    }
+    .prog-fill {
+      height:100%; border-radius:100px;
+      background:linear-gradient(90deg,var(--orange),var(--yellow));
+      width:0; transition:width 1s cubic-bezier(.4,0,.2,1);
+    }
+    .prog-stages { display:flex; gap:20px; flex-wrap:wrap; }
+    .prog-item {
+      display:flex; align-items:center; gap:6px;
+      font-size:11px; color:var(--muted);
+    }
+    .prog-dot { width:8px; height:8px; border-radius:50%; }
+    .prog-dot.on  { background:var(--orange); }
+    .prog-dot.off { background:var(--border2); }
 
     @media(max-width:768px){
-      .hero{padding:48px 20px 48px;}
-      .philosophy-grid{grid-template-columns:1fr;}
-      .philosophy{padding:0 20px;margin-bottom:48px;}
-      .stage-grid{grid-template-columns:1fr;}
-      .stages{padding:0 20px 80px;}
-      .hero-stats{gap:28px;}
+      .hero{padding:40px 20px 40px;}
+      .chapters{padding:0 20px;}
+      .chapter-grid{grid-template-columns:1fr;}
+      .progress-strip{padding:0 20px;}
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav">
   <a href="index.html" class="nav-logo">개발자<span>리</span></a>
   <ul class="nav-links">
-    <li><a href="index.html" class="active">커리큘럼 맵</a></li>
-    <li><a href="stage1/index.html">Stage 1</a></li>
+    <li><a href="index.html" class="active">Stage 1</a></li>
+    <li><a href="1-1.html">1-1</a></li>
+    <li><a href="1-2.html">1-2</a></li>
+    <li><a href="1-3.html">1-3</a></li>
+    <li><a href="1-4.html">1-4</a></li>
   </ul>
-  <span class="nav-badge">Top-Down CS · 8 Stages</span>
 </nav>
 
-<!-- HERO -->
 <header class="hero fade-in">
-  <p class="hero-eyebrow">개발자리 · 앱 개발자를 위한 컴퓨터 공학 커리큘럼</p>
+  <div class="badge badge-orange" style="margin-bottom:24px;">
+    <span class="badge-dot"></span>
+    Stage 1 · 4 Chapters · 16 Topics
+  </div>
   <h1 class="hero-title">
-    앱을 만들며<br>
-    <span class="line2">CS를 배운다</span>
+    🛠 일단<br>
+    <span class="accent">만든다</span>
   </h1>
-  <p class="hero-desc">
-    이론으로 시작하지 않는다. 앱을 만들다 마주치는 실제 문제를 해결하면서 필요한 CS 지식을 Top-Down 방식으로 쌓는다.
+  <p class="hero-sub">
+    아무것도 없는 상태에서 시작해 화면을 띄우고, 상태를 관리하고, 여러 화면을 연결하고, Swift 문법의 벽을 넘는다.
   </p>
-  <div class="hero-stats">
-    <div class="stat-item">
-      <div class="stat-num">8<span class="unit">단계</span></div>
-      <div class="stat-label">Learning Stages</div>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">핵심 기술</span>
+      <span class="meta-value">SwiftUI</span>
     </div>
-    <div class="stat-item">
-      <div class="stat-num">32<span class="unit">챕터</span></div>
-      <div class="stat-label">Problem-Driven Chapters</div>
+    <div class="meta-item">
+      <span class="meta-label">상태 관리</span>
+      <span class="meta-value">@State · @Binding</span>
     </div>
-    <div class="stat-item">
-      <div class="stat-num">100<span class="unit">+</span></div>
-      <div class="stat-label">Topics</div>
+    <div class="meta-item">
+      <span class="meta-label">언어</span>
+      <span class="meta-value">Swift 필수 문법</span>
     </div>
-    <div class="stat-item">
-      <div class="stat-num">20<span class="unit">개</span></div>
-      <div class="stat-label">앱 운영 경험 기반</div>
+    <div class="meta-item">
+      <span class="meta-label">결과물</span>
+      <span class="meta-value">Todo 앱 완성</span>
     </div>
   </div>
 </header>
 
-<!-- PHILOSOPHY -->
-<section class="philosophy fade-in delay-1">
-  <div class="philosophy-grid">
-    <div class="phil-card">
-      <span class="phil-icon">🔝</span>
-      <div class="phil-title">Top-Down</div>
-      <div class="phil-desc">먼저 만들고, 문제를 만나고, 그때 배운다. 기초를 다 배우고 시작하는 방식은 동기를 죽인다.</div>
-    </div>
-    <div class="phil-card">
-      <span class="phil-icon">💢</span>
-      <div class="phil-title">Problem-Driven</div>
-      <div class="phil-desc">각 챕터는 실제 개발 중 마주치는 문제에서 시작한다. 문제가 없으면 개념도 없다.</div>
-    </div>
-    <div class="phil-card">
-      <span class="phil-icon">📱</span>
-      <div class="phil-title">App-First</div>
-      <div class="phil-desc">모든 예시는 iOS 앱 개발 맥락 안에 있다. 추상적인 예제가 아닌 실제 코드로 배운다.</div>
-    </div>
-  </div>
-</section>
+<!-- Chapters -->
+<section class="chapters">
+  <div class="chapters-label">4 Chapters — 마주치는 문제 순서대로</div>
+  <div class="chapter-grid">
 
-<!-- STAGES -->
-<section class="stages">
-  <div class="stages-label">커리큘럼 로드맵 — 8 Stages</div>
-  <div class="stage-grid">
-
-    <!-- S1 -->
-    <a href="stage1/index.html" class="stage-card available fade-in delay-1">
-      <div class="stage-top">
-        <span class="stage-num">STAGE 1</span>
-        <span class="stage-status status-open">● 학습 가능</span>
+    <a href="1-1.html" class="chapter-card fade-in delay-1">
+      <div class="ch-num">Chapter 1-1</div>
+      <span class="ch-emoji">📱</span>
+      <div class="ch-title">화면에 뭔가 띄우기</div>
+      <div class="ch-problem">↳ "Hello World"를 앱에서 보고 싶다</div>
+      <div class="ch-topics">
+        <span class="ch-topic">View · body</span>
+        <span class="ch-topic">VStack/HStack/ZStack</span>
+        <span class="ch-topic">modifier</span>
+        <span class="ch-topic">@main</span>
+        <span class="ch-topic">Xcode Preview</span>
+        <span class="ch-topic">레이아웃 시스템</span>
       </div>
-      <span class="stage-emoji">🛠</span>
-      <div class="stage-title">일단 만든다</div>
-      <div class="stage-problem">아무것도 없다 → 화면에 뭔가를 띄우고 싶다</div>
-      <div class="stage-topics">
-        <span class="stage-topic">SwiftUI</span>
-        <span class="stage-topic">@State</span>
-        <span class="stage-topic">@Binding</span>
-        <span class="stage-topic">NavigationStack</span>
-        <span class="stage-topic">Optional</span>
-        <span class="stage-topic">Closure</span>
-      </div>
-      <div class="stage-arrow">→</div>
+      <div class="ch-link">챕터 열기 →</div>
     </a>
 
-    <!-- S2 -->
-    <div class="stage-card locked">
-      <div class="stage-top">
-        <span class="stage-num">STAGE 2</span>
-        <span class="stage-status status-soon">준비 중</span>
+    <a href="1-2.html" class="chapter-card fade-in delay-2">
+      <div class="ch-num">Chapter 1-2</div>
+      <span class="ch-emoji">🔄</span>
+      <div class="ch-title">버튼 누르면 화면이 바뀌게</div>
+      <div class="ch-problem">↳ 버튼을 눌렀는데 텍스트가 안 바뀐다</div>
+      <div class="ch-topics">
+        <span class="ch-topic">@State</span>
+        <span class="ch-topic">@Binding</span>
+        <span class="ch-topic">단방향 데이터 흐름</span>
+        <span class="ch-topic">TextField</span>
+        <span class="ch-topic">List + ForEach</span>
+        <span class="ch-topic">Todo 앱 완성</span>
       </div>
-      <span class="stage-emoji">🐢</span>
-      <div class="stage-title">"왜 이렇게 느려?"</div>
-      <div class="stage-problem">목록에 데이터가 많아지니 스크롤이 버벅인다</div>
-      <div class="stage-topics">
-        <span class="stage-topic">Big-O</span>
-        <span class="stage-topic">Array vs Set</span>
-        <span class="stage-topic">Heap</span>
-        <span class="stage-topic">Trie</span>
-        <span class="stage-topic">이진 탐색</span>
-      </div>
-    </div>
+      <div class="ch-link">챕터 열기 →</div>
+    </a>
 
-    <!-- S3 -->
-    <div class="stage-card locked">
-      <div class="stage-top">
-        <span class="stage-num">STAGE 3</span>
-        <span class="stage-status status-soon">준비 중</span>
+    <a href="1-3.html" class="chapter-card fade-in delay-3">
+      <div class="ch-num">Chapter 1-3</div>
+      <span class="ch-emoji">🗂</span>
+      <div class="ch-title">여러 화면과 공유 상태</div>
+      <div class="ch-problem">↳ 화면이 2개인데 데이터를 어떻게 공유하는가</div>
+      <div class="ch-topics">
+        <span class="ch-topic">NavigationStack</span>
+        <span class="ch-topic">@StateObject</span>
+        <span class="ch-topic">@ObservedObject</span>
+        <span class="ch-topic">@Observable</span>
+        <span class="ch-topic">@EnvironmentObject</span>
+        <span class="ch-topic">TabView</span>
       </div>
-      <span class="stage-emoji">🍝</span>
-      <div class="stage-title">코드가 스파게티가 됐다</div>
-      <div class="stage-problem">기능이 늘자 파일이 1000줄 / 수정하면 다른 곳이 깨진다</div>
-      <div class="stage-topics">
-        <span class="stage-topic">OOP</span>
-        <span class="stage-topic">SOLID</span>
-        <span class="stage-topic">Protocol</span>
-        <span class="stage-topic">MVVM</span>
-        <span class="stage-topic">Clean Arch</span>
-      </div>
-    </div>
+      <div class="ch-link">챕터 열기 →</div>
+    </a>
 
-    <!-- S4 -->
-    <div class="stage-card locked">
-      <div class="stage-top">
-        <span class="stage-num">STAGE 4</span>
-        <span class="stage-status status-soon">준비 중</span>
+    <a href="1-4.html" class="chapter-card fade-in delay-4">
+      <div class="ch-num">Chapter 1-4</div>
+      <span class="ch-emoji">✏️</span>
+      <div class="ch-title">막히는 Swift 문법</div>
+      <div class="ch-problem">↳ 컴파일 에러가 나는데 왜 나는지 모른다</div>
+      <div class="ch-topics">
+        <span class="ch-topic">Optional</span>
+        <span class="ch-topic">if let / guard let</span>
+        <span class="ch-topic">Array · Dictionary · Set</span>
+        <span class="ch-topic">Closure · [weak self]</span>
+        <span class="ch-topic">Xcode 에러 해석</span>
       </div>
-      <span class="stage-emoji">💀</span>
-      <div class="stage-title">앱이 죽는다</div>
-      <div class="stage-problem">EXC_BAD_ACCESS / 메모리 경고 / deinit이 불리지 않는다</div>
-      <div class="stage-topics">
-        <span class="stage-topic">ARC</span>
-        <span class="stage-topic">weak/unowned</span>
-        <span class="stage-topic">Instruments</span>
-        <span class="stage-topic">에러 처리</span>
-      </div>
-    </div>
-
-    <!-- S5 -->
-    <div class="stage-card locked">
-      <div class="stage-top">
-        <span class="stage-num">STAGE 5</span>
-        <span class="stage-status status-soon">준비 중</span>
-      </div>
-      <span class="stage-emoji">🌐</span>
-      <div class="stage-title">서버 데이터가 필요하다</div>
-      <div class="stage-problem">API를 호출해서 JSON을 파싱하고 싶다</div>
-      <div class="stage-topics">
-        <span class="stage-topic">HTTP</span>
-        <span class="stage-topic">URLSession</span>
-        <span class="stage-topic">Codable</span>
-        <span class="stage-topic">CoreData</span>
-        <span class="stage-topic">CloudKit</span>
-      </div>
-    </div>
-
-    <!-- S6 -->
-    <div class="stage-card locked">
-      <div class="stage-top">
-        <span class="stage-num">STAGE 6</span>
-        <span class="stage-status status-soon">준비 중</span>
-      </div>
-      <span class="stage-emoji">🧊</span>
-      <div class="stage-title">UI가 버벅이고 앱이 멈춘다</div>
-      <div class="stage-problem">네트워크 요청 중 화면이 얼어붙는다</div>
-      <div class="stage-topics">
-        <span class="stage-topic">GCD</span>
-        <span class="stage-topic">async/await</span>
-        <span class="stage-topic">Actor</span>
-        <span class="stage-topic">Combine</span>
-      </div>
-    </div>
-
-    <!-- S7 -->
-    <div class="stage-card locked">
-      <div class="stage-top">
-        <span class="stage-num">STAGE 7</span>
-        <span class="stage-status status-soon">준비 중</span>
-      </div>
-      <span class="stage-emoji">🧪</span>
-      <div class="stage-title">내 코드가 맞는지 모르겠다</div>
-      <div class="stage-problem">배포 후 버그 발견 / 수정하면 다른 곳이 깨질까 두렵다</div>
-      <div class="stage-topics">
-        <span class="stage-topic">XCTest</span>
-        <span class="stage-topic">TDD</span>
-        <span class="stage-topic">CI/CD</span>
-        <span class="stage-topic">Fastlane</span>
-        <span class="stage-topic">StoreKit 2</span>
-      </div>
-    </div>
-
-    <!-- S8 -->
-    <div class="stage-card locked">
-      <div class="stage-top">
-        <span class="stage-num">STAGE 8</span>
-        <span class="stage-status status-soon">준비 중</span>
-      </div>
-      <span class="stage-emoji">🔭</span>
-      <div class="stage-title">더 깊이 알고 싶다</div>
-      <div class="stage-problem">왜 이렇게 동작하는지 근본 원리가 궁금하다</div>
-      <div class="stage-topics">
-        <span class="stage-topic">CPU 구조</span>
-        <span class="stage-topic">OS 원리</span>
-        <span class="stage-topic">컴파일러</span>
-        <span class="stage-topic">Swift Macros</span>
-        <span class="stage-topic">선형대수</span>
-      </div>
-    </div>
+      <div class="ch-link">챕터 열기 →</div>
+    </a>
 
   </div>
+
 </section>
 
 <footer class="footer">
-  개발자리 · 앱 개발자를 위한 Top-Down CS 커리큘럼 · <a href="https://github.com" style="color:var(--orange);text-decoration:none;">GitHub</a>
+  개발자리 · 앱 개발자를 위한 Top-Down CS 커리큘럼
 </footer>
-
-<script>
-  // Prevent click on locked cards
-  document.querySelectorAll('.stage-card.locked').forEach(c => {
-    c.addEventListener('click', e => e.preventDefault());
-  });
-</script>
 </body>
 </html>
