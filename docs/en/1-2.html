@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1-2 버튼 누르면 화면이 바뀌게 | Stage 1 | 개발자리</title>
+  <title>1-2 Make the Screen Change on Tap | Stage 1 | devjari</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="../assets/style.css" />
   <style>
     .ch-hero {
       padding:56px 40px 48px; max-width:1400px; margin:0 auto;
@@ -56,35 +56,35 @@
 <body>
 
 <nav class="nav">
-  <a href="index.html" class="nav-logo">개발자<span>리</span></a>
+  <a href="../index.html" class="nav-logo">dev<span>jari</span></a>
   <ul class="nav-links">
-    <li><a href="setup.html">시작하기</a></li>
+    <li><a href="setup.html">Get Started</a></li>
     <li><a href="index.html">Stage 1</a></li>
     <li><a href="1-1.html">1-1</a></li>
     <li><a href="1-2.html" class="active">1-2</a></li>
     <li><a href="1-3.html">1-3</a></li>
     <li><a href="1-4.html">1-4</a></li>
   </ul>
-  <a href="en/1-2.html" style="font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid var(--border2);color:var(--muted);text-decoration:none;margin-left:auto;">EN</a>
+  <a href="../1-2.html" style="font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid var(--border2);color:var(--muted);text-decoration:none;margin-left:auto;">KO</a>
 </nav>
 
 <div class="breadcrumb">
   <a href="index.html">Stage 1</a>
   <span class="sep">/</span>
-  <span class="current">1-2 버튼 누르면 화면이 바뀌게</span>
+  <span class="current">1-2 Make the Screen Change on Tap</span>
 </div>
 
 <header class="ch-hero fade-in">
   <div class="badge badge-blue" style="margin-bottom:20px;">
     <span class="badge-dot"></span>
-    챌린지 1-2 · 8 Topics
+    Challenge 1-2 · 8 Topics
   </div>
-  <h1>🔄 버튼 누르면 <span class="accent">화면이 바뀌게</span></h1>
-  <p class="trigger">버튼을 눌렀는데 텍스트가 안 바뀐다</p>
+  <h1>🔄 Make the Screen <span class="accent">Change on Tap</span></h1>
+  <p class="trigger">I tapped a button but the text didn't change</p>
   <div class="chip-row">
     <span class="chip blue">@State</span>
     <span class="chip blue">@Binding</span>
-    <span class="chip blue">단방향 데이터 흐름</span>
+    <span class="chip blue">Unidirectional Data Flow</span>
     <span class="chip blue">TextField · Toggle · Slider</span>
     <span class="chip blue">List + ForEach</span>
     <span class="chip blue">NavigationStack</span>
@@ -94,30 +94,30 @@
 
 <div style="max-width:1400px;margin:0 auto;padding:0 40px 40px;position:relative;z-index:1;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
-    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">시작 전에 던져볼 질문</div>
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Questions Before You Start</div>
     <div style="display:flex;flex-direction:column;gap:20px;">
 
       <div style="display:flex;gap:14px;align-items:flex-start;">
         <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">01</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">버튼을 눌렀는데 텍스트가 안 바뀐다면, SwiftUI에서 화면을 업데이트하려면 어떻게 해야 하는가?</div>
-          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">SwiftUI @State property wrapper</span></div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">If tapping a button doesn't change the text, how do you update the screen in SwiftUI?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">SwiftUI @State property wrapper</span></div>
         </div>
       </div>
 
       <div style="display:flex;gap:14px;align-items:flex-start;">
         <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">02</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">부모 화면의 데이터를 자식 화면에서 바꾸려면 어떻게 전달하는가?</div>
-          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">SwiftUI @Binding parent child</span></div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">How do you pass data from parent to child so the child can modify it?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">SwiftUI @Binding parent child</span></div>
         </div>
       </div>
 
       <div style="display:flex;gap:14px;align-items:flex-start;">
         <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">03</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">배열 데이터를 목록으로 보여주고, 스와이프로 삭제하려면 어떻게 하는가?</div>
-          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">SwiftUI List ForEach onDelete</span></div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">How do you display array data as a list and delete items by swiping?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">SwiftUI List ForEach onDelete</span></div>
         </div>
       </div>
 
@@ -130,11 +130,11 @@
   <!-- ========== LEFT: Content Column ========== -->
   <div class="content-col">
 
-    <!-- Section 1: SwiftUI 렌더링 루프 -->
+    <!-- Section 1: SwiftUI Rendering Loop -->
     <div class="content-section" data-preview="pv-1">
       <div class="cs-label">Topic 01</div>
-      <h2 class="cs-title">SwiftUI 렌더링 루프</h2>
-      <div class="cs-subtitle">상태 변화 → View 재생성 메커니즘</div>
+      <h2 class="cs-title">SwiftUI Rendering Loop</h2>
+      <div class="cs-subtitle">State Change → View Re-creation Mechanism</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -159,11 +159,11 @@
       </div>
 
       <div class="topic-questions">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li>SwiftUI View는 struct인데, struct 안의 프로퍼티를 왜 직접 바꿀 수 없는가?</li>
-          <li>@State로 선언한 값이 View가 재생성되어도 사라지지 않는 이유는 무엇인가?</li>
-          <li>버튼을 눌러 count를 바꾸면 SwiftUI 내부에서 어떤 일이 순서대로 일어나는가?</li>
+          <li>A SwiftUI View is a struct — why can't you directly mutate a property inside a struct?</li>
+          <li>Why does a value declared with @State persist even when the View is re-created?</li>
+          <li>When you tap the button and change count, what happens inside SwiftUI step by step?</li>
         </ul>
       </div>
 
@@ -171,22 +171,22 @@
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">View는 struct — 불변이다</div>
-            <div class="item-desc">SwiftUI View는 값 타입. 상태가 바뀌면 새 View를 만든다. 기존 View를 수정하는 게 아님</div>
+            <div class="item-title">A View is a struct — it's immutable</div>
+            <div class="item-desc">SwiftUI Views are value types. When state changes, a new View is created. The existing View is not modified.</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">왜 직접 var를 바꿔도 안 바뀌는가</div>
-            <div class="item-desc">struct 내부에서 자신의 프로퍼티를 바꾸려면 mutating이 필요. body는 mutating이 아님</div>
+            <div class="item-title">Why changing a plain var doesn't work</div>
+            <div class="item-desc">To mutate a property inside a struct, you need mutating. The body property is not mutating.</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">State의 저장 위치</div>
-            <div class="item-desc">@State는 View 바깥의 SwiftUI 저장소에 저장. View가 재생성되어도 값 유지</div>
+            <div class="item-title">Where State is stored</div>
+            <div class="item-desc">@State stores values in SwiftUI's external storage, outside the View. Values persist across View re-creations.</div>
           </div>
         </div>
       </div>
@@ -196,7 +196,7 @@
     <div class="content-section" data-preview="pv-2">
       <div class="cs-label">Topic 02</div>
       <h2 class="cs-title">@State · @Binding</h2>
-      <div class="cs-subtitle">소유와 공유의 차이</div>
+      <div class="cs-subtitle">Ownership vs. Sharing</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -208,7 +208,7 @@
 
     var body: some View {
         VStack {
-            Text("이름: \(name)")
+            Text("Name: \(name)")
             ChildView(name: $name)
         }
     }
@@ -218,18 +218,18 @@ struct ChildView: View {
     @Binding var name: String
 
     var body: some View {
-        TextField("이름 입력", text: $name)
+        TextField("Enter name", text: $name)
             .textFieldStyle(.roundedBorder)
     }
 }</pre>
       </div>
 
       <div class="topic-questions">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li>@State와 @Binding의 소유권 차이는 무엇인가? 누가 값을 "가지고" 있는가?</li>
-          <li>부모의 @State를 자식에게 전달할 때 $ 기호는 무엇을 의미하는가?</li>
-          <li>자식 View에서 @State를 직접 선언하면 안 되는 이유는?</li>
+          <li>What is the ownership difference between @State and @Binding? Who "owns" the value?</li>
+          <li>What does the $ symbol mean when passing a parent's @State to a child?</li>
+          <li>Why shouldn't a child View declare its own @State for shared data?</li>
         </ul>
       </div>
 
@@ -237,22 +237,22 @@ struct ChildView: View {
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">@State — View가 소유</div>
-            <div class="item-desc">private으로 선언. 해당 View가 상태의 단독 소유자. 변경 시 자동 재렌더</div>
+            <div class="item-title">@State — Owned by the View</div>
+            <div class="item-desc">Declared as private. The View is the sole owner of the state. Changes trigger automatic re-rendering.</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">@Binding — 참조를 전달</div>
-            <div class="item-desc">$state로 전달. 부모의 State를 자식이 읽고 쓸 수 있음. 값이 아닌 참조</div>
+            <div class="item-title">@Binding — Passes a reference</div>
+            <div class="item-desc">Passed via $state. The child can read and write the parent's State. It's a reference, not a value.</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">단방향 데이터 흐름</div>
-            <div class="item-desc">상태는 위에서 아래로. View는 상태를 그릴 뿐, 상태를 소유하지 않는 것이 원칙</div>
+            <div class="item-title">Unidirectional Data Flow</div>
+            <div class="item-desc">State flows from top to bottom. Views only render state — the principle is that they don't own it.</div>
           </div>
         </div>
       </div>
@@ -262,7 +262,7 @@ struct ChildView: View {
     <div class="content-section" data-preview="pv-3">
       <div class="cs-label">Topic 03</div>
       <h2 class="cs-title">TextField</h2>
-      <div class="cs-subtitle">텍스트 입력과 @State String 연결</div>
+      <div class="cs-subtitle">Connecting Text Input to @State String</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -274,7 +274,7 @@ struct ChildView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("이메일")
+            Text("Email")
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
@@ -289,11 +289,11 @@ struct ChildView: View {
       </div>
 
       <div class="topic-questions">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li>TextField의 text: 파라미터에 왜 $를 붙여야 하는가? 안 붙이면 어떻게 되는가?</li>
-          <li>키보드가 올라올 때 화면이 가려지는 문제는 어떻게 해결하는가?</li>
-          <li>.onSubmit { } 은 언제 호출되는가?</li>
+          <li>Why must you use $ with the text: parameter of TextField? What happens if you don't?</li>
+          <li>How do you handle the keyboard covering the screen when it appears?</li>
+          <li>When does .onSubmit { } get called?</li>
         </ul>
       </div>
 
@@ -302,14 +302,14 @@ struct ChildView: View {
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">TextField("placeholder", text: $name)</div>
-            <div class="item-desc">$name으로 Binding 전달. 입력 즉시 @State 업데이트</div>
+            <div class="item-desc">Pass a Binding with $name. The @State updates instantly as the user types.</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">키보드 타입 · 완료 처리</div>
-            <div class="item-desc">.keyboardType(.numberPad), .onSubmit { }, .focused() 활용</div>
+            <div class="item-title">Keyboard Type & Submit Handling</div>
+            <div class="item-desc">Use .keyboardType(.numberPad), .onSubmit { }, .focused() as needed.</div>
           </div>
         </div>
       </div>
@@ -319,7 +319,7 @@ struct ChildView: View {
     <div class="content-section" data-preview="pv-4">
       <div class="cs-label">Topic 04</div>
       <h2 class="cs-title">Toggle · Slider · Picker</h2>
-      <div class="cs-subtitle">다양한 입력 컴포넌트</div>
+      <div class="cs-subtitle">Various Input Components</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -332,10 +332,10 @@ struct ChildView: View {
 
     var body: some View {
         Form {
-            Toggle("다크 모드", isOn: $isDark)
+            Toggle("Dark Mode", isOn: $isDark)
 
             VStack(alignment: .leading) {
-                Text("폰트 크기: \(Int(fontSize))")
+                Text("Font Size: \(Int(fontSize))")
                 Slider(value: $fontSize,
                        in: 12...24, step: 1)
             }
@@ -345,11 +345,11 @@ struct ChildView: View {
       </div>
 
       <div class="topic-questions">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li>Toggle에 바인딩하는 @State 변수의 타입은 반드시 무엇이어야 하는가?</li>
-          <li>Slider의 step: 파라미터를 생략하면 어떻게 동작하는가?</li>
-          <li>Picker의 .pickerStyle()을 바꾸면 모양이 어떻게 달라지는가?</li>
+          <li>What type must the @State variable bound to a Toggle always be?</li>
+          <li>What happens if you omit the step: parameter from a Slider?</li>
+          <li>How does the appearance change when you switch .pickerStyle() on a Picker?</li>
         </ul>
       </div>
 
@@ -357,22 +357,22 @@ struct ChildView: View {
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">Toggle("이름", isOn: $bool)</div>
-            <div class="item-desc">Bool @State에 바인딩. 설정 화면의 기본 패턴</div>
+            <div class="item-title">Toggle("Label", isOn: $bool)</div>
+            <div class="item-desc">Binds to a Bool @State. The basic pattern for settings screens.</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">Slider(value: $val, in: 0...100)</div>
-            <div class="item-desc">범위 내 실수 값 선택. step: 으로 스텝 설정</div>
+            <div class="item-desc">Selects a floating-point value within a range. Set increments with step:.</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">Picker</div>
-            <div class="item-desc">.pickerStyle(.segmented) / .menu / .wheel. ForEach로 옵션 생성</div>
+            <div class="item-desc">.pickerStyle(.segmented) / .menu / .wheel. Generate options with ForEach.</div>
           </div>
         </div>
       </div>
@@ -382,7 +382,7 @@ struct ChildView: View {
     <div class="content-section" data-preview="pv-5">
       <div class="cs-label">Topic 05</div>
       <h2 class="cs-title">List + ForEach + Identifiable</h2>
-      <div class="cs-subtitle">배열을 목록으로 렌더링</div>
+      <div class="cs-subtitle">Rendering Arrays as Lists</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -397,9 +397,9 @@ struct ChildView: View {
 
 struct FruitList: View {
     @State private var fruits = [
-        Fruit(name: "사과", emoji: "🍎"),
-        Fruit(name: "바나나", emoji: "🍌"),
-        Fruit(name: "포도", emoji: "🍇"),
+        Fruit(name: "Apple", emoji: "🍎"),
+        Fruit(name: "Banana", emoji: "🍌"),
+        Fruit(name: "Grape", emoji: "🍇"),
     ]
 
     var body: some View {
@@ -417,12 +417,12 @@ struct FruitList: View {
       </div>
 
       <div class="topic-questions">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li>ForEach에 전달하는 데이터가 Identifiable을 채택해야 하는 이유는 무엇인가?</li>
-          <li>id: \.self는 언제 쓰고, Identifiable은 언제 쓰는가?</li>
-          <li>List와 ScrollView + ForEach의 차이는 무엇인가?</li>
-          <li>.onDelete(perform:)에서 받는 IndexSet은 무엇인가?</li>
+          <li>Why must data passed to ForEach conform to Identifiable?</li>
+          <li>When do you use id: \.self, and when do you use Identifiable?</li>
+          <li>What is the difference between List and ScrollView + ForEach?</li>
+          <li>What is the IndexSet received in .onDelete(perform:)?</li>
         </ul>
       </div>
 
@@ -431,21 +431,21 @@ struct FruitList: View {
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">List { ForEach(items) }</div>
-            <div class="item-desc">배열의 각 요소를 셀로 렌더링. UITableView를 SwiftUI로 대체하는 방법</div>
+            <div class="item-desc">Renders each element of an array as a cell. The SwiftUI replacement for UITableView.</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">Identifiable 프로토콜</div>
-            <div class="item-desc">id 프로퍼티 필수. SwiftUI가 각 항목을 구별해 최소한만 재렌더하기 위해</div>
+            <div class="item-title">Identifiable Protocol</div>
+            <div class="item-desc">Requires an id property. Allows SwiftUI to distinguish each item and re-render only what's needed.</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">onDelete(perform:)</div>
-            <div class="item-desc">스와이프 삭제. IndexSet으로 제거할 항목 인덱스 전달</div>
+            <div class="item-desc">Swipe to delete. Passes an IndexSet with the indices of items to remove.</div>
           </div>
         </div>
       </div>
@@ -455,7 +455,7 @@ struct FruitList: View {
     <div class="content-section" data-preview="pv-6">
       <div class="cs-label">Topic 06</div>
       <h2 class="cs-title">NavigationStack · Sheet · Alert</h2>
-      <div class="cs-subtitle">화면 이동과 모달</div>
+      <div class="cs-subtitle">Navigation and Modals</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -468,13 +468,13 @@ struct FruitList: View {
     var body: some View {
         NavigationStack {
             List {
-                NavigationLink("상세 보기") {
+                NavigationLink("View Details") {
                     Text("Detail View")
                 }
             }
-            .navigationTitle("홈")
+            .navigationTitle("Home")
             .toolbar {
-                Button("추가") {
+                Button("Add") {
                     showSheet = true
                 }
             }
@@ -487,11 +487,11 @@ struct FruitList: View {
       </div>
 
       <div class="topic-questions">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li>NavigationLink와 .sheet()의 화면 전환 방식은 어떻게 다른가?</li>
-          <li>.sheet(isPresented:)에서 isPresented를 @State Bool로 관리하는 이유는?</li>
-          <li>NavigationStack과 (deprecated된) NavigationView의 차이는 무엇인가?</li>
+          <li>How do NavigationLink and .sheet() differ in their screen transition approach?</li>
+          <li>Why is isPresented in .sheet(isPresented:) managed with an @State Bool?</li>
+          <li>What is the difference between NavigationStack and the (deprecated) NavigationView?</li>
         </ul>
       </div>
 
@@ -500,30 +500,30 @@ struct FruitList: View {
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">NavigationStack + NavigationLink</div>
-            <div class="item-desc">스택 기반 화면 이동. .navigationTitle(), .navigationBarItems()</div>
+            <div class="item-desc">Stack-based navigation. Use .navigationTitle(), .navigationBarItems().</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">.sheet(isPresented: $show)</div>
-            <div class="item-desc">Bool @State로 모달 표시/숨김. 아래에서 올라오는 시트</div>
+            <div class="item-desc">Show/hide a modal with a Bool @State. A sheet that slides up from the bottom.</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">.alert("제목", isPresented: $show)</div>
-            <div class="item-desc">확인/취소 다이얼로그. 삭제 확인 UX 패턴</div>
+            <div class="item-title">.alert("Title", isPresented: $show)</div>
+            <div class="item-desc">Confirmation/cancel dialog. A common UX pattern for delete confirmations.</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Section 7: 데이터 모델 설계 -->
+    <!-- Section 7: Data Model Design -->
     <div class="content-section" data-preview="pv-7">
       <div class="cs-label">Topic 07</div>
-      <h2 class="cs-title">데이터 모델 설계</h2>
+      <h2 class="cs-title">Data Model Design</h2>
       <div class="cs-subtitle">Todo struct — id · title · isCompleted</div>
 
       <div class="code-block" style="margin-bottom:20px;">
@@ -545,11 +545,11 @@ struct FruitList: View {
       </div>
 
       <div class="topic-questions">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li>Todo struct에 Identifiable을 채택하면 어떤 장점이 있는가?</li>
-          <li>Codable을 채택하면 자동으로 얻는 기능은 무엇인가?</li>
-          <li>isCompleted를 토글하려면 배열의 요소에 어떻게 접근해야 하는가?</li>
+          <li>What advantages does conforming to Identifiable give the Todo struct?</li>
+          <li>What capabilities do you automatically get by conforming to Codable?</li>
+          <li>How do you access an element in the array to toggle isCompleted?</li>
         </ul>
       </div>
 
@@ -565,24 +565,24 @@ struct FruitList: View {
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">@State [Todo]</div>
-            <div class="item-desc">추가: append(), 삭제: remove(atOffsets:), 완료 토글: 인덱스로 접근해 toggle()</div>
+            <div class="item-desc">Add: append(), Delete: remove(atOffsets:), Toggle completion: access by index and toggle()</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Section 8: UserDefaults + Codable 영속성 -->
+    <!-- Section 8: UserDefaults + Codable Persistence -->
     <div class="content-section" data-preview="pv-8">
       <div class="cs-label">Topic 08</div>
-      <h2 class="cs-title">UserDefaults + Codable 영속성</h2>
-      <div class="cs-subtitle">재시작 후에도 데이터 유지</div>
+      <h2 class="cs-title">UserDefaults + Codable Persistence</h2>
+      <div class="cs-subtitle">Keeping Data After App Restart</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
           <div class="code-dots"><span></span><span></span><span></span></div>
           <span class="code-lang">Swift</span>
         </div>
-        <pre class="swift-code">// 저장
+        <pre class="swift-code">// Save
 func save(_ todos: [Todo]) {
     if let data = try? JSONEncoder()
         .encode(todos) {
@@ -591,7 +591,7 @@ func save(_ todos: [Todo]) {
     }
 }
 
-// 불러오기
+// Load
 func load() -> [Todo] {
     guard let data = UserDefaults.standard
         .data(forKey: "todos"),
@@ -603,11 +603,11 @@ func load() -> [Todo] {
       </div>
 
       <div class="topic-questions">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li>UserDefaults에 직접 [Todo]를 저장할 수 없는 이유는 무엇인가?</li>
-          <li>JSONEncoder와 JSONDecoder는 각각 어떤 변환을 하는가?</li>
-          <li>앱 재시작 후에도 데이터가 유지되려면 저장 시점을 언제로 잡아야 하는가?</li>
+          <li>Why can't you store [Todo] directly in UserDefaults?</li>
+          <li>What conversions do JSONEncoder and JSONDecoder perform respectively?</li>
+          <li>When should the save happen to ensure data persists after an app restart?</li>
         </ul>
       </div>
 
@@ -616,21 +616,21 @@ func load() -> [Todo] {
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">JSONEncoder / JSONDecoder</div>
-            <div class="item-desc">Codable 타입을 Data로 변환 후 UserDefaults에 저장. 반대로 불러오기</div>
+            <div class="item-desc">Convert Codable types to Data and store in UserDefaults. Reverse the process to load.</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">.onAppear / .onChange</div>
-            <div class="item-desc">View 나타날 때 로드, 상태 변경될 때 저장 — 자동 저장 패턴</div>
+            <div class="item-desc">Load when the View appears, save when state changes — the auto-save pattern.</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">Empty State</div>
-            <div class="item-desc">items.isEmpty일 때 안내 뷰 표시. ContentUnavailableView (iOS 17+)</div>
+            <div class="item-desc">Show a placeholder view when items.isEmpty. Use ContentUnavailableView (iOS 17+).</div>
           </div>
         </div>
       </div>
@@ -658,8 +658,8 @@ func load() -> [Todo] {
           <div id="pv-2" class="preview-content">
             <div class="preview-label">Preview</div>
             <div style="flex:1;display:flex;flex-direction:column;gap:14px;padding-top:20px;">
-              <div style="font-size:15px;color:#1A1D2A;text-align:center;">이름: </div>
-              <div style="border:1px solid #D0D3DC;border-radius:8px;padding:10px 12px;font-size:13px;color:#999;background:#FAFAFA;">이름 입력</div>
+              <div style="font-size:15px;color:#1A1D2A;text-align:center;">Name: </div>
+              <div style="border:1px solid #D0D3DC;border-radius:8px;padding:10px 12px;font-size:13px;color:#999;background:#FAFAFA;">Enter name</div>
             </div>
           </div>
 
@@ -667,7 +667,7 @@ func load() -> [Todo] {
           <div id="pv-3" class="preview-content">
             <div class="preview-label">Preview</div>
             <div style="flex:1;display:flex;flex-direction:column;gap:6px;padding-top:20px;">
-              <div style="font-size:11px;color:#8E8E93;letter-spacing:.02em;">이메일</div>
+              <div style="font-size:11px;color:#8E8E93;letter-spacing:.02em;">Email</div>
               <div style="border:1px solid #D0D3DC;border-radius:8px;padding:10px 12px;font-size:13px;color:#999;background:#FAFAFA;">example@email.com</div>
             </div>
           </div>
@@ -677,13 +677,13 @@ func load() -> [Todo] {
             <div class="preview-label">Preview</div>
             <div style="flex:1;display:flex;flex-direction:column;gap:16px;padding-top:16px;">
               <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #E2E4EA;">
-                <span style="font-size:13px;">다크 모드</span>
+                <span style="font-size:13px;">Dark Mode</span>
                 <div style="width:42px;height:24px;border-radius:12px;background:#E2E4EA;position:relative;">
                   <div style="width:20px;height:20px;border-radius:50%;background:#fff;position:absolute;top:2px;left:2px;box-shadow:0 1px 3px rgba(0,0,0,.15);"></div>
                 </div>
               </div>
               <div style="display:flex;flex-direction:column;gap:8px;">
-                <span style="font-size:13px;">폰트 크기: 16</span>
+                <span style="font-size:13px;">Font Size: 16</span>
                 <div style="position:relative;height:4px;background:#E2E4EA;border-radius:2px;">
                   <div style="position:absolute;left:0;top:0;width:33%;height:100%;background:#007AFF;border-radius:2px;"></div>
                   <div style="position:absolute;left:33%;top:50%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid #007AFF;"></div>
@@ -698,15 +698,15 @@ func load() -> [Todo] {
             <div style="flex:1;display:flex;flex-direction:column;padding-top:8px;">
               <div style="display:flex;align-items:center;gap:10px;padding:12px 4px;border-bottom:1px solid #E2E4EA;">
                 <span style="font-size:18px;">🍎</span>
-                <span style="font-size:14px;">사과</span>
+                <span style="font-size:14px;">Apple</span>
               </div>
               <div style="display:flex;align-items:center;gap:10px;padding:12px 4px;border-bottom:1px solid #E2E4EA;">
                 <span style="font-size:18px;">🍌</span>
-                <span style="font-size:14px;">바나나</span>
+                <span style="font-size:14px;">Banana</span>
               </div>
               <div style="display:flex;align-items:center;gap:10px;padding:12px 4px;border-bottom:1px solid #E2E4EA;">
                 <span style="font-size:18px;">🍇</span>
-                <span style="font-size:14px;">포도</span>
+                <span style="font-size:14px;">Grape</span>
               </div>
             </div>
           </div>
@@ -716,11 +716,11 @@ func load() -> [Todo] {
             <div class="preview-label">Preview</div>
             <div style="flex:1;display:flex;flex-direction:column;">
               <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0 12px;border-bottom:1px solid #E2E4EA;">
-                <span style="font-size:20px;font-weight:700;">홈</span>
-                <span style="font-size:13px;color:#007AFF;font-weight:500;">추가</span>
+                <span style="font-size:20px;font-weight:700;">Home</span>
+                <span style="font-size:13px;color:#007AFF;font-weight:500;">Add</span>
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 4px;border-bottom:1px solid #E2E4EA;">
-                <span style="font-size:14px;">상세 보기</span>
+                <span style="font-size:14px;">View Details</span>
                 <span style="font-size:12px;color:#C7C7CC;">&#9654;</span>
               </div>
             </div>
@@ -732,32 +732,32 @@ func load() -> [Todo] {
             <div style="flex:1;display:flex;flex-direction:column;padding-top:12px;gap:0;">
               <div style="display:flex;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid #E2E4EA;">
                 <span style="font-size:16px;color:#007AFF;">&#9745;</span>
-                <span style="font-size:13px;color:#999;text-decoration:line-through;">장보기</span>
+                <span style="font-size:13px;color:#999;text-decoration:line-through;">Go shopping</span>
               </div>
               <div style="display:flex;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid #E2E4EA;">
                 <span style="font-size:16px;color:#D0D3DC;">&#9744;</span>
-                <span style="font-size:13px;">SwiftUI 공부</span>
+                <span style="font-size:13px;">Study SwiftUI</span>
               </div>
               <div style="display:flex;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid #E2E4EA;">
                 <span style="font-size:16px;color:#D0D3DC;">&#9744;</span>
-                <span style="font-size:13px;">운동하기</span>
+                <span style="font-size:13px;">Exercise</span>
               </div>
             </div>
           </div>
 
-          <!-- Preview 8: UserDefaults 저장/불러오기 결과 -->
+          <!-- Preview 8: UserDefaults Save/Load Result -->
           <div id="pv-8" class="preview-content">
             <div class="preview-label">Preview</div>
             <div style="flex:1;display:flex;flex-direction:column;padding-top:12px;">
               <div style="display:flex;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid #E2E4EA;">
                 <span style="font-size:16px;color:#007AFF;">&#9745;</span>
-                <span style="font-size:13px;color:#999;text-decoration:line-through;">장보기</span>
+                <span style="font-size:13px;color:#999;text-decoration:line-through;">Go shopping</span>
               </div>
               <div style="display:flex;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid #E2E4EA;">
                 <span style="font-size:16px;color:#D0D3DC;">&#9744;</span>
-                <span style="font-size:13px;">SwiftUI 공부</span>
+                <span style="font-size:13px;">Study SwiftUI</span>
               </div>
-              <div style="padding:10px 4px;font-size:10px;color:#8E8E93;font-style:italic;">앱 재시작 후에도 유지됨</div>
+              <div style="padding:10px 4px;font-size:10px;color:#8E8E93;font-style:italic;">Data persists after app restart</div>
             </div>
           </div>
 
@@ -768,54 +768,54 @@ func load() -> [Todo] {
 
 </div>
 
-<!-- 숙제 & 과제 -->
+<!-- Homework & Assignments -->
 <div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
     <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">Homework</div>
-    <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">챌린지 1-2를 마쳤다면</h2>
+    <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">When You've Finished Challenge 1-2</h2>
 
     <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
       <div style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);background:var(--blue-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);background:var(--blue-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">Required</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">카운터 앱 만들기</div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.6;">+1, -1, 리셋 버튼이 있는 카운터. @State로 숫자 관리. 0 미만이면 텍스트 색상을 빨간색으로 변경</div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Build a Counter App</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">A counter with +1, -1, and reset buttons. Manage the number with @State. Change the text color to red when below 0.</div>
         </div>
       </div>
       <div style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);background:var(--blue-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);background:var(--blue-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">Required</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Todo 앱 완성</div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.6;">TextField로 입력 → List에 추가 → 스와이프 삭제 → 탭하면 완료 토글. UserDefaults로 앱 재시작 후에도 데이터 유지</div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Complete the Todo App</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Enter via TextField → Add to List → Swipe to delete → Tap to toggle completion. Persist data across app restarts with UserDefaults.</div>
         </div>
       </div>
       <div style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">도전</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">Challenge</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">설정 화면 만들기</div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Toggle, Slider, Picker를 조합한 설정 화면. 다크모드 토글, 폰트 크기 슬라이더, 언어 선택 Picker. 부모-자식 간 @Binding으로 데이터 전달</div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Build a Settings Screen</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">A settings screen combining Toggle, Slider, and Picker. Dark mode toggle, font size slider, and language selection Picker. Pass data between parent and child via @Binding.</div>
         </div>
       </div>
     </div>
 
     <div style="border-top:1px solid var(--border);padding-top:20px;">
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">완료 체크리스트</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Completion Checklist</div>
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> @State 없이 var만 쓰면 왜 안 되는지 설명할 수 있다</div>
-        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> @State vs @Binding의 소유권 차이를 안다</div>
-        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> List + ForEach + Identifiable 조합을 쓸 수 있다</div>
-        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> UserDefaults + Codable로 데이터를 저장/불러올 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can explain why using just var without @State doesn't work</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I understand the ownership difference between @State and @Binding</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can use the List + ForEach + Identifiable combination</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can save and load data with UserDefaults + Codable</div>
       </div>
     </div>
 
     <div style="border-top:1px solid var(--border);padding-top:20px;margin-top:20px;">
       <details>
-        <summary style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);cursor:pointer;margin-bottom:16px;user-select:none;">Solution — 답안 보기</summary>
+        <summary style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);cursor:pointer;margin-bottom:16px;user-select:none;">Solution — Show Answer</summary>
 
         <div style="display:flex;flex-direction:column;gap:24px;">
 
           <div>
-            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">1. 카운터 앱</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">1. Counter App</div>
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
@@ -834,7 +834,7 @@ func load() -> [Todo] {
                 Button("-1") { count -= 1 }
                     .buttonStyle(.bordered)
 
-                Button("리셋") { count = 0 }
+                Button("Reset") { count = 0 }
                     .buttonStyle(.bordered)
                     .tint(.gray)
 
@@ -848,7 +848,7 @@ func load() -> [Todo] {
           </div>
 
           <div>
-            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">2. Todo 앱</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">2. Todo App</div>
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
@@ -895,13 +895,13 @@ struct TodoListView: View {
                     save()
                 }
             }
-            .navigationTitle("할 일")
+            .navigationTitle("Todo")
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     HStack {
-                        TextField("새 할 일",
+                        TextField("New todo",
                             text: $newTitle)
-                        Button("추가") {
+                        Button("Add") {
                             guard !newTitle.isEmpty
                                 else { return }
                             todos.append(
@@ -937,7 +937,7 @@ struct TodoListView: View {
           </div>
 
           <div>
-            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">3. 설정 화면</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">3. Settings Screen</div>
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
@@ -946,23 +946,23 @@ struct TodoListView: View {
               <pre class="swift-code">struct SettingsView: View {
     @State private var isDarkMode = false
     @State private var fontSize: Double = 16
-    @State private var language = "한국어"
-    let languages = ["한국어", "English", "日本語"]
+    @State private var language = "Korean"
+    let languages = ["Korean", "English", "Japanese"]
 
     var body: some View {
         NavigationStack {
             Form {
-                Section("화면") {
-                    Toggle("다크 모드",
+                Section("Display") {
+                    Toggle("Dark Mode",
                         isOn: $isDarkMode)
                     VStack(alignment: .leading) {
-                        Text("폰트 크기: \(Int(fontSize))")
+                        Text("Font Size: \(Int(fontSize))")
                         Slider(value: $fontSize,
                             in: 12...28, step: 1)
                     }
                 }
-                Section("언어") {
-                    Picker("언어 선택",
+                Section("Language") {
+                    Picker("Select Language",
                         selection: $language) {
                         ForEach(languages, id: \.self) {
                             Text($0)
@@ -975,7 +975,7 @@ struct TodoListView: View {
                         fontSize: $fontSize)
                 }
             }
-            .navigationTitle("설정")
+            .navigationTitle("Settings")
         }
     }
 }
@@ -985,7 +985,7 @@ struct PreviewCard: View {
     @Binding var fontSize: Double
 
     var body: some View {
-        Text("미리보기 텍스트")
+        Text("Preview Text")
             .font(.system(size: fontSize))
             .padding()
             .frame(maxWidth: .infinity)
@@ -1006,17 +1006,17 @@ struct PreviewCard: View {
 <!-- Challenge nav -->
 <div class="ch-nav">
   <a href="1-1.html">
-    <span class="nav-dir">← 이전 챌린지</span>
-    <span class="nav-title">1-1 화면에 뭔가 띄우기</span>
+    <span class="nav-dir">← Previous Challenge</span>
+    <span class="nav-title">1-1 Display Something on Screen</span>
   </a>
   <a href="1-3.html" class="next">
-    <span class="nav-dir">다음 챌린지 →</span>
-    <span class="nav-title">1-3 여러 화면과 공유 상태</span>
+    <span class="nav-dir">Next Challenge →</span>
+    <span class="nav-title">1-3 Multiple Screens & Shared State</span>
   </a>
 </div>
 
 <footer class="footer">
-  개발자리 · Stage 1 — 챌린지 1-2 · 버튼 누르면 화면이 바뀌게
+  devjari · Stage 1 — Challenge 1-2 · Make the Screen Change on Tap
 </footer>
 
 <script>

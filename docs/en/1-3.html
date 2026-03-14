@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1-3 여러 화면과 공유 상태 | Stage 1 | 개발자리</title>
+  <title>1-3 Multiple Screens & Shared State | Stage 1 | DevRi</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="../assets/style.css" />
   <style>
     .ch-hero {
       padding:56px 40px 48px; max-width:1400px; margin:0 auto;
@@ -56,31 +56,31 @@
 <body>
 
 <nav class="nav">
-  <a href="index.html" class="nav-logo">개발자<span>리</span></a>
+  <a href="index.html" class="nav-logo">Dev<span>Ri</span></a>
   <ul class="nav-links">
-    <li><a href="setup.html">시작하기</a></li>
+    <li><a href="setup.html">Get Started</a></li>
     <li><a href="index.html">Stage 1</a></li>
     <li><a href="1-1.html">1-1</a></li>
     <li><a href="1-2.html">1-2</a></li>
     <li><a href="1-3.html" class="active">1-3</a></li>
     <li><a href="1-4.html">1-4</a></li>
   </ul>
-  <a href="en/1-3.html" style="font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid var(--border2);color:var(--muted);text-decoration:none;margin-left:auto;">EN</a>
+  <a href="../1-3.html" style="font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid var(--border2);color:var(--muted);text-decoration:none;margin-left:auto;">KO</a>
 </nav>
 
 <div class="breadcrumb">
   <a href="index.html">Stage 1</a>
   <span class="sep">/</span>
-  <span class="current">1-3 여러 화면과 공유 상태</span>
+  <span class="current">1-3 Multiple Screens & Shared State</span>
 </div>
 
 <header class="ch-hero fade-in">
   <div class="badge badge-green" style="margin-bottom:20px;">
     <span class="badge-dot"></span>
-    챌린지 1-3 · 5 Topics
+    Challenge 1-3 · 5 Topics
   </div>
-  <h1>🗂 여러 화면과 <span class="accent">공유 상태</span></h1>
-  <p class="trigger">화면이 2개인데 데이터를 어떻게 공유하는가</p>
+  <h1>🗂 Multiple Screens & <span class="accent">Shared State</span></h1>
+  <p class="trigger">How do I share data between two screens?</p>
   <div class="chip-row">
     <span class="chip green">NavigationPath</span>
     <span class="chip green">sheet vs fullScreenCover</span>
@@ -95,30 +95,30 @@
 
 <div style="max-width:1400px;margin:0 auto;padding:0 40px 40px;position:relative;z-index:1;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
-    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">시작 전에 던져볼 질문</div>
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Questions Before You Start</div>
     <div style="display:flex;flex-direction:column;gap:20px;">
 
       <div style="display:flex;gap:14px;align-items:flex-start;">
         <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--green);flex-shrink:0;margin-top:1px;">01</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">화면이 2개 이상인데, 한 화면에서 바꾼 데이터를 다른 화면에서 어떻게 보는가?</div>
-          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--green-dim);color:var(--green);padding:2px 6px;border-radius:4px;">SwiftUI shared state ObservableObject</span></div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">If you change data on one screen, how does another screen see the change?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--green-dim);color:var(--green);padding:2px 6px;border-radius:4px;">SwiftUI shared state ObservableObject</span></div>
         </div>
       </div>
 
       <div style="display:flex;gap:14px;align-items:flex-start;">
         <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--green);flex-shrink:0;margin-top:1px;">02</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">화면을 "밀어서 이동"하는 것과 "아래에서 올라오는 모달"의 차이는 무엇인가?</div>
-          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--green-dim);color:var(--green);padding:2px 6px;border-radius:4px;">SwiftUI NavigationStack vs sheet</span></div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">What's the difference between "push navigation" and "modal from bottom"?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--green-dim);color:var(--green);padding:2px 6px;border-radius:4px;">SwiftUI NavigationStack vs sheet</span></div>
         </div>
       </div>
 
       <div style="display:flex;gap:14px;align-items:flex-start;">
         <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--green);flex-shrink:0;margin-top:1px;">03</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">앱 하단에 탭 바를 만들어서 여러 화면을 전환하려면 어떻게 하는가?</div>
-          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--green-dim);color:var(--green);padding:2px 6px;border-radius:4px;">SwiftUI TabView tabItem</span></div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">How do you create a tab bar at the bottom to switch between screens?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--green-dim);color:var(--green);padding:2px 6px;border-radius:4px;">SwiftUI TabView tabItem</span></div>
         </div>
       </div>
 
@@ -135,7 +135,7 @@
     <div class="content-section" data-preview="pv-1">
       <div class="cs-label">Topic 01</div>
       <h2 class="cs-title">NavigationStack + NavigationPath</h2>
-      <div class="cs-subtitle">스택 기반 이동과 프로그래밍 방식 제어</div>
+      <div class="cs-subtitle">Stack-based navigation and programmatic control</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -148,16 +148,16 @@
     var body: some View {
         NavigationStack(path: $path) {
             List {
-                NavigationLink("프로필",
+                NavigationLink("Profile",
                     value: "profile")
-                NavigationLink("설정",
+                NavigationLink("Settings",
                     value: "settings")
             }
-            .navigationTitle("메뉴")
+            .navigationTitle("Menu")
             .navigationDestination(
                 for: String.self
             ) { value in
-                Text("\(value) 화면")
+                Text("\(value) screen")
             }
         }
     }
@@ -165,11 +165,11 @@
       </div>
 
       <div class="topic-questions green">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li><code>NavigationLink(destination:)</code>과 <code>.navigationDestination(for:)</code>의 차이는 무엇인가?</li>
-          <li><code>NavigationPath</code>를 <code>@State</code>로 관리하면 어떤 것이 가능해지는가?</li>
-          <li>코드로 특정 화면으로 바로 이동하려면 NavigationPath를 어떻게 조작하는가?</li>
+          <li>What is the difference between <code>NavigationLink(destination:)</code> and <code>.navigationDestination(for:)</code>?</li>
+          <li>What becomes possible when you manage <code>NavigationPath</code> with <code>@State</code>?</li>
+          <li>How do you manipulate NavigationPath to navigate directly to a specific screen via code?</li>
         </ul>
       </div>
 
@@ -178,21 +178,21 @@
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">NavigationLink(destination:)</div>
-            <div class="item-desc">탭하면 화면 push. 뒤로 가기는 자동. .navigationDestination(for:) 패턴 (iOS 16+)</div>
+            <div class="item-desc">Pushes a screen on tap. Back navigation is automatic. .navigationDestination(for:) pattern (iOS 16+)</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">NavigationPath</div>
-            <div class="item-desc">@State로 path를 관리해 코드로 화면 이동. path.append() / path.removeLast() / path.removeAll()</div>
+            <div class="item-desc">Manage path with @State to navigate programmatically. path.append() / path.removeLast() / path.removeAll()</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">딥링크 처리</div>
-            <div class="item-desc">onOpenURL에서 NavigationPath를 조작해 특정 화면으로 바로 이동</div>
+            <div class="item-title">Deep Link Handling</div>
+            <div class="item-desc">Manipulate NavigationPath in onOpenURL to navigate directly to a specific screen</div>
           </div>
         </div>
       </div>
@@ -202,7 +202,7 @@
     <div class="content-section" data-preview="pv-2">
       <div class="cs-label">Topic 02</div>
       <h2 class="cs-title">sheet vs fullScreenCover</h2>
-      <div class="cs-subtitle">모달 종류와 선택 기준</div>
+      <div class="cs-subtitle">Modal types and when to choose each</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -215,10 +215,10 @@
 
     var body: some View {
         VStack(spacing: 16) {
-            Button("Sheet 열기") {
+            Button("Open Sheet") {
                 showSheet = true
             }
-            Button("FullScreen 열기") {
+            Button("Open FullScreen") {
                 showFull = true
             }
         }
@@ -237,11 +237,11 @@
       </div>
 
       <div class="topic-questions green">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li><code>.sheet()</code>과 <code>.fullScreenCover()</code>는 시각적으로 어떻게 다른가?</li>
-          <li>sheet를 띄운 화면에서 dismiss하려면 어떤 환경 변수를 사용하는가?</li>
-          <li><code>.presentationDetents([.medium, .large])</code>는 무엇을 조절하는가?</li>
+          <li>How do <code>.sheet()</code> and <code>.fullScreenCover()</code> differ visually?</li>
+          <li>What environment variable do you use to dismiss a sheet from within?</li>
+          <li>What does <code>.presentationDetents([.medium, .large])</code> control?</li>
         </ul>
       </div>
 
@@ -250,21 +250,21 @@
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">.sheet(isPresented: $show)</div>
-            <div class="item-desc">아래에서 올라오는 카드 형태. 뒤 화면이 살짝 보임. 가장 일반적인 모달</div>
+            <div class="item-desc">A card-style modal sliding up from the bottom. The previous screen is partially visible. The most common modal type</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">.fullScreenCover(isPresented: $show)</div>
-            <div class="item-desc">전체 화면 덮음. 카메라, 온보딩 등 완전한 새 컨텍스트를 줄 때</div>
+            <div class="item-desc">Covers the entire screen. Used for camera, onboarding, or any completely new context</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">dismiss 환경 변수</div>
-            <div class="item-desc">@Environment(\.dismiss) var dismiss — 자식 View에서 모달 닫기</div>
+            <div class="item-title">dismiss environment variable</div>
+            <div class="item-desc">@Environment(\.dismiss) var dismiss — dismiss the modal from a child View</div>
           </div>
         </div>
       </div>
@@ -274,7 +274,7 @@
     <div class="content-section" data-preview="pv-3">
       <div class="cs-label">Topic 03</div>
       <h2 class="cs-title">@StateObject vs @ObservedObject</h2>
-      <div class="cs-subtitle">소유 vs 구독의 차이</div>
+      <div class="cs-subtitle">Ownership vs subscription</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -309,12 +309,12 @@ struct ChildView: View {
       </div>
 
       <div class="topic-questions green">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li><code>@StateObject</code>와 <code>@ObservedObject</code>는 언제 각각 사용하는가?</li>
-          <li>자식 View에서 <code>@StateObject</code>를 쓰면 왜 위험한가?</li>
-          <li><code>ObservableObject</code>의 <code>@Published</code> 프로퍼티가 변경되면 어떤 일이 일어나는가?</li>
-          <li>class를 쓰는 이유는 무엇인가? struct로는 왜 안 되는가?</li>
+          <li>When should you use <code>@StateObject</code> vs <code>@ObservedObject</code>?</li>
+          <li>Why is it dangerous to use <code>@StateObject</code> in a child View?</li>
+          <li>What happens when a <code>@Published</code> property of an <code>ObservableObject</code> changes?</li>
+          <li>Why use a class? Why can't you use a struct instead?</li>
         </ul>
       </div>
 
@@ -323,28 +323,28 @@ struct ChildView: View {
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">ObservableObject + @Published</div>
-            <div class="item-desc">class에 채택. @Published 프로퍼티가 변경되면 구독 중인 View 재렌더</div>
+            <div class="item-desc">Adopted by a class. When a @Published property changes, subscribed Views re-render</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">@StateObject — 소유자</div>
-            <div class="item-desc">객체를 처음 생성하고 소유. View가 재생성되어도 객체는 유지. 최상위 View에서 사용</div>
+            <div class="item-title">@StateObject — Owner</div>
+            <div class="item-desc">Creates and owns the object. The object persists even when the View is recreated. Used in the top-level View</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">@ObservedObject — 구독자</div>
-            <div class="item-desc">외부에서 주입받아 구독. View가 재생성되면 새로운 객체로 교체될 수 있음</div>
+            <div class="item-title">@ObservedObject — Subscriber</div>
+            <div class="item-desc">Receives and subscribes to an externally injected object. May be replaced with a new object when the View is recreated</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">실수 패턴</div>
-            <div class="item-desc">자식 View에서 @StateObject를 사용하면 부모 재렌더 시 객체가 리셋된다</div>
+            <div class="item-title">Common Mistake</div>
+            <div class="item-desc">Using @StateObject in a child View causes the object to reset when the parent re-renders</div>
           </div>
         </div>
       </div>
@@ -354,17 +354,17 @@ struct ChildView: View {
     <div class="content-section" data-preview="pv-4">
       <div class="cs-label">Topic 04</div>
       <h2 class="cs-title">@Observable · @EnvironmentObject</h2>
-      <div class="cs-subtitle">iOS 17+ 새 방법과 환경 주입</div>
+      <div class="cs-subtitle">iOS 17+ new approach and environment injection</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
           <div class="code-dots"><span></span><span></span><span></span></div>
           <span class="code-lang">Swift</span>
         </div>
-        <pre class="swift-code">// iOS 17+ 방식
+        <pre class="swift-code">// iOS 17+ approach
 @Observable
 class UserSettings {
-    var username = "개발자리"
+    var username = "DevRi"
     var isDarkMode = false
 }
 
@@ -388,11 +388,11 @@ struct SettingsView: View {
       </div>
 
       <div class="topic-questions green">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li><code>@Observable</code> 매크로(iOS 17+)를 쓰면 <code>@Published</code>가 왜 필요 없어지는가?</li>
-          <li><code>@EnvironmentObject</code>는 어떤 문제를 해결하기 위해 존재하는가? (prop drilling이란?)</li>
-          <li><code>@Environment(\.dismiss)</code>에서 <code>\.dismiss</code>는 어디에 정의되어 있는가?</li>
+          <li>Why does using the <code>@Observable</code> macro (iOS 17+) eliminate the need for <code>@Published</code>?</li>
+          <li>What problem does <code>@EnvironmentObject</code> solve? (What is prop drilling?)</li>
+          <li>Where is <code>\.dismiss</code> defined in <code>@Environment(\.dismiss)</code>?</li>
         </ul>
       </div>
 
@@ -400,32 +400,32 @@ struct SettingsView: View {
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">@Observable 매크로 (iOS 17+)</div>
-            <div class="item-desc">class에 붙이면 ObservableObject + @Published 없이도 동작. 훨씬 단순</div>
+            <div class="item-title">@Observable macro (iOS 17+)</div>
+            <div class="item-desc">Attach to a class and it works without ObservableObject + @Published. Much simpler</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">@EnvironmentObject</div>
-            <div class="item-desc">부모에서 .environmentObject() 주입. 깊은 자식이 바로 꺼내 씀. prop drilling 해결</div>
+            <div class="item-desc">Inject from parent via .environmentObject(). Deep children can access it directly. Solves prop drilling</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">@Environment(\.store)</div>
-            <div class="item-desc">@Observable + @Environment 조합 (iOS 17+). 더 명시적이고 타입 안전한 방법</div>
+            <div class="item-desc">@Observable + @Environment combo (iOS 17+). A more explicit and type-safe approach</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Section 5: TabView 기본 구성 -->
+    <!-- Section 5: TabView Basics -->
     <div class="content-section" data-preview="pv-5">
       <div class="cs-label">Topic 05</div>
-      <h2 class="cs-title">TabView 기본 구성</h2>
-      <div class="cs-subtitle">tabItem · 탭별 NavigationStack</div>
+      <h2 class="cs-title">TabView Basics</h2>
+      <div class="cs-subtitle">tabItem · Independent NavigationStack per tab</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -437,20 +437,20 @@ struct SettingsView: View {
         TabView {
             HomeView()
                 .tabItem {
-                    Label("홈",
+                    Label("Home",
                         systemImage: "house")
                 }
 
             SearchView()
                 .tabItem {
-                    Label("검색",
+                    Label("Search",
                         systemImage:
                             "magnifyingglass")
                 }
 
             ProfileView()
                 .tabItem {
-                    Label("프로필",
+                    Label("Profile",
                         systemImage: "person")
                 }
         }
@@ -459,11 +459,11 @@ struct SettingsView: View {
       </div>
 
       <div class="topic-questions green">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li>TabView 안의 각 탭에 NavigationStack을 넣는 이유는 무엇인가?</li>
-          <li><code>TabView(selection: $selectedTab)</code>으로 프로그래밍 방식 탭 전환이 필요한 경우는 언제인가?</li>
-          <li><code>.tabItem { }</code>에 넣을 수 있는 View의 종류에 제한이 있는가?</li>
+          <li>Why should you put a NavigationStack inside each tab of a TabView?</li>
+          <li>When would you need programmatic tab switching with <code>TabView(selection: $selectedTab)</code>?</li>
+          <li>Are there restrictions on what kinds of Views you can put inside <code>.tabItem { }</code>?</li>
         </ul>
       </div>
 
@@ -471,22 +471,22 @@ struct SettingsView: View {
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">.tabItem { Label("홈", systemImage: "house") }</div>
-            <div class="item-desc">각 탭의 아이콘과 레이블. SF Symbols 이름 사용</div>
+            <div class="item-title">.tabItem { Label("Home", systemImage: "house") }</div>
+            <div class="item-desc">Icon and label for each tab. Uses SF Symbols names</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">탭별 독립 NavigationStack</div>
-            <div class="item-desc">각 탭 안에 NavigationStack을 넣으면 탭 전환 시 navigation 상태가 각자 유지</div>
+            <div class="item-title">Independent NavigationStack per tab</div>
+            <div class="item-desc">Placing a NavigationStack inside each tab preserves each tab's navigation state when switching tabs</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">Programmatic 탭 전환</div>
-            <div class="item-desc">TabView(selection: $selectedTab). 푸시 알림 등에서 특정 탭으로 이동할 때</div>
+            <div class="item-title">Programmatic tab switching</div>
+            <div class="item-desc">TabView(selection: $selectedTab). Navigate to a specific tab from push notifications, etc.</div>
           </div>
         </div>
       </div>
@@ -504,14 +504,14 @@ struct SettingsView: View {
           <!-- Preview 1: NavigationStack menu list -->
           <div id="pv-1" class="preview-content active">
             <div class="preview-label">Preview</div>
-            <div style="font-size:20px;font-weight:700;margin-bottom:16px;padding:0 4px;">메뉴</div>
+            <div style="font-size:20px;font-weight:700;margin-bottom:16px;padding:0 4px;">Menu</div>
             <div style="border-top:1px solid #E2E4EA;">
               <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 4px;border-bottom:1px solid #E2E4EA;">
-                <span style="font-size:13px;">프로필</span>
+                <span style="font-size:13px;">Profile</span>
                 <span style="color:#C7C7CC;font-size:13px;">&#8250;</span>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 4px;border-bottom:1px solid #E2E4EA;">
-                <span style="font-size:13px;">설정</span>
+                <span style="font-size:13px;">Settings</span>
                 <span style="color:#C7C7CC;font-size:13px;">&#8250;</span>
               </div>
             </div>
@@ -521,32 +521,32 @@ struct SettingsView: View {
           <div id="pv-2" class="preview-content">
             <div class="preview-label">Preview</div>
             <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;">
-              <div style="background:#007AFF;color:#fff;padding:10px 28px;border-radius:10px;font-size:13px;font-weight:500;text-align:center;">Sheet 열기</div>
-              <div style="background:#007AFF;color:#fff;padding:10px 28px;border-radius:10px;font-size:13px;font-weight:500;text-align:center;">FullScreen 열기</div>
+              <div style="background:#007AFF;color:#fff;padding:10px 28px;border-radius:10px;font-size:13px;font-weight:500;text-align:center;">Open Sheet</div>
+              <div style="background:#007AFF;color:#fff;padding:10px 28px;border-radius:10px;font-size:13px;font-weight:500;text-align:center;">Open FullScreen</div>
             </div>
           </div>
 
-          <!-- Preview 3: TodoStore List 실행 결과 -->
+          <!-- Preview 3: TodoStore List output -->
           <div id="pv-3" class="preview-content">
             <div class="preview-label">Preview</div>
             <div style="flex:1;display:flex;flex-direction:column;padding-top:8px;">
               <div style="display:flex;align-items:center;padding:11px 4px;border-bottom:1px solid #E2E4EA;">
-                <span style="font-size:13px;">장보기</span>
+                <span style="font-size:13px;">Buy groceries</span>
               </div>
               <div style="display:flex;align-items:center;padding:11px 4px;border-bottom:1px solid #E2E4EA;">
-                <span style="font-size:13px;">SwiftUI 공부</span>
+                <span style="font-size:13px;">Study SwiftUI</span>
               </div>
               <div style="display:flex;align-items:center;padding:11px 4px;border-bottom:1px solid #E2E4EA;">
-                <span style="font-size:13px;">운동하기</span>
+                <span style="font-size:13px;">Work out</span>
               </div>
             </div>
           </div>
 
-          <!-- Preview 4: @Observable 실행 결과 -->
+          <!-- Preview 4: @Observable output -->
           <div id="pv-4" class="preview-content">
             <div class="preview-label">Preview</div>
             <div style="flex:1;display:flex;align-items:center;justify-content:center;">
-              <span style="font-size:17px;font-weight:600;color:#1A1D2A;">개발자리</span>
+              <span style="font-size:17px;font-weight:600;color:#1A1D2A;">DevRi</span>
             </div>
           </div>
 
@@ -554,20 +554,20 @@ struct SettingsView: View {
           <div id="pv-5" class="preview-content">
             <div class="preview-label">Preview</div>
             <div style="flex:1;display:flex;justify-content:center;align-items:center;">
-              <span style="font-size:15px;color:#6B7190;">홈 화면</span>
+              <span style="font-size:15px;color:#6B7190;">Home Screen</span>
             </div>
             <div style="border-top:1px solid #E2E4EA;display:flex;justify-content:space-around;padding:8px 0 4px;">
               <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
                 <span style="font-size:16px;">&#127968;</span>
-                <span style="font-size:9px;color:#007AFF;font-weight:600;">홈</span>
+                <span style="font-size:9px;color:#007AFF;font-weight:600;">Home</span>
               </div>
               <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
                 <span style="font-size:16px;">&#128269;</span>
-                <span style="font-size:9px;color:#8E8E93;">검색</span>
+                <span style="font-size:9px;color:#8E8E93;">Search</span>
               </div>
               <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
                 <span style="font-size:16px;">&#128100;</span>
-                <span style="font-size:9px;color:#8E8E93;">프로필</span>
+                <span style="font-size:9px;color:#8E8E93;">Profile</span>
               </div>
             </div>
           </div>
@@ -579,54 +579,54 @@ struct SettingsView: View {
 
 </div>
 
-<!-- 숙제 & 과제 -->
+<!-- Homework & Assignments -->
 <div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
     <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:8px;">Homework</div>
-    <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">챌린지 1-3을 마쳤다면</h2>
+    <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">After completing Challenge 1-3</h2>
 
     <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
       <div style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);background:var(--green-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);background:var(--green-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">Required</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">3탭 앱 만들기</div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.6;">TabView에 홈/검색/프로필 3개 탭 구성. 각 탭 안에 NavigationStack 배치. 홈에서 상세 화면으로 push 이동</div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Build a 3-tab app</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Set up a TabView with Home/Search/Profile tabs. Place a NavigationStack inside each tab. Push-navigate from Home to a detail screen</div>
         </div>
       </div>
       <div style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);background:var(--green-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);background:var(--green-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">Required</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">공유 데이터 모델 만들기</div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.6;">@Observable class로 앱 전체 상태 관리. 하나의 탭에서 데이터를 바꾸면 다른 탭에서도 반영되는지 확인</div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Create a shared data model</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Manage app-wide state with an @Observable class. Verify that changing data in one tab is reflected in another tab</div>
         </div>
       </div>
       <div style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">도전</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">Stretch</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">메모 앱 — sheet + NavigationStack 조합</div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.6;">메모 목록(List) → 메모 상세(push) → 새 메모 작성(sheet). @StateObject로 메모 배열 관리, 자식에게 @ObservedObject로 전달</div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Memo app — sheet + NavigationStack combo</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Memo list (List) → memo detail (push) → new memo (sheet). Manage memo array with @StateObject, pass to children via @ObservedObject</div>
         </div>
       </div>
     </div>
 
     <div style="border-top:1px solid var(--border);padding-top:20px;">
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">완료 체크리스트</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Completion Checklist</div>
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> NavigationStack과 sheet의 사용 시점 차이를 안다</div>
-        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> @StateObject vs @ObservedObject를 올바르게 쓸 수 있다</div>
-        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> @Observable (iOS 17+) 방식을 이해하고 쓸 수 있다</div>
-        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> TabView 안에 독립적인 NavigationStack을 넣을 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I know when to use NavigationStack vs sheet</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can correctly use @StateObject vs @ObservedObject</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I understand and can use the @Observable (iOS 17+) approach</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can place independent NavigationStacks inside a TabView</div>
       </div>
     </div>
 
     <div style="border-top:1px solid var(--border);padding-top:20px;margin-top:20px;">
       <details>
-        <summary style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);cursor:pointer;margin-bottom:16px;user-select:none;">Solution — 답안 보기</summary>
+        <summary style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);cursor:pointer;margin-bottom:16px;user-select:none;">Solution — View Answer</summary>
 
         <div style="display:flex;flex-direction:column;gap:24px;">
 
           <div>
-            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">1. 3탭 앱</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">1. 3-Tab App</div>
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
@@ -637,35 +637,35 @@ struct SettingsView: View {
         TabView {
             NavigationStack {
                 List {
-                    NavigationLink("공지사항") {
-                        Text("공지 상세")
+                    NavigationLink("Announcements") {
+                        Text("Announcement Detail")
                     }
-                    NavigationLink("이벤트") {
-                        Text("이벤트 상세")
+                    NavigationLink("Events") {
+                        Text("Event Detail")
                     }
                 }
-                .navigationTitle("홈")
+                .navigationTitle("Home")
             }
             .tabItem {
-                Label("홈",
+                Label("Home",
                     systemImage: "house")
             }
 
             NavigationStack {
-                Text("검색 화면")
-                    .navigationTitle("검색")
+                Text("Search Screen")
+                    .navigationTitle("Search")
             }
             .tabItem {
-                Label("검색",
+                Label("Search",
                     systemImage: "magnifyingglass")
             }
 
             NavigationStack {
-                Text("내 프로필")
-                    .navigationTitle("프로필")
+                Text("My Profile")
+                    .navigationTitle("Profile")
             }
             .tabItem {
-                Label("프로필",
+                Label("Profile",
                     systemImage: "person")
             }
         }
@@ -675,7 +675,7 @@ struct SettingsView: View {
           </div>
 
           <div>
-            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">2. 공유 데이터 모델 (@Observable)</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">2. Shared Data Model (@Observable)</div>
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
@@ -700,10 +700,10 @@ struct AppRoot: View {
     var body: some View {
         TabView {
             ItemListView()
-                .tabItem { Label("목록",
+                .tabItem { Label("List",
                     systemImage: "list.bullet") }
             FavoritesView()
-                .tabItem { Label("즐겨찾기",
+                .tabItem { Label("Favorites",
                     systemImage: "heart") }
         }
         .environment(data)
@@ -712,7 +712,7 @@ struct AppRoot: View {
 
 struct ItemListView: View {
     @Environment(AppData.self) var data
-    let items = ["사과", "바나나", "포도"]
+    let items = ["Apple", "Banana", "Grape"]
 
     var body: some View {
         List(items, id: \.self) { item in
@@ -744,7 +744,7 @@ struct FavoritesView: View {
           </div>
 
           <div>
-            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">3. 메모 앱</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">3. Memo App</div>
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
@@ -759,8 +759,8 @@ struct FavoritesView: View {
 
 class MemoStore: ObservableObject {
     @Published var memos: [Memo] = [
-        Memo(title: "첫 번째 메모",
-             body: "SwiftUI 공부 시작!")
+        Memo(title: "First Memo",
+             body: "Starting SwiftUI study!")
     ]
 }
 
@@ -787,7 +787,7 @@ struct MemoListView: View {
                     }
                 }
             }
-            .navigationTitle("메모")
+            .navigationTitle("Memos")
             .toolbar {
                 Button { showNew = true } label: {
                     Image(systemName: "plus")
@@ -820,13 +820,13 @@ struct NewMemoView: View {
     var body_view: some View {
         NavigationStack {
             Form {
-                TextField("제목", text: $title)
+                TextField("Title", text: $title)
                 TextEditor(text: $body)
                     .frame(minHeight: 120)
             }
-            .navigationTitle("새 메모")
+            .navigationTitle("New Memo")
             .toolbar {
-                Button("저장") {
+                Button("Save") {
                     store.memos.append(
                         Memo(title: title,
                              body: body))
@@ -848,17 +848,17 @@ struct NewMemoView: View {
 <!-- Challenge nav -->
 <div class="ch-nav">
   <a href="1-2.html">
-    <span class="nav-dir">← 이전 챌린지</span>
-    <span class="nav-title">1-2 버튼 누르면 화면이 바뀌게</span>
+    <span class="nav-dir">← Previous Challenge</span>
+    <span class="nav-title">1-2 Making the Screen Change on Button Tap</span>
   </a>
   <a href="1-4.html" class="next">
-    <span class="nav-dir">다음 챌린지 →</span>
-    <span class="nav-title">1-4 막히는 Swift 문법</span>
+    <span class="nav-dir">Next Challenge →</span>
+    <span class="nav-title">1-4 Swift Syntax That Trips You Up</span>
   </a>
 </div>
 
 <footer class="footer">
-  개발자리 · Stage 1 — 챌린지 1-3 · 여러 화면과 공유 상태
+  DevRi · Stage 1 — Challenge 1-3 · Multiple Screens & Shared State
 </footer>
 
 <script>

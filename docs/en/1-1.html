@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1-1 화면에 뭔가 띄우기 | Stage 1 | 개발자리</title>
+  <title>1-1 Display Something on Screen | Stage 1 | 개발자리</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="../assets/style.css" />
   <style>
     .ch-hero {
       padding:56px 40px 48px; max-width:1400px; margin:0 auto;
@@ -56,36 +56,36 @@
 <body>
 
 <nav class="nav">
-  <a href="index.html" class="nav-logo">개발자<span>리</span></a>
+  <a href="../index.html" class="nav-logo">개발자<span>리</span></a>
   <ul class="nav-links">
-    <li><a href="setup.html">시작하기</a></li>
+    <li><a href="setup.html">Getting Started</a></li>
     <li><a href="index.html">Stage 1</a></li>
     <li><a href="1-1.html" class="active">1-1</a></li>
     <li><a href="1-2.html">1-2</a></li>
     <li><a href="1-3.html">1-3</a></li>
     <li><a href="1-4.html">1-4</a></li>
   </ul>
-  <a href="en/1-1.html" style="font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid var(--border2);color:var(--muted);text-decoration:none;margin-left:auto;">EN</a>
+  <a href="../1-1.html" style="font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid var(--border2);color:var(--muted);text-decoration:none;margin-left:auto;">KO</a>
 </nav>
 
 <div class="breadcrumb">
   <a href="index.html">Stage 1</a>
   <span class="sep">/</span>
-  <span class="current">1-1 화면에 뭔가 띄우기</span>
+  <span class="current">1-1 Display Something on Screen</span>
 </div>
 
 <header class="ch-hero fade-in">
   <div class="badge badge-orange" style="margin-bottom:20px;">
     <span class="badge-dot"></span>
-    챌린지 1-1 · 8 Topics
+    Challenge 1-1 · 8 Topics
   </div>
-  <h1>📱 화면에 <span class="accent">뭔가 띄우기</span></h1>
-  <p class="trigger">"Hello World"를 앱에서 보고 싶다</p>
+  <h1>📱 Display <span class="accent">Something on Screen</span></h1>
+  <p class="trigger">I want to see "Hello World" in an app</p>
   <div class="chip-row">
     <span class="chip orange">View</span>
     <span class="chip orange">body</span>
     <span class="chip orange">VStack / HStack / ZStack</span>
-    <span class="chip orange">modifier 체이닝</span>
+    <span class="chip orange">modifier chaining</span>
     <span class="chip orange">frame · padding · Spacer</span>
     <span class="chip orange">@main · App · Scene</span>
     <span class="chip orange">Xcode Preview</span>
@@ -95,30 +95,30 @@
 
 <div style="max-width:1400px;margin:0 auto;padding:0 40px 40px;position:relative;z-index:1;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
-    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">시작 전에 던져볼 질문</div>
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Questions Before You Start</div>
     <div style="display:flex;flex-direction:column;gap:20px;">
 
       <div style="display:flex;gap:14px;align-items:flex-start;">
         <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--orange);flex-shrink:0;margin-top:1px;">01</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">SwiftUI에서 화면에 글자나 이미지를 띄우는 코드를 어떻게 쓰는가?</div>
-          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--orange-dim);color:var(--orange);padding:2px 6px;border-radius:4px;">SwiftUI Text Image Button tutorial</span></div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">How do you write code to display text or images on screen in SwiftUI?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--orange-dim);color:var(--orange);padding:2px 6px;border-radius:4px;">SwiftUI Text Image Button tutorial</span></div>
         </div>
       </div>
 
       <div style="display:flex;gap:14px;align-items:flex-start;">
         <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--orange);flex-shrink:0;margin-top:1px;">02</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">여러 요소를 원하는 위치에 배치하려면 어떻게 하는가?</div>
-          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--orange-dim);color:var(--orange);padding:2px 6px;border-radius:4px;">SwiftUI VStack HStack layout</span></div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">How do you arrange multiple elements where you want them?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--orange-dim);color:var(--orange);padding:2px 6px;border-radius:4px;">SwiftUI VStack HStack layout</span></div>
         </div>
       </div>
 
       <div style="display:flex;gap:14px;align-items:flex-start;">
         <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--orange);flex-shrink:0;margin-top:1px;">03</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">작성한 코드가 실제 앱에서 어떻게 실행되는가?</div>
-          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--orange-dim);color:var(--orange);padding:2px 6px;border-radius:4px;">SwiftUI @main App WindowGroup entry point</span></div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">How does the code you write actually run as an app?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--orange-dim);color:var(--orange);padding:2px 6px;border-radius:4px;">SwiftUI @main App WindowGroup entry point</span></div>
         </div>
       </div>
 
@@ -131,11 +131,11 @@
   <!-- ========== LEFT: Content Column ========== -->
   <div class="content-col">
 
-    <!-- Section 1: ContentView 구조 -->
+    <!-- Section 1: ContentView Structure -->
     <div class="content-section" data-preview="pv-1">
       <div class="cs-label">Topic 01</div>
-      <h2 class="cs-title">ContentView 구조</h2>
-      <div class="cs-subtitle">앱 시작점, struct가 View를 채택하는 이유</div>
+      <h2 class="cs-title">ContentView Structure</h2>
+      <div class="cs-subtitle">App entry point, why struct adopts View</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -152,11 +152,11 @@
       </div>
 
       <div class="topic-questions">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li>SwiftUI에서 View를 class가 아닌 struct로 만드는 이유는 무엇인가?</li>
-          <li><code>some View</code>에서 <code>some</code>을 빼면 어떤 에러가 나는가? 왜 필요한가?</li>
-          <li><code>#Preview</code>와 시뮬레이터 빌드의 차이는 무엇인가?</li>
+          <li>Why does SwiftUI use struct instead of class for Views?</li>
+          <li>What error occurs if you remove <code>some</code> from <code>some View</code>? Why is it needed?</li>
+          <li>What is the difference between <code>#Preview</code> and running in the simulator?</li>
         </ul>
       </div>
 
@@ -165,30 +165,30 @@
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">struct ContentView: View</div>
-            <div class="item-desc">SwiftUI View는 struct다. class가 아닌 이유 — 값 타입의 불변성이 렌더링 시스템과 맞닿는 지점</div>
+            <div class="item-desc">SwiftUI Views are structs. Why not classes — how value type immutability aligns with the rendering system</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">var body: some View</div>
-            <div class="item-desc">View 프로토콜의 유일한 요구사항. some View — Opaque Type이 왜 필요한가</div>
+            <div class="item-desc">The only requirement of the View protocol. some View — why Opaque Types are necessary</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">#Preview 매크로</div>
-            <div class="item-desc">iOS 17+ Preview 매크로. 빌드 없이 실시간 UI 확인. Canvas 활성화하는 법</div>
+            <div class="item-title">#Preview macro</div>
+            <div class="item-desc">iOS 17+ Preview macro. Real-time UI preview without building. How to activate the Canvas</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Section 2: 기본 뷰 3종 -->
+    <!-- Section 2: Three Basic Views -->
     <div class="content-section" data-preview="pv-2">
       <div class="cs-label">Topic 02</div>
-      <h2 class="cs-title">기본 뷰 3종</h2>
+      <h2 class="cs-title">Three Basic Views</h2>
       <div class="cs-subtitle">Text · Image · Button</div>
 
       <div class="code-block" style="margin-bottom:20px;">
@@ -205,19 +205,19 @@
         .font(.system(size: 40))
         .foregroundStyle(.yellow)
 
-    Button("시작하기") {
-        print("탭!")
+    Button("Get Started") {
+        print("Tapped!")
     }
     .buttonStyle(.borderedProminent)
 }</pre>
       </div>
 
       <div class="topic-questions">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li><code>Text("Hello").font(.title).bold()</code>에서 <code>.font()</code>과 <code>.bold()</code>의 순서를 바꾸면 결과가 달라지는가?</li>
-          <li><code>Image(systemName:)</code>과 <code>Image("이미지이름")</code>의 차이는 무엇인가?</li>
-          <li><code>Button</code>의 action 클로저 안에서 <code>print()</code>를 호출하면 Preview에서 출력을 볼 수 있는가?</li>
+          <li>In <code>Text("Hello").font(.title).bold()</code>, does swapping <code>.font()</code> and <code>.bold()</code> change the result?</li>
+          <li>What is the difference between <code>Image(systemName:)</code> and <code>Image("imageName")</code>?</li>
+          <li>If you call <code>print()</code> inside a <code>Button</code>'s action closure, can you see the output in Preview?</li>
         </ul>
       </div>
 
@@ -226,31 +226,31 @@
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">Text("Hello")</div>
-            <div class="item-desc">문자열 표시. .font(), .foregroundStyle(), .bold() modifier 체이닝</div>
+            <div class="item-desc">Display strings. Chaining .font(), .foregroundStyle(), .bold() modifiers</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">Image(systemName:)</div>
-            <div class="item-desc">SF Symbols 사용. .resizable() + .scaledToFit() 조합. 크기 지정 패턴</div>
+            <div class="item-desc">Using SF Symbols. The .resizable() + .scaledToFit() combo. Size specification patterns</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">Button(action:label:)</div>
-            <div class="item-desc">탭 액션 연결. 후행 클로저 문법 읽기. .buttonStyle() 커스터마이징</div>
+            <div class="item-desc">Connecting tap actions. Reading trailing closure syntax. Customizing with .buttonStyle()</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Section 3: Stack 3종 -->
+    <!-- Section 3: Three Types of Stacks -->
     <div class="content-section" data-preview="pv-3">
       <div class="cs-label">Topic 03</div>
-      <h2 class="cs-title">Stack 3종</h2>
-      <div class="cs-subtitle">VStack · HStack · ZStack — 화면을 쌓는 3가지 방향</div>
+      <h2 class="cs-title">Three Types of Stacks</h2>
+      <div class="cs-subtitle">VStack · HStack · ZStack — three directions to stack views</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -259,9 +259,9 @@
         </div>
         <pre class="swift-code">VStack(spacing: 20) {
     HStack {
-        Text("왼쪽")
+        Text("Left")
         Spacer()
-        Text("오른쪽")
+        Text("Right")
     }
     .padding()
     .background(.gray.opacity(0.1))
@@ -271,17 +271,17 @@
         RoundedRectangle(cornerRadius: 12)
             .fill(.blue.opacity(0.15))
             .frame(height: 60)
-        Text("ZStack 겹침")
+        Text("ZStack overlap")
     }
 }</pre>
       </div>
 
       <div class="topic-questions">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li><code>VStack(alignment: .leading)</code>에서 alignment를 생략하면 기본값은 무엇인가?</li>
-          <li><code>HStack</code> 안에 <code>Spacer()</code>를 넣으면 어떻게 되는가? 두 개 넣으면?</li>
-          <li><code>.padding().background(.blue)</code> vs <code>.background(.blue).padding()</code> 결과는 왜 다른가?</li>
+          <li>In <code>VStack(alignment: .leading)</code>, what is the default value when alignment is omitted?</li>
+          <li>What happens when you put a <code>Spacer()</code> inside an <code>HStack</code>? What about two?</li>
+          <li>Why do <code>.padding().background(.blue)</code> vs <code>.background(.blue).padding()</code> produce different results?</li>
         </ul>
       </div>
 
@@ -289,29 +289,29 @@
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">VStack — 수직 쌓기</div>
-            <div class="item-desc">alignment: .leading/.center/.trailing, spacing: 값 설정. 기본 alignment가 .center인 이유</div>
+            <div class="item-title">VStack — Vertical stacking</div>
+            <div class="item-desc">alignment: .leading/.center/.trailing, spacing: value. Why the default alignment is .center</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">HStack — 수평 쌓기</div>
-            <div class="item-desc">alignment: .top/.center/.bottom. 텍스트 baseline 정렬 .firstTextBaseline</div>
+            <div class="item-title">HStack — Horizontal stacking</div>
+            <div class="item-desc">alignment: .top/.center/.bottom. Text baseline alignment with .firstTextBaseline</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">ZStack — 겹치기</div>
-            <div class="item-desc">나중에 추가된 뷰가 위로. alignment 기준점. 오버레이 vs ZStack 선택 기준</div>
+            <div class="item-title">ZStack — Overlapping</div>
+            <div class="item-desc">Later views appear on top. Alignment anchor point. When to choose overlay vs ZStack</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">Modifier 체이닝 순서</div>
-            <div class="item-desc">.padding().background() vs .background().padding() — 순서가 결과를 바꾸는 이유</div>
+            <div class="item-title">Modifier chaining order</div>
+            <div class="item-desc">.padding().background() vs .background().padding() — why order changes the result</div>
           </div>
         </div>
       </div>
@@ -321,7 +321,7 @@
     <div class="content-section" data-preview="pv-4">
       <div class="cs-label">Topic 04</div>
       <h2 class="cs-title">frame modifier</h2>
-      <div class="cs-subtitle">크기를 직접 지정하는 방법</div>
+      <div class="cs-subtitle">How to specify sizes directly</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -329,12 +329,12 @@
           <span class="code-lang">Swift</span>
         </div>
         <pre class="swift-code">VStack(spacing: 12) {
-    Text("고정 크기")
+    Text("Fixed size")
         .frame(width: 120, height: 40)
         .background(.orange.opacity(0.2))
         .cornerRadius(8)
 
-    Text("최대 너비")
+    Text("Max width")
         .frame(maxWidth: .infinity)
         .padding()
         .background(.blue.opacity(0.15))
@@ -343,11 +343,11 @@
       </div>
 
       <div class="topic-questions">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li><code>.frame(width: 200)</code>은 뷰 자체의 크기를 바꾸는 것인가, 뷰를 감싸는 프레임의 크기를 바꾸는 것인가?</li>
-          <li><code>maxWidth: .infinity</code>는 어떤 상황에서 쓰는가? 버튼을 화면 전체 너비로 만들려면?</li>
-          <li><code>.frame()</code> 안의 <code>alignment</code> 파라미터는 무엇을 정렬하는가?</li>
+          <li>Does <code>.frame(width: 200)</code> change the view's own size, or the size of a frame wrapping the view?</li>
+          <li>When do you use <code>maxWidth: .infinity</code>? How do you make a button span the full screen width?</li>
+          <li>What does the <code>alignment</code> parameter inside <code>.frame()</code> align?</li>
         </ul>
       </div>
 
@@ -356,21 +356,21 @@
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">.frame(width:height:)</div>
-            <div class="item-desc">고정 크기 지정. 뷰 자체가 아닌 "뷰를 담는 프레임"에 크기를 주는 개념</div>
+            <div class="item-desc">Fixed size specification. The concept of sizing "the frame that contains the view," not the view itself</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">maxWidth: .infinity</div>
-            <div class="item-desc">부모가 주는 최대 너비를 다 차지. 버튼 full-width 만들기 패턴</div>
+            <div class="item-desc">Takes up all the width the parent offers. The full-width button pattern</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">alignment 파라미터</div>
-            <div class="item-desc">frame 안에서 자식 뷰의 위치 결정. .frame(maxWidth:.infinity, alignment:.leading)</div>
+            <div class="item-title">alignment parameter</div>
+            <div class="item-desc">Determines the child view's position within the frame. .frame(maxWidth:.infinity, alignment:.leading)</div>
           </div>
         </div>
       </div>
@@ -380,7 +380,7 @@
     <div class="content-section" data-preview="pv-5">
       <div class="cs-label">Topic 05</div>
       <h2 class="cs-title">padding · Spacer · offset</h2>
-      <div class="cs-subtitle">여백과 위치 조정</div>
+      <div class="cs-subtitle">Spacing and position adjustment</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -390,7 +390,7 @@
         <pre class="swift-code">VStack {
     Spacer()
 
-    Text("가운데 정렬")
+    Text("Centered")
         .padding()
         .background(.orange.opacity(0.15))
         .cornerRadius(8)
@@ -400,11 +400,11 @@
       </div>
 
       <div class="topic-questions">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li><code>padding()</code>에 값을 안 주면 기본 여백은 몇 pt인가?</li>
-          <li><code>Spacer()</code>는 Stack 밖에서도 동작하는가?</li>
-          <li><code>.offset(x: 20)</code>과 <code>.padding(.leading, 20)</code>의 결정적 차이는 무엇인가?</li>
+          <li>What is the default padding value in points when you call <code>padding()</code> without a value?</li>
+          <li>Does <code>Spacer()</code> work outside of a Stack?</li>
+          <li>What is the critical difference between <code>.offset(x: 20)</code> and <code>.padding(.leading, 20)</code>?</li>
         </ul>
       </div>
 
@@ -413,21 +413,21 @@
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">.padding()</div>
-            <div class="item-desc">주변 여백 추가. .padding(.horizontal, 20) 방향별 지정. 레이아웃에 영향을 준다</div>
+            <div class="item-desc">Adds surrounding margins. Directional specification with .padding(.horizontal, 20). Affects layout</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">Spacer()</div>
-            <div class="item-desc">남은 공간 전부 차지. Stack 안에서만 의미 있음. minLength 옵션</div>
+            <div class="item-desc">Takes up all remaining space. Only meaningful inside Stacks. The minLength option</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">.offset(x:y:)</div>
-            <div class="item-desc">위치를 이동하지만 레이아웃 공간은 그대로 유지. padding과의 결정적 차이</div>
+            <div class="item-desc">Moves position but keeps layout space unchanged. The critical difference from padding</div>
           </div>
         </div>
       </div>
@@ -437,7 +437,7 @@
     <div class="content-section" data-preview="pv-6">
       <div class="cs-label">Topic 06</div>
       <h2 class="cs-title">GeometryReader</h2>
-      <div class="cs-subtitle">부모 크기 읽어서 반응형으로</div>
+      <div class="cs-subtitle">Reading parent size for responsive layouts</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -456,11 +456,11 @@
       </div>
 
       <div class="topic-questions">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li><code>GeometryReader</code>를 쓰면 왜 레이아웃이 예상과 다르게 변하는가?</li>
-          <li>부모의 크기를 몰라도 되는 상황에서 GeometryReader를 쓰면 어떤 문제가 있는가?</li>
-          <li>화면 너비의 30%만큼 너비를 주려면 어떻게 하는가?</li>
+          <li>Why does using <code>GeometryReader</code> cause unexpected layout changes?</li>
+          <li>What problems arise from using GeometryReader when you don't need the parent's size?</li>
+          <li>How do you give a view a width equal to 30% of the screen width?</li>
         </ul>
       </div>
 
@@ -469,21 +469,21 @@
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">GeometryProxy</div>
-            <div class="item-desc">geo.size.width, geo.size.height로 부모 크기 접근. 비율로 크기 계산</div>
+            <div class="item-desc">Access parent size with geo.size.width, geo.size.height. Calculate sizes proportionally</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">주의사항</div>
-            <div class="item-desc">GeometryReader는 최대 크기를 차지하려 한다. 의도치 않은 레이아웃 변화 주의</div>
+            <div class="item-title">Caveats</div>
+            <div class="item-desc">GeometryReader tries to take up maximum size. Watch out for unintended layout changes</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">언제 쓰는가</div>
-            <div class="item-desc">화면 크기에 비례한 뷰, 스크롤 오프셋 읽기, 커스텀 애니메이션</div>
+            <div class="item-title">When to use it</div>
+            <div class="item-desc">Views proportional to screen size, reading scroll offsets, custom animations</div>
           </div>
         </div>
       </div>
@@ -493,7 +493,7 @@
     <div class="content-section" data-preview="pv-7">
       <div class="cs-label">Topic 07</div>
       <h2 class="cs-title">@main · App · WindowGroup</h2>
-      <div class="cs-subtitle">앱의 진입점과 Scene 구조</div>
+      <div class="cs-subtitle">App entry point and Scene structure</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -511,11 +511,11 @@ struct MyApp: App {
       </div>
 
       <div class="topic-questions">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li><code>@main</code>을 두 개의 struct에 붙이면 어떻게 되는가?</li>
-          <li><code>WindowGroup</code>은 왜 단순히 "Window"가 아니라 "Group"인가?</li>
-          <li>App → Scene → View 계층에서 각각의 역할은 무엇인가?</li>
+          <li>What happens if you attach <code>@main</code> to two structs?</li>
+          <li>Why is it called <code>WindowGroup</code> and not simply "Window"?</li>
+          <li>In the App → Scene → View hierarchy, what is each layer's role?</li>
         </ul>
       </div>
 
@@ -523,56 +523,56 @@ struct MyApp: App {
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">@main 어트리뷰트</div>
-            <div class="item-desc">진입점 마킹. 컴파일러가 main() 함수를 자동 생성. 하나의 타입에만 붙일 수 있다</div>
+            <div class="item-title">@main attribute</div>
+            <div class="item-desc">Marks the entry point. The compiler auto-generates a main() function. Can only be attached to one type</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">App 프로토콜</div>
-            <div class="item-desc">body: some Scene 요구. SwiftUI 앱의 최상위 구조체</div>
+            <div class="item-title">App protocol</div>
+            <div class="item-desc">Requires body: some Scene. The top-level struct of a SwiftUI app</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
             <div class="item-title">WindowGroup</div>
-            <div class="item-desc">기본 Scene 타입. iPad/Mac에서 여러 창을 지원하는 이유</div>
+            <div class="item-desc">The default Scene type. Why it supports multiple windows on iPad/Mac</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Section 8: View 계층과 레이아웃 영향 -->
+    <!-- Section 8: View Hierarchy and Layout Impact -->
     <div class="content-section" data-preview="pv-8">
       <div class="cs-label">Topic 08</div>
-      <h2 class="cs-title">View 계층과 레이아웃 영향</h2>
-      <div class="cs-subtitle">부모/자식 관계가 레이아웃에 미치는 영향</div>
+      <h2 class="cs-title">View Hierarchy and Layout Impact</h2>
+      <div class="cs-subtitle">How parent/child relationships affect layout</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
           <div class="code-dots"><span></span><span></span><span></span></div>
           <span class="code-lang">Swift</span>
         </div>
-        <pre class="swift-code">// 부모가 크기 제안 → 자식이 결정
+        <pre class="swift-code">// Parent proposes size → child decides
 VStack {
-    Text("padding 먼저")
+    Text("padding first")
         .padding()
         .background(.orange.opacity(0.2))
 
-    Text("background 먼저")
+    Text("background first")
         .background(.blue.opacity(0.2))
         .padding()
 }</pre>
       </div>
 
       <div class="topic-questions">
-        <div class="tq-label">생각해보기</div>
+        <div class="tq-label">Think About It</div>
         <ul>
-          <li>SwiftUI에서 부모와 자식의 크기 협상은 어떤 순서로 이루어지는가?</li>
-          <li>자식 View가 부모가 제안한 크기보다 더 큰 크기를 원하면 어떻게 되는가?</li>
-          <li>시뮬레이터에서는 정상인데 실기기에서 다르게 보이는 경우는 언제인가?</li>
+          <li>In what order does the size negotiation between parent and child happen in SwiftUI?</li>
+          <li>What happens when a child View wants a size larger than what the parent proposed?</li>
+          <li>When does something look correct in the simulator but different on a real device?</li>
         </ul>
       </div>
 
@@ -580,15 +580,15 @@ VStack {
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">크기 협상 과정</div>
-            <div class="item-desc">부모가 자식에게 제안 크기 전달 → 자식이 자신의 크기를 결정 → 부모가 배치. SwiftUI 레이아웃의 핵심</div>
+            <div class="item-title">Size negotiation process</div>
+            <div class="item-desc">Parent proposes size to child → child determines its own size → parent positions it. The core of SwiftUI layout</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">실기기 vs 시뮬레이터</div>
-            <div class="item-desc">렌더링 성능, Metal, 카메라/센서 차이. 시뮬레이터에서만 테스트하면 안 되는 이유</div>
+            <div class="item-title">Real device vs simulator</div>
+            <div class="item-desc">Rendering performance, Metal, camera/sensor differences. Why you shouldn't test only on the simulator</div>
           </div>
         </div>
       </div>
@@ -617,7 +617,7 @@ VStack {
             <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;">
               <span style="font-size:22px;font-weight:700;color:#1A1D2A;">개발자리</span>
               <span style="font-size:48px;color:#FFD60A;">&#9733;</span>
-              <span style="display:inline-block;padding:10px 28px;background:#007AFF;color:#fff;border-radius:10px;font-size:16px;font-weight:500;">시작하기</span>
+              <span style="display:inline-block;padding:10px 28px;background:#007AFF;color:#fff;border-radius:10px;font-size:16px;font-weight:500;">Get Started</span>
             </div>
           </div>
 
@@ -626,12 +626,12 @@ VStack {
             <div class="preview-label">Preview</div>
             <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:24px;padding:0 8px;">
               <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:rgba(128,128,128,0.08);border-radius:10px;">
-                <span style="font-size:15px;">왼쪽</span>
-                <span style="font-size:15px;">오른쪽</span>
+                <span style="font-size:15px;">Left</span>
+                <span style="font-size:15px;">Right</span>
               </div>
               <div style="position:relative;display:flex;align-items:center;justify-content:center;height:70px;">
                 <div style="position:absolute;inset:0;background:rgba(0,122,255,0.12);border-radius:12px;"></div>
-                <span style="position:relative;font-size:15px;">ZStack 겹침</span>
+                <span style="position:relative;font-size:15px;">ZStack overlap</span>
               </div>
             </div>
           </div>
@@ -641,10 +641,10 @@ VStack {
             <div class="preview-label">Preview</div>
             <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:0 8px;">
               <div style="width:130px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(232,93,26,0.15);border-radius:10px;">
-                <span style="font-size:14px;">고정 크기</span>
+                <span style="font-size:14px;">Fixed size</span>
               </div>
               <div style="width:100%;padding:14px;display:flex;align-items:center;justify-content:center;background:rgba(0,122,255,0.12);border-radius:10px;">
-                <span style="font-size:14px;">최대 너비</span>
+                <span style="font-size:14px;">Max width</span>
               </div>
             </div>
           </div>
@@ -654,7 +654,7 @@ VStack {
             <div class="preview-label">Preview</div>
             <div style="flex:1;display:flex;align-items:center;justify-content:center;">
               <div style="padding:14px 20px;background:rgba(232,93,26,0.12);border-radius:10px;">
-                <span style="font-size:15px;">가운데 정렬</span>
+                <span style="font-size:15px;">Centered</span>
               </div>
             </div>
           </div>
@@ -670,7 +670,7 @@ VStack {
             </div>
           </div>
 
-          <!-- Preview 7: App 실행 결과 — ContentView -->
+          <!-- Preview 7: App entry — ContentView -->
           <div id="pv-7" class="preview-content">
             <div class="preview-label">Preview</div>
             <div style="flex:1;display:flex;align-items:center;justify-content:center;">
@@ -685,13 +685,13 @@ VStack {
               <div>
                 <div style="font-size:10px;color:#999;margin-bottom:6px;font-family:'DM Mono',monospace;">.padding().background()</div>
                 <div style="padding:14px 18px;background:rgba(232,93,26,0.18);border-radius:6px;">
-                  <span style="font-size:14px;">padding 먼저</span>
+                  <span style="font-size:14px;">padding first</span>
                 </div>
               </div>
               <div>
                 <div style="font-size:10px;color:#999;margin-bottom:6px;font-family:'DM Mono',monospace;">.background().padding()</div>
                 <div style="padding:14px 18px;">
-                  <span style="font-size:14px;background:rgba(0,122,255,0.18);padding:4px 6px;border-radius:4px;">background 먼저</span>
+                  <span style="font-size:14px;background:rgba(0,122,255,0.18);padding:4px 6px;border-radius:4px;">background first</span>
                 </div>
               </div>
             </div>
@@ -704,54 +704,54 @@ VStack {
 
 </div>
 
-<!-- 숙제 & 과제 -->
+<!-- Homework & Assignments -->
 <div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
     <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;">Homework</div>
-    <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">챌린지 1-1을 마쳤다면</h2>
+    <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">After completing Challenge 1-1</h2>
 
     <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
       <div style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);background:var(--orange-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);background:var(--orange-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">Required</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">자기소개 카드 만들기</div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.6;">VStack, HStack, ZStack을 모두 사용해서 이름, 사진(SF Symbol), 한 줄 소개가 있는 프로필 카드를 만들어보기. padding, background, cornerRadius modifier 활용</div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Build a self-introduction card</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Using VStack, HStack, and ZStack together, create a profile card with your name, a photo (SF Symbol), and a one-line bio. Apply padding, background, and cornerRadius modifiers</div>
         </div>
       </div>
       <div style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);background:var(--orange-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);background:var(--orange-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">Required</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">modifier 순서 실험</div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.6;">.padding().background(.blue) vs .background(.blue).padding() — 두 가지를 나란히 놓고 결과가 왜 다른지 주석으로 설명 달기</div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Modifier order experiment</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">.padding().background(.blue) vs .background(.blue).padding() — place both side by side and add comments explaining why the results differ</div>
         </div>
       </div>
       <div style="display:flex;gap:12px;align-items:flex-start;">
-        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">도전</span>
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">Challenge</span>
         <div>
-          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">날씨 카드 UI 클론</div>
-          <div style="font-size:12px;color:var(--muted);line-height:1.6;">ZStack으로 그라디언트 배경 위에 온도, 도시 이름, 날씨 아이콘을 겹쳐 배치. GeometryReader로 화면 너비의 90%로 카드 크기 설정</div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Weather card UI clone</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Overlay temperature, city name, and weather icon on a gradient background using ZStack. Set card width to 90% of screen width using GeometryReader</div>
         </div>
       </div>
     </div>
 
     <div style="border-top:1px solid var(--border);padding-top:20px;">
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">완료 체크리스트</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Completion Checklist</div>
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> Text, Image, Button을 코드 없이 떠올릴 수 있다</div>
-        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> VStack/HStack/ZStack의 차이를 한 문장으로 설명할 수 있다</div>
-        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> modifier 순서가 결과를 바꾸는 이유를 안다</div>
-        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> @main → App → WindowGroup → ContentView 흐름을 그릴 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can recall Text, Image, and Button without looking at code</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can explain the difference between VStack/HStack/ZStack in one sentence</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I understand why modifier order changes the result</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can draw the @main → App → WindowGroup → ContentView flow</div>
       </div>
     </div>
 
     <div style="border-top:1px solid var(--border);padding-top:20px;margin-top:20px;">
       <details>
-        <summary style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);cursor:pointer;margin-bottom:16px;user-select:none;">Solution — 답안 보기</summary>
+        <summary style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);cursor:pointer;margin-bottom:16px;user-select:none;">Solution — Show Answer</summary>
 
         <div style="display:flex;flex-direction:column;gap:24px;">
 
           <div>
-            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">1. 자기소개 카드 만들기</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">1. Build a self-introduction card</div>
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
@@ -768,13 +768,13 @@ VStack {
                     .font(.system(size: 60))
                     .foregroundStyle(.orange)
 
-                Text("홍길동")
+                Text("John Doe")
                     .font(.title2)
                     .bold()
 
                 HStack {
                     Image(systemName: "swift")
-                    Text("iOS 개발자 지망생")
+                    Text("Aspiring iOS Developer")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -789,33 +789,33 @@ VStack {
           </div>
 
           <div>
-            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">2. modifier 순서 실험</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">2. Modifier order experiment</div>
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
                 <span class="code-lang">Swift</span>
               </div>
               <pre class="swift-code">VStack(spacing: 30) {
-    // padding 먼저 → 여백 포함한 영역에 배경
+    // padding first → background covers the padded area
     Text("padding → background")
         .padding()
         .background(.orange.opacity(0.3))
         .cornerRadius(8)
 
-    // background 먼저 → 텍스트 크기만큼만 배경
+    // background first → background covers only the text size
     Text("background → padding")
         .background(.blue.opacity(0.3))
         .padding()
         .cornerRadius(8)
 }
-// modifier는 안→바깥 순서로 적용된다.
-// .padding()이 먼저 오면 여백이 생긴 뒤 배경이 칠해지고,
-// .background()가 먼저 오면 텍스트 크기만큼만 배경이 칠해진다.</pre>
+// Modifiers are applied from inside → outside.
+// When .padding() comes first, spacing is added then background is painted,
+// When .background() comes first, background is painted on the text size only.</pre>
             </div>
           </div>
 
           <div>
-            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">3. 날씨 카드 UI 클론</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">3. Weather card UI clone</div>
             <div class="code-block">
               <div class="code-header">
                 <div class="code-dots"><span></span><span></span><span></span></div>
@@ -833,7 +833,7 @@ VStack {
                 .cornerRadius(20)
 
                 VStack(spacing: 8) {
-                    Text("서울")
+                    Text("Seoul")
                         .font(.title2).bold()
                         .foregroundStyle(.white)
                     Image(systemName: "sun.max.fill")
@@ -865,17 +865,17 @@ VStack {
 <!-- Challenge nav -->
 <div class="ch-nav">
   <a href="index.html">
-    <span class="nav-dir">← Stage 1 목록</span>
-    <span class="nav-title">Stage 1 인덱스</span>
+    <span class="nav-dir">← Stage 1 Index</span>
+    <span class="nav-title">Stage 1 Index</span>
   </a>
   <a href="1-2.html" class="next">
-    <span class="nav-dir">다음 챌린지 →</span>
-    <span class="nav-title">1-2 버튼 누르면 화면이 바뀌게</span>
+    <span class="nav-dir">Next Challenge →</span>
+    <span class="nav-title">1-2 Make the Screen Change on Button Tap</span>
   </a>
 </div>
 
 <footer class="footer">
-  개발자리 · Stage 1 — 챌린지 1-1 · 화면에 뭔가 띄우기
+  개발자리 · Stage 1 — Challenge 1-1 · Display Something on Screen
 </footer>
 
 <script>

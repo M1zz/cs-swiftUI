@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>시작하기 — Xcode & Swift 설치 | 개발자리</title>
+  <title>Getting Started — Xcode & Swift Setup | devjari</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="../assets/style.css" />
   <style>
     .setup-wrap {
       max-width:860px; margin:0 auto; padding:0 40px 80px;
@@ -99,186 +99,186 @@
 <nav class="nav">
   <a href="index.html" class="nav-logo">개발자<span>리</span></a>
   <ul class="nav-links">
-    <li><a href="setup.html" class="active">시작하기</a></li>
+    <li><a href="setup.html" class="active">Getting Started</a></li>
     <li><a href="index.html">Stage 1</a></li>
     <li><a href="1-1.html">1-1</a></li>
     <li><a href="1-2.html">1-2</a></li>
     <li><a href="1-3.html">1-3</a></li>
     <li><a href="1-4.html">1-4</a></li>
   </ul>
-  <a href="en/setup.html" style="font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid var(--border2);color:var(--muted);text-decoration:none;margin-left:auto;">EN</a>
+  <a href="../setup.html" style="font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid var(--border2);color:var(--muted);text-decoration:none;margin-left:auto;">KO</a>
 </nav>
 
 <div class="breadcrumb">
   <a href="index.html">Stage 1</a>
   <span class="sep">/</span>
-  <span class="current">시작하기</span>
+  <span class="current">Getting Started</span>
 </div>
 
 <header class="setup-hero fade-in">
   <div class="badge badge-orange" style="margin-bottom:20px;">
     <span class="badge-dot"></span>
-    준비물
+    Prerequisites
   </div>
-  <h1>🔧 <span class="accent">시작하기</span></h1>
+  <h1>🔧 <span class="accent">Getting Started</span></h1>
   <p class="sub">
-    챌린지를 시작하기 전에 필요한 것은 딱 두 가지 — Mac과 Xcode. Swift는 Xcode 안에 포함되어 있다.
+    Two things you need before starting — a Mac and Xcode. Swift comes bundled inside Xcode.
   </p>
 </header>
 
 <div class="setup-wrap">
 
-  <!-- Swift란? -->
+  <!-- What is Swift? -->
   <div class="setup-section fade-in">
     <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;">Language</div>
-    <h2>Swift가 뭔가?</h2>
-    <p class="section-sub">Apple이 만든 프로그래밍 언어. iPhone, iPad, Mac 앱을 만들 때 쓴다.</p>
+    <h2>What is Swift?</h2>
+    <p class="section-sub">A programming language created by Apple. Used to build iPhone, iPad, and Mac apps.</p>
 
-    <p>2014년에 Apple이 공개한 언어로, 그 전에 쓰던 Objective-C를 대체하기 위해 만들어졌다. 현재 iOS/macOS/watchOS/visionOS 앱 개발의 표준 언어다.</p>
+    <p>Swift was introduced by Apple in 2014, designed to replace the previously used Objective-C. It is now the standard language for iOS/macOS/watchOS/visionOS app development.</p>
 
-    <h3>왜 Swift인가</h3>
+    <h3>Why Swift</h3>
     <ul>
-      <li><strong>안전하다</strong> — Optional 시스템으로 null 크래시를 컴파일 시점에 잡는다</li>
-      <li><strong>빠르다</strong> — C++에 근접한 성능. 값 타입(struct) 중심 설계</li>
-      <li><strong>읽기 쉽다</strong> — 세미콜론 없음, 타입 추론, 후행 클로저 등 간결한 문법</li>
-      <li><strong>SwiftUI와 찰떡</strong> — SwiftUI는 Swift 전용. 선언형 UI를 Swift 문법으로 작성</li>
+      <li><strong>Safe</strong> — The Optional system catches null crashes at compile time</li>
+      <li><strong>Fast</strong> — Near C++ performance. Designed around value types (structs)</li>
+      <li><strong>Readable</strong> — No semicolons, type inference, trailing closures, and other concise syntax</li>
+      <li><strong>Perfect with SwiftUI</strong> — SwiftUI is Swift-exclusive. Declarative UI written in Swift syntax</li>
     </ul>
 
     <div class="callout">
-      <div class="label">참고</div>
-      <p>Swift는 오픈소스다. Linux, Windows에서도 실행 가능하지만, iOS 앱을 만들려면 <strong>반드시 Mac + Xcode</strong>가 필요하다.</p>
+      <div class="label">Note</div>
+      <p>Swift is open source. It can run on Linux and Windows, but to build iOS apps you <strong>must have a Mac + Xcode</strong>.</p>
     </div>
   </div>
 
-  <!-- Xcode란? -->
+  <!-- What is Xcode? -->
   <div class="setup-section fade-in">
     <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;">Tool</div>
-    <h2>Xcode가 뭔가?</h2>
-    <p class="section-sub">Apple이 만든 개발 도구. 코드 편집, 빌드, 시뮬레이터, 앱 배포까지 전부 여기서 한다.</p>
+    <h2>What is Xcode?</h2>
+    <p class="section-sub">Apple's development tool. Code editing, building, simulator, and app distribution — all in one place.</p>
 
-    <p>Xcode는 IDE(통합 개발 환경)다. 코드를 작성하고, 앱을 빌드하고, 시뮬레이터에서 돌려보고, App Store에 제출하는 것까지 Xcode 하나로 가능하다.</p>
+    <p>Xcode is an IDE (Integrated Development Environment). You can write code, build apps, run them in the simulator, and submit to the App Store — all with Xcode alone.</p>
 
-    <h3>Xcode 안에 뭐가 들어있나</h3>
+    <h3>What's inside Xcode</h3>
     <ul>
-      <li><strong>코드 에디터</strong> — 자동 완성, 구문 강조, 에러 표시, Fix-it 제안</li>
-      <li><strong>Swift 컴파일러</strong> — Swift가 별도 설치 없이 포함되어 있다</li>
-      <li><strong>iOS 시뮬레이터</strong> — 실기기 없이 iPhone/iPad 화면에서 앱을 테스트</li>
-      <li><strong>SwiftUI Preview (Canvas)</strong> — 빌드 없이 실시간으로 UI 확인</li>
-      <li><strong>Interface Builder</strong> — 드래그 & 드롭 UI 편집 (SwiftUI에서는 거의 안 씀)</li>
-      <li><strong>Instruments</strong> — 성능/메모리 프로파일링 도구</li>
-      <li><strong>Signing & 배포</strong> — 앱에 서명하고 App Store Connect에 업로드</li>
+      <li><strong>Code Editor</strong> — Auto-completion, syntax highlighting, error display, Fix-it suggestions</li>
+      <li><strong>Swift Compiler</strong> — Swift is included without any separate installation</li>
+      <li><strong>iOS Simulator</strong> — Test your app on iPhone/iPad screens without a physical device</li>
+      <li><strong>SwiftUI Preview (Canvas)</strong> — See UI changes in real time without building</li>
+      <li><strong>Interface Builder</strong> — Drag & drop UI editing (rarely used with SwiftUI)</li>
+      <li><strong>Instruments</strong> — Performance and memory profiling tools</li>
+      <li><strong>Signing & Distribution</strong> — Sign your app and upload to App Store Connect</li>
     </ul>
 
     <div class="callout">
-      <div class="label">요구사항</div>
-      <p><strong>macOS만 지원</strong>한다. Windows/Linux에서는 Xcode를 쓸 수 없다. Mac이 없다면 중고 MacBook Air(M1 이상)가 가장 합리적인 선택이다.</p>
+      <div class="label">Requirements</div>
+      <p><strong>macOS only</strong>. Xcode is not available on Windows or Linux. If you don't have a Mac, a used MacBook Air (M1 or later) is the most practical option.</p>
     </div>
   </div>
 
-  <!-- 설치 방법 -->
+  <!-- Installation -->
   <div class="setup-section fade-in">
     <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;">Install</div>
-    <h2>Xcode 설치하기</h2>
-    <p class="section-sub">Mac App Store에서 무료로 다운로드. 용량이 크니 시간 여유를 두자.</p>
+    <h2>Installing Xcode</h2>
+    <p class="section-sub">Free download from the Mac App Store. It's a large download, so allow some time.</p>
 
     <div class="step">
       <span class="step-num">1</span>
       <div class="step-content">
-        <div class="title">Mac App Store에서 "Xcode" 검색</div>
-        <div class="desc">Mac에서 App Store를 열고 검색창에 "Xcode"를 입력한다. Apple 개발자 로고가 있는 파란색 아이콘이 Xcode다.</div>
+        <div class="title">Search for "Xcode" in the Mac App Store</div>
+        <div class="desc">Open the App Store on your Mac and type "Xcode" in the search bar. Look for the blue icon with the Apple developer logo.</div>
       </div>
     </div>
 
     <div class="step">
       <span class="step-num">2</span>
       <div class="step-content">
-        <div class="title">"받기" 버튼 클릭 → 설치</div>
-        <div class="desc">무료다. 다만 <strong>약 12~15GB</strong> 용량이므로 디스크 공간을 확인하자. 다운로드에 30분~1시간 이상 걸릴 수 있다.</div>
+        <div class="title">Click "Get" → Install</div>
+        <div class="desc">It's free. However, it's <strong>about 12–15 GB</strong> in size, so make sure you have enough disk space. The download may take 30 minutes to over an hour.</div>
       </div>
     </div>
 
     <div class="step">
       <span class="step-num">3</span>
       <div class="step-content">
-        <div class="title">처음 실행 → 추가 컴포넌트 설치</div>
-        <div class="desc">Xcode를 처음 열면 "Install Additional Components"라는 팝업이 뜬다. 설치를 눌러 시뮬레이터 등 필요한 도구를 설치한다.</div>
+        <div class="title">First launch → Install additional components</div>
+        <div class="desc">When you first open Xcode, an "Install Additional Components" popup will appear. Click Install to set up the simulator and other required tools.</div>
       </div>
     </div>
 
     <div class="step">
       <span class="step-num">4</span>
       <div class="step-content">
-        <div class="title">Apple ID 로그인 (선택)</div>
-        <div class="desc">Xcode → Settings → Accounts에서 Apple ID를 추가하면 무료 개발자 계정으로 실기기에서 앱을 실행할 수 있다. 시뮬레이터만 쓸 거라면 나중에 해도 된다.</div>
+        <div class="title">Sign in with Apple ID (optional)</div>
+        <div class="desc">Go to Xcode → Settings → Accounts and add your Apple ID. This gives you a free developer account to run apps on a physical device. If you're only using the simulator, you can do this later.</div>
       </div>
     </div>
 
     <div class="callout">
-      <div class="label">팁</div>
-      <p>App Store 대신 <span class="tag-inline">developer.apple.com/xcode</span> 에서 직접 다운로드하면 특정 버전을 선택할 수 있다. 베타 버전이 필요하거나 App Store가 느릴 때 유용하다.</p>
+      <div class="label">Tip</div>
+      <p>Instead of the App Store, you can download directly from <span class="tag-inline">developer.apple.com/xcode</span> to choose a specific version. This is useful when you need a beta version or when the App Store is slow.</p>
     </div>
   </div>
 
-  <!-- 설치 확인 -->
+  <!-- Verify Installation -->
   <div class="setup-section fade-in">
     <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;">Verify</div>
-    <h2>설치 확인하기</h2>
-    <p class="section-sub">제대로 설치됐는지 확인하는 가장 빠른 방법.</p>
+    <h2>Verify Installation</h2>
+    <p class="section-sub">The quickest way to confirm everything is set up correctly.</p>
 
     <div class="step">
       <span class="step-num">1</span>
       <div class="step-content">
-        <div class="title">Xcode를 열고 "Create New Project" 클릭</div>
-        <div class="desc">Welcome 화면에서 "Create New Project..."를 선택한다.</div>
+        <div class="title">Open Xcode and click "Create New Project"</div>
+        <div class="desc">Select "Create New Project..." from the Welcome screen.</div>
       </div>
     </div>
 
     <div class="step">
       <span class="step-num">2</span>
       <div class="step-content">
-        <div class="title">iOS → App 선택 → Next</div>
-        <div class="desc">플랫폼에서 iOS, 템플릿에서 App을 선택하고 Next를 누른다.</div>
+        <div class="title">Select iOS → App → Next</div>
+        <div class="desc">Choose iOS for the platform and App for the template, then click Next.</div>
       </div>
     </div>
 
     <div class="step">
       <span class="step-num">3</span>
       <div class="step-content">
-        <div class="title">프로젝트 이름 입력 → Interface: SwiftUI 확인</div>
-        <div class="desc">Product Name에 아무 이름(예: "TestApp")을 입력. Interface가 <strong>SwiftUI</strong>로 되어 있는지 확인하고 Next → 저장 위치 선택.</div>
+        <div class="title">Enter a project name → Confirm Interface: SwiftUI</div>
+        <div class="desc">Type any name (e.g., "TestApp") in the Product Name field. Make sure Interface is set to <strong>SwiftUI</strong>, then click Next → choose a save location.</div>
       </div>
     </div>
 
     <div class="step">
       <span class="step-num">4</span>
       <div class="step-content">
-        <div class="title">▶ 실행 버튼 (또는 ⌘R)</div>
-        <div class="desc">왼쪽 상단의 ▶ 버튼을 누르거나 <span class="tag-inline">⌘R</span> 단축키. 시뮬레이터가 뜨고 "Hello, world!"가 보이면 성공.</div>
+        <div class="title">Click the ▶ Run button (or ⌘R)</div>
+        <div class="desc">Press the ▶ button in the top-left corner or use the <span class="tag-inline">⌘R</span> shortcut. If the simulator launches and you see "Hello, world!" — you're all set.</div>
       </div>
     </div>
 
     <div class="callout" style="background:var(--green-dim);border-left-color:var(--green);">
-      <div class="label" style="color:var(--green);">성공</div>
-      <p>시뮬레이터에서 "Hello, world!"가 보인다면, Xcode + Swift + SwiftUI가 모두 정상 동작하는 것이다. 이제 <a href="1-1.html" style="color:var(--orange);font-weight:600;">챌린지 1-1</a>을 시작하자.</p>
+      <div class="label" style="color:var(--green);">Success</div>
+      <p>If you can see "Hello, world!" in the simulator, Xcode + Swift + SwiftUI are all working correctly. Now let's start <a href="1-1.html" style="color:var(--orange);font-weight:600;">Challenge 1-1</a>.</p>
     </div>
   </div>
 
-  <!-- 다음으로 -->
+  <!-- Navigation -->
   <div class="ch-nav" style="max-width:100%;padding:0;">
     <a href="index.html">
-      <span class="nav-dir">← Stage 1 목록</span>
-      <span class="nav-title">Stage 1 인덱스</span>
+      <span class="nav-dir">← Stage 1 Index</span>
+      <span class="nav-title">Stage 1 Index</span>
     </a>
     <a href="1-1.html" class="next">
-      <span class="nav-dir">첫 번째 챌린지 →</span>
-      <span class="nav-title">1-1 화면에 뭔가 띄우기</span>
+      <span class="nav-dir">First Challenge →</span>
+      <span class="nav-title">1-1 Display Something on Screen</span>
     </a>
   </div>
 
 </div>
 
 <footer class="footer">
-  개발자리 · 앱 개발자를 위한 Top-Down CS 커리큘럼
+  devjari · Top-Down CS Curriculum for App Developers
 </footer>
 </body>
 </html>
