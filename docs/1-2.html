@@ -710,17 +710,19 @@ func load() -> [Todo] {
             </div>
           </div>
 
-          <!-- Preview 8: Data Flow Diagram -->
+          <!-- Preview 8: UserDefaults 저장/불러오기 결과 -->
           <div id="pv-8" class="preview-content">
             <div class="preview-label">Preview</div>
-            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px 0;">
-              <div style="background:#F0F1F5;border:1px solid #D0D3DC;border-radius:8px;padding:8px 12px;font-size:11px;font-weight:600;color:#1A1D2A;text-align:center;">[Todo]</div>
-              <div style="font-size:10px;color:#007AFF;">&#9660; JSONEncoder</div>
-              <div style="background:#F0F1F5;border:1px solid #D0D3DC;border-radius:8px;padding:8px 12px;font-size:11px;font-weight:600;color:#1A1D2A;text-align:center;">Data</div>
-              <div style="font-size:10px;color:#007AFF;">&#9660; UserDefaults</div>
-              <div style="background:#F0F1F5;border:1px solid #D0D3DC;border-radius:8px;padding:8px 12px;font-size:11px;font-weight:600;color:#1A1D2A;text-align:center;">Data</div>
-              <div style="font-size:10px;color:#007AFF;">&#9660; JSONDecoder</div>
-              <div style="background:#F0F1F5;border:1px solid #D0D3DC;border-radius:8px;padding:8px 12px;font-size:11px;font-weight:600;color:#1A1D2A;text-align:center;">[Todo]</div>
+            <div style="flex:1;display:flex;flex-direction:column;padding-top:12px;">
+              <div style="display:flex;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid #E2E4EA;">
+                <span style="font-size:16px;color:#007AFF;">&#9745;</span>
+                <span style="font-size:13px;color:#999;text-decoration:line-through;">장보기</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid #E2E4EA;">
+                <span style="font-size:16px;color:#D0D3DC;">&#9744;</span>
+                <span style="font-size:13px;">SwiftUI 공부</span>
+              </div>
+              <div style="padding:10px 4px;font-size:10px;color:#8E8E93;font-style:italic;">앱 재시작 후에도 유지됨</div>
             </div>
           </div>
 

@@ -454,7 +454,7 @@ body::before {
 }
 
 .preview-col {
-  flex: 0 0 45%;
+  flex: 0 0 240px;
   position: relative;
 }
 
@@ -467,9 +467,9 @@ body::before {
 }
 
 .sticky-phone .phone-frame {
-  width: 280px;
+  width: 220px;
   min-height: 420px;
-  border-radius: 40px;
+  border-radius: 36px;
   border: 3px solid #1A1D2A;
   background: #FFFFFF;
   position: relative;
@@ -693,7 +693,7 @@ body::before {
   .split-layout { flex-direction: column; gap: 24px; padding: 0 20px 60px; }
   .preview-col { flex: none; position: static; }
   .sticky-phone { position: static; padding-top: 0; }
-  .sticky-phone .phone-frame { width: 240px; min-height: 360px; border-radius: 32px; }
+  .sticky-phone .phone-frame { width: 200px; min-height: 340px; border-radius: 30px; }
   .sticky-phone .phone-screen { min-height: 320px; }
   .code-preview { flex-direction: column; }
   .phone-preview { align-self: center; }
