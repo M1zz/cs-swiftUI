@@ -111,6 +111,22 @@
       <h2 class="cs-title">let vs var · 타입 추론</h2>
       <div class="cs-subtitle">상수와 변수, 타입을 명시하는 시점</div>
 
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">let name = "개발자리"     // String 추론
+let age: Int = 10         // 명시적 타입
+var score = 0             // 변경 가능
+
+score += 10
+// name = "다른이름"      // ❌ 컴파일 에러!
+
+print("이름: \(name)")
+print("점수: \(score)")</pre>
+      </div>
+
       <div class="topic-questions yellow">
         <div class="tq-label">생각해보기</div>
         <ul>
@@ -136,22 +152,6 @@
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">let name = "개발자리"     // String 추론
-let age: Int = 10         // 명시적 타입
-var score = 0             // 변경 가능
-
-score += 10
-// name = "다른이름"      // ❌ 컴파일 에러!
-
-print("이름: \(name)")
-print("점수: \(score)")</pre>
-      </div>
     </div>
 
     <!-- Section 2: Optional 완전 정복 -->
@@ -159,6 +159,29 @@ print("점수: \(score)")</pre>
       <div class="cs-label">Topic 02</div>
       <h2 class="cs-title">Optional 완전 정복</h2>
       <div class="cs-subtitle">nil · if let · guard let · ?? · !</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">var nickname: String? = nil
+
+// if let 언래핑
+if let name = nickname {
+    print("닉네임: \(name)")
+} else {
+    print("닉네임 없음")
+}
+
+// ?? nil 병합
+let display = nickname ?? "익명"
+print("표시: \(display)")
+
+// 옵셔널 체이닝
+let count = nickname?.count
+print("글자수: \(count)")</pre>
+      </div>
 
       <div class="topic-questions yellow">
         <div class="tq-label">생각해보기</div>
@@ -207,29 +230,6 @@ print("점수: \(score)")</pre>
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">var nickname: String? = nil
-
-// if let 언래핑
-if let name = nickname {
-    print("닉네임: \(name)")
-} else {
-    print("닉네임 없음")
-}
-
-// ?? nil 병합
-let display = nickname ?? "익명"
-print("표시: \(display)")
-
-// 옵셔널 체이닝
-let count = nickname?.count
-print("글자수: \(count)")</pre>
-      </div>
     </div>
 
     <!-- Section 3: Array · Dictionary · Set -->
@@ -237,6 +237,29 @@ print("글자수: \(count)")</pre>
       <div class="cs-label">Topic 03</div>
       <h2 class="cs-title">Array · Dictionary · Set</h2>
       <div class="cs-subtitle">언제 무엇을 쓰는가</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">// Array
+var fruits = ["사과", "바나나", "포도"]
+fruits.append("딸기")
+print(fruits[0])
+print(fruits.count)
+
+// Dictionary
+let scores: [String: Int] = [
+    "수학": 90,
+    "영어": 85,
+]
+print(scores["수학"] ?? 0)
+
+// Set
+let tags: Set = ["Swift", "iOS", "Swift"]
+print(tags.count)  // 중복 제거</pre>
+      </div>
 
       <div class="topic-questions yellow">
         <div class="tq-label">생각해보기</div>
@@ -270,29 +293,6 @@ print("글자수: \(count)")</pre>
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">// Array
-var fruits = ["사과", "바나나", "포도"]
-fruits.append("딸기")
-print(fruits[0])
-print(fruits.count)
-
-// Dictionary
-let scores: [String: Int] = [
-    "수학": 90,
-    "영어": 85,
-]
-print(scores["수학"] ?? 0)
-
-// Set
-let tags: Set = ["Swift", "iOS", "Swift"]
-print(tags.count)  // 중복 제거</pre>
-      </div>
     </div>
 
     <!-- Section 4: 고차 함수 — map · filter · forEach -->
@@ -300,6 +300,31 @@ print(tags.count)  // 중복 제거</pre>
       <div class="cs-label">Topic 04</div>
       <h2 class="cs-title">고차 함수 — map · filter · forEach</h2>
       <div class="cs-subtitle">반복 대신 선언적으로</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">let numbers = [1, 2, 3, 4, 5]
+
+// map — 변환
+let doubled = numbers.map { $0 * 2 }
+print(doubled)
+
+// filter — 걸러내기
+let evens = numbers.filter { $0 % 2 == 0 }
+print(evens)
+
+// compactMap — nil 제거
+let strings = ["1", "a", "3"]
+let nums = strings.compactMap { Int($0) }
+print(nums)
+
+// reduce — 합산
+let sum = numbers.reduce(0, +)
+print(sum)</pre>
+      </div>
 
       <div class="topic-questions yellow">
         <div class="tq-label">생각해보기</div>
@@ -340,31 +365,6 @@ print(tags.count)  // 중복 제거</pre>
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">let numbers = [1, 2, 3, 4, 5]
-
-// map — 변환
-let doubled = numbers.map { $0 * 2 }
-print(doubled)
-
-// filter — 걸러내기
-let evens = numbers.filter { $0 % 2 == 0 }
-print(evens)
-
-// compactMap — nil 제거
-let strings = ["1", "a", "3"]
-let nums = strings.compactMap { Int($0) }
-print(nums)
-
-// reduce — 합산
-let sum = numbers.reduce(0, +)
-print(sum)</pre>
-      </div>
     </div>
 
     <!-- Section 5: 클로저 문법 단계별 줄이기 -->
@@ -372,6 +372,31 @@ print(sum)</pre>
       <div class="cs-label">Topic 05</div>
       <h2 class="cs-title">클로저 문법 단계별 줄이기</h2>
       <div class="cs-subtitle">기본 → 후행 → 단축 인자명</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">let names = ["Charlie", "Alice", "Bob"]
+
+// 1. 기본 형태
+let a = names.sorted(by: {
+    (a: String, b: String) -> Bool in
+    return a < b
+})
+
+// 2. 타입 추론
+let b = names.sorted(by: { a, b in a < b })
+
+// 3. 단축 인자명
+let c = names.sorted(by: { $0 < $1 })
+
+// 4. 후행 클로저
+let d = names.sorted { $0 < $1 }
+
+print(d)</pre>
+      </div>
 
       <div class="topic-questions yellow">
         <div class="tq-label">생각해보기</div>
@@ -412,31 +437,6 @@ print(sum)</pre>
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">let names = ["Charlie", "Alice", "Bob"]
-
-// 1. 기본 형태
-let a = names.sorted(by: {
-    (a: String, b: String) -> Bool in
-    return a < b
-})
-
-// 2. 타입 추론
-let b = names.sorted(by: { a, b in a < b })
-
-// 3. 단축 인자명
-let c = names.sorted(by: { $0 < $1 })
-
-// 4. 후행 클로저
-let d = names.sorted { $0 < $1 }
-
-print(d)</pre>
-      </div>
     </div>
 
     <!-- Section 6: [weak self] 캡처 리스트 -->
@@ -444,6 +444,38 @@ print(d)</pre>
       <div class="cs-label">Topic 06</div>
       <h2 class="cs-title">[weak self] 캡처 리스트</h2>
       <div class="cs-subtitle">언제 필요하고 언제 없어도 되는가</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">class DataLoader {
+    var data: String?
+
+    func load() {
+        // ✅ [weak self] 필요
+        URLSession.shared.dataTask(
+            with: url
+        ) { [weak self] data, _, _ in
+            guard let self else { return }
+            self.data = String(
+                data: data!, encoding: .utf8
+            )
+        }.resume()
+    }
+}
+
+// ❌ SwiftUI View에서는 불필요
+struct MyView: View {
+    var body: some View {
+        Button("탭") {
+            // struct이므로 순환참조 없음
+            print("no [weak self] needed")
+        }
+    }
+}</pre>
+      </div>
 
       <div class="topic-questions yellow">
         <div class="tq-label">생각해보기</div>
@@ -477,38 +509,6 @@ print(d)</pre>
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">class DataLoader {
-    var data: String?
-
-    func load() {
-        // ✅ [weak self] 필요
-        URLSession.shared.dataTask(
-            with: url
-        ) { [weak self] data, _, _ in
-            guard let self else { return }
-            self.data = String(
-                data: data!, encoding: .utf8
-            )
-        }.resume()
-    }
-}
-
-// ❌ SwiftUI View에서는 불필요
-struct MyView: View {
-    var body: some View {
-        Button("탭") {
-            // struct이므로 순환참조 없음
-            print("no [weak self] needed")
-        }
-    }
-}</pre>
-      </div>
     </div>
 
     <!-- Section 7: 자주 만나는 에러 메시지 4종 -->
@@ -516,6 +516,28 @@ struct MyView: View {
       <div class="cs-label">Topic 07</div>
       <h2 class="cs-title">자주 만나는 에러 메시지 4종</h2>
       <div class="cs-subtitle">원인과 해결 패턴</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">// ❌ 타입 불일치
+let num: Int = 42
+// let text: String = num
+
+// ✅ 해결
+let text: String = String(num)
+
+// ❌ 옵셔널 미언래핑
+let name: String? = "Kim"
+// print("Hello " + name)
+
+// ✅ 해결
+if let name {
+    print("Hello " + name)
+}</pre>
+      </div>
 
       <div class="topic-questions yellow">
         <div class="tq-label">생각해보기</div>
@@ -557,28 +579,6 @@ struct MyView: View {
             <div class="item-desc">믿어도 되는 경우: 프로토콜 메서드 추가, import 추가. 무시해야 할 경우: 복잡한 타입 문제에서 엉뚱한 제안</div>
           </div>
         </div>
-      </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">// ❌ 타입 불일치
-let num: Int = 42
-// let text: String = num
-
-// ✅ 해결
-let text: String = String(num)
-
-// ❌ 옵셔널 미언래핑
-let name: String? = "Kim"
-// print("Hello " + name)
-
-// ✅ 해결
-if let name {
-    print("Hello " + name)
-}</pre>
       </div>
     </div>
 

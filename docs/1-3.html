@@ -102,6 +102,33 @@
       <h2 class="cs-title">NavigationStack + NavigationPath</h2>
       <div class="cs-subtitle">스택 기반 이동과 프로그래밍 방식 제어</div>
 
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">struct RootView: View {
+    @State private var path = NavigationPath()
+
+    var body: some View {
+        NavigationStack(path: $path) {
+            List {
+                NavigationLink("프로필",
+                    value: "profile")
+                NavigationLink("설정",
+                    value: "settings")
+            }
+            .navigationTitle("메뉴")
+            .navigationDestination(
+                for: String.self
+            ) { value in
+                Text("\(value) 화면")
+            }
+        }
+    }
+}</pre>
+      </div>
+
       <div class="topic-questions green">
         <div class="tq-label">생각해보기</div>
         <ul>
@@ -134,33 +161,6 @@
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">struct RootView: View {
-    @State private var path = NavigationPath()
-
-    var body: some View {
-        NavigationStack(path: $path) {
-            List {
-                NavigationLink("프로필",
-                    value: "profile")
-                NavigationLink("설정",
-                    value: "settings")
-            }
-            .navigationTitle("메뉴")
-            .navigationDestination(
-                for: String.self
-            ) { value in
-                Text("\(value) 화면")
-            }
-        }
-    }
-}</pre>
-      </div>
     </div>
 
     <!-- Section 2: sheet vs fullScreenCover -->
@@ -168,6 +168,38 @@
       <div class="cs-label">Topic 02</div>
       <h2 class="cs-title">sheet vs fullScreenCover</h2>
       <div class="cs-subtitle">모달 종류와 선택 기준</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">struct ModalDemo: View {
+    @State private var showSheet = false
+    @State private var showFull = false
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Button("Sheet 열기") {
+                showSheet = true
+            }
+            Button("FullScreen 열기") {
+                showFull = true
+            }
+        }
+        .sheet(isPresented: $showSheet) {
+            Text("Sheet!")
+                .presentationDetents(
+                    [.medium, .large])
+        }
+        .fullScreenCover(
+            isPresented: $showFull
+        ) {
+            Text("Full Screen!")
+        }
+    }
+}</pre>
+      </div>
 
       <div class="topic-questions green">
         <div class="tq-label">생각해보기</div>
@@ -201,38 +233,6 @@
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">struct ModalDemo: View {
-    @State private var showSheet = false
-    @State private var showFull = false
-
-    var body: some View {
-        VStack(spacing: 16) {
-            Button("Sheet 열기") {
-                showSheet = true
-            }
-            Button("FullScreen 열기") {
-                showFull = true
-            }
-        }
-        .sheet(isPresented: $showSheet) {
-            Text("Sheet!")
-                .presentationDetents(
-                    [.medium, .large])
-        }
-        .fullScreenCover(
-            isPresented: $showFull
-        ) {
-            Text("Full Screen!")
-        }
-    }
-}</pre>
-      </div>
     </div>
 
     <!-- Section 3: @StateObject vs @ObservedObject -->
@@ -240,6 +240,38 @@
       <div class="cs-label">Topic 03</div>
       <h2 class="cs-title">@StateObject vs @ObservedObject</h2>
       <div class="cs-subtitle">소유 vs 구독의 차이</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">class TodoStore: ObservableObject {
+    @Published var items: [String] = []
+
+    func add(_ item: String) {
+        items.append(item)
+    }
+}
+
+struct ParentView: View {
+    @StateObject var store = TodoStore()
+
+    var body: some View {
+        ChildView(store: store)
+    }
+}
+
+struct ChildView: View {
+    @ObservedObject var store: TodoStore
+
+    var body: some View {
+        List(store.items, id: \.self) {
+            Text($0)
+        }
+    }
+}</pre>
+      </div>
 
       <div class="topic-questions green">
         <div class="tq-label">생각해보기</div>
@@ -281,38 +313,6 @@
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">class TodoStore: ObservableObject {
-    @Published var items: [String] = []
-
-    func add(_ item: String) {
-        items.append(item)
-    }
-}
-
-struct ParentView: View {
-    @StateObject var store = TodoStore()
-
-    var body: some View {
-        ChildView(store: store)
-    }
-}
-
-struct ChildView: View {
-    @ObservedObject var store: TodoStore
-
-    var body: some View {
-        List(store.items, id: \.self) {
-            Text($0)
-        }
-    }
-}</pre>
-      </div>
     </div>
 
     <!-- Section 4: @Observable · @EnvironmentObject -->
@@ -320,6 +320,37 @@ struct ChildView: View {
       <div class="cs-label">Topic 04</div>
       <h2 class="cs-title">@Observable · @EnvironmentObject</h2>
       <div class="cs-subtitle">iOS 17+ 새 방법과 환경 주입</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">// iOS 17+ 방식
+@Observable
+class UserSettings {
+    var username = "개발자리"
+    var isDarkMode = false
+}
+
+struct AppRoot: View {
+    @State var settings = UserSettings()
+
+    var body: some View {
+        SettingsView()
+            .environment(settings)
+    }
+}
+
+struct SettingsView: View {
+    @Environment(UserSettings.self)
+    var settings
+
+    var body: some View {
+        Text(settings.username)
+    }
+}</pre>
+      </div>
 
       <div class="topic-questions green">
         <div class="tq-label">생각해보기</div>
@@ -353,37 +384,6 @@ struct ChildView: View {
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">// iOS 17+ 방식
-@Observable
-class UserSettings {
-    var username = "개발자리"
-    var isDarkMode = false
-}
-
-struct AppRoot: View {
-    @State var settings = UserSettings()
-
-    var body: some View {
-        SettingsView()
-            .environment(settings)
-    }
-}
-
-struct SettingsView: View {
-    @Environment(UserSettings.self)
-    var settings
-
-    var body: some View {
-        Text(settings.username)
-    }
-}</pre>
-      </div>
     </div>
 
     <!-- Section 5: TabView 기본 구성 -->
@@ -391,6 +391,37 @@ struct SettingsView: View {
       <div class="cs-label">Topic 05</div>
       <h2 class="cs-title">TabView 기본 구성</h2>
       <div class="cs-subtitle">tabItem · 탭별 NavigationStack</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">struct MainTabView: View {
+    var body: some View {
+        TabView {
+            HomeView()
+                .tabItem {
+                    Label("홈",
+                        systemImage: "house")
+                }
+
+            SearchView()
+                .tabItem {
+                    Label("검색",
+                        systemImage:
+                            "magnifyingglass")
+                }
+
+            ProfileView()
+                .tabItem {
+                    Label("프로필",
+                        systemImage: "person")
+                }
+        }
+    }
+}</pre>
+      </div>
 
       <div class="topic-questions green">
         <div class="tq-label">생각해보기</div>
@@ -423,37 +454,6 @@ struct SettingsView: View {
             <div class="item-desc">TabView(selection: $selectedTab). 푸시 알림 등에서 특정 탭으로 이동할 때</div>
           </div>
         </div>
-      </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">struct MainTabView: View {
-    var body: some View {
-        TabView {
-            HomeView()
-                .tabItem {
-                    Label("홈",
-                        systemImage: "house")
-                }
-
-            SearchView()
-                .tabItem {
-                    Label("검색",
-                        systemImage:
-                            "magnifyingglass")
-                }
-
-            ProfileView()
-                .tabItem {
-                    Label("프로필",
-                        systemImage: "person")
-                }
-        }
-    }
-}</pre>
       </div>
     </div>
 

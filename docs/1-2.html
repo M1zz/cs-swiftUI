@@ -101,6 +101,28 @@
       <h2 class="cs-title">SwiftUI 렌더링 루프</h2>
       <div class="cs-subtitle">상태 변화 → View 재생성 메커니즘</div>
 
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">struct CounterView: View {
+    @State private var count = 0
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("\(count)")
+                .font(.system(size: 60, weight: .bold))
+
+            Button("+ 1") {
+                count += 1
+            }
+            .buttonStyle(.borderedProminent)
+        }
+    }
+}</pre>
+      </div>
+
       <div class="topic-questions">
         <div class="tq-label">생각해보기</div>
         <ul>
@@ -133,28 +155,6 @@
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">struct CounterView: View {
-    @State private var count = 0
-
-    var body: some View {
-        VStack(spacing: 20) {
-            Text("\(count)")
-                .font(.system(size: 60, weight: .bold))
-
-            Button("+ 1") {
-                count += 1
-            }
-            .buttonStyle(.borderedProminent)
-        }
-    }
-}</pre>
-      </div>
     </div>
 
     <!-- Section 2: @State · @Binding -->
@@ -162,6 +162,32 @@
       <div class="cs-label">Topic 02</div>
       <h2 class="cs-title">@State · @Binding</h2>
       <div class="cs-subtitle">소유와 공유의 차이</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">struct ParentView: View {
+    @State private var name = ""
+
+    var body: some View {
+        VStack {
+            Text("이름: \(name)")
+            ChildView(name: $name)
+        }
+    }
+}
+
+struct ChildView: View {
+    @Binding var name: String
+
+    var body: some View {
+        TextField("이름 입력", text: $name)
+            .textFieldStyle(.roundedBorder)
+    }
+}</pre>
+      </div>
 
       <div class="topic-questions">
         <div class="tq-label">생각해보기</div>
@@ -195,32 +221,6 @@
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">struct ParentView: View {
-    @State private var name = ""
-
-    var body: some View {
-        VStack {
-            Text("이름: \(name)")
-            ChildView(name: $name)
-        }
-    }
-}
-
-struct ChildView: View {
-    @Binding var name: String
-
-    var body: some View {
-        TextField("이름 입력", text: $name)
-            .textFieldStyle(.roundedBorder)
-    }
-}</pre>
-      </div>
     </div>
 
     <!-- Section 3: TextField -->
@@ -228,6 +228,30 @@ struct ChildView: View {
       <div class="cs-label">Topic 03</div>
       <h2 class="cs-title">TextField</h2>
       <div class="cs-subtitle">텍스트 입력과 @State String 연결</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">struct InputView: View {
+    @State private var email = ""
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("이메일")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            TextField("example@email.com",
+                      text: $email)
+                .textFieldStyle(.roundedBorder)
+                .keyboardType(.emailAddress)
+        }
+        .padding()
+    }
+}</pre>
+      </div>
 
       <div class="topic-questions">
         <div class="tq-label">생각해보기</div>
@@ -254,30 +278,6 @@ struct ChildView: View {
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">struct InputView: View {
-    @State private var email = ""
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("이메일")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-
-            TextField("example@email.com",
-                      text: $email)
-                .textFieldStyle(.roundedBorder)
-                .keyboardType(.emailAddress)
-        }
-        .padding()
-    }
-}</pre>
-      </div>
     </div>
 
     <!-- Section 4: Toggle · Slider · Picker -->
@@ -285,6 +285,29 @@ struct ChildView: View {
       <div class="cs-label">Topic 04</div>
       <h2 class="cs-title">Toggle · Slider · Picker</h2>
       <div class="cs-subtitle">다양한 입력 컴포넌트</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">struct SettingsView: View {
+    @State private var isDark = false
+    @State private var fontSize: Double = 16
+
+    var body: some View {
+        Form {
+            Toggle("다크 모드", isOn: $isDark)
+
+            VStack(alignment: .leading) {
+                Text("폰트 크기: \(Int(fontSize))")
+                Slider(value: $fontSize,
+                       in: 12...24, step: 1)
+            }
+        }
+    }
+}</pre>
+      </div>
 
       <div class="topic-questions">
         <div class="tq-label">생각해보기</div>
@@ -318,29 +341,6 @@ struct ChildView: View {
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">struct SettingsView: View {
-    @State private var isDark = false
-    @State private var fontSize: Double = 16
-
-    var body: some View {
-        Form {
-            Toggle("다크 모드", isOn: $isDark)
-
-            VStack(alignment: .leading) {
-                Text("폰트 크기: \(Int(fontSize))")
-                Slider(value: $fontSize,
-                       in: 12...24, step: 1)
-            }
-        }
-    }
-}</pre>
-      </div>
     </div>
 
     <!-- Section 5: List + ForEach + Identifiable -->
@@ -348,6 +348,38 @@ struct ChildView: View {
       <div class="cs-label">Topic 05</div>
       <h2 class="cs-title">List + ForEach + Identifiable</h2>
       <div class="cs-subtitle">배열을 목록으로 렌더링</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">struct Fruit: Identifiable {
+    let id = UUID()
+    let name: String
+    let emoji: String
+}
+
+struct FruitList: View {
+    @State private var fruits = [
+        Fruit(name: "사과", emoji: "🍎"),
+        Fruit(name: "바나나", emoji: "🍌"),
+        Fruit(name: "포도", emoji: "🍇"),
+    ]
+
+    var body: some View {
+        List {
+            ForEach(fruits) { fruit in
+                HStack {
+                    Text(fruit.emoji)
+                    Text(fruit.name)
+                }
+            }
+            .onDelete { fruits.remove(atOffsets: $0) }
+        }
+    }
+}</pre>
+      </div>
 
       <div class="topic-questions">
         <div class="tq-label">생각해보기</div>
@@ -382,38 +414,6 @@ struct ChildView: View {
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">struct Fruit: Identifiable {
-    let id = UUID()
-    let name: String
-    let emoji: String
-}
-
-struct FruitList: View {
-    @State private var fruits = [
-        Fruit(name: "사과", emoji: "🍎"),
-        Fruit(name: "바나나", emoji: "🍌"),
-        Fruit(name: "포도", emoji: "🍇"),
-    ]
-
-    var body: some View {
-        List {
-            ForEach(fruits) { fruit in
-                HStack {
-                    Text(fruit.emoji)
-                    Text(fruit.name)
-                }
-            }
-            .onDelete { fruits.remove(atOffsets: $0) }
-        }
-    }
-}</pre>
-      </div>
     </div>
 
     <!-- Section 6: NavigationStack · Sheet · Alert -->
@@ -421,6 +421,35 @@ struct FruitList: View {
       <div class="cs-label">Topic 06</div>
       <h2 class="cs-title">NavigationStack · Sheet · Alert</h2>
       <div class="cs-subtitle">화면 이동과 모달</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">struct HomeView: View {
+    @State private var showSheet = false
+
+    var body: some View {
+        NavigationStack {
+            List {
+                NavigationLink("상세 보기") {
+                    Text("Detail View")
+                }
+            }
+            .navigationTitle("홈")
+            .toolbar {
+                Button("추가") {
+                    showSheet = true
+                }
+            }
+            .sheet(isPresented: $showSheet) {
+                Text("Sheet Content")
+            }
+        }
+    }
+}</pre>
+      </div>
 
       <div class="topic-questions">
         <div class="tq-label">생각해보기</div>
@@ -454,35 +483,6 @@ struct FruitList: View {
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">struct HomeView: View {
-    @State private var showSheet = false
-
-    var body: some View {
-        NavigationStack {
-            List {
-                NavigationLink("상세 보기") {
-                    Text("Detail View")
-                }
-            }
-            .navigationTitle("홈")
-            .toolbar {
-                Button("추가") {
-                    showSheet = true
-                }
-            }
-            .sheet(isPresented: $showSheet) {
-                Text("Sheet Content")
-            }
-        }
-    }
-}</pre>
-      </div>
     </div>
 
     <!-- Section 7: 데이터 모델 설계 -->
@@ -490,6 +490,24 @@ struct FruitList: View {
       <div class="cs-label">Topic 07</div>
       <h2 class="cs-title">데이터 모델 설계</h2>
       <div class="cs-subtitle">Todo struct — id · title · isCompleted</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">struct Todo: Identifiable, Codable {
+    let id: UUID
+    var title: String
+    var isCompleted: Bool
+
+    init(title: String) {
+        self.id = UUID()
+        self.title = title
+        self.isCompleted = false
+    }
+}</pre>
+      </div>
 
       <div class="topic-questions">
         <div class="tq-label">생각해보기</div>
@@ -516,24 +534,6 @@ struct FruitList: View {
           </div>
         </div>
       </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">struct Todo: Identifiable, Codable {
-    let id: UUID
-    var title: String
-    var isCompleted: Bool
-
-    init(title: String) {
-        self.id = UUID()
-        self.title = title
-        self.isCompleted = false
-    }
-}</pre>
-      </div>
     </div>
 
     <!-- Section 8: UserDefaults + Codable 영속성 -->
@@ -541,6 +541,31 @@ struct FruitList: View {
       <div class="cs-label">Topic 08</div>
       <h2 class="cs-title">UserDefaults + Codable 영속성</h2>
       <div class="cs-subtitle">재시작 후에도 데이터 유지</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <span class="code-lang">Swift</span>
+        </div>
+        <pre class="swift-code">// 저장
+func save(_ todos: [Todo]) {
+    if let data = try? JSONEncoder()
+        .encode(todos) {
+        UserDefaults.standard
+            .set(data, forKey: "todos")
+    }
+}
+
+// 불러오기
+func load() -> [Todo] {
+    guard let data = UserDefaults.standard
+        .data(forKey: "todos"),
+        let todos = try? JSONDecoder()
+            .decode([Todo].self, from: data)
+    else { return [] }
+    return todos
+}</pre>
+      </div>
 
       <div class="topic-questions">
         <div class="tq-label">생각해보기</div>
@@ -573,31 +598,6 @@ struct FruitList: View {
             <div class="item-desc">items.isEmpty일 때 안내 뷰 표시. ContentUnavailableView (iOS 17+)</div>
           </div>
         </div>
-      </div>
-
-      <div class="code-block" style="margin-top:20px;">
-        <div class="code-header">
-          <div class="code-dots"><span></span><span></span><span></span></div>
-          <span class="code-lang">Swift</span>
-        </div>
-        <pre class="swift-code">// 저장
-func save(_ todos: [Todo]) {
-    if let data = try? JSONEncoder()
-        .encode(todos) {
-        UserDefaults.standard
-            .set(data, forKey: "todos")
-    }
-}
-
-// 불러오기
-func load() -> [Todo] {
-    guard let data = UserDefaults.standard
-        .data(forKey: "todos"),
-        let todos = try? JSONDecoder()
-            .decode([Todo].self, from: data)
-    else { return [] }
-    return todos
-}</pre>
       </div>
     </div>
 
