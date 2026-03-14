@@ -731,6 +731,48 @@ func load() -> [Todo] {
 
 </div>
 
+<!-- 숙제 & 과제 -->
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">Homework</div>
+    <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">챌린지 1-2를 마쳤다면</h2>
+
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);background:var(--blue-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">카운터 앱 만들기</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">+1, -1, 리셋 버튼이 있는 카운터. @State로 숫자 관리. 0 미만이면 텍스트 색상을 빨간색으로 변경</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);background:var(--blue-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Todo 앱 완성</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">TextField로 입력 → List에 추가 → 스와이프 삭제 → 탭하면 완료 토글. UserDefaults로 앱 재시작 후에도 데이터 유지</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">도전</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">설정 화면 만들기</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Toggle, Slider, Picker를 조합한 설정 화면. 다크모드 토글, 폰트 크기 슬라이더, 언어 선택 Picker. 부모-자식 간 @Binding으로 데이터 전달</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--border);padding-top:20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">완료 체크리스트</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> @State 없이 var만 쓰면 왜 안 되는지 설명할 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> @State vs @Binding의 소유권 차이를 안다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> List + ForEach + Identifiable 조합을 쓸 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> UserDefaults + Codable로 데이터를 저장/불러올 수 있다</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Challenge nav -->
 <div class="ch-nav">
   <a href="1-1.html">

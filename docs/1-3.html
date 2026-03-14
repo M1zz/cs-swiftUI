@@ -545,6 +545,48 @@ struct SettingsView: View {
 
 </div>
 
+<!-- 숙제 & 과제 -->
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:8px;">Homework</div>
+    <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">챌린지 1-3을 마쳤다면</h2>
+
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);background:var(--green-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">3탭 앱 만들기</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">TabView에 홈/검색/프로필 3개 탭 구성. 각 탭 안에 NavigationStack 배치. 홈에서 상세 화면으로 push 이동</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);background:var(--green-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">공유 데이터 모델 만들기</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">@Observable class로 앱 전체 상태 관리. 하나의 탭에서 데이터를 바꾸면 다른 탭에서도 반영되는지 확인</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">도전</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">메모 앱 — sheet + NavigationStack 조합</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">메모 목록(List) → 메모 상세(push) → 새 메모 작성(sheet). @StateObject로 메모 배열 관리, 자식에게 @ObservedObject로 전달</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--border);padding-top:20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">완료 체크리스트</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> NavigationStack과 sheet의 사용 시점 차이를 안다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> @StateObject vs @ObservedObject를 올바르게 쓸 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> @Observable (iOS 17+) 방식을 이해하고 쓸 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> TabView 안에 독립적인 NavigationStack을 넣을 수 있다</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Challenge nav -->
 <div class="ch-nav">
   <a href="1-2.html">

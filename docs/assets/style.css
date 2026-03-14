@@ -460,8 +460,7 @@ body::before {
 
 .sticky-phone {
   position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 80px;
   display: flex;
   align-items: flex-start;
   justify-content: center;

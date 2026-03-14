@@ -706,6 +706,48 @@ VStack {
 
 </div>
 
+<!-- 숙제 & 과제 -->
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;">Homework</div>
+    <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">챌린지 1-1을 마쳤다면</h2>
+
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);background:var(--orange-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">자기소개 카드 만들기</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">VStack, HStack, ZStack을 모두 사용해서 이름, 사진(SF Symbol), 한 줄 소개가 있는 프로필 카드를 만들어보기. padding, background, cornerRadius modifier 활용</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);background:var(--orange-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">modifier 순서 실험</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">.padding().background(.blue) vs .background(.blue).padding() — 두 가지를 나란히 놓고 결과가 왜 다른지 주석으로 설명 달기</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">도전</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">날씨 카드 UI 클론</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">ZStack으로 그라디언트 배경 위에 온도, 도시 이름, 날씨 아이콘을 겹쳐 배치. GeometryReader로 화면 너비의 90%로 카드 크기 설정</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid var(--border);padding-top:20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">완료 체크리스트</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> Text, Image, Button을 코드 없이 떠올릴 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> VStack/HStack/ZStack의 차이를 한 문장으로 설명할 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> modifier 순서가 결과를 바꾸는 이유를 안다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> @main → App → WindowGroup → ContentView 흐름을 그릴 수 있다</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Challenge nav -->
 <div class="ch-nav">
   <a href="index.html">
