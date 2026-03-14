@@ -583,6 +583,230 @@ struct SettingsView: View {
         <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> TabView 안에 독립적인 NavigationStack을 넣을 수 있다</div>
       </div>
     </div>
+
+    <div style="border-top:1px solid var(--border);padding-top:20px;margin-top:20px;">
+      <details>
+        <summary style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);cursor:pointer;margin-bottom:16px;user-select:none;">Solution — 답안 보기</summary>
+
+        <div style="display:flex;flex-direction:column;gap:24px;">
+
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">1. 3탭 앱</div>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">struct MainTabView: View {
+    var body: some View {
+        TabView {
+            NavigationStack {
+                List {
+                    NavigationLink("공지사항") {
+                        Text("공지 상세")
+                    }
+                    NavigationLink("이벤트") {
+                        Text("이벤트 상세")
+                    }
+                }
+                .navigationTitle("홈")
+            }
+            .tabItem {
+                Label("홈",
+                    systemImage: "house")
+            }
+
+            NavigationStack {
+                Text("검색 화면")
+                    .navigationTitle("검색")
+            }
+            .tabItem {
+                Label("검색",
+                    systemImage: "magnifyingglass")
+            }
+
+            NavigationStack {
+                Text("내 프로필")
+                    .navigationTitle("프로필")
+            }
+            .tabItem {
+                Label("프로필",
+                    systemImage: "person")
+            }
+        }
+    }
+}</pre>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">2. 공유 데이터 모델 (@Observable)</div>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">@Observable
+class AppData {
+    var favorites: [String] = []
+
+    func toggle(_ item: String) {
+        if favorites.contains(item) {
+            favorites.removeAll { $0 == item }
+        } else {
+            favorites.append(item)
+        }
+    }
+}
+
+struct AppRoot: View {
+    @State var data = AppData()
+
+    var body: some View {
+        TabView {
+            ItemListView()
+                .tabItem { Label("목록",
+                    systemImage: "list.bullet") }
+            FavoritesView()
+                .tabItem { Label("즐겨찾기",
+                    systemImage: "heart") }
+        }
+        .environment(data)
+    }
+}
+
+struct ItemListView: View {
+    @Environment(AppData.self) var data
+    let items = ["사과", "바나나", "포도"]
+
+    var body: some View {
+        List(items, id: \.self) { item in
+            HStack {
+                Text(item)
+                Spacer()
+                Image(systemName:
+                    data.favorites.contains(item)
+                    ? "heart.fill" : "heart")
+                    .foregroundStyle(.red)
+                    .onTapGesture {
+                        data.toggle(item)
+                    }
+            }
+        }
+    }
+}
+
+struct FavoritesView: View {
+    @Environment(AppData.self) var data
+
+    var body: some View {
+        List(data.favorites, id: \.self) {
+            Text($0)
+        }
+    }
+}</pre>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">3. 메모 앱</div>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">struct Memo: Identifiable {
+    let id = UUID()
+    var title: String
+    var body: String
+    var date = Date()
+}
+
+class MemoStore: ObservableObject {
+    @Published var memos: [Memo] = [
+        Memo(title: "첫 번째 메모",
+             body: "SwiftUI 공부 시작!")
+    ]
+}
+
+struct MemoListView: View {
+    @StateObject var store = MemoStore()
+    @State private var showNew = false
+
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(store.memos) { memo in
+                    NavigationLink {
+                        MemoDetailView(memo: memo)
+                    } label: {
+                        VStack(alignment: .leading) {
+                            Text(memo.title)
+                                .font(.headline)
+                            Text(memo.body)
+                                .font(.caption)
+                                .foregroundStyle(
+                                    .secondary)
+                                .lineLimit(1)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("메모")
+            .toolbar {
+                Button { showNew = true } label: {
+                    Image(systemName: "plus")
+                }
+            }
+            .sheet(isPresented: $showNew) {
+                NewMemoView(store: store)
+            }
+        }
+    }
+}
+
+struct MemoDetailView: View {
+    let memo: Memo
+    var body: some View {
+        ScrollView {
+            Text(memo.body)
+                .padding()
+        }
+        .navigationTitle(memo.title)
+    }
+}
+
+struct NewMemoView: View {
+    @ObservedObject var store: MemoStore
+    @Environment(\.dismiss) var dismiss
+    @State private var title = ""
+    @State private var body = ""
+
+    var body_view: some View {
+        NavigationStack {
+            Form {
+                TextField("제목", text: $title)
+                TextEditor(text: $body)
+                    .frame(minHeight: 120)
+            }
+            .navigationTitle("새 메모")
+            .toolbar {
+                Button("저장") {
+                    store.memos.append(
+                        Memo(title: title,
+                             body: body))
+                    dismiss()
+                }
+            }
+        }
+    }
+}</pre>
+            </div>
+          </div>
+
+        </div>
+      </details>
+    </div>
   </div>
 </div>
 

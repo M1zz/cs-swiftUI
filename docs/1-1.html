@@ -741,6 +741,122 @@ VStack {
         <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> @main → App → WindowGroup → ContentView 흐름을 그릴 수 있다</div>
       </div>
     </div>
+
+    <div style="border-top:1px solid var(--border);padding-top:20px;margin-top:20px;">
+      <details>
+        <summary style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);cursor:pointer;margin-bottom:16px;user-select:none;">Solution — 답안 보기</summary>
+
+        <div style="display:flex;flex-direction:column;gap:24px;">
+
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">1. 자기소개 카드 만들기</div>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">struct ProfileCard: View {
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 20)
+                .fill(.orange.opacity(0.1))
+
+            VStack(spacing: 12) {
+                Image(systemName: "person.circle.fill")
+                    .font(.system(size: 60))
+                    .foregroundStyle(.orange)
+
+                Text("홍길동")
+                    .font(.title2)
+                    .bold()
+
+                HStack {
+                    Image(systemName: "swift")
+                    Text("iOS 개발자 지망생")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .padding(24)
+        }
+        .frame(maxWidth: .infinity)
+        .padding()
+    }
+}</pre>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">2. modifier 순서 실험</div>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">VStack(spacing: 30) {
+    // padding 먼저 → 여백 포함한 영역에 배경
+    Text("padding → background")
+        .padding()
+        .background(.orange.opacity(0.3))
+        .cornerRadius(8)
+
+    // background 먼저 → 텍스트 크기만큼만 배경
+    Text("background → padding")
+        .background(.blue.opacity(0.3))
+        .padding()
+        .cornerRadius(8)
+}
+// modifier는 안→바깥 순서로 적용된다.
+// .padding()이 먼저 오면 여백이 생긴 뒤 배경이 칠해지고,
+// .background()가 먼저 오면 텍스트 크기만큼만 배경이 칠해진다.</pre>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">3. 날씨 카드 UI 클론</div>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">struct WeatherCard: View {
+    var body: some View {
+        GeometryReader { geo in
+            ZStack {
+                LinearGradient(
+                    colors: [.blue, .cyan],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .cornerRadius(20)
+
+                VStack(spacing: 8) {
+                    Text("서울")
+                        .font(.title2).bold()
+                        .foregroundStyle(.white)
+                    Image(systemName: "sun.max.fill")
+                        .font(.system(size: 48))
+                        .foregroundStyle(.yellow)
+                    Text("24°")
+                        .font(.system(size: 56,
+                            weight: .thin))
+                        .foregroundStyle(.white)
+                }
+            }
+            .frame(width: geo.size.width * 0.9,
+                   height: 200)
+            .frame(maxWidth: .infinity)
+        }
+        .frame(height: 200)
+        .padding()
+    }
+}</pre>
+            </div>
+          </div>
+
+        </div>
+      </details>
+    </div>
   </div>
 </div>
 

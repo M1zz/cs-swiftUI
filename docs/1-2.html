@@ -772,6 +772,199 @@ func load() -> [Todo] {
         <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> UserDefaults + Codable로 데이터를 저장/불러올 수 있다</div>
       </div>
     </div>
+
+    <div style="border-top:1px solid var(--border);padding-top:20px;margin-top:20px;">
+      <details>
+        <summary style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);cursor:pointer;margin-bottom:16px;user-select:none;">Solution — 답안 보기</summary>
+
+        <div style="display:flex;flex-direction:column;gap:24px;">
+
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">1. 카운터 앱</div>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">struct CounterView: View {
+    @State private var count = 0
+
+    var body: some View {
+        VStack(spacing: 24) {
+            Text("\(count)")
+                .font(.system(size: 72, weight: .bold))
+                .foregroundStyle(count < 0 ? .red : .primary)
+
+            HStack(spacing: 16) {
+                Button("-1") { count -= 1 }
+                    .buttonStyle(.bordered)
+
+                Button("리셋") { count = 0 }
+                    .buttonStyle(.bordered)
+                    .tint(.gray)
+
+                Button("+1") { count += 1 }
+                    .buttonStyle(.borderedProminent)
+            }
+        }
+    }
+}</pre>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">2. Todo 앱</div>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">struct Todo: Identifiable, Codable {
+    let id: UUID
+    var title: String
+    var isCompleted: Bool
+
+    init(title: String) {
+        self.id = UUID()
+        self.title = title
+        self.isCompleted = false
+    }
+}
+
+struct TodoListView: View {
+    @State private var todos: [Todo] = []
+    @State private var newTitle = ""
+
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach($todos) { $todo in
+                    HStack {
+                        Image(systemName: todo.isCompleted
+                            ? "checkmark.circle.fill"
+                            : "circle")
+                            .foregroundStyle(
+                                todo.isCompleted
+                                    ? .blue : .gray)
+                            .onTapGesture {
+                                todo.isCompleted.toggle()
+                                save()
+                            }
+                        Text(todo.title)
+                            .strikethrough(
+                                todo.isCompleted)
+                    }
+                }
+                .onDelete { offsets in
+                    todos.remove(atOffsets: offsets)
+                    save()
+                }
+            }
+            .navigationTitle("할 일")
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    HStack {
+                        TextField("새 할 일",
+                            text: $newTitle)
+                        Button("추가") {
+                            guard !newTitle.isEmpty
+                                else { return }
+                            todos.append(
+                                Todo(title: newTitle))
+                            newTitle = ""
+                            save()
+                        }
+                    }
+                }
+            }
+            .onAppear { load() }
+        }
+    }
+
+    func save() {
+        if let data = try? JSONEncoder()
+            .encode(todos) {
+            UserDefaults.standard
+                .set(data, forKey: "todos")
+        }
+    }
+
+    func load() {
+        guard let data = UserDefaults.standard
+            .data(forKey: "todos"),
+            let saved = try? JSONDecoder()
+                .decode([Todo].self, from: data)
+        else { return }
+        todos = saved
+    }
+}</pre>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">3. 설정 화면</div>
+            <div class="code-block">
+              <div class="code-header">
+                <div class="code-dots"><span></span><span></span><span></span></div>
+                <span class="code-lang">Swift</span>
+              </div>
+              <pre class="swift-code">struct SettingsView: View {
+    @State private var isDarkMode = false
+    @State private var fontSize: Double = 16
+    @State private var language = "한국어"
+    let languages = ["한국어", "English", "日本語"]
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section("화면") {
+                    Toggle("다크 모드",
+                        isOn: $isDarkMode)
+                    VStack(alignment: .leading) {
+                        Text("폰트 크기: \(Int(fontSize))")
+                        Slider(value: $fontSize,
+                            in: 12...28, step: 1)
+                    }
+                }
+                Section("언어") {
+                    Picker("언어 선택",
+                        selection: $language) {
+                        ForEach(languages, id: \.self) {
+                            Text($0)
+                        }
+                    }
+                }
+                Section {
+                    PreviewCard(
+                        isDarkMode: $isDarkMode,
+                        fontSize: $fontSize)
+                }
+            }
+            .navigationTitle("설정")
+        }
+    }
+}
+
+struct PreviewCard: View {
+    @Binding var isDarkMode: Bool
+    @Binding var fontSize: Double
+
+    var body: some View {
+        Text("미리보기 텍스트")
+            .font(.system(size: fontSize))
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(isDarkMode ? .black : .white)
+            .foregroundStyle(isDarkMode ? .white : .black)
+            .cornerRadius(12)
+    }
+}</pre>
+            </div>
+          </div>
+
+        </div>
+      </details>
+    </div>
   </div>
 </div>
 
