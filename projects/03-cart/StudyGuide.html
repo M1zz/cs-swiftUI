@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>장바구니 학습 가이드</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #fff; color: #1a1a1a; }
+
+  /* 커버 */
+  .cover {
+    width: 100%; height: 100vh; min-height: 700px;
+    background: linear-gradient(135deg, #0d1a0d 0%, #16a34a 100%);
+    display: flex; flex-direction: column; justify-content: center; padding: 80px;
+    page-break-after: always;
+  }
+  .cover-tag { font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 24px; }
+  .cover-title { font-size: 56px; font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 16px; }
+  .cover-sub { font-size: 18px; color: rgba(255,255,255,.8); line-height: 1.6; max-width: 560px; }
+  .cover-badge {
+    margin-top: 48px; display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,.15); border-radius: 100px; padding: 10px 20px;
+    color: #fff; font-size: 14px;
+  }
+
+  /* 본문 */
+  .page { max-width: 800px; margin: 0 auto; padding: 64px 48px; }
+  .section { margin-bottom: 56px; page-break-inside: avoid; }
+  .section-label {
+    font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+    color: #16a34a; font-weight: 700; margin-bottom: 16px;
+  }
+  h2 { font-size: 28px; font-weight: 800; margin-bottom: 20px; }
+  h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #333; }
+  p { font-size: 15px; line-height: 1.8; color: #444; margin-bottom: 12px; }
+
+  /* 학습 단계 카드 */
+  .step-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .step-card {
+    border: 1.5px solid #e5e7eb; border-radius: 14px; padding: 24px;
+    background: #fafafa;
+  }
+  .step-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #16a34a; color: #fff;
+    font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+  }
+  .step-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .step-desc { font-size: 13px; color: #666; line-height: 1.7; }
+
+  /* 학습 순서 */
+  .learn-step { margin-bottom: 24px; padding: 24px; background: #fafafa; border-radius: 14px; border: 1.5px solid #e5e7eb; }
+  .learn-step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .learn-step-badge {
+    background: #16a34a; color: #fff; font-size: 12px; font-weight: 700;
+    padding: 4px 12px; border-radius: 100px;
+  }
+  .learn-step-time { font-size: 13px; color: #888; }
+  .learn-step-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .learn-step-desc { font-size: 14px; color: #555; line-height: 1.7; }
+
+  /* 체크리스트 */
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; line-height: 1.6;
+  }
+  .checklist li::before {
+    content: ''; flex-shrink: 0; margin-top: 3px;
+    width: 18px; height: 18px; border: 2px solid #d1d5db; border-radius: 4px;
+  }
+
+  /* 코드 블록 */
+  .code-block {
+    background: #0d1117; border-radius: 10px; padding: 20px 24px;
+    margin: 16px 0; overflow-x: auto;
+  }
+  .code-block code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 13px; color: #e6edf3; line-height: 1.7; white-space: pre; }
+  .kw { color: #ff7b72; } .ty { color: #79c0ff; } .str { color: #a5d6ff; }
+  .cm { color: #8b949e; font-style: italic; } .fn { color: #d2a8ff; }
+
+  /* 코드 제목 */
+  .code-title { font-size: 13px; font-weight: 700; color: #555; margin-bottom: 4px; }
+
+  /* 퀴즈 */
+  .quiz-box {
+    background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 14px;
+    padding: 24px; margin-top: 16px;
+  }
+  .quiz-label { font-size: 11px; font-weight: 700; color: #16a34a; letter-spacing: .1em; margin-bottom: 12px; }
+  .quiz-q { font-size: 14px; font-weight: 600; color: #166534; margin-bottom: 8px; padding-left: 12px; border-left: 3px solid #4ade80; }
+
+  /* 도전 과제 */
+  .challenge-box {
+    background: #fffbeb; border: 1.5px solid #fcd34d; border-radius: 14px;
+    padding: 24px; margin-top: 16px;
+  }
+  .challenge-label { font-size: 11px; font-weight: 700; color: #d97706; letter-spacing: .1em; margin-bottom: 12px; }
+  .challenge-item { font-size: 14px; color: #92400e; margin-bottom: 8px; padding-left: 16px; position: relative; }
+  .challenge-item::before { content: '▶'; position: absolute; left: 0; color: #f59e0b; font-size: 10px; top: 2px; }
+
+  /* 인포 테이블 */
+  .info-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .info-table th, .info-table td {
+    padding: 12px 16px; text-align: left; font-size: 14px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .info-table th { font-weight: 700; color: #555; background: #f9fafb; }
+
+  @media print {
+    .cover { height: 100vh; }
+    .page { padding: 40px 48px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 커버 -->
+<div class="cover">
+  <div class="cover-tag">Clone Coding 03</div>
+  <div class="cover-title">🛒 장바구니</div>
+  <div class="cover-sub">@Observable + Environment 패턴으로 앱 전역 상태를 관리합니다</div>
+  <div class="cover-badge">Xcode 15 · iOS 17 · @Observable</div>
+</div>
+
+<!-- 본문 -->
+<div class="page">
+
+  <!-- Section 1 -->
+  <div class="section">
+    <div class="section-label">Learning Goals</div>
+    <h2>이 프로젝트에서 배우는 것</h2>
+    <div class="step-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">@Observable Store</div>
+        <div class="step-desc">CartStore 하나로 전체 앱 상태를 통합 관리하는 패턴</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">.environment()</div>
+        <div class="step-desc">뷰 계층 어디서나 Store에 접근하는 의존성 주입 방법</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">.searchable</div>
+        <div class="step-desc">단 한 줄로 검색창 + 필터링을 구현하는 SwiftUI 수식어</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-title">struct + Identifiable</div>
+        <div class="step-desc">Product, CartItem 데이터 모델을 올바르게 설계하는 방법</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="section">
+    <div class="section-label">Study Path</div>
+    <h2>추천 학습 순서</h2>
+
+    <div class="learn-step">
+      <div class="learn-step-header">
+        <span class="learn-step-badge">STEP 1</span>
+        <span class="learn-step-time">⏱ 10분</span>
+      </div>
+      <div class="learn-step-title">실행 먼저</div>
+      <div class="learn-step-desc">상품 검색, 담기, 장바구니 확인, 결제 팝업까지 전체 흐름을 손으로 직접 눌러 확인합니다.</div>
+    </div>
+
+    <div class="learn-step">
+      <div class="learn-step-header">
+        <span class="learn-step-badge">STEP 2</span>
+        <span class="learn-step-time">⏱ 40분</span>
+      </div>
+      <div class="learn-step-title">코드 읽기</div>
+      <div class="learn-step-desc">Models → CartStore → CartApp → ProductListView → CartView 순서로 읽습니다. 상태가 어떻게 흘러가는지 추적하세요.</div>
+    </div>
+
+    <div class="learn-step">
+      <div class="learn-step-header">
+        <span class="learn-step-badge">STEP 3</span>
+        <span class="learn-step-time">⏱ 2시간</span>
+      </div>
+      <div class="learn-step-title">직접 만들기</div>
+      <div class="learn-step-desc">CartStore부터 먼저 만들고 UI를 구성하세요. Store가 완성되면 뷰 코드는 자연스럽게 따라옵니다.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="section">
+    <div class="section-label">Self Check</div>
+    <h2>핵심 개념 체크리스트</h2>
+    <ul class="checklist">
+      <li>@Observable 클래스를 @State로 감싸야 하는 이유를 설명할 수 있다</li>
+      <li>.environment(store)와 @Environment(CartStore.self)의 연결 방식을 이해한다</li>
+      <li>CartItem과 Product가 분리된 이유(수량 상태 vs 제품 정보)를 설명할 수 있다</li>
+      <li>.reduce()로 totalPrice를 계산하는 방법을 구현할 수 있다</li>
+      <li>.searchable(text:)가 filtered 배열에 적용되는 흐름을 이해한다</li>
+      <li>.confirmationDialog로 결제 확인 팝업을 구현할 수 있다</li>
+    </ul>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="section">
+    <div class="section-label">Code Analysis</div>
+    <h2>핵심 코드 분석</h2>
+
+    <div class="code-title">Store + Environment 패턴</div>
+    <div class="code-block"><code><span class="cm">// CartApp.swift — 루트에서 주입</span>
+<span class="kw">@main struct</span> <span class="ty">CartApp</span>: <span class="ty">App</span> {
+    <span class="kw">@State private var</span> store = <span class="ty">CartStore</span>()
+    <span class="kw">var</span> body: <span class="kw">some</span> <span class="ty">Scene</span> {
+        <span class="ty">WindowGroup</span> { <span class="ty">ContentView</span>() }
+            .<span class="fn">environment</span>(store)    <span class="cm">// 전체 앱에 공유</span>
+    }
+}
+
+<span class="cm">// ProductListView.swift — 어디서든 접근</span>
+<span class="kw">@Environment</span>(<span class="ty">CartStore</span>.self) <span class="kw">private var</span> store</code></div>
+
+    <div class="code-title" style="margin-top:24px;">총액 계산 (reduce)</div>
+    <div class="code-block"><code><span class="kw">var</span> totalPrice: <span class="ty">Int</span> {
+    items.<span class="fn">reduce</span>(<span class="str">0</span>) { $0 + $1.subtotal }
+    <span class="cm">//    ↑ 누적값  ↑ 현재 항목.price * quantity</span>
+}</code></div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="section">
+    <div class="section-label">Quiz</div>
+    <h2>셀프 체크 퀴즈</h2>
+    <div class="quiz-box">
+      <div class="quiz-label">SELF CHECK QUIZ</div>
+      <div class="quiz-q">Q1. CartStore를 @Observable 없이 일반 class로 만들면 어떤 문제가 생기나요?</div>
+      <div class="quiz-q">Q2. Product.samples를 static으로 선언한 이유는?</div>
+      <div class="quiz-q" style="margin-bottom:0;">Q3. items 배열에서 특정 Product를 찾을 때 first(where:)를 쓰는 이유는?</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="section">
+    <div class="section-label">Challenge</div>
+    <h2>도전 과제</h2>
+    <div class="challenge-box">
+      <div class="challenge-label">BONUS CHALLENGES</div>
+      <div class="challenge-item">카테고리별 필터 + 가격순 정렬 옵션 추가</div>
+      <div class="challenge-item">찜하기 기능 (하트 아이콘, 찜 목록 탭)</div>
+      <div class="challenge-item">쿠폰 코드 입력 시 할인 적용 기능</div>
+      <div class="challenge-item">UserDefaults로 장바구니 내용을 앱 재실행 후에도 유지</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

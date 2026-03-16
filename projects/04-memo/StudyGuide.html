@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>메모장 — Clone Coding 04 Study Guide</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #fff; color: #1a1a1a; }
+
+.cover {
+  width: 100%; height: 100vh; min-height: 700px;
+  background: linear-gradient(135deg, #1a1500 0%, #ca8a04 100%);
+  display: flex; flex-direction: column; justify-content: center; padding: 80px;
+  page-break-after: always;
+}
+.cover-tag { font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 24px; }
+.cover-title { font-size: 56px; font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 16px; }
+.cover-sub { font-size: 18px; color: rgba(255,255,255,.8); line-height: 1.6; max-width: 560px; }
+.cover-badge {
+  margin-top: 48px; display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,.15); border-radius: 100px; padding: 10px 20px;
+  color: #fff; font-size: 14px;
+}
+
+.page { max-width: 800px; margin: 0 auto; padding: 64px 48px; }
+.section { margin-bottom: 56px; page-break-inside: avoid; }
+.section-label {
+  font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+  color: #ca8a04; font-weight: 700; margin-bottom: 16px;
+}
+h2 { font-size: 28px; font-weight: 800; margin-bottom: 20px; }
+h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #333; }
+p { font-size: 15px; line-height: 1.8; color: #444; margin-bottom: 12px; }
+
+.step-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.step-card { border: 1.5px solid #e5e7eb; border-radius: 14px; padding: 24px; background: #fafafa; }
+.step-num {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: #ca8a04; color: #fff;
+  font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+}
+.step-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.step-desc { font-size: 13px; color: #666; line-height: 1.7; }
+
+.checklist { list-style: none; }
+.checklist li {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; line-height: 1.6;
+}
+.checklist li::before {
+  content: ''; flex-shrink: 0; margin-top: 3px;
+  width: 18px; height: 18px; border: 2px solid #d1d5db; border-radius: 4px;
+}
+
+.code-block {
+  background: #0d1117; border-radius: 10px; padding: 20px 24px;
+  margin: 16px 0;
+}
+.code-block code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 13px; color: #e6edf3; line-height: 1.7; white-space: pre; display: block; }
+.kw { color: #ff7b72; } .ty { color: #79c0ff; } .str { color: #a5d6ff; }
+.cm { color: #8b949e; font-style: italic; } .fn { color: #d2a8ff; }
+
+.quiz-box { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 14px; padding: 24px; margin-top: 16px; }
+.quiz-label { font-size: 11px; font-weight: 700; color: #16a34a; letter-spacing: .1em; margin-bottom: 12px; }
+.quiz-q { font-size: 14px; font-weight: 600; color: #166534; margin-bottom: 8px; padding: 10px 12px; background: #dcfce7; border-radius: 8px; }
+
+.challenge-box { background: #fffbeb; border: 1.5px solid #fcd34d; border-radius: 14px; padding: 24px; margin-top: 16px; }
+.challenge-label { font-size: 11px; font-weight: 700; color: #d97706; letter-spacing: .1em; margin-bottom: 12px; }
+.challenge-item { font-size: 14px; color: #92400e; margin-bottom: 10px; padding-left: 20px; position: relative; line-height: 1.6; }
+.challenge-item::before { content: '▶'; position: absolute; left: 0; color: #f59e0b; font-size: 10px; top: 3px; }
+
+.flow-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
+.flow-box { background: #f3f4f6; border-radius: 8px; padding: 10px 16px; font-size: 13px; font-weight: 600; }
+.flow-arrow { color: #9ca3af; font-size: 18px; }
+
+@media print {
+  .cover { height: 100vh; }
+  .page { padding: 40px 48px; }
+  .section { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- 커버 -->
+<div class="cover">
+  <div class="cover-tag">Clone Coding 04</div>
+  <div class="cover-title">📝 메모장</div>
+  <div class="cover-sub">UserDefaults와 JSON으로 데이터를 영구 저장하는 방법을 익힙니다</div>
+  <div class="cover-badge">Xcode 15 · iOS 17 · UserDefaults</div>
+</div>
+
+<!-- 본문 -->
+<div class="page">
+
+  <!-- Section 1: 배우는 것 -->
+  <div class="section">
+    <div class="section-label">What You Learn</div>
+    <h2>이 프로젝트에서 배우는 것</h2>
+    <div class="step-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">Codable</div>
+        <div class="step-desc">struct를 JSON으로 직렬화/역직렬화하는 Swift 표준 프로토콜</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">UserDefaults</div>
+        <div class="step-desc">앱 내 키-값 저장소, 소량 데이터 영구 저장</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">didSet</div>
+        <div class="step-desc">프로퍼티 변경 시 자동으로 save()를 호출하는 반응형 패턴</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-title">NavigationStack + NavigationLink</div>
+        <div class="step-desc">목록→상세 화면 전환 네비게이션</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: 학습 순서 -->
+  <div class="section">
+    <div class="section-label">Learning Path</div>
+    <h2>학습 순서</h2>
+    <div class="step-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">실행 — 10분</div>
+        <div class="step-desc">메모 작성 → 저장 → 수정 → 삭제<br>앱 재실행 후 데이터 유지 확인</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">코드 읽기 — 35분</div>
+        <div class="step-desc">Memo.swift → MemoStore.swift → MemoListView.swift → MemoEditView.swift</div>
+      </div>
+      <div class="step-card" style="grid-column: span 2;">
+        <div class="step-num">3</div>
+        <div class="step-title">직접 만들기 — 1.5시간</div>
+        <div class="step-desc">Codable struct → didSet 저장소 → NavigationStack 순서로 빈 프로젝트에서 직접 구현해봅니다.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: 체크리스트 -->
+  <div class="section">
+    <div class="section-label">Checklist</div>
+    <h2>이해도 체크리스트</h2>
+    <ul class="checklist">
+      <li>Codable이 Encodable + Decodable의 조합임을 안다</li>
+      <li>JSONEncoder().encode()와 JSONDecoder().decode()의 타입 파라미터를 이해한다</li>
+      <li>didSet { save() }가 items 변경 시 자동 저장하는 원리를 설명할 수 있다</li>
+      <li>init() { load() }에서 저장된 데이터를 복원하는 흐름을 구현할 수 있다</li>
+      <li>NavigationLink(destination:)의 지연 로딩 방식을 이해한다</li>
+      <li>@State private var memo: Memo를 MemoEditView에서 초기화하는 패턴을 안다</li>
+    </ul>
+  </div>
+
+  <!-- Section 4: 핵심 코드 -->
+  <div class="section">
+    <div class="section-label">Key Code</div>
+    <h2>핵심 코드 패턴</h2>
+
+    <h3>1. 저장/불러오기</h3>
+    <div class="code-block"><code><span class="cm">// MemoStore.swift</span>
+@<span class="ty">Observable</span> <span class="kw">class</span> <span class="ty">MemoStore</span> {
+    <span class="kw">var</span> items: [<span class="ty">Memo</span>] = [] {
+        <span class="kw">didSet</span> { <span class="fn">save</span>() }        <span class="cm">// 변경될 때마다 자동 저장</span>
+    }
+
+    <span class="kw">init</span>() { <span class="fn">load</span>() }           <span class="cm">// 앱 시작 시 자동 불러오기</span>
+
+    <span class="kw">private func</span> <span class="fn">save</span>() {
+        <span class="kw">let</span> data = <span class="kw">try</span>? <span class="ty">JSONEncoder</span>().<span class="fn">encode</span>(items)
+        <span class="ty">UserDefaults</span>.standard.<span class="fn">set</span>(data, forKey: <span class="str">"memos"</span>)
+    }
+
+    <span class="kw">private func</span> <span class="fn">load</span>() {
+        <span class="kw">guard let</span> data = <span class="ty">UserDefaults</span>.standard.<span class="fn">data</span>(forKey: <span class="str">"memos"</span>),
+              <span class="kw">let</span> saved = <span class="kw">try</span>? <span class="ty">JSONDecoder</span>().<span class="fn">decode</span>([<span class="ty">Memo</span>].<span class="kw">self</span>, from: data)
+        <span class="kw">else</span> { <span class="kw">return</span> }
+        items = saved
+    }
+}</code></div>
+
+    <h3>2. MemoEditView 상태 초기화</h3>
+    <div class="code-block"><code><span class="kw">struct</span> <span class="ty">MemoEditView</span>: <span class="ty">View</span> {
+    <span class="kw">let</span> memo: <span class="ty">Memo</span>
+
+    @<span class="ty">State</span> <span class="kw">private var</span> title: <span class="ty">String</span>
+    @<span class="ty">State</span> <span class="kw">private var</span> body: <span class="ty">String</span>
+
+    <span class="kw">init</span>(memo: <span class="ty">Memo</span>) {
+        <span class="kw">self</span>.memo = memo
+        _title = <span class="ty">State</span>(initialValue: memo.title)   <span class="cm">// ← 이 패턴!</span>
+        _body  = <span class="ty">State</span>(initialValue: memo.body)
+    }
+}</code></div>
+  </div>
+
+  <!-- Section 5: 퀴즈 -->
+  <div class="section">
+    <div class="section-label">Quiz</div>
+    <h2>이해도 퀴즈</h2>
+    <div class="quiz-box">
+      <div class="quiz-label">QUIZ — 스스로 답해보세요</div>
+      <div class="quiz-q">Q1. UserDefaults 대신 파일시스템(FileManager)을 쓰는 경우는 언제인가요?</div>
+      <div class="quiz-q">Q2. <code style="background:#d1fae5;padding:2px 6px;border-radius:4px;">_title = State(initialValue:)</code> 에서 밑줄(_)이 의미하는 것은?</div>
+      <div class="quiz-q">Q3. MemoStore가 @Observable이어야 하는 이유는?</div>
+    </div>
+  </div>
+
+  <!-- Section 6: 도전 과제 -->
+  <div class="section">
+    <div class="section-label">Challenge</div>
+    <h2>도전 과제</h2>
+    <div class="challenge-box">
+      <div class="challenge-label">CHALLENGE — 기능을 직접 추가해보세요</div>
+      <div class="challenge-item">메모에 태그(#태그) 추가 및 태그별 필터링</div>
+      <div class="challenge-item">중요 메모 상단 고정(isPinned) 기능</div>
+      <div class="challenge-item">SwiftData로 저장 방식 마이그레이션</div>
+      <div class="challenge-item">마크다운 렌더링(Text에 .textInputAutocapitalization 적용)</div>
+    </div>
+  </div>
+
+  <!-- Section 7: 데이터 흐름 -->
+  <div class="section">
+    <div class="section-label">Data Flow</div>
+    <h2>데이터 흐름</h2>
+    <div class="flow-row">
+      <div class="flow-box">MemoApp</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">@State store</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">.environment(store)</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-box">MemoListView<br><small style="font-weight:400;color:#6b7280;">[@Environment store]</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">NavigationLink</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">MemoEditView<br><small style="font-weight:400;color:#6b7280;">[store.update(memo)]</small></div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-box">store.items didSet</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">UserDefaults.save()</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>날씨 앱 — Clone Coding 05 Study Guide</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #fff; color: #1a1a1a; }
+
+.cover {
+  width: 100%; height: 100vh; min-height: 700px;
+  background: linear-gradient(135deg, #020b18 0%, #2563eb 100%);
+  display: flex; flex-direction: column; justify-content: center; padding: 80px;
+  page-break-after: always;
+}
+.cover-tag { font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 24px; }
+.cover-title { font-size: 56px; font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 16px; }
+.cover-sub { font-size: 18px; color: rgba(255,255,255,.8); line-height: 1.6; max-width: 560px; }
+.cover-badge {
+  margin-top: 48px; display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,.15); border-radius: 100px; padding: 10px 20px;
+  color: #fff; font-size: 14px;
+}
+
+.page { max-width: 800px; margin: 0 auto; padding: 64px 48px; }
+.section { margin-bottom: 56px; page-break-inside: avoid; }
+.section-label {
+  font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+  color: #2563eb; font-weight: 700; margin-bottom: 16px;
+}
+h2 { font-size: 28px; font-weight: 800; margin-bottom: 20px; }
+h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #333; }
+p { font-size: 15px; line-height: 1.8; color: #444; margin-bottom: 12px; }
+
+.step-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.step-card { border: 1.5px solid #e5e7eb; border-radius: 14px; padding: 24px; background: #fafafa; }
+.step-num {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: #2563eb; color: #fff;
+  font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+}
+.step-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.step-desc { font-size: 13px; color: #666; line-height: 1.7; }
+
+.checklist { list-style: none; }
+.checklist li {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; line-height: 1.6;
+}
+.checklist li::before {
+  content: ''; flex-shrink: 0; margin-top: 3px;
+  width: 18px; height: 18px; border: 2px solid #d1d5db; border-radius: 4px;
+}
+
+.code-block {
+  background: #0d1117; border-radius: 10px; padding: 20px 24px;
+  margin: 16px 0;
+}
+.code-block code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 13px; color: #e6edf3; line-height: 1.7; white-space: pre; display: block; }
+.kw { color: #ff7b72; } .ty { color: #79c0ff; } .str { color: #a5d6ff; }
+.cm { color: #8b949e; font-style: italic; } .fn { color: #d2a8ff; }
+
+.quiz-box { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 14px; padding: 24px; margin-top: 16px; }
+.quiz-label { font-size: 11px; font-weight: 700; color: #16a34a; letter-spacing: .1em; margin-bottom: 12px; }
+.quiz-q { font-size: 14px; font-weight: 600; color: #166534; margin-bottom: 8px; padding: 10px 12px; background: #dcfce7; border-radius: 8px; }
+
+.challenge-box { background: #fffbeb; border: 1.5px solid #fcd34d; border-radius: 14px; padding: 24px; margin-top: 16px; }
+.challenge-label { font-size: 11px; font-weight: 700; color: #d97706; letter-spacing: .1em; margin-bottom: 12px; }
+.challenge-item { font-size: 14px; color: #92400e; margin-bottom: 10px; padding-left: 20px; position: relative; line-height: 1.6; }
+.challenge-item::before { content: '▶'; position: absolute; left: 0; color: #f59e0b; font-size: 10px; top: 3px; }
+
+.flow-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
+.flow-box { background: #f3f4f6; border-radius: 8px; padding: 10px 16px; font-size: 13px; font-weight: 600; }
+.flow-arrow { color: #9ca3af; font-size: 18px; }
+
+@media print {
+  .cover { height: 100vh; }
+  .page { padding: 40px 48px; }
+  .section { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- 커버 -->
+<div class="cover">
+  <div class="cover-tag">Clone Coding 05</div>
+  <div class="cover-title">🌤️ 날씨 앱</div>
+  <div class="cover-sub">async/await와 URLSession으로 실시간 외부 API 데이터를 가져옵니다</div>
+  <div class="cover-badge">Xcode 15 · iOS 17 · async/await · Open-Meteo API</div>
+</div>
+
+<!-- 본문 -->
+<div class="page">
+
+  <!-- Section 1: 배우는 것 -->
+  <div class="section">
+    <div class="section-label">What You Learn</div>
+    <h2>이 프로젝트에서 배우는 것</h2>
+    <div class="step-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">async/await</div>
+        <div class="step-desc">비동기 네트워크 요청을 동기 코드처럼 순서대로 작성</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">Codable + CodingKeys</div>
+        <div class="step-desc">snake_case JSON을 camelCase Swift 프로퍼티로 변환</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">URLSession</div>
+        <div class="step-desc">iOS 기본 HTTP 클라이언트, URLComponents로 URL 구성</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-title">.task</div>
+        <div class="step-desc">뷰가 나타날 때 자동으로 비동기 작업을 시작하는 뷰 모디파이어</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: 학습 순서 -->
+  <div class="section">
+    <div class="section-label">Learning Path</div>
+    <h2>학습 순서</h2>
+    <div class="step-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">실행 — 10분</div>
+        <div class="step-desc">여러 도시 탭 스와이프, 날씨 로딩, 시간별/일별 예보 확인</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">API 먼저 이해 — 20분</div>
+        <div class="step-desc">open-meteo.com 에서 직접 URL 만들어보기</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">코드 읽기 — 40분</div>
+        <div class="step-desc">WeatherModel → WeatherService → WeatherView 순서</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-title">직접 만들기 — 3시간</div>
+        <div class="step-desc">async fetch → Codable 모델 → UI 구성</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: 체크리스트 -->
+  <div class="section">
+    <div class="section-label">Checklist</div>
+    <h2>이해도 체크리스트</h2>
+    <ul class="checklist">
+      <li>async 함수를 호출할 때 반드시 await를 붙여야 하는 이유를 안다</li>
+      <li>try await URLSession.shared.data(from:url)의 반환 타입을 설명할 수 있다</li>
+      <li>CodingKeys enum으로 JSON 키와 Swift 프로퍼티를 매핑하는 방법을 구현할 수 있다</li>
+      <li>@MainActor.run { } 이 필요한 이유를 설명할 수 있다</li>
+      <li>.task { await service.fetch(city:) } 가 언제 실행되는지 안다</li>
+      <li>weatherData를 [UUID: WeatherResponse] 딕셔너리로 캐싱하는 이유를 이해한다</li>
+    </ul>
+  </div>
+
+  <!-- Section 4: 핵심 코드 -->
+  <div class="section">
+    <div class="section-label">Key Code</div>
+    <h2>핵심 코드 패턴</h2>
+
+    <h3>1. async/await 네트워크 요청</h3>
+    <div class="code-block"><code><span class="kw">func</span> <span class="fn">fetch</span>(city: <span class="ty">City</span>) <span class="kw">async</span> {
+    <span class="kw">var</span> comps = <span class="ty">URLComponents</span>(string: <span class="str">"https://api.open-meteo.com/v1/forecast"</span>)!
+    comps.queryItems = [
+        .<span class="fn">init</span>(name: <span class="str">"latitude"</span>,  value: <span class="ty">String</span>(city.lat)),
+        .<span class="fn">init</span>(name: <span class="str">"longitude"</span>, value: <span class="ty">String</span>(city.lon)),
+        .<span class="fn">init</span>(name: <span class="str">"current"</span>,   value: <span class="str">"temperature_2m,weathercode"</span>),
+        .<span class="fn">init</span>(name: <span class="str">"hourly"</span>,    value: <span class="str">"temperature_2m,weathercode"</span>),
+    ]
+
+    <span class="kw">let</span> (data, _) = <span class="kw">try</span>! <span class="kw">await</span> <span class="ty">URLSession</span>.shared.<span class="fn">data</span>(from: comps.url!)
+    <span class="kw">let</span> response  = <span class="kw">try</span>! <span class="ty">JSONDecoder</span>().<span class="fn">decode</span>(<span class="ty">WeatherResponse</span>.<span class="kw">self</span>, from: data)
+
+    <span class="kw">await</span> <span class="ty">MainActor</span>.<span class="fn">run</span> {
+        weatherData[city.id] = response   <span class="cm">// UI 스레드에서 업데이트</span>
+    }
+}</code></div>
+
+    <h3>2. CodingKeys 매핑</h3>
+    <div class="code-block"><code><span class="kw">struct</span> <span class="ty">CurrentWeather</span>: <span class="ty">Codable</span> {
+    <span class="kw">let</span> temperature: <span class="ty">Double</span>
+    <span class="kw">let</span> weathercode: <span class="ty">Int</span>
+
+    <span class="kw">enum</span> <span class="ty">CodingKeys</span>: <span class="ty">String</span>, <span class="ty">CodingKey</span> {
+        <span class="kw">case</span> temperature  = <span class="str">"temperature_2m"</span>   <span class="cm">// JSON 키 → Swift 이름</span>
+        <span class="kw">case</span> weathercode  = <span class="str">"weathercode"</span>
+    }
+}</code></div>
+  </div>
+
+  <!-- Section 5: 퀴즈 -->
+  <div class="section">
+    <div class="section-label">Quiz</div>
+    <h2>이해도 퀴즈</h2>
+    <div class="quiz-box">
+      <div class="quiz-label">QUIZ — 스스로 답해보세요</div>
+      <div class="quiz-q">Q1. MainActor.run {} 없이 백그라운드 스레드에서 UI를 업데이트하면?</div>
+      <div class="quiz-q">Q2. URLComponents를 쓰는 이유 (직접 문자열로 URL 만드는 것 vs)?</div>
+      <div class="quiz-q">Q3. weatherData 캐시가 없으면 도시를 탭할 때마다 어떤 일이 생기나요?</div>
+    </div>
+  </div>
+
+  <!-- Section 6: 도전 과제 -->
+  <div class="section">
+    <div class="section-label">Challenge</div>
+    <h2>도전 과제</h2>
+    <div class="challenge-box">
+      <div class="challenge-label">CHALLENGE — 기능을 직접 추가해보세요</div>
+      <div class="challenge-item">현재 위치 날씨 (CoreLocation + CLLocationManager)</div>
+      <div class="challenge-item">날씨 코드별 배경 애니메이션 (비 오는 날 빗방울 파티클)</div>
+      <div class="challenge-item">미세먼지 데이터 추가 (Open-Meteo air quality API)</div>
+      <div class="challenge-item">날씨 위젯 (WidgetKit) 추가</div>
+    </div>
+  </div>
+
+  <!-- Section 7: API 흐름 -->
+  <div class="section">
+    <div class="section-label">Data Flow</div>
+    <h2>API 데이터 흐름</h2>
+    <div class="flow-row">
+      <div class="flow-box">WeatherApp</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">.environment(service)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">ContentView<br><small style="font-weight:400;color:#6b7280;">(.task)</small></div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-box">await service.fetch(city)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">URLSession</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">open-meteo.com API</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-box">JSONDecoder</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">WeatherResponse</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">@MainActor<br><small style="font-weight:400;color:#6b7280;">weatherData[city.id]</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">WeatherView 자동 갱신</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
