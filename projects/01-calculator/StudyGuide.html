@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>계산기 학습 가이드</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; background: #fff; color: #1a1a1a; }
+
+  /* 커버 */
+  .cover {
+    width: 100%; height: 100vh; min-height: 700px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #FF6B2B 100%);
+    display: flex; flex-direction: column; justify-content: center; padding: 80px;
+    page-break-after: always;
+  }
+  .cover-tag { font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 24px; }
+  .cover-title { font-size: 56px; font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 16px; }
+  .cover-sub { font-size: 18px; color: rgba(255,255,255,.8); line-height: 1.6; max-width: 560px; }
+  .cover-badge {
+    margin-top: 48px; display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,.15); border-radius: 100px; padding: 10px 20px;
+    color: #fff; font-size: 14px;
+  }
+
+  /* 본문 */
+  .page { max-width: 800px; margin: 0 auto; padding: 64px 48px; }
+  .section { margin-bottom: 56px; page-break-inside: avoid; }
+  .section-label {
+    font-size: 11px; letter-spacing: .15em; text-transform: uppercase;
+    color: #FF6B2B; font-weight: 700; margin-bottom: 16px;
+  }
+  h2 { font-size: 28px; font-weight: 800; margin-bottom: 20px; }
+  h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #333; }
+  p { font-size: 15px; line-height: 1.8; color: #444; margin-bottom: 12px; }
+
+  /* 학습 단계 카드 */
+  .step-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .step-card {
+    border: 1.5px solid #e5e7eb; border-radius: 14px; padding: 24px;
+    background: #fafafa;
+  }
+  .step-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #FF6B2B; color: #fff;
+    font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center;
+    margin-bottom: 12px;
+  }
+  .step-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .step-desc { font-size: 13px; color: #666; line-height: 1.7; }
+
+  /* 학습 순서 */
+  .learn-step { margin-bottom: 24px; padding: 24px; background: #fafafa; border-radius: 14px; border: 1.5px solid #e5e7eb; }
+  .learn-step-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .learn-step-badge {
+    background: #FF6B2B; color: #fff; font-size: 12px; font-weight: 700;
+    padding: 4px 12px; border-radius: 100px;
+  }
+  .learn-step-time { font-size: 13px; color: #888; }
+  .learn-step-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .learn-step-desc { font-size: 14px; color: #555; line-height: 1.7; }
+
+  /* 체크리스트 */
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; line-height: 1.6;
+  }
+  .checklist li::before {
+    content: ''; flex-shrink: 0; margin-top: 3px;
+    width: 18px; height: 18px; border: 2px solid #d1d5db; border-radius: 4px;
+  }
+
+  /* 코드 블록 */
+  .code-block {
+    background: #0d1117; border-radius: 10px; padding: 20px 24px;
+    margin: 16px 0; overflow-x: auto;
+  }
+  .code-block code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 13px; color: #e6edf3; line-height: 1.7; white-space: pre; }
+  .kw { color: #ff7b72; } .ty { color: #79c0ff; } .str { color: #a5d6ff; }
+  .cm { color: #8b949e; font-style: italic; } .fn { color: #d2a8ff; }
+
+  /* 코드 제목 */
+  .code-title { font-size: 13px; font-weight: 700; color: #555; margin-bottom: 4px; }
+
+  /* 퀴즈 */
+  .quiz-box {
+    background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 14px;
+    padding: 24px; margin-top: 16px;
+  }
+  .quiz-label { font-size: 11px; font-weight: 700; color: #16a34a; letter-spacing: .1em; margin-bottom: 12px; }
+  .quiz-q { font-size: 14px; font-weight: 600; color: #166534; margin-bottom: 8px; padding-left: 12px; border-left: 3px solid #4ade80; }
+
+  /* 도전 과제 */
+  .challenge-box {
+    background: #fffbeb; border: 1.5px solid #fcd34d; border-radius: 14px;
+    padding: 24px; margin-top: 16px;
+  }
+  .challenge-label { font-size: 11px; font-weight: 700; color: #d97706; letter-spacing: .1em; margin-bottom: 12px; }
+  .challenge-item { font-size: 14px; color: #92400e; margin-bottom: 8px; padding-left: 16px; position: relative; }
+  .challenge-item::before { content: '▶'; position: absolute; left: 0; color: #f59e0b; font-size: 10px; top: 2px; }
+
+  /* 인포 테이블 */
+  .info-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .info-table th, .info-table td {
+    padding: 12px 16px; text-align: left; font-size: 14px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .info-table th { font-weight: 700; color: #555; background: #f9fafb; }
+
+  @media print {
+    .cover { height: 100vh; }
+    .page { padding: 40px 48px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 커버 -->
+<div class="cover">
+  <div class="cover-tag">Clone Coding 01</div>
+  <div class="cover-title">🧮 계산기</div>
+  <div class="cover-sub">iOS 계산기를 클론하며 SwiftUI의 레이아웃과 상태 관리를 익힙니다</div>
+  <div class="cover-badge">Xcode 15 · iOS 17 · SwiftUI</div>
+</div>
+
+<!-- 본문 -->
+<div class="page">
+
+  <!-- Section 1 -->
+  <div class="section">
+    <div class="section-label">Learning Goals</div>
+    <h2>이 프로젝트에서 배우는 것</h2>
+    <div class="step-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">@Observable</div>
+        <div class="step-desc">화면과 로직 분리, CalculatorLogic 클래스로 상태 분리 패턴</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">GeometryReader</div>
+        <div class="step-desc">화면 크기에 따라 버튼 크기를 동적으로 계산하는 방법</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">enum</div>
+        <div class="step-desc">CalcButton 열거형으로 버튼 데이터를 구조화하는 패턴</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-title">ForEach + 2D Array</div>
+        <div class="step-desc">buttonLayout 2차원 배열로 그리드를 구성하는 기법</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="section">
+    <div class="section-label">Study Path</div>
+    <h2>추천 학습 순서</h2>
+
+    <div class="learn-step">
+      <div class="learn-step-header">
+        <span class="learn-step-badge">STEP 1</span>
+        <span class="learn-step-time">⏱ 10분</span>
+      </div>
+      <div class="learn-step-title">실행 먼저</div>
+      <div class="learn-step-desc">.xcodeproj를 열고 시뮬레이터에서 바로 실행해 보세요. 모든 버튼을 눌러보며 동작을 먼저 파악합니다.</div>
+    </div>
+
+    <div class="learn-step">
+      <div class="learn-step-header">
+        <span class="learn-step-badge">STEP 2</span>
+        <span class="learn-step-time">⏱ 30분</span>
+      </div>
+      <div class="learn-step-title">코드 읽기</div>
+      <div class="learn-step-desc">CalcButton.swift → CalculatorLogic.swift → ContentView.swift 순서로 읽습니다. 주석을 보며 각 프로퍼티의 역할을 파악하세요.</div>
+    </div>
+
+    <div class="learn-step">
+      <div class="learn-step-header">
+        <span class="learn-step-badge">STEP 3</span>
+        <span class="learn-step-time">⏱ 2시간</span>
+      </div>
+      <div class="learn-step-title">직접 만들기</div>
+      <div class="learn-step-desc">새 Xcode 프로젝트를 생성한 후 보지 않고 처음부터 작성합니다. 막히면 힌트만 보고 다시 도전하세요.</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="section">
+    <div class="section-label">Self Check</div>
+    <h2>핵심 개념 체크리스트</h2>
+    <ul class="checklist">
+      <li>@Observable 클래스와 @State 변수의 차이를 설명할 수 있다</li>
+      <li>enum에 연산 프로퍼티(backgroundColor, foregroundColor)를 추가하는 이유를 안다</li>
+      <li>GeometryReader에서 geo.size.width로 버튼 크기를 계산하는 방식을 이해한다</li>
+      <li>2D 배열([[CalcButton]])을 ForEach로 중첩 순회하는 방법을 안다</li>
+      <li>displayText를 최대 12자리로 포맷하는 방법을 구현할 수 있다</li>
+      <li>소수점 처리(0.0 → "0", 5.0 → "5")를 직접 구현할 수 있다</li>
+    </ul>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="section">
+    <div class="section-label">Code Analysis</div>
+    <h2>핵심 코드 분석</h2>
+
+    <div class="code-title">CalculatorLogic의 핵심 패턴</div>
+    <div class="code-block"><code><span class="kw">@Observable</span> <span class="kw">class</span> <span class="ty">CalculatorLogic</span> {
+    <span class="kw">var</span> displayText = <span class="str">"0"</span>
+    <span class="kw">private var</span> currentValue: <span class="ty">Double</span> = <span class="str">0</span>
+    <span class="kw">private var</span> <span class="fn">operator</span>: <span class="ty">String</span>? = <span class="kw">nil</span>
+
+    <span class="kw">func</span> <span class="fn">tap</span>(_ button: <span class="ty">CalcButton</span>) {
+        <span class="kw">switch</span> button {
+        <span class="kw">case</span> .<span class="fn">digit</span>(<span class="kw">let</span> d): <span class="fn">appendDigit</span>(d)
+        <span class="kw">case</span> .<span class="fn">operator</span>(<span class="kw">let</span> op): <span class="fn">setOperator</span>(op)
+        <span class="kw">case</span> .equals: <span class="fn">calculate</span>()
+        <span class="kw">case</span> .clear: <span class="fn">reset</span>()
+        }
+    }
+}</code></div>
+
+    <div class="code-title" style="margin-top:24px;">GeometryReader 버튼 크기 계산</div>
+    <div class="code-block"><code><span class="ty">GeometryReader</span> { geo <span class="kw">in</span>
+    <span class="kw">let</span> w = geo.size.width
+    <span class="kw">let</span> buttonSize = (w - <span class="str">5</span> * <span class="str">12</span>) / <span class="str">4</span>  <span class="cm">// 4열, 간격 12pt</span>
+
+    <span class="ty">VStack</span>(spacing: <span class="str">12</span>) {
+        <span class="ty">ForEach</span>(buttonLayout, id: \.self) { row <span class="kw">in</span>
+            <span class="ty">HStack</span>(spacing: <span class="str">12</span>) {
+                <span class="ty">ForEach</span>(row, id: \.self) { btn <span class="kw">in</span>
+                    <span class="ty">CalcButtonView</span>(button: btn, size: buttonSize)
+                }
+            }
+        }
+    }
+}</code></div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="section">
+    <div class="section-label">Quiz</div>
+    <h2>셀프 체크 퀴즈</h2>
+    <div class="quiz-box">
+      <div class="quiz-label">SELF CHECK QUIZ</div>
+      <div class="quiz-q">Q1. <code>@Observable</code>을 붙인 클래스와 일반 클래스의 차이는?</div>
+      <div class="quiz-q">Q2. <code>enum CalcButton</code>에서 <code>isWide: Bool</code>이 필요한 이유는?</div>
+      <div class="quiz-q" style="margin-bottom:0;">Q3. <code>shouldResetDisplay</code> 플래그가 없으면 어떤 버그가 생기나요?</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="section">
+    <div class="section-label">Challenge</div>
+    <h2>도전 과제</h2>
+    <div class="challenge-box">
+      <div class="challenge-label">BONUS CHALLENGES</div>
+      <div class="challenge-item">가로 모드에서도 버튼이 정상 배치되도록 수정</div>
+      <div class="challenge-item">최근 계산 기록을 List로 표시하는 기능 추가</div>
+      <div class="challenge-item">다크모드 / 라이트모드 자동 전환 지원 (현재는 .dark 고정)</div>
+      <div class="challenge-item">소수점 6자리까지만 표시하고 반올림하는 포맷터 적용</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
