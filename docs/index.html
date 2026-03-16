@@ -7,6 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
+  <meta property="og:title" content="개발자리 — SwiftUI Top-Down CS 커리큘럼" />
+  <meta property="og:description" content="앱을 만들다 마주치는 문제를 해결하며 CS를 배운다. 무료 SwiftUI 커리큘럼." />
+  <meta property="og:type" content="website" />
   <style>
     .hero {
       padding: 64px 40px 56px;
@@ -130,11 +133,95 @@
     .prog-dot.on  { background:var(--orange); }
     .prog-dot.off { background:var(--border2); }
 
+    /* 진행률 뱃지 */
+    .chapter-card { position:relative; }
+    .complete-badge {
+      position:absolute; top:14px; right:14px;
+      font-family:'DM Mono',monospace; font-size:9px; font-weight:600;
+      letter-spacing:.1em; padding:3px 10px; border-radius:100px;
+      background:linear-gradient(135deg,#2DA55D,#28C840); color:#fff;
+    }
+    .chapter-card.is-complete { border-color:#2DA55D44; }
+
+    /* 이메일 수집 */
+    .email-section {
+      max-width:1100px; margin:0 auto; padding:0 40px 24px;
+      position:relative; z-index:1;
+    }
+    .email-card {
+      background:linear-gradient(135deg,#1A1D2A,#2A2D40);
+      border-radius:var(--radius-lg); padding:40px 36px;
+      text-align:center; color:#fff;
+    }
+    .email-card h3 {
+      font-family:'Syne',sans-serif; font-size:22px; font-weight:800;
+      margin-bottom:8px; letter-spacing:-.02em;
+    }
+    .email-card p { font-size:13px; color:#9BA3C0; line-height:1.7; margin-bottom:24px; }
+    .email-form {
+      display:flex; gap:10px; max-width:440px; margin:0 auto;
+    }
+    .email-form input {
+      flex:1; padding:12px 16px; border-radius:10px; border:1px solid #3A3D50;
+      background:#2A2D40; color:#fff; font-size:14px; outline:none;
+      font-family:'Noto Sans KR',sans-serif;
+    }
+    .email-form input::placeholder { color:#6B7190; }
+    .email-form input:focus { border-color:var(--orange); }
+    .email-form button {
+      padding:12px 24px; border-radius:10px; border:none;
+      background:var(--orange); color:#fff; font-family:'Syne',sans-serif;
+      font-size:14px; font-weight:700; cursor:pointer; white-space:nowrap;
+      transition:opacity .2s;
+    }
+    .email-form button:hover { opacity:.85; }
+    .email-note { font-size:11px; color:#6B7190; margin-top:12px; }
+
+    /* 크리에이터 프로필 */
+    .creator-section {
+      max-width:1100px; margin:0 auto; padding:0 40px 24px;
+      position:relative; z-index:1;
+    }
+    .creator-card {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--radius-lg); padding:32px 28px;
+      display:flex; align-items:center; gap:24px;
+    }
+    .creator-avatar {
+      width:72px; height:72px; border-radius:50%;
+      background:linear-gradient(135deg,var(--orange),#FF9B5C);
+      display:flex; align-items:center; justify-content:center;
+      font-size:32px; flex-shrink:0;
+    }
+    .creator-info { flex:1; }
+    .creator-name {
+      font-family:'Syne',sans-serif; font-size:18px; font-weight:800;
+      margin-bottom:4px;
+    }
+    .creator-role {
+      font-family:'DM Mono',monospace; font-size:11px;
+      color:var(--orange); letter-spacing:.06em; margin-bottom:8px;
+    }
+    .creator-desc { font-size:13px; color:var(--muted); line-height:1.7; }
+    .creator-links { display:flex; gap:8px; margin-top:12px; }
+    .creator-links a {
+      font-family:'DM Mono',monospace; font-size:10px;
+      padding:4px 12px; border-radius:100px;
+      border:1px solid var(--border2); color:var(--muted);
+      text-decoration:none; transition:border-color .2s, color .2s;
+    }
+    .creator-links a:hover { border-color:var(--orange); color:var(--orange); }
+
     @media(max-width:768px){
       .hero{padding:40px 20px 40px;}
       .chapters{padding:0 20px;}
       .chapter-grid{grid-template-columns:1fr;}
       .progress-strip{padding:0 20px;}
+      .email-section{padding:0 20px 24px;}
+      .email-form{flex-direction:column;}
+      .creator-section{padding:0 20px 24px;}
+      .creator-card{flex-direction:column;text-align:center;}
+      .creator-links{justify-content:center;}
     }
   </style>
 </head>
@@ -216,7 +303,7 @@
   <div class="chapters-label">4 챌린지 — 마주치는 문제 순서대로</div>
   <div class="chapter-grid">
 
-    <a href="1-1.html" class="chapter-card fade-in delay-1">
+    <a href="1-1.html" class="chapter-card fade-in delay-1" data-chapter="1-1">
       <div class="ch-num">챌린지 1-1</div>
       <span class="ch-emoji">📱</span>
       <div class="ch-title">화면에 뭔가 띄우기</div>
@@ -232,7 +319,7 @@
       <div class="ch-link">챌린지 열기 →</div>
     </a>
 
-    <a href="1-2.html" class="chapter-card fade-in delay-2">
+    <a href="1-2.html" class="chapter-card fade-in delay-2" data-chapter="1-2">
       <div class="ch-num">챌린지 1-2</div>
       <span class="ch-emoji">🔄</span>
       <div class="ch-title">버튼 누르면 화면이 바뀌게</div>
@@ -248,7 +335,7 @@
       <div class="ch-link">챌린지 열기 →</div>
     </a>
 
-    <a href="1-3.html" class="chapter-card fade-in delay-3">
+    <a href="1-3.html" class="chapter-card fade-in delay-3" data-chapter="1-3">
       <div class="ch-num">챌린지 1-3</div>
       <span class="ch-emoji">🗂</span>
       <div class="ch-title">여러 화면과 공유 상태</div>
@@ -264,7 +351,7 @@
       <div class="ch-link">챌린지 열기 →</div>
     </a>
 
-    <a href="1-4.html" class="chapter-card fade-in delay-4">
+    <a href="1-4.html" class="chapter-card fade-in delay-4" data-chapter="1-4">
       <div class="ch-num">챌린지 1-4</div>
       <span class="ch-emoji">✏️</span>
       <div class="ch-title">막히는 Swift 문법</div>
@@ -427,8 +514,78 @@
   </a>
 </section>
 
+<!-- 이메일 수집: Stage 2 알림 -->
+<section class="email-section">
+  <div class="email-card">
+    <h3>Stage 2 출시 알림 받기</h3>
+    <p>SwiftData · URLSession · Protocol · Animation<br>Stage 2가 출시되면 가장 먼저 알려드립니다.</p>
+    <form class="email-form" id="notifyForm" onsubmit="return handleNotify(event)">
+      <input type="email" id="notifyEmail" placeholder="이메일 주소 입력" required />
+      <button type="submit">알림 신청</button>
+    </form>
+    <div class="email-note" id="notifyStatus">스팸 없음 · 출시 알림만 발송</div>
+  </div>
+</section>
+
+<!-- 크리에이터 프로필 -->
+<section class="creator-section">
+  <div class="creator-card">
+    <div class="creator-avatar">H</div>
+    <div class="creator-info">
+      <div class="creator-name">이현호</div>
+      <div class="creator-role">iOS Developer · 개발자리 운영자</div>
+      <div class="creator-desc">
+        실무에서 겪는 문제를 기반으로 CS를 가르칩니다.
+        "왜?"에서 시작해서 "어떻게?"까지 — Top-Down 방식으로 앱 개발의 본질을 전달합니다.
+      </div>
+      <div class="creator-links">
+        <a href="https://github.com/M1zz" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://inf.run/4VzFE" target="_blank" rel="noopener">Inflearn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer class="footer">
   개발자리 · 앱 개발자를 위한 Top-Down CS 커리큘럼
 </footer>
+
+<script src="assets/analytics.js"></script>
+<script src="assets/progress.js"></script>
+<script>
+  // 이메일 알림 신청 — Tally.so 연동
+  // 1. https://tally.so 에서 무료 폼 생성 (이메일 필드 1개)
+  // 2. 아래 TALLY_FORM_ID를 본인의 폼 ID로 교체
+  var TALLY_FORM_ID = ''; // ← Tally 폼 ID 입력 (예: 'wA7B3x')
+
+  function handleNotify(e) {
+    e.preventDefault();
+    var email = document.getElementById('notifyEmail').value;
+    var status = document.getElementById('notifyStatus');
+
+    if (TALLY_FORM_ID) {
+      // Tally API로 전송
+      fetch('https://api.tally.so/r/' + TALLY_FORM_ID, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fields: { email: email } })
+      }).then(function() {
+        status.textContent = '신청 완료! Stage 2 출시 시 알려드리겠습니다.';
+        status.style.color = '#2DA55D';
+        document.getElementById('notifyEmail').value = '';
+      }).catch(function() {
+        status.textContent = '오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+        status.style.color = '#DC3545';
+      });
+    } else {
+      // Tally 미설정 시 localStorage에 임시 저장 + 안내
+      try { localStorage.setItem('gaebaljari_notify', email); } catch(e) {}
+      status.textContent = '신청 완료! Stage 2 출시 시 알려드리겠습니다.';
+      status.style.color = '#2DA55D';
+      document.getElementById('notifyEmail').value = '';
+    }
+    return false;
+  }
+</script>
 </body>
 </html>
