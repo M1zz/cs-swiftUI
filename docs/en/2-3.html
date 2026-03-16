@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2-3 Writing Reusable Code | Stage 2 | 개발자리</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+  <style>
+    .ch-hero { padding:56px 40px 48px; max-width:1400px; margin:0 auto; position:relative; z-index:1; }
+    .ch-hero h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(36px,6vw,64px); font-weight:800; letter-spacing:-.03em; margin-bottom:12px; }
+    .ch-hero h1 .accent { color:var(--green); }
+    .ch-hero .trigger { font-size:14px; color:var(--muted); font-style:italic; margin-bottom:32px; }
+    .ch-hero .trigger::before { content:'↳ '; color:var(--green); }
+    .ch-nav { display:flex; justify-content:space-between; gap:16px; max-width:1400px; margin:0 auto; padding:0 40px 80px; flex-wrap:wrap; position:relative; z-index:1; }
+    .ch-nav a { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px 24px; text-decoration:none; display:flex; flex-direction:column; gap:4px; flex:1; min-width:200px; transition:border-color .2s; }
+    .ch-nav a:hover { border-color:var(--green); }
+    .ch-nav .nav-dir { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.08em; color:var(--muted); }
+    .ch-nav .nav-title { font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; }
+    .ch-nav .next { text-align:right; }
+    @media(max-width:768px){ .ch-hero{padding:36px 20px 36px;} .ch-nav{padding:0 20px 60px;} }
+  </style>
+</head>
+<body>
+
+<nav class="nav"></nav>
+<script src="../assets/nav.js"></script>
+
+<div class="breadcrumb">
+  <a href="stage2.html">Stage 2</a>
+  <span class="sep">/</span>
+  <span class="current">2-3 Writing Reusable Code</span>
+</div>
+
+<header class="ch-hero fade-in">
+  <div class="badge badge-green" style="margin-bottom:20px;">
+    <span class="badge-dot"></span>
+    Challenge 2-3 · 6 Topics
+  </div>
+  <h1>🧩 Writing Reusable <span class="accent">Code</span></h1>
+  <p class="trigger">You keep copy-pasting similar code</p>
+  <div class="chip-row">
+    <span class="chip green">Protocol</span>
+    <span class="chip green">Extension</span>
+    <span class="chip green">Generic</span>
+    <span class="chip green">throws · try · catch</span>
+    <span class="chip green">Result Type</span>
+    <span class="chip green">enum Associated Values</span>
+  </div>
+</header>
+
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 40px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Questions to Ask Before You Start</div>
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--green);flex-shrink:0;margin-top:1px;">01</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">How does a Protocol differ from an Abstract Class?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--green-dim,#e8f7ef);color:var(--green);padding:2px 6px;border-radius:4px;">Swift protocol vs abstract class differences</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--green);flex-shrink:0;margin-top:1px;">02</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">How much code does Generic actually eliminate?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--green-dim,#e8f7ef);color:var(--green);padding:2px 6px;border-radius:4px;">Swift generics benefits reusable type safe code</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--green);flex-shrink:0;margin-top:1px;">03</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">Between throws and Result, which is better? Do they serve different use cases?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--green-dim,#e8f7ef);color:var(--green);padding:2px 6px;border-radius:4px;">Swift throws vs Result type when to use</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="split-layout">
+  <div class="content-col">
+
+    <!-- Topic 01: Protocol -->
+    <div class="content-section" data-preview="pv-1">
+      <div class="cs-label">Topic 01</div>
+      <h2 class="cs-title">Protocol — A Contract for Types</h2>
+      <div class="cs-subtitle">An interface that enforces implementation — any type that adopts it must fulfill its requirements</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// Protocol declaration — "Implement this to be Drawable"
+protocol Drawable {
+    func draw() -> String
+}
+
+protocol Describable {
+    var description: String { get }
+}
+
+// Adopting multiple Protocols
+struct Circle: Drawable, Describable {
+    let radius: Double
+
+    func draw() -> String { "◯ r=\(radius)" }
+    var description: String { "Circle(radius: \(radius))" }
+}
+
+struct Rectangle: Drawable, Describable {
+    let width: Double
+    let height: Double
+
+    func draw() -> String { "▭ \(width)×\(height)" }
+    var description: String { "Rect(\(width)×\(height))" }
+}
+
+// Polymorphism via Protocol type
+let shapes: [any Drawable] = [
+    Circle(radius: 5),
+    Rectangle(width: 10, height: 3),
+    Circle(radius: 2)
+]
+
+// Call draw() without knowing the concrete type
+shapes.forEach { print($0.draw()) }
+// ◯ r=5.0
+// ▭ 10.0×3.0
+// ◯ r=2.0
+
+// Protocol with default implementation (Extension)
+protocol Shape: Drawable {
+    var area: Double { get }
+    func describe() -> String
+}
+
+extension Shape {
+    // Default implementation — adopting types work without override
+    func describe() -> String {
+        "The area of this shape is \(area)."
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--green);background:var(--green-dim,#e8f7ef);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--green);">Think About It</div>
+        <ul>
+          <li>What does <code>protocol Shape: Drawable</code> mean? (protocol inheriting from another protocol)</li>
+          <li>What is the difference between <code>any Drawable</code> and <code>some Drawable</code>?</li>
+          <li>What is the difference between <code>{ get }</code> and <code>{ get set }</code> in Protocol property requirements?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-green">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Protocol = Contract</div>
+            <div class="item-desc">Adopting types must implement all requirements. Verified at compile time, so no runtime errors</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Protocol Polymorphism</div>
+            <div class="item-desc">Group different types under the same Protocol type in an array and call the same methods</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Protocol + Extension</div>
+            <div class="item-desc">Provide default implementations in an Extension so adopting types only override when needed. Eliminates code duplication</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 02: Extension -->
+    <div class="content-section" data-preview="pv-2">
+      <div class="cs-label">Topic 02</div>
+      <h2 class="cs-title">Extension — Adding Functionality to Existing Types</h2>
+      <div class="cs-subtitle">Add new features to existing types like String, Int, and Array without access to their source code</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// String Extension
+extension String {
+    var isEmail: Bool {
+        contains("@") && contains(".")
+    }
+
+    var trimmed: String {
+        trimmingCharacters(in: .whitespaces)
+    }
+
+    func repeated(_ times: Int) -> String {
+        String(repeating: self, count: times)
+    }
+}
+
+"hello@example.com".isEmail   // true
+"  hello  ".trimmed            // "hello"
+"ha".repeated(3)               // "hahaha"
+
+// Int Extension
+extension Int {
+    var isEven: Bool { self % 2 == 0 }
+    var isOdd: Bool  { !isEven }
+
+    // Clamp within range
+    func clamped(to range: ClosedRange<Int>) -> Int {
+        min(max(self, range.lowerBound), range.upperBound)
+    }
+}
+
+7.isOdd                    // true
+150.clamped(to: 0...100)   // 100
+
+// Array Extension
+extension Array where Element: Comparable {
+    var sortedUnique: [Element] {
+        Array(Set(self)).sorted()
+    }
+}
+
+[3, 1, 2, 1, 3].sortedUnique  // [1, 2, 3]
+
+// Collection Extension — safe subscript
+extension Collection {
+    subscript(safe index: Index) -> Element? {
+        indices.contains(index) ? self[index] : nil
+    }
+}
+
+let arr = [1, 2, 3]
+arr[safe: 5]  // nil (no crash)</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--green);background:var(--green-dim,#e8f7ef);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--green);">Think About It</div>
+        <ul>
+          <li>Why can't you add stored properties via Extension?</li>
+          <li>When is a conditional Extension like <code>where Element: Comparable</code> useful?</li>
+          <li>What should you be careful about when adding Extensions to Apple's Foundation types (String, Array)?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-green">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Extension Limitations</div>
+            <div class="item-desc">Cannot add stored properties. Only computed properties, methods, initializers, and protocol conformances</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Conditional Extension</div>
+            <div class="item-desc">A <code>where</code> clause activates the Extension only when specific type conditions are met. Preserves type safety</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Code Organization Tool</div>
+            <div class="item-desc">Split the same type into multiple Extensions by feature for better readability. Works well with <code>// MARK: - Protocol</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 03: Generic -->
+    <div class="content-section" data-preview="pv-3">
+      <div class="cs-label">Topic 03</div>
+      <h2 class="cs-title">Generic — Type-Independent Code</h2>
+      <div class="cs-subtitle">No need to write separate versions for Int, String, and Double</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// Generic stack data structure
+struct Stack<Element> {
+    private var storage: [Element] = []
+
+    mutating func push(_ element: Element) {
+        storage.append(element)
+    }
+
+    mutating func pop() -> Element? {
+        storage.popLast()
+    }
+
+    var top: Element? { storage.last }
+    var isEmpty: Bool { storage.isEmpty }
+    var count: Int { storage.count }
+}
+
+var intStack = Stack<Int>()
+intStack.push(1); intStack.push(2); intStack.push(3)
+intStack.pop()  // 3
+
+var strStack = Stack<String>()
+strStack.push("Swift")
+strStack.push("Generic")
+
+// Generic function
+func swapValues<T>(_ a: inout T, _ b: inout T) {
+    let temp = a
+    a = b
+    b = temp
+}
+
+// Generic + where (type constraint)
+func findMin<T: Comparable>(_ array: [T]) -> T? {
+    guard !array.isEmpty else { return nil }
+    return array.min()
+}
+
+func findMax<T: Comparable>(_ array: [T]) -> T? {
+    array.max()
+}
+
+findMin([3, 1, 4, 1, 5])  // Optional(1)
+findMin(["banana", "apple", "cherry"])  // Optional("apple")
+
+// Multiple type constraints
+func process<T: Hashable & Comparable>(
+    _ items: [T]
+) -> [T] {
+    Array(Set(items)).sorted()
+}
+
+// Generic typealias
+typealias Pair<T> = (T, T)
+let point: Pair<Double> = (3.0, 4.0)</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--green);background:var(--green-dim,#e8f7ef);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--green);">Think About It</div>
+        <ul>
+          <li>Why can't you use the <code>&lt;</code> operator without <code>T: Comparable</code>?</li>
+          <li>Swift's <code>Array</code> and <code>Optional</code> are also Generic types. What might their internal implementation look like?</li>
+          <li><code>some View</code> is an opaque type. How does it differ from Generic's <code>T</code>?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-green">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Type Parameter &lt;T&gt;</div>
+            <div class="item-desc">A placeholder for an actual type. The compiler determines the type at the call site. Achieves both type safety and reusability</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Type Constraint</div>
+            <div class="item-desc"><code>T: Protocol</code> or <code>T: Class</code> specifies capabilities T must have. Enables use of constrained methods/operators</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">where Clause</div>
+            <div class="item-desc">Expresses complex type relationships. Can also express associated type relationships like <code>where T == U.Element</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 04: throws/try/catch -->
+    <div class="content-section" data-preview="pv-4">
+      <div class="cs-label">Topic 04</div>
+      <h2 class="cs-title">throws · try · catch — Error Handling</h2>
+      <div class="cs-subtitle">Express exceptional situations as types and force callers to handle them explicitly</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// Custom error type
+enum AppError: LocalizedError {
+    case invalidInput(String)
+    case notFound(id: Int)
+    case permissionDenied
+    case unknown(Error)
+
+    var errorDescription: String? {
+        switch self {
+        case .invalidInput(let msg):
+            return "Invalid input: \(msg)"
+        case .notFound(let id):
+            return "ID \(id) not found"
+        case .permissionDenied:
+            return "Permission denied"
+        case .unknown(let e):
+            return "Unknown error: \(e)"
+        }
+    }
+}
+
+// throws function
+func validateAge(_ age: Int) throws -> String {
+    guard age >= 0 else {
+        throw AppError.invalidInput("Age must be 0 or greater")
+    }
+    guard age <= 150 else {
+        throw AppError.invalidInput("Invalid age")
+    }
+    return age >= 18 ? "Adult" : "Minor"
+}
+
+// do-catch error handling
+do {
+    let result = try validateAge(-5)
+    print(result)
+} catch AppError.invalidInput(let msg) {
+    print("Input error:", msg)   // Input error: Age must be 0 or greater
+} catch AppError.permissionDenied {
+    print("No permission")
+} catch {
+    print("Other error:", error)
+}
+
+// try? — returns nil on failure (ignores error)
+let result1 = try? validateAge(25)    // Optional("Adult")
+let result2 = try? validateAge(-1)    // nil
+
+// try! — crashes on failure (use only when certain)
+let result3 = try! validateAge(30)    // "Adult"
+
+// Propagating errors upward (rethrows)
+func transform<T>(
+    _ value: T,
+    using block: (T) throws -> T
+) rethrows -> T {
+    try block(value)
+}</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--green);background:var(--green-dim,#e8f7ef);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--green);">Think About It</div>
+        <ul>
+          <li>Using <code>try?</code> discards error information. In what situations is this tradeoff acceptable?</li>
+          <li>What is <code>rethrows</code> and why is it needed?</li>
+          <li>How does Swift's error handling differ from Objective-C's <code>NSError</code> approach?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-green">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">throws = Explicit Error Declaration</div>
+            <div class="item-desc">Declares in the function signature that errors may be thrown. Callers must handle them, preventing missed error handling</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">try / try? / try!</div>
+            <div class="item-desc"><code>try</code>: must use do-catch | <code>try?</code>: converts to Optional | <code>try!</code>: forced (crashes on failure)</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">LocalizedError</div>
+            <div class="item-desc">Implement <code>errorDescription</code> to provide user-friendly messages. Can be used directly in Alert</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 05: Result -->
+    <div class="content-section" data-preview="pv-5">
+      <div class="cs-label">Topic 05</div>
+      <h2 class="cs-title">Result&lt;Success, Failure&gt; — Error as a Value</h2>
+      <div class="cs-subtitle">Represent success or failure as a single type — especially useful in async contexts or callbacks</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// Basic Result type usage
+func divide(_ a: Double, by b: Double) -> Result<Double, AppError> {
+    guard b != 0 else {
+        return .failure(.invalidInput("Cannot divide by zero"))
+    }
+    return .success(a / b)
+}
+
+// Handle with switch
+let result = divide(10, by: 2)
+switch result {
+case .success(let value):
+    print("Result:", value)  // Result: 5.0
+case .failure(let error):
+    print("Error:", error.errorDescription ?? "")
+}
+
+// map / flatMap chaining
+let doubled = divide(10, by: 2)
+    .map { $0 * 2 }           // success → transform value
+    // .mapError { ... }       // failure → transform error
+
+// Convert to throws with get()
+do {
+    let value = try divide(10, by: 0).get()
+    print(value)
+} catch {
+    print(error)  // Cannot divide by zero
+}
+
+// Result vs throws — when to use which?
+// throws: synchronous functions, immediate control flow
+// Result: passing in callbacks, deferred handling, storing as a value
+
+// Store a Result and handle later
+struct CachedResult<T> {
+    var value: Result<T, AppError>?
+
+    func unwrap() throws -> T {
+        guard let result = value else {
+            throw AppError.notFound(id: 0)
+        }
+        return try result.get()
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--green);background:var(--green-dim,#e8f7ef);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--green);">Think About It</div>
+        <ul>
+          <li>How is <code>Result.get()</code> implemented internally?</li>
+          <li>What does <code>Result&lt;T, Never&gt;</code> mean? What is Never?</li>
+          <li>In an async/await environment, when is it appropriate to return a Result type?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-green">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Result = Return Value with Error</div>
+            <div class="item-desc">Represents success (.success) and failure (.failure) as a single enum. Useful for structuring error handling in callback patterns</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">map / flatMap</div>
+            <div class="item-desc">Transforms the success case value. On failure, it propagates as-is. Same concept as Optional's map</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Interconversion with throws</div>
+            <div class="item-desc"><code>result.get()</code> converts to throws, and <code>Result { try fn() }</code> converts a throwing function to Result</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 06: enum Associated Values -->
+    <div class="content-section" data-preview="pv-6">
+      <div class="cs-label">Topic 06</div>
+      <h2 class="cs-title">enum Associated Values — State with Data</h2>
+      <div class="cs-subtitle">Each case can carry different types of data — the most powerful feature of Swift enums</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// Network state — each case carries different data
+enum NetworkState {
+    case idle
+    case loading(progress: Double)
+    case success(data: Data, statusCode: Int)
+    case failure(error: Error, retryCount: Int)
+}
+
+// Pattern matching + value extraction with switch
+func handleState(_ state: NetworkState) {
+    switch state {
+    case .idle:
+        print("Idle")
+    case .loading(let progress):
+        print("Loading: \(Int(progress * 100))%")
+    case .success(let data, let code):
+        print("Success (\(code)): \(data.count) bytes")
+    case .failure(let error, let retry):
+        print("Failed (retry \(retry)): \(error)")
+    }
+}
+
+handleState(.loading(progress: 0.75))
+// Loading: 75%
+
+// if case let — extract a single case
+let state = NetworkState.success(
+    data: Data(), statusCode: 200
+)
+if case .success(_, let code) = state, code == 200 {
+    print("Request succeeded!")
+}
+
+// Practical example — app notification types
+enum AppNotification {
+    case message(from: String, body: String)
+    case friendRequest(userId: Int, name: String)
+    case systemAlert(title: String, priority: Int)
+    case promotion(discount: Double, expiry: Date)
+}
+
+func notificationTitle(_ n: AppNotification) -> String {
+    switch n {
+    case .message(let from, _):      return "Message from \(from)"
+    case .friendRequest(_, let name): return "\(name) sent a friend request"
+    case .systemAlert(let title, _): return title
+    case .promotion(let d, _):       return "\(Int(d*100))% off!"
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--green);background:var(--green-dim,#e8f7ef);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--green);">Think About It</div>
+        <ul>
+          <li>What is the difference between an enum with associated values and a struct? When do you choose enum?</li>
+          <li>What is the syntax difference between ignoring an associated value with <code>_</code> and binding it?</li>
+          <li>Swift's Optional&lt;T&gt; is actually an enum composed of <code>.none</code> and <code>.some(T)</code>. Explain Optional's behavior from this perspective</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-green">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Associated Values</div>
+            <div class="item-desc">Each case can carry values of different types and counts. Represents state + data as a single type</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Pattern Matching</div>
+            <div class="item-desc">Extract case and data simultaneously with <code>switch</code>, <code>if case</code>, <code>guard case</code>. Nested patterns are also possible</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Exhaustive switch</div>
+            <div class="item-desc">Compile error if not all cases are handled. When a new case is added, the compiler catches any missing handling</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Preview Column -->
+  <div class="preview-col">
+    <div class="sticky-phone">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <div id="pv-1" class="preview-content active">
+            <div class="preview-label">Protocol</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
+              <div style="background:#E8F7EF;border-radius:8px;padding:10px;font-size:10px;">
+                <div style="color:#2DA55D;font-family:'DM Mono',monospace;margin-bottom:4px;">protocol Drawable</div>
+                <div style="color:#333;font-size:9px;">func draw() → String</div>
+              </div>
+              <div style="display:flex;gap:6px;">
+                <div style="flex:1;background:#F7F8FA;border-radius:8px;padding:8px;text-align:center;">
+                  <div style="font-size:18px;">◯</div>
+                  <div style="font-size:9px;color:#2DA55D;font-family:'DM Mono',monospace;">Circle</div>
+                </div>
+                <div style="flex:1;background:#F7F8FA;border-radius:8px;padding:8px;text-align:center;">
+                  <div style="font-size:18px;">▭</div>
+                  <div style="font-size:9px;color:#2DA55D;font-family:'DM Mono',monospace;">Rect</div>
+                </div>
+              </div>
+              <div style="background:#1E1F2E;border-radius:8px;padding:8px;font-family:'DM Mono',monospace;font-size:9px;color:#50FA7B;">
+                shapes.forEach {<br>&nbsp;&nbsp;$0.draw()  // ✓
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-2" class="preview-content">
+            <div class="preview-label">Extension</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
+              <div style="background:#1E1F2E;border-radius:8px;padding:10px;font-family:'DM Mono',monospace;font-size:9px;line-height:1.8;">
+                <span style="color:#FF79C6;">extension</span> <span style="color:#8BE9FD;">String</span> {<br>
+                &nbsp;&nbsp;<span style="color:#FF79C6;">var</span> isEmail: Bool<br>
+                &nbsp;&nbsp;<span style="color:#FF79C6;">var</span> trimmed: String<br>
+                }
+              </div>
+              <div style="background:#F0FFF4;border-radius:8px;padding:8px;font-size:10px;">
+                <div style="color:#2DA55D;font-family:'DM Mono',monospace;">"hello@x.com"</div>
+                <div style="color:#333;">.isEmail → <b>true</b></div>
+              </div>
+              <div style="background:#F0FFF4;border-radius:8px;padding:8px;font-size:10px;">
+                <div style="color:#2DA55D;font-family:'DM Mono',monospace;">[3,1,2,1]</div>
+                <div style="color:#333;">.sortedUnique → <b>[1,2,3]</b></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-3" class="preview-content">
+            <div class="preview-label">Generic</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
+              <div style="background:#1E1F2E;border-radius:8px;padding:10px;font-family:'DM Mono',monospace;font-size:9px;line-height:1.8;">
+                <span style="color:#FF79C6;">struct</span> <span style="color:#8BE9FD;">Stack</span>&lt;<span style="color:#FFB86C;">T</span>&gt; {<br>
+                &nbsp;&nbsp;<span style="color:#FF79C6;">mutating func</span> push(_ e: <span style="color:#FFB86C;">T</span>)<br>
+                &nbsp;&nbsp;<span style="color:#FF79C6;">mutating func</span> pop() → <span style="color:#FFB86C;">T</span>?<br>
+                }
+              </div>
+              <div style="display:flex;gap:6px;">
+                <div style="flex:1;background:#F7F8FA;border-radius:8px;padding:6px;text-align:center;">
+                  <div style="font-size:9px;color:#2DA55D;font-family:'DM Mono',monospace;">Stack&lt;Int&gt;</div>
+                  <div style="font-size:11px;">1 2 3</div>
+                </div>
+                <div style="flex:1;background:#F7F8FA;border-radius:8px;padding:6px;text-align:center;">
+                  <div style="font-size:9px;color:#2DA55D;font-family:'DM Mono',monospace;">Stack&lt;String&gt;</div>
+                  <div style="font-size:11px;">A B</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-4" class="preview-content">
+            <div class="preview-label">throws / catch</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
+              <div style="background:#1E1F2E;border-radius:8px;padding:10px;font-family:'DM Mono',monospace;font-size:9px;line-height:1.8;">
+                <span style="color:#FF79C6;">do</span> {<br>
+                &nbsp;&nbsp;<span style="color:#FF79C6;">let</span> r = <span style="color:#FFB86C;">try</span> validate(<span style="color:#BD93F9;">-5</span>)<br>
+                } <span style="color:#FF79C6;">catch</span> AppError<br>
+                &nbsp;&nbsp;.invalidInput(msg) {<br>
+                &nbsp;&nbsp;print(msg)<br>
+                }
+              </div>
+              <div style="background:#FFF0F0;border-radius:8px;padding:8px;font-size:10px;text-align:center;">
+                <div style="color:#DC3545;font-weight:600;">AppError.invalidInput</div>
+                <div style="color:#666;font-size:9px;">Age must be 0 or greater</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-5" class="preview-content">
+            <div class="preview-label">Result Type</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:space-around;padding:0 8px;">
+              <div style="background:#F0FFF4;border-radius:10px;padding:10px;">
+                <div style="font-size:10px;font-family:'DM Mono',monospace;color:#2DA55D;margin-bottom:4px;">.success(5.0)</div>
+                <div style="font-size:11px;">divide(10, by: 2)</div>
+              </div>
+              <div style="text-align:center;font-size:18px;color:var(--muted);">↕</div>
+              <div style="background:#FFF0F0;border-radius:10px;padding:10px;">
+                <div style="font-size:10px;font-family:'DM Mono',monospace;color:#DC3545;margin-bottom:4px;">.failure(invalidInput)</div>
+                <div style="font-size:11px;">divide(10, by: 0)</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-6" class="preview-content">
+            <div class="preview-label">enum Associated Values</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 4px;">
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;font-size:10px;border-left:3px solid #2DA55D;">
+                <span style="font-family:'DM Mono',monospace;color:#2DA55D;">.idle</span>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;font-size:10px;border-left:3px solid #FFB86C;">
+                <span style="font-family:'DM Mono',monospace;color:#B8860B;">.loading(75%)</span>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;font-size:10px;border-left:3px solid #2DA55D;">
+                <span style="font-family:'DM Mono',monospace;color:#2DA55D;">.success(data, 200)</span>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;font-size:10px;border-left:3px solid #DC3545;">
+                <span style="font-family:'DM Mono',monospace;color:#DC3545;">.failure(err, retry:2)</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Homework -->
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:8px;">Homework</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">After Completing Challenge 2-3</h2>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);background:var(--green-dim,#e8f7ef);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">Required</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Build a Shape Calculator with Protocol</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Define a <code>Shape</code> protocol (area, perimeter, draw) and implement Circle, Rectangle, Triangle. Put them in an [any Shape] array and print the total area</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--green);background:var(--green-dim,#e8f7ef);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">Required</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Generic Stack + throws Error Handling</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Build a Generic Stack that throws <code>StackError.empty</code> when popping from an empty stack. Show error alerts in a SwiftUI View with do-catch</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">Stretch</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Result-Based Form Validation System</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Implement validation functions for email, password, and name fields using <code>Result&lt;String, ValidationError&gt;</code>. Combine multiple validation results and display a comprehensive error list in the View</div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Completion Checklist</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can declare a Protocol and have multiple types adopt it</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can add useful functionality to existing types with Extension</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can write Generic functions/types and apply type constraints</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can choose between throws/do-catch and Result type appropriately</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can represent various state+data combinations as a single type with enum associated values</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Challenge nav -->
+<div class="ch-nav">
+  <a href="2-2.html">
+    <span class="nav-dir">← Previous Challenge</span>
+    <span class="nav-title">2-2 Fetching Data from the Internet</span>
+  </a>
+  <a href="2-4.html" class="next">
+    <span class="nav-dir">Next Challenge →</span>
+    <span class="nav-title">2-4 Building Animated UI</span>
+  </a>
+</div>
+
+<!-- Comments -->
+<div class="comment-donation-wrap">
+  <div class="section-heading">Comments</div>
+  <div class="utterances-wrap">
+    <script src="https://utteranc.es/client.js"
+      repo="M1zz/cs-swiftUI"
+      issue-term="title"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!-- Donation floating button -->
+<div class="donation-float">
+  <div class="donation-float-card" id="donationCard">
+    <div class="section-heading" style="margin-bottom:4px;">Support Us</div>
+    <div class="donation-desc">If this content helped you,<br>a coffee-sized donation would mean a lot :)</div>
+    <img class="donation-qr" src="../kakao-pay-qr.jpg" alt="KakaoPay QR">
+    <div class="donation-name">Hyunho Lee</div>
+    <div class="donation-kakao-badge">KakaoPay</div>
+  </div>
+  <button class="donation-float-btn" onclick="toggleDonation()" aria-label="Support Us">☕</button>
+</div>
+
+<footer class="footer">
+  개발자리 · Stage 2 — Challenge 2-3 · Writing Reusable Code
+</footer>
+
+<script>
+  function highlightSwift(el) {
+    let html = el.textContent;
+    html = html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    html = html.replace(/(\/\/.*)/gm,'<span class="cm">$1</span>');
+    html = html.replace(/"([^"]*?)"/g,'<span class="str">"$1"</span>');
+    html = html.replace(/@(\w+)/g,'<span class="pr">@$1</span>');
+    html = html.replace(/#(\w+)/g,'<span class="pr">#$1</span>');
+    html = html.replace(/(<[^>]+>)|\b(struct|class|var|let|func|import|return|if|else|guard|for|in|case|enum|protocol|some|private|true|false|nil|self|mutating|static|init|try|throw|throws|async|await|actor|do|catch|extension|where|typealias|inout|switch|any|rethrows)\b/g, (m, tag, kw) => tag || `<span class="kw">${kw}</span>`);
+    html = html.replace(/\b(\d+\.?\d*)\b/g,'<span class="num">$1</span>');
+    el.innerHTML = html;
+  }
+  document.querySelectorAll('.swift-code').forEach(highlightSwift);
+
+  const sections = document.querySelectorAll('.content-section');
+  const previews = document.querySelectorAll('.preview-content');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.dataset.preview;
+        previews.forEach(p => p.classList.remove('active'));
+        const t = document.getElementById(id);
+        if (t) t.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
+  sections.forEach(s => observer.observe(s));
+
+  function toggleDonation() {
+    document.getElementById('donationCard').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const float = document.querySelector('.donation-float');
+    if (!float.contains(e.target)) {
+      document.getElementById('donationCard').classList.remove('open');
+    }
+  });
+</script>
+<script src="../assets/progress.js"></script>
+<script src="../assets/analytics.js"></script>
+</body>
+</html>

@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Essential Swift Grammar | Stage 1.5 | devjari</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+  <style>
+    .ch-hero { padding:56px 40px 48px; max-width:1400px; margin:0 auto; position:relative; z-index:1; }
+    .ch-hero h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(36px,6vw,64px); font-weight:800; letter-spacing:-.03em; margin-bottom:12px; }
+    .ch-hero h1 .accent { color:var(--purple); }
+    .ch-hero .trigger { font-size:14px; color:var(--muted); font-style:italic; margin-bottom:32px; }
+    .ch-hero .trigger::before { content:'↳ '; color:var(--purple); }
+    .chip.purple { border-color:#9B7FFF44; color:var(--purple); }
+    .badge-purple { color:var(--purple); background:#7C5DC712; border:1px solid #9B7FFF44; }
+    .ch-nav { display:flex; justify-content:space-between; gap:16px; max-width:1400px; margin:0 auto; padding:0 40px 80px; flex-wrap:wrap; position:relative; z-index:1; }
+    .ch-nav a { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px 24px; text-decoration:none; display:flex; flex-direction:column; gap:4px; flex:1; min-width:200px; transition:border-color .2s; }
+    .ch-nav a:hover { border-color:var(--purple); }
+    .ch-nav .nav-dir { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.08em; color:var(--muted); }
+    .ch-nav .nav-title { font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; }
+    .ch-nav .next { text-align:right; }
+    .topic-questions.purple { background:#7C5DC712; border-left-color:var(--purple); }
+    .topic-questions.purple li::before { color:var(--purple); }
+    .color-purple .item-dot { background:var(--purple); }
+    .color-purple .item-title { color:var(--purple); }
+    @media(max-width:768px){ .ch-hero{padding:36px 20px 36px;} .ch-nav{padding:0 20px 60px;} }
+  </style>
+</head>
+<body>
+
+<nav class="nav"></nav>
+<script src="../assets/nav.js"></script>
+
+<div class="breadcrumb">
+  <a href="index.html">Stage 1</a>
+  <span class="sep">/</span>
+  <span class="current">Essential Swift Grammar</span>
+  <span class="sep">/</span>
+  <a href="stage2.html">Stage 2</a>
+</div>
+
+<header class="ch-hero fade-in">
+  <div class="badge badge-purple" style="margin-bottom:20px;">
+    <span class="badge-dot"></span>
+    Stage 1.5 · 8 Topics · Prerequisite for Stage 2
+  </div>
+  <h1>🔩 Essential Swift <span class="accent">Grammar</span></h1>
+  <p class="trigger">I finished Stage 1, but I don't understand why the code behaves this way</p>
+  <div class="chip-row">
+    <span class="chip purple">Computed Property</span>
+    <span class="chip purple">Property Observer</span>
+    <span class="chip purple">struct vs class</span>
+    <span class="chip purple">mutating</span>
+    <span class="chip purple">Access Control</span>
+    <span class="chip purple">init Patterns</span>
+    <span class="chip purple">Type Casting</span>
+    <span class="chip purple">static · lazy · inout</span>
+  </div>
+</header>
+
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 40px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Questions to consider before starting</div>
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--purple);flex-shrink:0;margin-top:1px;">01</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">When should you choose struct vs class in Swift?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:#7C5DC712;color:var(--purple);padding:2px 6px;border-radius:4px;">Swift struct vs class when to use value reference type</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--purple);flex-shrink:0;margin-top:1px;">02</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">What is the difference between a computed property and a function?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:#7C5DC712;color:var(--purple);padding:2px 6px;border-radius:4px;">Swift computed property vs function difference</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--purple);flex-shrink:0;margin-top:1px;">03</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">Why is access control necessary? What problems arise if you never use private?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:#7C5DC712;color:var(--purple);padding:2px 6px;border-radius:4px;">Swift access control private internal public fileprivate</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="split-layout">
+  <div class="content-col">
+
+    <!-- Topic 01: Computed Property -->
+    <div class="content-section" data-preview="pv-1">
+      <div class="cs-label">Topic 01</div>
+      <h2 class="cs-title">Computed Property</h2>
+      <div class="cs-subtitle">A property that calculates its value instead of storing it</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">struct Rectangle {
+    var width: Double
+    var height: Double
+
+    // Computed Property — if only get exists, get can be omitted
+    var area: Double {
+        width * height
+    }
+
+    // get + set
+    var perimeter: Double {
+        get { (width + height) * 2 }
+        set { width = newValue / 2 - height }
+    }
+}
+
+var rect = Rectangle(width: 10, height: 5)
+print(rect.area)      // 50.0
+print(rect.perimeter) // 30.0
+
+// A common pattern in SwiftUI
+struct UserProfile {
+    var firstName: String
+    var lastName: String
+
+    // Combine without storing
+    var fullName: String { "\(firstName) \(lastName)" }
+
+    // Condition check
+    var isNameValid: Bool { !firstName.isEmpty && !lastName.isEmpty }
+
+    // Formatting
+    var initials: String {
+        let f = firstName.first.map(String.init) ?? ""
+        let l = lastName.first.map(String.init) ?? ""
+        return f + l
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">Think about it</div>
+        <ul>
+          <li>When should you use a computed property vs. a function? What about when the computation is expensive?</li>
+          <li>Why can you omit <code>get { }</code> in a read-only computed property?</li>
+          <li>How can you rename <code>newValue</code> in a <code>set</code> block?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Read-only computed property</div>
+            <div class="item-desc">If only a <code>get { }</code> block exists, it can be omitted. <code>var area: Double { width * height }</code></div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">get + set</div>
+            <div class="item-desc">Access the new value with <code>newValue</code> in <code>set</code>. Useful for bidirectional conversions (e.g., Celsius ↔ Fahrenheit)</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Function vs computed property</div>
+            <div class="item-desc">No parameters and no side effects → computed property. Has side effects or requires parameters → function</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 02: Property Observer -->
+    <div class="content-section" data-preview="pv-2">
+      <div class="cs-label">Topic 02</div>
+      <h2 class="cs-title">Property Observer — willSet / didSet</h2>
+      <div class="cs-subtitle">Run code before or after a property value changes</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">class StepCounter {
+    var steps: Int = 0 {
+        willSet {
+            // Called just before the change — access new value via newValue
+            print("About to change to \(newValue)")
+        }
+        didSet {
+            // Called right after the change — access previous value via oldValue
+            print("Changed from \(oldValue) to \(steps)")
+            if steps >= 10000 {
+                print("Goal reached!")
+            }
+        }
+    }
+}
+
+// A practical pattern in SwiftUI ViewModels
+class CartViewModel: ObservableObject {
+    @Published var items: [CartItem] = [] {
+        didSet {
+            // Auto-save whenever items change
+            save()
+        }
+    }
+
+    @Published var searchText: String = "" {
+        didSet {
+            // Refresh results when search text changes (simple filter)
+            filterItems()
+        }
+    }
+
+    private func save() { /* Save to UserDefaults */ }
+    private func filterItems() { /* Filter logic */ }
+}
+
+// Note: you cannot attach didSet directly to @State
+// → Use the .onChange(of:) modifier instead
+struct ContentView: View {
+    @State private var count = 0
+
+    var body: some View {
+        Stepper("\(count)", value: $count)
+            .onChange(of: count) { old, new in
+                print("\(old) → \(new)")
+            }
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">Think about it</div>
+        <ul>
+          <li>Can you modify the value in <code>willSet</code>? What about in <code>didSet</code>?</li>
+          <li>Is <code>didSet</code> called when you assign a value to a property inside <code>init</code>?</li>
+          <li>Why can't you use <code>didSet</code> with SwiftUI's <code>@State</code>?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">willSet</div>
+            <div class="item-desc">Called just before the value changes. Access the new value via <code>newValue</code>. You cannot modify the value here</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">didSet</div>
+            <div class="item-desc">Called right after the value changes. Access the old value via <code>oldValue</code>. Modifying the same property inside <code>didSet</code> runs only once without recursion</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Not called during init</div>
+            <div class="item-desc">Property observers are not triggered during initializer assignments. This is by design</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 03: struct vs class -->
+    <div class="content-section" data-preview="pv-3">
+      <div class="cs-label">Topic 03</div>
+      <h2 class="cs-title">struct vs class — Value Type vs Reference Type</h2>
+      <div class="cs-subtitle">The most important type choice in Swift</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// struct — value type (copy)
+struct PointS {
+    var x: Int
+    var y: Int
+}
+
+var a = PointS(x: 1, y: 2)
+var b = a        // Creates a copy
+b.x = 99
+print(a.x) // 1  ← a is unchanged
+
+// class — reference type (points to the same object)
+class PointC {
+    var x: Int
+    var y: Int
+    init(x: Int, y: Int) { self.x = x; self.y = y }
+}
+
+var c = PointC(x: 1, y: 2)
+var d = c        // Points to the same object
+d.x = 99
+print(c.x) // 99 ← c is also changed!
+
+// When to use which in SwiftUI
+// struct: data models, View (SwiftUI Views are always structs)
+// class: ObservableObject, network managers, singletons
+
+// Modifying self in a struct method — mutating
+struct Counter {
+    var count = 0
+
+    mutating func increment() {
+        count += 1  // Compile error without mutating
+    }
+
+    mutating func reset() {
+        count = 0
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">Think about it</div>
+        <ul>
+          <li>Why are SwiftUI Views structs? What problems would arise if they were classes?</li>
+          <li>Can you modify properties of a class instance declared with <code>let a = SomeClass()</code>?</li>
+          <li>What is Copy-on-Write, and how do Swift's Array/Dictionary leverage it?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">struct = value type</div>
+            <div class="item-desc">Copied on assignment/passing. Independent state. Thread-safe. Ideal for SwiftUI Views and data models</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">class = reference type</div>
+            <div class="item-desc">Shares the same instance on assignment/passing. Supports inheritance. Used for ObservableObject and shared state</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">mutating</div>
+            <div class="item-desc">Required when a struct method modifies self (the instance). Also applies to enum methods</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 04: Access Control -->
+    <div class="content-section" data-preview="pv-4">
+      <div class="cs-label">Topic 04</div>
+      <h2 class="cs-title">Access Control</h2>
+      <div class="cs-subtitle">Deciding what to expose and what to hide from the outside</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// Access levels (from broadest to narrowest)
+// open > public > internal (default) > fileprivate > private
+
+class BankAccount {
+    // private: accessible only within this class
+    private var balance: Double = 0
+
+    // internal (default): accessible within the same module
+    var owner: String
+
+    // public: accessible from external modules as well
+    public var accountNumber: String
+
+    init(owner: String, number: String) {
+        self.owner = owner
+        self.accountNumber = number
+    }
+
+    // private(set): readable from anywhere, writable only internally
+    private(set) var transactionCount = 0
+
+    func deposit(_ amount: Double) {
+        guard amount > 0 else { return }
+        balance += amount
+        transactionCount += 1
+    }
+
+    func withdraw(_ amount: Double) -> Bool {
+        guard amount <= balance else { return false }
+        balance -= amount
+        transactionCount += 1
+        return true
+    }
+}
+
+// A practical pattern in SwiftUI ViewModels
+class CounterViewModel: ObservableObject {
+    @Published private(set) var count = 0  // Read-only from outside
+
+    func increment() { count += 1 }   // Only modifiable internally
+    func decrement() { count -= 1 }
+    func reset()     { count = 0  }
+}</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">Think about it</div>
+        <ul>
+          <li>What is the difference between <code>private</code> and <code>fileprivate</code>? Can you access a <code>private</code> member from an extension in the same file?</li>
+          <li>Why use the pattern <code>@Published private(set) var count</code>?</li>
+          <li>What problems arise if you never use access control? What does it mean for team projects?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">private</div>
+            <div class="item-desc">Accessible only within the declaring type + extensions in the same file. The most commonly used level</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">internal (default)</div>
+            <div class="item-desc">Applied when no keyword is specified. Accessible throughout the entire module (app target)</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">private(set)</div>
+            <div class="item-desc">Anyone can read, only internal code can write. Commonly used to protect @Published properties in ViewModels</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 05: init -->
+    <div class="content-section" data-preview="pv-5">
+      <div class="cs-label">Topic 05</div>
+      <h2 class="cs-title">init — Initializer Patterns</h2>
+      <div class="cs-subtitle">How to safely initialize instances</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// struct: automatically generates a memberwise init
+struct Point {
+    var x: Double
+    var y: Double
+    // Swift automatically generates init(x:y:)
+}
+let p = Point(x: 1, y: 2)
+
+// Adding a custom init removes the memberwise init
+// Separate it into an extension to keep both
+extension Point {
+    init(value: Double) {
+        self.x = value
+        self.y = value
+    }
+}
+
+// class: you must write init yourself
+class Person {
+    let name: String
+    var age: Int
+    var email: String?   // Optional doesn't need to be set in init
+
+    // Designated initializer
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+
+    // Convenience initializer — reuses another init
+    convenience init(name: String) {
+        self.init(name: name, age: 0)
+    }
+}
+
+// Failable init — initialization that can fail
+struct Color {
+    let hex: String
+
+    init?(hex: String) {  // Note the ?
+        guard hex.hasPrefix("#"), hex.count == 7 else {
+            return nil  // Initialization fails → returns nil
+        }
+        self.hex = hex
+    }
+}
+
+let valid = Color(hex: "#FF6B2B")   // Optional<Color>
+let invalid = Color(hex: "bad")     // nil</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">Think about it</div>
+        <ul>
+          <li>You added a custom init to a struct and existing code broke with a compile error. Why? How do you fix it?</li>
+          <li>Why must <code>convenience init</code> always call <code>self.init(...)</code>?</li>
+          <li>What is the difference between using <code>init?</code> (failable) and throwing an error with <code>throws</code>?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Memberwise init (auto-generated for structs)</div>
+            <div class="item-desc">When no custom init exists, an init with parameters for all stored properties is auto-generated. Add custom inits in an extension to keep both</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">convenience init</div>
+            <div class="item-desc">A convenience initializer in a class that reuses another designated init. Must call an init from the same class</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Failable init — init?</div>
+            <div class="item-desc">Returns nil if initialization conditions are not met. Result is Optional. Commonly used with URL, type conversions, etc.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 06: Type Casting -->
+    <div class="content-section" data-preview="pv-6">
+      <div class="cs-label">Topic 06</div>
+      <h2 class="cs-title">Type Casting — as? / as! / is</h2>
+      <div class="cs-subtitle">How to check and convert types at runtime</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">class Animal { var name: String; init(_ n: String) { name = n } }
+class Dog: Animal { func bark() { print("Woof!") } }
+class Cat: Animal { func meow() { print("Meow") } }
+
+let animals: [Animal] = [Dog("Buddy"), Cat("Whiskers"), Dog("Max")]
+
+// is — type check
+for animal in animals {
+    if animal is Dog {
+        print("\(animal.name) is a dog")
+    }
+}
+
+// as? — safe downcasting (returns Optional)
+for animal in animals {
+    if let dog = animal as? Dog {
+        dog.bark()  // Can call Dog-specific methods
+    }
+}
+
+// as! — forced downcasting (crashes on failure)
+let firstAnimal = animals[0]
+let dog = firstAnimal as! Dog  // Use only when you're certain
+
+// Upcasting with as (always succeeds, no Optional needed)
+let d = Dog("Puppy")
+let a: Animal = d as Animal
+
+// Practical: Codable + Any type handling
+let json: [String: Any] = ["count": 5, "name": "test"]
+if let count = json["count"] as? Int {
+    print(count) // 5
+}
+
+// switch + pattern matching
+for animal in animals {
+    switch animal {
+    case let dog as Dog:
+        dog.bark()
+    case let cat as Cat:
+        cat.meow()
+    default:
+        break
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">Think about it</div>
+        <ul>
+          <li>What problems arise from overusing <code>as!</code> instead of <code>as?</code>?</li>
+          <li>Which is safer — upcasting (child → parent) or downcasting (parent → child) — and why?</li>
+          <li>Why do you need to use <code>AnyView</code> instead of <code>[any View]</code> in SwiftUI?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">as? — conditional cast</div>
+            <div class="item-desc">Returns nil on failure. Used safely with <code>if let</code>. The most commonly used form in practice</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">as! — forced cast</div>
+            <div class="item-desc">Use only when the type is certain. Crashes at runtime on failure. When in doubt, always use <code>as?</code></div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">is — type check</div>
+            <div class="item-desc">Returns Bool. Also used with the <code>case let x as Type</code> pattern in switch statements</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 07: static / lazy -->
+    <div class="content-section" data-preview="pv-7">
+      <div class="cs-label">Topic 07</div>
+      <h2 class="cs-title">static · lazy · inout</h2>
+      <div class="cs-subtitle">Three keywords that make your code more flexible</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// static — members that belong to the type, not an instance
+struct AppConfig {
+    static let baseURL = "https://api.example.com"
+    static let timeout: TimeInterval = 30
+
+    static func makeURL(_ path: String) -> URL? {
+        URL(string: baseURL + path)
+    }
+}
+
+AppConfig.baseURL  // Access without an instance
+AppConfig.makeURL("/posts")
+
+// Singleton pattern
+class NetworkManager {
+    static let shared = NetworkManager()
+    private init() {}  // Prevents external creation
+}
+
+// lazy — initialized on first access
+class DataManager {
+    // Defer expensive initialization until first use
+    lazy var cache: [String: Data] = [:]
+
+    lazy var formatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateStyle = .medium
+        f.locale = Locale(identifier: "en_US")
+        return f
+    }()
+}
+
+// inout — directly modify a variable outside the function
+func doubleValue(_ value: inout Int) {
+    value *= 2
+}
+
+var number = 5
+doubleValue(&number)  // & is required
+print(number) // 10
+
+// swap implementation
+func swap<T>(_ a: inout T, _ b: inout T) {
+    let temp = a
+    a = b
+    b = temp
+}</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">Think about it</div>
+        <ul>
+          <li>What is the difference between the <code>static</code> and <code>class</code> keywords? Can you use <code>class</code> in a struct?</li>
+          <li>Why does using <code>lazy var</code> in a struct require <code>mutating</code>?</li>
+          <li>What is the difference between <code>inout</code> and returning the modified value? Which is more Swift-like?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">static</div>
+            <div class="item-desc">Properties/methods that belong to the type itself. Accessed without an instance. Used for constants, utility functions, and singletons</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">lazy var</div>
+            <div class="item-desc">Initialized on first access. Ideal for expensive objects (DateFormatter, large arrays). Cannot be used with <code>let</code></div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">inout</div>
+            <div class="item-desc">Lets a function modify the parameter directly. Requires <code>&</code> at the call site. From a functional programming perspective, returning values is preferred</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 08: Putting It All Together -->
+    <div class="content-section" data-preview="pv-8">
+      <div class="cs-label">Topic 08</div>
+      <h2 class="cs-title">Patterns You'll See in Practice</h2>
+      <div class="cs-subtitle">How the grammar you learned combines in real code</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// A real-world ViewModel — using everything we've learned
+@MainActor
+class ProductViewModel: ObservableObject {
+
+    // private(set): external read OK, write X
+    @Published private(set) var products: [Product] = []
+    @Published private(set) var isLoading = false
+
+    // computed property: derived data
+    var discountedProducts: [Product] {
+        products.filter { $0.discount > 0 }
+    }
+
+    var totalCount: Int { products.count }
+
+    // static: shared constants
+    static let maxItemsPerPage = 20
+
+    // lazy: created only on first use
+    private lazy var cache: [Int: Product] = [:]
+
+    // didSet: cache synchronization
+    // (used internally when products are updated)
+
+    func load() async {
+        isLoading = true
+        defer { isLoading = false }  // defer: always runs when the block exits
+        do {
+            products = try await ProductService.fetchAll()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+}
+
+// struct model — value type
+struct Product: Identifiable, Codable {
+    let id: Int
+    let name: String
+    let price: Double
+    var discount: Double = 0
+
+    // computed property
+    var finalPrice: Double { price * (1 - discount) }
+    var isOnSale: Bool { discount > 0 }
+
+    // static factory method
+    static func mock() -> Product {
+        Product(id: 0, name: "Test Product", price: 9900)
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">Think about it</div>
+        <ul>
+          <li>What role does <code>defer</code> play in this code? How is it different from just writing <code>isLoading = false</code> at the end of the function?</li>
+          <li>Why is <code>Product</code> a struct and <code>ProductViewModel</code> a class?</li>
+          <li>What is the difference between <code>@Published private(set)</code> and <code>@Published private</code>?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">defer</div>
+            <div class="item-desc">Runs when the block exits (whether by return, throw, or normal completion). Useful for cleanup code (isLoading = false, closing files)</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Static factory method</div>
+            <div class="item-desc">The <code>static func mock()</code> pattern. Useful for generating sample data in Previews and tests</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Connecting all the grammar</div>
+            <div class="item-desc">Each concept is learned independently, but in real code they combine together. Reading practice comes before writing practice</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Preview Column -->
+  <div class="preview-col">
+    <div class="sticky-phone">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <div id="pv-1" class="preview-content active">
+            <div class="preview-label">Computed Property</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 4px;">
+              <div style="background:#1E1F2E;border-radius:10px;padding:10px;font-family:'DM Mono',monospace;font-size:9px;line-height:1.9;color:#E4E6F0;">
+                <span style="color:#FF79C6;">var</span> area: Double {<br>
+                &nbsp;&nbsp;width * height<br>
+                }<br>
+                <span style="color:#6272A4;">// stored ✗, computed ✓</span>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:10px;font-size:11px;">
+                <div style="color:#7C5DC7;font-family:'DM Mono',monospace;font-size:9px;margin-bottom:4px;">RESULT</div>
+                10 × 5 = <strong>50.0</strong>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-2" class="preview-content">
+            <div class="preview-label">willSet / didSet</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="flex:1;height:6px;background:#EEE;border-radius:3px;overflow:hidden;"><div style="width:65%;height:100%;background:var(--purple);border-radius:3px;"></div></div>
+                <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--purple);">6,500</div>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;font-size:10px;color:#6B7190;">
+                willSet → <span style="color:var(--purple);">7,000</span><br>
+                didSet ← <span style="color:#6B7190;">6,500</span>
+              </div>
+              <div style="background:#F0EDFF;border-radius:8px;padding:8px;font-size:11px;color:var(--purple);">3,500 steps to goal</div>
+            </div>
+          </div>
+
+          <div id="pv-3" class="preview-content">
+            <div class="preview-label">struct vs class</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:0 4px;">
+              <div style="background:#F0FFF4;border-radius:8px;padding:10px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:#2DA55D;margin-bottom:4px;">STRUCT (copy)</div>
+                <div style="font-size:11px;">a = {x:1} → b = {x:1}</div>
+                <div style="font-size:11px;color:#6B7190;">b.x = 99</div>
+                <div style="font-size:11px;">a.x = <strong>1</strong> ← unchanged</div>
+              </div>
+              <div style="background:#FFF0F0;border-radius:8px;padding:10px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:#DC3545;margin-bottom:4px;">CLASS (reference)</div>
+                <div style="font-size:11px;">c → d (same object)</div>
+                <div style="font-size:11px;color:#6B7190;">d.x = 99</div>
+                <div style="font-size:11px;">c.x = <strong style="color:#DC3545;">99</strong> ← also changed!</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-4" class="preview-content">
+            <div class="preview-label">Access Control</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 4px;">
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--purple);margin-bottom:4px;">BANK ACCOUNT</div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:10px;">balance</span>
+                <span style="font-size:9px;background:#FFE8E8;color:#DC3545;padding:2px 6px;border-radius:4px;font-family:'DM Mono',monospace;">private 🔒</span>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:10px;">owner</span>
+                <span style="font-size:9px;background:#EEF5FF;color:#2E8BD8;padding:2px 6px;border-radius:4px;font-family:'DM Mono',monospace;">internal</span>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:10px;">deposit()</span>
+                <span style="font-size:9px;background:#F0FFF4;color:#2DA55D;padding:2px 6px;border-radius:4px;font-family:'DM Mono',monospace;">public</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-5" class="preview-content">
+            <div class="preview-label">init Patterns</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
+              <div style="background:#F0EDFF;border-radius:8px;padding:8px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--purple);margin-bottom:4px;">MEMBERWISE (auto)</div>
+                <div style="font-size:10px;">Point(x: 1, y: 2)</div>
+              </div>
+              <div style="background:#F0EDFF;border-radius:8px;padding:8px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--purple);margin-bottom:4px;">CONVENIENCE</div>
+                <div style="font-size:10px;">Person(name: "John")</div>
+              </div>
+              <div style="background:#FFF8EE;border-radius:8px;padding:8px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:#D4950A;margin-bottom:4px;">FAILABLE (init?)</div>
+                <div style="font-size:10px;">Color(hex: "bad") → nil</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-6" class="preview-content">
+            <div class="preview-label">Type Casting</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--purple);margin-bottom:4px;">[Animal] array</div>
+              <div style="background:#F0EDFF;border-radius:8px;padding:8px;display:flex;align-items:center;gap:6px;">
+                <span style="font-size:14px;">🐕</span>
+                <span style="font-size:11px;">as? Dog → </span>
+                <span style="font-size:11px;color:#2DA55D;font-weight:600;">bark() ✓</span>
+              </div>
+              <div style="background:#F0EDFF;border-radius:8px;padding:8px;display:flex;align-items:center;gap:6px;">
+                <span style="font-size:14px;">🐈</span>
+                <span style="font-size:11px;">as? Dog → </span>
+                <span style="font-size:11px;color:#DC3545;">nil</span>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;font-size:10px;color:#6B7190;">as? returns nil on failure, no crash</div>
+            </div>
+          </div>
+
+          <div id="pv-7" class="preview-content">
+            <div class="preview-label">static · lazy</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
+              <div style="background:#1E1F2E;border-radius:10px;padding:10px;font-family:'DM Mono',monospace;font-size:9px;line-height:1.9;color:#E4E6F0;">
+                <span style="color:#FF79C6;">static let</span> shared<br>
+                &nbsp;&nbsp;= Manager()<br>
+                <span style="color:#FF79C6;">lazy var</span> cache<br>
+                &nbsp;&nbsp;= [String: Data]()
+              </div>
+              <div style="text-align:center;font-size:10px;color:#6B7190;">lazy: initialized only on first use</div>
+            </div>
+          </div>
+
+          <div id="pv-8" class="preview-content">
+            <div class="preview-label">All Together</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 4px;">
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--purple);margin-bottom:4px;">ProductViewModel</div>
+              <div style="background:#F7F8FA;border-radius:6px;padding:6px;font-size:10px;display:flex;gap:4px;align-items:center;"><span style="color:var(--purple);">●</span> private(set) products</div>
+              <div style="background:#F7F8FA;border-radius:6px;padding:6px;font-size:10px;display:flex;gap:4px;align-items:center;"><span style="color:var(--blue);">●</span> computed: discounted</div>
+              <div style="background:#F7F8FA;border-radius:6px;padding:6px;font-size:10px;display:flex;gap:4px;align-items:center;"><span style="color:#D4950A);">●</span> lazy cache</div>
+              <div style="background:#F7F8FA;border-radius:6px;padding:6px;font-size:10px;display:flex;gap:4px;align-items:center;"><span style="color:#2DA55D;">●</span> defer: isLoading</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Homework -->
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:8px;">Homework</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">Now that you know essential Swift grammar</h2>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);background:#7C5DC712;padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">Required</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">BankAccount class refactoring</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Make <code>balance</code> private, expose it externally as a computed property, auto-save transaction history with didSet, and add initial balance validation with a failable init</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);background:#7C5DC712;padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">Required</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Stage 1 Todo app refactoring</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Apply access control to the existing Todo app, extract completed/incomplete counts with computed properties, and add a static method for generating sample data</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">Challenge</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Generic Stack data structure</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Implement a Generic Stack struct with push / pop / peek / isEmpty. pop() should be failable (return Optional). Add a contains() method via extension + where clause, available only for Equatable types</div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Completion checklist</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I know when to use computed properties and can apply them in SwiftUI Views</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can explain the difference between struct and class, and articulate when to use each</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can appropriately use private / private(set) / internal</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I understand the difference between as? and as!, and can use them safely in real code</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Challenge nav -->
+<div class="ch-nav">
+  <a href="1-4.html">
+    <span class="nav-dir">← Last in Stage 1</span>
+    <span class="nav-title">1-4 Tricky Swift Syntax</span>
+  </a>
+  <a href="stage2.html" class="next">
+    <span class="nav-dir">Next Stage →</span>
+    <span class="nav-title">Stage 2 — Building It Right</span>
+  </a>
+</div>
+
+<!-- Comments -->
+<div class="comment-donation-wrap">
+  <div class="section-heading">Comments</div>
+  <div class="utterances-wrap">
+    <script src="https://utteranc.es/client.js"
+      repo="M1zz/cs-swiftUI"
+      issue-term="title"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!-- Donation floating button -->
+<div class="donation-float">
+  <div class="donation-float-card" id="donationCard">
+    <div class="section-heading" style="margin-bottom:4px;">Support</div>
+    <div class="donation-desc">If this content helped you,<br>consider buying me a coffee :)</div>
+    <img class="donation-qr" src="../kakao-pay-qr.jpg" alt="KakaoPay QR">
+    <div class="donation-name">Hyunho Lee</div>
+    <div class="donation-kakao-badge">KakaoPay</div>
+  </div>
+  <button class="donation-float-btn" onclick="toggleDonation()" aria-label="Support">☕</button>
+</div>
+
+<footer class="footer">
+  devjari · Stage 1.5 — Essential Swift Grammar
+</footer>
+
+<script>
+  function highlightSwift(el) {
+    let html = el.textContent;
+    html = html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    html = html.replace(/(\/\/.*)/gm,'<span class="cm">$1</span>');
+    html = html.replace(/"([^"]*?)"/g,'<span class="str">"$1"</span>');
+    html = html.replace(/@(\w+)/g,'<span class="pr">@$1</span>');
+    html = html.replace(/(<[^>]+>)|\b(struct|class|var|let|func|import|return|if|else|guard|for|in|case|enum|protocol|some|private|fileprivate|internal|public|open|true|false|nil|self|mutating|static|init|try|throw|throws|async|await|actor|do|catch|lazy|inout|defer|convenience|override|super|get|set|willSet|didSet|is|as)\b/g, (m, tag, kw) => tag || `<span class="kw">${kw}</span>`);
+    html = html.replace(/\b(\d+\.?\d*)\b/g,'<span class="num">$1</span>');
+    el.innerHTML = html;
+  }
+  document.querySelectorAll('.swift-code').forEach(highlightSwift);
+
+  const sections = document.querySelectorAll('.content-section');
+  const previews = document.querySelectorAll('.preview-content');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.dataset.preview;
+        previews.forEach(p => p.classList.remove('active'));
+        const t = document.getElementById(id);
+        if (t) t.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
+  sections.forEach(s => observer.observe(s));
+
+  function toggleDonation() {
+    document.getElementById('donationCard').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const float = document.querySelector('.donation-float');
+    if (!float.contains(e.target)) {
+      document.getElementById('donationCard').classList.remove('open');
+    }
+  });
+</script>
+<script src="../assets/analytics.js"></script>
+<script src="../assets/progress.js"></script>
+</body>
+</html>

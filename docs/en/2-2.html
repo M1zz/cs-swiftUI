@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2-2 Fetching Data from the Internet | Stage 2 | 개발자리</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+  <style>
+    .ch-hero { padding:56px 40px 48px; max-width:1400px; margin:0 auto; position:relative; z-index:1; }
+    .ch-hero h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(36px,6vw,64px); font-weight:800; letter-spacing:-.03em; margin-bottom:12px; }
+    .ch-hero h1 .accent { color:var(--blue); }
+    .ch-hero .trigger { font-size:14px; color:var(--muted); font-style:italic; margin-bottom:32px; }
+    .ch-hero .trigger::before { content:'↳ '; color:var(--blue); }
+    .ch-nav { display:flex; justify-content:space-between; gap:16px; max-width:1400px; margin:0 auto; padding:0 40px 80px; flex-wrap:wrap; position:relative; z-index:1; }
+    .ch-nav a { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px 24px; text-decoration:none; display:flex; flex-direction:column; gap:4px; flex:1; min-width:200px; transition:border-color .2s; }
+    .ch-nav a:hover { border-color:var(--blue); }
+    .ch-nav .nav-dir { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.08em; color:var(--muted); }
+    .ch-nav .nav-title { font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; }
+    .ch-nav .next { text-align:right; }
+    @media(max-width:768px){ .ch-hero{padding:36px 20px 36px;} .ch-nav{padding:0 20px 60px;} }
+  </style>
+</head>
+<body>
+
+<nav class="nav"></nav>
+<script src="../assets/nav.js"></script>
+
+<div class="breadcrumb">
+  <a href="stage2.html">Stage 2</a>
+  <span class="sep">/</span>
+  <span class="current">2-2 Fetching Data from the Internet</span>
+</div>
+
+<header class="ch-hero fade-in">
+  <div class="badge badge-blue" style="margin-bottom:20px;">
+    <span class="badge-dot"></span>
+    Challenge 2-2 · 6 Topics
+  </div>
+  <h1>🌐 Fetching Data from <span class="accent">the Internet</span></h1>
+  <p class="trigger">You need to receive real-time data from a server</p>
+  <div class="chip-row">
+    <span class="chip blue">async / await</span>
+    <span class="chip blue">URLSession</span>
+    <span class="chip blue">Codable · JSONDecoder</span>
+    <span class="chip blue">Task · .task modifier</span>
+    <span class="chip blue">Loading / Error States</span>
+    <span class="chip blue">@MainActor</span>
+  </div>
+</header>
+
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 40px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Questions to Ask Before You Start</div>
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">01</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">Why must network requests be asynchronous (async)?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">why network requests must be async iOS main thread</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">02</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">How is Swift's async/await different from callbacks (completion handlers)?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">Swift async await vs completion handler differences</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">03</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">How should you give feedback to users when an API response is slow?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">SwiftUI loading state ProgressView skeleton</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="split-layout">
+  <div class="content-col">
+
+    <!-- Topic 01: async/await -->
+    <div class="content-section" data-preview="pv-1">
+      <div class="cs-label">Topic 01</div>
+      <h2 class="cs-title">async / await Basics</h2>
+      <div class="cs-subtitle">Swift Concurrency makes asynchronous code read like synchronous code</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// ❌ Callback approach — nesting gets deep (Callback Hell)
+func fetchUser(completion: @escaping (User?) -> Void) {
+    URLSession.shared.dataTask(with: url) { data, _, _ in
+        guard let data = data else { completion(nil); return }
+        completion(try? JSONDecoder().decode(User.self, from: data))
+    }.resume()
+}
+
+// ✅ async/await approach — reads top to bottom
+func fetchUser() async throws -> User {
+    let (data, _) = try await URLSession.shared.data(from: url)
+    return try JSONDecoder().decode(User.self, from: data)
+}
+
+// await: "Wait here, continue when the result arrives"
+// async: "This function can only be called in an async context"
+// throws: "This function can throw an error, handle it with try"
+
+// How to call it
+Task {
+    do {
+        let user = try await fetchUser()
+        print(user.name)
+    } catch {
+        print("Error: \(error)")
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">Think About It</div>
+        <ul>
+          <li>When you hit <code>await</code>, does the current thread stop, or does it go handle other work?</li>
+          <li>When calling an <code>async throws</code> function, why is the order <code>try await</code> and not the other way around?</li>
+          <li>What is the difference between SwiftUI View's <code>.task { }</code> and <code>onAppear { Task { } }</code>?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">What await Means</div>
+            <div class="item-desc">Suspends the current execution and waits for the result. It does not block the thread — other work can use that thread</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Task { }</div>
+            <div class="item-desc">A container to start async code from a synchronous context. Supports cancellation and priority settings</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">.task modifier</div>
+            <div class="item-desc">Starts a Task when the View appears, automatically cancels when it disappears. An improved version of <code>onAppear + Task</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 02: URLSession -->
+    <div class="content-section" data-preview="pv-2">
+      <div class="cs-label">Topic 02</div>
+      <h2 class="cs-title">URLSession — HTTP Requests</h2>
+      <div class="cs-subtitle">The basic pattern for fetching data from an API with GET requests</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// API response model
+struct Post: Codable, Identifiable {
+    let id: Int
+    let title: String
+    let body: String
+    let userId: Int
+}
+
+// Network function
+func fetchPosts() async throws -> [Post] {
+    guard let url = URL(
+        string: "https://jsonplaceholder.typicode.com/posts"
+    ) else {
+        throw URLError(.badURL)
+    }
+
+    // data(from:) supports async/await on iOS 15+
+    let (data, response) = try await URLSession.shared
+        .data(from: url)
+
+    // Check HTTP status code
+    guard let httpResponse = response as? HTTPURLResponse,
+          httpResponse.statusCode == 200 else {
+        throw URLError(.badServerResponse)
+    }
+
+    let decoder = JSONDecoder()
+    // Auto-convert snake_case API keys
+    // decoder.keyDecodingStrategy = .convertFromSnakeCase
+    return try decoder.decode([Post].self, from: data)
+}
+
+// POST request (sending data)
+func createPost(_ post: Post) async throws -> Post {
+    guard let url = URL(
+        string: "https://jsonplaceholder.typicode.com/posts"
+    ) else { throw URLError(.badURL) }
+
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.setValue("application/json",
+        forHTTPHeaderField: "Content-Type")
+    request.httpBody = try JSONEncoder().encode(post)
+
+    let (data, _) = try await URLSession.shared
+        .data(for: request)
+    return try JSONDecoder().decode(Post.self, from: data)
+}</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">Think About It</div>
+        <ul>
+          <li>What do HTTP status codes 200, 404, and 500 each mean?</li>
+          <li>What is the difference between <code>URLSession.shared</code> and a custom <code>URLSession</code>? When should you create your own?</li>
+          <li>Where and how should you include an API authentication token? (Header vs Query parameter)</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">URLSession.shared.data(from:)</div>
+            <div class="item-desc">The simplest form of a GET request. Returns a (Data, URLResponse) tuple</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">URLRequest</div>
+            <div class="item-desc">A request object containing HTTP Method, Header, and Body. Used for POST/PUT/PATCH/DELETE</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">keyDecodingStrategy</div>
+            <div class="item-desc"><code>.convertFromSnakeCase</code>: auto-converts <code>user_name</code> → <code>userName</code>. Maps without CodingKeys</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 03: State Management -->
+    <div class="content-section" data-preview="pv-3">
+      <div class="cs-label">Topic 03</div>
+      <h2 class="cs-title">Loading / Success / Error State Handling</h2>
+      <div class="cs-subtitle">How to represent the 3 states of a network request in your View</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// Represent state with an enum
+enum LoadingState<T> {
+    case idle
+    case loading
+    case success(T)
+    case failure(Error)
+}
+
+struct PostListView: View {
+    @State private var state: LoadingState<[Post]> = .idle
+
+    var body: some View {
+        Group {
+            switch state {
+            case .idle:
+                Color.clear.onAppear { load() }
+            case .loading:
+                ProgressView("Loading...")
+            case .success(let posts):
+                List(posts) { post in
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(post.title)
+                            .font(.headline)
+                        Text(post.body)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(2)
+                    }
+                }
+            case .failure(let error):
+                VStack(spacing: 16) {
+                    Image(systemName: "wifi.slash")
+                        .font(.system(size: 40))
+                        .foregroundStyle(.secondary)
+                    Text(error.localizedDescription)
+                        .multilineTextAlignment(.center)
+                    Button("Retry") { load() }
+                        .buttonStyle(.borderedProminent)
+                }
+                .padding()
+            }
+        }
+        .navigationTitle("Posts")
+    }
+
+    func load() {
+        state = .loading
+        Task {
+            do {
+                let posts = try await fetchPosts()
+                state = .success(posts)
+            } catch {
+                state = .failure(error)
+            }
+        }
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">Think About It</div>
+        <ul>
+          <li>What are the advantages of representing <code>LoadingState</code> as an enum compared to splitting it into <code>@State var isLoading: Bool</code> + <code>@State var error: Error?</code>?</li>
+          <li>When loading data with <code>.task { }</code>, what happens if the View disappears?</li>
+          <li>How do you call multiple APIs simultaneously on the same screen? (<code>async let</code>)</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">enum State Modeling</div>
+            <div class="item-desc">Explicitly represents possible states. The compiler catches missing state handling (switch exhaustiveness check)</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">async let — Parallel Requests</div>
+            <div class="item-desc"><code>async let a = fetchA(); async let b = fetchB(); let (ra, rb) = try await (a, b)</code> — runs both requests concurrently</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">ProgressView</div>
+            <div class="item-desc">Loading indicator component. <code>ProgressView("text")</code> for spinner, <code>ProgressView(value: 0.5)</code> for progress bar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 04: @MainActor -->
+    <div class="content-section" data-preview="pv-4">
+      <div class="cs-label">Topic 04</div>
+      <h2 class="cs-title">@MainActor — UI Updates on the Main Thread</h2>
+      <div class="cs-subtitle">How to safely reflect data received in the background onto the UI</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// When you add @MainActor to a ViewModel,
+// all property changes run on the main thread
+@MainActor
+class NewsViewModel: ObservableObject {
+    @Published var articles: [Article] = []
+    @Published var isLoading = false
+    @Published var errorMessage: String?
+
+    func fetchArticles() async {
+        isLoading = true
+        errorMessage = nil
+
+        do {
+            // Network runs in the background
+            articles = try await NewsService.fetch()
+        } catch {
+            // Safe for UI updates because of @MainActor
+            errorMessage = error.localizedDescription
+        }
+
+        isLoading = false
+    }
+}
+
+struct NewsView: View {
+    @StateObject private var vm = NewsViewModel()
+
+    var body: some View {
+        NavigationStack {
+            Group {
+                if vm.isLoading {
+                    ProgressView()
+                } else {
+                    List(vm.articles) { article in
+                        Text(article.title)
+                    }
+                }
+            }
+            .navigationTitle("News")
+        }
+        .task { await vm.fetchArticles() }
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">Think About It</div>
+        <ul>
+          <li>Why must UI updates happen on the main thread?</li>
+          <li>What warning/error occurs if you change a <code>@Published</code> property from a background thread without <code>@MainActor</code>?</li>
+          <li>Between <code>@StateObject</code> and <code>@ObservedObject</code>, which should you use in the View that creates the ViewModel?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@MainActor</div>
+            <div class="item-desc">Guarantees that a class or function always runs on the main thread. Required for UIKit/SwiftUI updates</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Actor</div>
+            <div class="item-desc">A Swift Concurrency primitive that prevents data race conditions. MainActor is a special global actor</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 05: Error Handling -->
+    <div class="content-section" data-preview="pv-5">
+      <div class="cs-label">Topic 05</div>
+      <h2 class="cs-title">Network Error Handling</h2>
+      <div class="cs-subtitle">How to define predictable errors as types and inform users</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// Custom error type
+enum NetworkError: LocalizedError {
+    case invalidURL
+    case badResponse(statusCode: Int)
+    case decodingFailed
+    case noInternet
+
+    var errorDescription: String? {
+        switch self {
+        case .invalidURL:
+            return "Invalid URL."
+        case .badResponse(let code):
+            return "Server error (\(code)). Please try again later."
+        case .decodingFailed:
+            return "Unable to read the data."
+        case .noInternet:
+            return "Please check your internet connection."
+        }
+    }
+}
+
+// Using the error type
+func fetchData(from urlString: String) async throws -> Data {
+    guard let url = URL(string: urlString) else {
+        throw NetworkError.invalidURL
+    }
+
+    let (data, response) = try await URLSession.shared
+        .data(from: url)
+
+    guard let http = response as? HTTPURLResponse else {
+        throw NetworkError.badResponse(statusCode: 0)
+    }
+
+    guard (200...299).contains(http.statusCode) else {
+        throw NetworkError.badResponse(
+            statusCode: http.statusCode)
+    }
+
+    return data
+}
+
+// Branched error handling
+do {
+    let data = try await fetchData(from: "https://...")
+    let posts = try JSONDecoder().decode([Post].self, from: data)
+} catch let error as NetworkError {
+    print(error.errorDescription ?? "")
+} catch is DecodingError {
+    print("JSON parsing failed")
+} catch {
+    print("Unknown error: \(error)")
+}</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">Think About It</div>
+        <ul>
+          <li>What are the benefits of adopting the <code>LocalizedError</code> protocol?</li>
+          <li>What is the execution order of <code>catch let error as NetworkError</code> vs <code>catch</code>? Should more specific catches come first?</li>
+          <li>How would you implement automatic retry logic on network failure?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">LocalizedError</div>
+            <div class="item-desc">Implement <code>errorDescription</code> so <code>error.localizedDescription</code> returns a user-friendly message</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Layered Error Catching</div>
+            <div class="item-desc">Catch specific error types first. The final <code>catch error</code> is a fallback that handles all remaining errors</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 06: Practical Pattern -->
+    <div class="content-section" data-preview="pv-6">
+      <div class="cs-label">Topic 06</div>
+      <h2 class="cs-title">Practical Network Layer Pattern</h2>
+      <div class="cs-subtitle">Building a reusable API client</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// Reusable generic network function
+struct APIClient {
+    static let shared = APIClient()
+    private let baseURL = "https://jsonplaceholder.typicode.com"
+    private let decoder: JSONDecoder = {
+        let d = JSONDecoder()
+        d.keyDecodingStrategy = .convertFromSnakeCase
+        return d
+    }()
+
+    func fetch<T: Decodable>(_ path: String) async throws -> T {
+        guard let url = URL(string: baseURL + path) else {
+            throw NetworkError.invalidURL
+        }
+        let (data, response) = try await URLSession.shared
+            .data(from: url)
+        guard let http = response as? HTTPURLResponse,
+              (200...299).contains(http.statusCode) else {
+            throw NetworkError.badResponse(statusCode: 0)
+        }
+        do {
+            return try decoder.decode(T.self, from: data)
+        } catch {
+            throw NetworkError.decodingFailed
+        }
+    }
+}
+
+// Usage — clean with type inference
+let posts: [Post] = try await APIClient.shared.fetch("/posts")
+let user: User = try await APIClient.shared.fetch("/users/1")</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">Think About It</div>
+        <ul>
+          <li>In <code>fetch&lt;T: Decodable&gt;</code>, how is <code>T</code> determined at the call site?</li>
+          <li>What are the pros of the singleton <code>APIClient.shared</code> and its downsides in testing?</li>
+          <li>How would you automatically add a Bearer token to all requests for authenticated APIs?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Generic fetch Function</div>
+            <div class="item-desc">The return type is determined at the call site. URL, headers, and error handling are centralized, eliminating duplication</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Singleton Pattern</div>
+            <div class="item-desc">Shares a single instance across the entire app. Configuration defined once. Downside: difficult to mock in tests</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Preview Column -->
+  <div class="preview-col">
+    <div class="sticky-phone">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <div id="pv-1" class="preview-content active">
+            <div class="preview-label">async/await</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 4px;">
+              <div style="background:#1E1F2E;border-radius:10px;padding:10px;font-family:'DM Mono',monospace;font-size:9px;line-height:1.8;">
+                <span style="color:#FF79C6;">func</span> <span style="color:#8BE9FD;">fetch</span>() <span style="color:#FF79C6;">async throws</span><br>
+                &nbsp;&nbsp;<span style="color:#FF79C6;">let</span> data = <span style="color:#FFB86C;">try await</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;URLSession...<br>
+                &nbsp;&nbsp;<span style="color:#FF79C6;">return try</span> decode(...)
+              </div>
+              <div style="text-align:center;font-size:10px;color:#6B7190;">Reads top to bottom</div>
+            </div>
+          </div>
+
+          <div id="pv-2" class="preview-content">
+            <div class="preview-label">URLSession</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;font-size:10px;color:#6B7190;font-family:'DM Mono',monospace;text-align:center;">GET /posts → 200 OK</div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;">
+                <div style="font-size:11px;font-weight:600;margin-bottom:2px;">First post title</div>
+                <div style="font-size:10px;color:#6B7190;">sunt aut facere...</div>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;">
+                <div style="font-size:11px;font-weight:600;margin-bottom:2px;">Second post title</div>
+                <div style="font-size:10px;color:#6B7190;">qui est esse...</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-3" class="preview-content">
+            <div class="preview-label">Loading States</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:space-around;padding:0 8px;">
+              <div style="background:#EEF5FF;border-radius:10px;padding:10px;text-align:center;">
+                <div style="font-size:10px;font-family:'DM Mono',monospace;color:#2E8BD8;margin-bottom:6px;">.loading</div>
+                <div style="width:20px;height:20px;border:2px solid #2E8BD8;border-top-color:transparent;border-radius:50%;margin:0 auto;"></div>
+              </div>
+              <div style="background:#F0FFF4;border-radius:10px;padding:10px;">
+                <div style="font-size:10px;font-family:'DM Mono',monospace;color:#2DA55D;margin-bottom:6px;">.success</div>
+                <div style="font-size:11px;">✓ Data loaded</div>
+              </div>
+              <div style="background:#FFF0F0;border-radius:10px;padding:10px;">
+                <div style="font-size:10px;font-family:'DM Mono',monospace;color:#DC3545;margin-bottom:6px;">.failure</div>
+                <div style="font-size:11px;">⚠ Retry</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-4" class="preview-content">
+            <div class="preview-label">@MainActor</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 4px;">
+              <div style="text-align:center;font-size:28px;">📰</div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:10px;">
+                <div style="font-size:11px;font-weight:600;margin-bottom:2px;">News Title</div>
+                <div style="font-size:10px;color:#6B7190;">Summary...</div>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:10px;">
+                <div style="font-size:11px;font-weight:600;margin-bottom:2px;">News Title 2</div>
+                <div style="font-size:10px;color:#6B7190;">Summary...</div>
+              </div>
+              <div style="text-align:center;font-size:9px;color:#2E8BD8;font-family:'DM Mono',monospace;">@MainActor → UI Safe</div>
+            </div>
+          </div>
+
+          <div id="pv-5" class="preview-content">
+            <div class="preview-label">Error Handling</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:0 8px;">
+              <div style="font-size:36px;">📡</div>
+              <div style="font-size:13px;font-weight:600;text-align:center;">Please check your<br>internet connection</div>
+              <div style="font-size:10px;color:#6B7190;text-align:center;">NetworkError.noInternet</div>
+              <div style="background:#E85D1A;color:white;padding:8px 20px;border-radius:10px;font-size:12px;font-weight:600;">Retry</div>
+            </div>
+          </div>
+
+          <div id="pv-6" class="preview-content">
+            <div class="preview-label">API Client</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
+              <div style="background:#1E1F2E;border-radius:10px;padding:10px;font-family:'DM Mono',monospace;font-size:9px;line-height:1.8;color:#E4E6F0;">
+                <span style="color:#FF79C6;">let</span> posts: [Post] =<br>
+                &nbsp;&nbsp;<span style="color:#FFB86C;">try await</span><br>
+                &nbsp;&nbsp;APIClient<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;.shared<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;.fetch(<span style="color:#50FA7B;">"/posts"</span>)
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Homework -->
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">Homework</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">After Completing Challenge 2-2</h2>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);background:var(--blue-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">Required</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Post List App with JSONPlaceholder API</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Fetch data from https://jsonplaceholder.typicode.com/posts. Display loading/error/success states. Navigate to a detail screen on item tap</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);background:var(--blue-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">Required</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Refactor with @MainActor ViewModel</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Extract network logic into a @MainActor ObservableObject ViewModel. The View should only observe the ViewModel's state</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">Stretch</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Search + Caching</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Add search filtering by title. Implement in-memory caching so previously fetched data is not re-requested</div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Completion Checklist</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can write URLSession requests with async/await</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can represent loading/success/failure states as an enum and branch in the View</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can separate network code into a @MainActor ViewModel</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can create custom error types and handle them with do-catch</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Challenge nav -->
+<div class="ch-nav">
+  <a href="2-1.html">
+    <span class="nav-dir">← Previous Challenge</span>
+    <span class="nav-title">2-1 Saving Data in Your App</span>
+  </a>
+  <a href="2-3.html" class="next">
+    <span class="nav-dir">Next Challenge →</span>
+    <span class="nav-title">2-3 Writing Reusable Code</span>
+  </a>
+</div>
+
+<!-- Comments -->
+<div class="comment-donation-wrap">
+  <div class="section-heading">Comments</div>
+  <div class="utterances-wrap">
+    <script src="https://utteranc.es/client.js"
+      repo="M1zz/cs-swiftUI"
+      issue-term="title"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!-- Donation floating button -->
+<div class="donation-float">
+  <div class="donation-float-card" id="donationCard">
+    <div class="section-heading" style="margin-bottom:4px;">Support Us</div>
+    <div class="donation-desc">If this content helped you,<br>a coffee-sized donation would mean a lot :)</div>
+    <img class="donation-qr" src="../kakao-pay-qr.jpg" alt="KakaoPay QR">
+    <div class="donation-name">Hyunho Lee</div>
+    <div class="donation-kakao-badge">KakaoPay</div>
+  </div>
+  <button class="donation-float-btn" onclick="toggleDonation()" aria-label="Support Us">☕</button>
+</div>
+
+<footer class="footer">
+  개발자리 · Stage 2 — Challenge 2-2 · Fetching Data from the Internet
+</footer>
+
+<script>
+  function highlightSwift(el) {
+    let html = el.textContent;
+    html = html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    html = html.replace(/(\/\/.*)/gm,'<span class="cm">$1</span>');
+    html = html.replace(/"([^"]*?)"/g,'<span class="str">"$1"</span>');
+    html = html.replace(/@(\w+)/g,'<span class="pr">@$1</span>');
+    html = html.replace(/(<[^>]+>)|\b(struct|class|var|let|func|import|return|if|else|guard|for|in|case|enum|protocol|some|private|true|false|nil|self|mutating|static|init|try|throw|throws|async|await|actor|do|catch)\b/g, (m, tag, kw) => tag || `<span class="kw">${kw}</span>`);
+    html = html.replace(/\b(\d+\.?\d*)\b/g,'<span class="num">$1</span>');
+    el.innerHTML = html;
+  }
+  document.querySelectorAll('.swift-code').forEach(highlightSwift);
+
+  const sections = document.querySelectorAll('.content-section');
+  const previews = document.querySelectorAll('.preview-content');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.dataset.preview;
+        previews.forEach(p => p.classList.remove('active'));
+        const t = document.getElementById(id);
+        if (t) t.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
+  sections.forEach(s => observer.observe(s));
+
+  function toggleDonation() {
+    document.getElementById('donationCard').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const float = document.querySelector('.donation-float');
+    if (!float.contains(e.target)) {
+      document.getElementById('donationCard').classList.remove('open');
+    }
+  });
+</script>
+<script src="../assets/progress.js"></script>
+<script src="../assets/analytics.js"></script>
+</body>
+</html>

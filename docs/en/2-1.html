@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2-1 Saving Data in Your App | Stage 2 | 개발자리</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+  <style>
+    .ch-hero { padding:56px 40px 48px; max-width:1400px; margin:0 auto; position:relative; z-index:1; }
+    .ch-hero h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(36px,6vw,64px); font-weight:800; letter-spacing:-.03em; margin-bottom:12px; }
+    .ch-hero h1 .accent { color:var(--blue); }
+    .ch-hero .trigger { font-size:14px; color:var(--muted); font-style:italic; margin-bottom:32px; }
+    .ch-hero .trigger::before { content:'↳ '; color:var(--blue); }
+    .chip.blue { border-color:#5AB4FF44; color:var(--blue); }
+    .ch-nav { display:flex; justify-content:space-between; gap:16px; max-width:1400px; margin:0 auto; padding:0 40px 80px; flex-wrap:wrap; position:relative; z-index:1; }
+    .ch-nav a { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px 24px; text-decoration:none; display:flex; flex-direction:column; gap:4px; flex:1; min-width:200px; transition:border-color .2s; }
+    .ch-nav a:hover { border-color:var(--blue); }
+    .ch-nav .nav-dir { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.08em; color:var(--muted); }
+    .ch-nav .nav-title { font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; }
+    .ch-nav .next { text-align:right; }
+    @media(max-width:768px){ .ch-hero{padding:36px 20px 36px;} .ch-nav{padding:0 20px 60px;} }
+  </style>
+</head>
+<body>
+
+<nav class="nav"></nav>
+<script src="../assets/nav.js"></script>
+
+<div class="breadcrumb">
+  <a href="stage2.html">Stage 2</a>
+  <span class="sep">/</span>
+  <span class="current">2-1 Saving Data in Your App</span>
+</div>
+
+<header class="ch-hero fade-in">
+  <div class="badge badge-blue" style="margin-bottom:20px;">
+    <span class="badge-dot"></span>
+    Challenge 2-1 · 6 Topics
+  </div>
+  <h1>💾 Saving Data in <span class="accent">Your App</span></h1>
+  <p class="trigger">Data should persist even after the app is closed and reopened</p>
+  <div class="chip-row">
+    <span class="chip blue">Codable · JSON</span>
+    <span class="chip blue">UserDefaults</span>
+    <span class="chip blue">@Model</span>
+    <span class="chip blue">ModelContainer · ModelContext</span>
+    <span class="chip blue">@Query</span>
+    <span class="chip blue">CRUD — Create · Read · Update · Delete</span>
+  </div>
+</header>
+
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 40px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Questions to Ask Before You Start</div>
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">01</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">What are the different ways an iOS app can persist data?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">iOS data persistence options UserDefaults CoreData SwiftData</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">02</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">What is Swift's Codable and why do you need it?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">Swift Codable Encodable Decodable JSON tutorial</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">03</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">What are the differences between SwiftData and CoreData?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">SwiftData vs CoreData iOS 17 differences</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="split-layout">
+
+  <div class="content-col">
+
+    <!-- Topic 01: Codable -->
+    <div class="content-section" data-preview="pv-1">
+      <div class="cs-label">Topic 01</div>
+      <h2 class="cs-title">Codable — Swift ↔ JSON</h2>
+      <div class="cs-subtitle">How to convert data to JSON and restore it back</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// Codable = Encodable + Decodable
+struct User: Codable {
+    let id: Int
+    let name: String
+    let email: String
+}
+
+// Swift → JSON (Encoding)
+let user = User(id: 1, name: "Hyunho", email: "test@test.com")
+let encoder = JSONEncoder()
+encoder.outputFormatting = .prettyPrinted
+if let data = try? encoder.encode(user),
+   let json = String(data: data, encoding: .utf8) {
+    print(json)
+    // { "id": 1, "name": "Hyunho", "email": "test@test.com" }
+}
+
+// JSON → Swift (Decoding)
+let jsonString = """
+{ "id": 1, "name": "Hyunho", "email": "test@test.com" }
+"""
+let decoder = JSONDecoder()
+if let data = jsonString.data(using: .utf8),
+   let decoded = try? decoder.decode(User.self, from: data) {
+    print(decoded.name) // Hyunho
+}</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">Think About It</div>
+        <ul>
+          <li>If the server's JSON key is <code>user_name</code> but you want your Swift property to be <code>userName</code>, how do you handle that? (<code>CodingKeys</code>)</li>
+          <li>What is the difference between <code>try?</code> and <code>try!</code>? Which is safer in a real app?</li>
+          <li>How do you represent nested JSON structures (objects within objects) with Codable?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Codable Protocol</div>
+            <div class="item-desc">A type alias for <code>Encodable + Decodable</code>. If all properties of a struct are Codable, the implementation is auto-synthesized</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">JSONEncoder / JSONDecoder</div>
+            <div class="item-desc">Provided by Swift standard library. Use <code>keyDecodingStrategy</code> for automatic snake_case ↔ camelCase conversion</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">CodingKeys enum</div>
+            <div class="item-desc">Maps JSON keys to Swift property names when they differ. <code>case userName = "user_name"</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 02: UserDefaults -->
+    <div class="content-section" data-preview="pv-2">
+      <div class="cs-label">Topic 02</div>
+      <h2 class="cs-title">UserDefaults — Simple Settings Storage</h2>
+      <div class="cs-subtitle">The quickest way to persist small data even after the app is closed</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// Saving/loading basic types
+UserDefaults.standard.set(true, forKey: "isDarkMode")
+UserDefaults.standard.set(42, forKey: "launchCount")
+UserDefaults.standard.set("English", forKey: "language")
+
+let isDark = UserDefaults.standard.bool(forKey: "isDarkMode")
+let count = UserDefaults.standard.integer(forKey: "launchCount")
+
+// Saving a Codable struct (convert to JSON, then store as Data)
+struct AppSettings: Codable {
+    var theme: String
+    var fontSize: Int
+}
+
+let settings = AppSettings(theme: "dark", fontSize: 16)
+if let data = try? JSONEncoder().encode(settings) {
+    UserDefaults.standard.set(data, forKey: "appSettings")
+}
+
+// Loading
+if let data = UserDefaults.standard.data(forKey: "appSettings"),
+   let saved = try? JSONDecoder().decode(
+       AppSettings.self, from: data) {
+    print(saved.theme) // dark
+}
+
+// @AppStorage — SwiftUI-native UserDefaults
+struct ContentView: View {
+    @AppStorage("isDarkMode") var isDarkMode = false
+
+    var body: some View {
+        Toggle("Dark Mode", isOn: $isDarkMode)
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">Think About It</div>
+        <ul>
+          <li>What kind of data is UserDefaults suitable for, and what is it not? (user tokens, cart items, payment info?)</li>
+          <li>What is the biggest difference between <code>@AppStorage</code> and <code>@State</code>?</li>
+          <li>How can you reset UserDefaults values without deleting the app?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">When to Use UserDefaults</div>
+            <div class="item-desc">App settings, user preferences, last launch date — small amounts of simple data. Not suitable for large data or sensitive information</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@AppStorage</div>
+            <div class="item-desc">Use UserDefaults as a binding like <code>@State</code> in SwiftUI. When the value changes, the View automatically re-renders</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 03: @Model -->
+    <div class="content-section" data-preview="pv-3">
+      <div class="cs-label">Topic 03</div>
+      <h2 class="cs-title">@Model — SwiftData Data Model</h2>
+      <div class="cs-subtitle">A modern data persistence solution replacing Core Data on iOS 17+</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">import SwiftData
+
+// Declare a persistent model with the @Model macro
+@Model
+class TodoItem {
+    var title: String
+    var isCompleted: Bool
+    var createdAt: Date
+
+    init(title: String) {
+        self.title = title
+        self.isCompleted = false
+        self.createdAt = Date()
+    }
+}
+
+// Connect ModelContainer at the app entry point
+@main
+struct MyApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+        .modelContainer(for: TodoItem.self)
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">Think About It</div>
+        <ul>
+          <li>Why must SwiftData's <code>@Model</code> be applied to a <code>class</code> rather than a <code>struct</code>?</li>
+          <li>Why can all child Views use it when you attach <code>.modelContainer(for:)</code> to the top-level App?</li>
+          <li>How do you configure <code>.modelContainer</code> to use multiple Model types together?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@Model Macro</div>
+            <div class="item-desc">Attach to a class and SwiftData automatically handles persistence, change tracking, and relationship management. Requires iOS 17+</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">ModelContainer</div>
+            <div class="item-desc">Manages the database file. Register multiple models with <code>.modelContainer(for: [A.self, B.self])</code></div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">ModelContext</div>
+            <div class="item-desc">The entry point for CRUD operations. Access from a View via <code>@Environment(\.modelContext)</code>. insert / delete / save</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 04: @Query -->
+    <div class="content-section" data-preview="pv-4">
+      <div class="cs-label">Topic 04</div>
+      <h2 class="cs-title">@Query — Querying Data</h2>
+      <div class="cs-subtitle">How to read, filter, and sort data in SwiftData</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">struct TodoListView: View {
+    // @Query: Automatically fetches data from the DB
+    // and updates the View when data changes
+    @Query(sort: \TodoItem.createdAt, order: .reverse)
+    var todos: [TodoItem]
+
+    // Adding filter conditions
+    @Query(filter: #Predicate<TodoItem> { !$0.isCompleted },
+           sort: \TodoItem.createdAt)
+    var activeTodos: [TodoItem]
+
+    var body: some View {
+        List(todos) { todo in
+            Text(todo.title)
+        }
+    }
+}
+
+// CRUD with ModelContext
+struct AddTodoView: View {
+    @Environment(\.modelContext) private var context
+    @State private var title = ""
+
+    var body: some View {
+        HStack {
+            TextField("To-do", text: $title)
+            Button("Add") {
+                let item = TodoItem(title: title)
+                context.insert(item)  // Create
+                title = ""
+            }
+        }
+    }
+}
+
+// Delete
+func delete(_ item: TodoItem) {
+    context.delete(item)
+}</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">Think About It</div>
+        <ul>
+          <li>How does an array fetched with <code>@Query</code> differ from <code>@State</code>? Can you modify it directly?</li>
+          <li>After <code>context.insert()</code>, do you need to call <code>try context.save()</code> or not?</li>
+          <li>How do you combine multiple conditions with AND / OR in <code>#Predicate</code>?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@Query Property Wrapper</div>
+            <div class="item-desc">A live query that observes the DB. Automatically refreshes the View when data changes. Supports sort, filter, and order parameters</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">#Predicate Macro</div>
+            <div class="item-desc">Type-safe filter conditions. <code>#Predicate&lt;TodoItem&gt; { $0.isCompleted == false }</code></div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Auto-Save</div>
+            <div class="item-desc">SwiftData automatically saves changes. Explicit save() is optional, but recommended at critical points</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 05: Relationships -->
+    <div class="content-section" data-preview="pv-5">
+      <div class="cs-label">Topic 05</div>
+      <h2 class="cs-title">Relationships — Connected Data</h2>
+      <div class="cs-subtitle">How to express one-to-many and many-to-many relationships between models</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">@Model
+class Category {
+    var name: String
+    // One-to-many: one category has many todos
+    @Relationship(deleteRule: .cascade)
+    var todos: [TodoItem] = []
+
+    init(name: String) { self.name = name }
+}
+
+@Model
+class TodoItem {
+    var title: String
+    var isCompleted: Bool
+    // Inverse relationship
+    var category: Category?
+
+    init(title: String) {
+        self.title = title
+        self.isCompleted = false
+    }
+}
+
+// Setting up relationships
+let category = Category(name: "Work")
+let todo = TodoItem(title: "Prepare for meeting")
+todo.category = category
+context.insert(category)
+
+// deleteRule: .cascade → deleting a category also deletes its todos</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">Think About It</div>
+        <ul>
+          <li>What is the difference between <code>deleteRule: .cascade</code> and <code>.nullify</code>? When is each appropriate?</li>
+          <li>When setting up bidirectional relationships, do you need to add @Relationship on both models?</li>
+          <li>Do you need to save the Category first, or the TodoItem first?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@Relationship</div>
+            <div class="item-desc">Controls cascading deletes via deleteRule. .cascade / .nullify / .deny / .noAction</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Inverse Relationships</div>
+            <div class="item-desc">When both models reference each other, SwiftData automatically keeps them in sync. It works even if only one side is set up</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 06: Migration & Preview -->
+    <div class="content-section" data-preview="pv-6">
+      <div class="cs-label">Topic 06</div>
+      <h2 class="cs-title">Preview and Test Containers</h2>
+      <div class="cs-subtitle">How to use SwiftData in SwiftUI Previews</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// In-memory container for previews
+#Preview {
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(
+        for: TodoItem.self,
+        configurations: config
+    )
+
+    // Insert sample data
+    let context = container.mainContext
+    context.insert(TodoItem(title: "Study SwiftData"))
+    context.insert(TodoItem(title: "Deploy app"))
+
+    return TodoListView()
+        .modelContainer(container)
+}
+
+// Production app — persistent storage
+@main
+struct MyApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+        .modelContainer(for: TodoItem.self)
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">Think About It</div>
+        <ul>
+          <li>A container created with <code>isStoredInMemoryOnly: true</code> loses its data when the app restarts. In what situations is this useful?</li>
+          <li>What happens to existing user data when you add a new property to an @Model class? (Schema Migration)</li>
+          <li>How do you set up SwiftData for use in Unit Tests?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">In-Memory Container</div>
+            <div class="item-desc">A temporary DB that doesn't write to disk, for previews and tests. <code>isStoredInMemoryOnly: true</code></div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Schema Migration</div>
+            <div class="item-desc">Migration to preserve existing data when the model structure changes. Uses VersionedSchema and SchemaMigrationPlan</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Preview Column -->
+  <div class="preview-col">
+    <div class="sticky-phone">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <div id="pv-1" class="preview-content active">
+            <div class="preview-label">Codable</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 4px;gap:10px;">
+              <div style="background:#1E1F2E;border-radius:10px;padding:12px;font-family:'DM Mono',monospace;font-size:10px;color:#50FA7B;line-height:1.7;">{<br>&nbsp;&nbsp;"id": 1,<br>&nbsp;&nbsp;"name": "Hyunho",<br>&nbsp;&nbsp;"email": "test@.."<br>}</div>
+              <div style="display:flex;align-items:center;justify-content:center;gap:8px;">
+                <div style="font-size:10px;color:#2E8BD8;font-family:'DM Mono',monospace;">Swift</div>
+                <div style="font-size:16px;">⇄</div>
+                <div style="font-size:10px;color:#2DA55D;font-family:'DM Mono',monospace;">JSON</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-2" class="preview-content">
+            <div class="preview-label">UserDefaults</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:0 4px;">
+              <div style="background:#F7F8FA;border-radius:10px;padding:12px;border:1px solid #E2E4EA;">
+                <div style="font-size:9px;color:#6B7190;margin-bottom:8px;font-family:'DM Mono',monospace;">APP STORAGE</div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                  <span style="font-size:13px;">Dark Mode</span>
+                  <div style="width:36px;height:20px;background:#E85D1A;border-radius:10px;display:flex;align-items:center;justify-content:flex-end;padding-right:2px;"><div style="width:16px;height:16px;background:white;border-radius:50%;"></div></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <span style="font-size:13px;">Notifications</span>
+                  <div style="width:36px;height:20px;background:#D0D3DC;border-radius:10px;display:flex;align-items:center;padding-left:2px;"><div style="width:16px;height:16px;background:white;border-radius:50%;"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-3" class="preview-content">
+            <div class="preview-label">@Model</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
+              <div style="font-size:9px;color:#2E8BD8;font-family:'DM Mono',monospace;margin-bottom:4px;">SWIFTDATA ▸ TODO</div>
+              <div style="background:#EEF5FF;border-radius:8px;padding:10px;border-left:3px solid #2E8BD8;font-size:12px;">💾 Persisted</div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:10px;font-size:12px;color:#1A1D2A;">Study SwiftData</div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:10px;font-size:12px;color:#1A1D2A;">Deploy app</div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:10px;font-size:12px;color:#1A1D2A;opacity:.5;">+ Add new item</div>
+            </div>
+          </div>
+
+          <div id="pv-4" class="preview-content">
+            <div class="preview-label">@Query</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 4px;">
+              <div style="font-size:9px;color:#2E8BD8;font-family:'DM Mono',monospace;margin-bottom:4px;">DB → VIEW Auto Sync</div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:10px;display:flex;align-items:center;gap:8px;">
+                <div style="width:16px;height:16px;border-radius:50%;background:#2DA55D;display:flex;align-items:center;justify-content:center;color:white;font-size:9px;">✓</div>
+                <span style="font-size:11px;text-decoration:line-through;color:#6B7190;">Study SwiftData</span>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:10px;display:flex;align-items:center;gap:8px;">
+                <div style="width:16px;height:16px;border-radius:50%;border:1.5px solid #D0D3DC;"></div>
+                <span style="font-size:11px;">Deploy app</span>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:10px;display:flex;align-items:center;gap:8px;">
+                <div style="width:16px;height:16px;border-radius:50%;border:1.5px solid #D0D3DC;"></div>
+                <span style="font-size:11px;">Code review</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-5" class="preview-content">
+            <div class="preview-label">Relationship</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 4px;">
+              <div style="background:#EEF5FF;border-radius:10px;padding:12px;">
+                <div style="font-size:10px;font-family:'DM Mono',monospace;color:#2E8BD8;margin-bottom:8px;">📁 Work</div>
+                <div style="padding-left:12px;display:flex;flex-direction:column;gap:4px;">
+                  <div style="font-size:11px;color:#1A1D2A;">• Prepare for meeting</div>
+                  <div style="font-size:11px;color:#1A1D2A;">• Write report</div>
+                </div>
+              </div>
+              <div style="background:#F0FFF4;border-radius:10px;padding:12px;">
+                <div style="font-size:10px;font-family:'DM Mono',monospace;color:#2DA55D;margin-bottom:8px;">📁 Personal</div>
+                <div style="padding-left:12px;display:flex;flex-direction:column;gap:4px;">
+                  <div style="font-size:11px;color:#1A1D2A;">• Work out</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-6" class="preview-content">
+            <div class="preview-label">Preview Container</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 4px;">
+              <div style="background:#1E1F2E;border-radius:10px;padding:12px;font-family:'DM Mono',monospace;font-size:10px;color:#6272A4;line-height:1.7;"><span style="color:#FF79C6;">#Preview</span> {<br>&nbsp;<span style="color:#8BE9FD;">inMemory</span><br>&nbsp;<span style="color:#50FA7B;">+ sampleData</span><br>}</div>
+              <div style="text-align:center;font-size:11px;color:#6B7190;">No disk storage ✗<br>Preview only</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Homework -->
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">Homework</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">After Completing Challenge 2-1</h2>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);background:var(--blue-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">Required</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Build a Diary App with SwiftData</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Define DiaryEntry(title, content, date) with @Model. Display a list with @Query. Add/delete with ModelContext. Verify data persists after app restart</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);background:var(--blue-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">Required</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Build a Settings Screen with @AppStorage</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Connect a dark mode toggle and font size slider with @AppStorage. Verify settings persist after closing and reopening the app</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">Stretch</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Add Category Filtering</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Create a Category model and set up a one-to-many relationship with DiaryEntry. Implement filtering by category (#Predicate)</div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Completion Checklist</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can convert Swift structs to/from JSON using Codable</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can persist settings with @AppStorage</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can declare an @Model class and connect .modelContainer()</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can fetch data with @Query and add/delete with ModelContext</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Challenge nav -->
+<div class="ch-nav">
+  <a href="stage2.html">
+    <span class="nav-dir">← Stage 2 Index</span>
+    <span class="nav-title">Stage 2 Overview</span>
+  </a>
+  <a href="2-2.html" class="next">
+    <span class="nav-dir">Next Challenge →</span>
+    <span class="nav-title">2-2 Fetching Data from the Internet</span>
+  </a>
+</div>
+
+<!-- Comments -->
+<div class="comment-donation-wrap">
+  <div class="section-heading">Comments</div>
+  <div class="utterances-wrap">
+    <script src="https://utteranc.es/client.js"
+      repo="M1zz/cs-swiftUI"
+      issue-term="title"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!-- Donation floating button -->
+<div class="donation-float">
+  <div class="donation-float-card" id="donationCard">
+    <div class="section-heading" style="margin-bottom:4px;">Support Us</div>
+    <div class="donation-desc">If this content helped you,<br>a coffee-sized donation would mean a lot :)</div>
+    <img class="donation-qr" src="../kakao-pay-qr.jpg" alt="KakaoPay QR">
+    <div class="donation-name">Hyunho Lee</div>
+    <div class="donation-kakao-badge">KakaoPay</div>
+  </div>
+  <button class="donation-float-btn" onclick="toggleDonation()" aria-label="Support Us">☕</button>
+</div>
+
+<footer class="footer">
+  개발자리 · Stage 2 — Challenge 2-1 · Saving Data in Your App
+</footer>
+
+<script>
+  function highlightSwift(el) {
+    let html = el.textContent;
+    html = html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    html = html.replace(/(\/\/.*)/gm,'<span class="cm">$1</span>');
+    html = html.replace(/"([^"]*?)"/g,'<span class="str">"$1"</span>');
+    html = html.replace(/@(\w+)/g,'<span class="pr">@$1</span>');
+    html = html.replace(/#(\w+)/g,'<span class="pr">#$1</span>');
+    html = html.replace(/(<[^>]+>)|\b(struct|class|var|let|func|import|return|if|else|guard|for|in|case|enum|protocol|some|private|true|false|nil|self|mutating|static|init|try|throw|throws|async|await|actor)\b/g, (m, tag, kw) => tag || `<span class="kw">${kw}</span>`);
+    html = html.replace(/\b(\d+\.?\d*)\b/g,'<span class="num">$1</span>');
+    el.innerHTML = html;
+  }
+  document.querySelectorAll('.swift-code').forEach(highlightSwift);
+
+  const sections = document.querySelectorAll('.content-section');
+  const previews = document.querySelectorAll('.preview-content');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.dataset.preview;
+        previews.forEach(p => p.classList.remove('active'));
+        const t = document.getElementById(id);
+        if (t) t.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
+  sections.forEach(s => observer.observe(s));
+
+  function toggleDonation() {
+    document.getElementById('donationCard').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const float = document.querySelector('.donation-float');
+    if (!float.contains(e.target)) {
+      document.getElementById('donationCard').classList.remove('open');
+    }
+  });
+</script>
+<script src="../assets/progress.js"></script>
+<script src="../assets/analytics.js"></script>
+</body>
+</html>

@@ -10,7 +10,7 @@
   var page = path.split('/').pop() || 'index.html';
   var isEN = path.indexOf('/en/') !== -1;
 
-  var enAvailable = ['index.html','setup.html','1-1.html','1-2.html','1-3.html','1-4.html'];
+  var enAvailable = ['index.html','setup.html','1-1.html','1-2.html','1-3.html','1-4.html','stage2.html','2-1.html','2-2.html','2-3.html','2-4.html','clone-coding.html','swift-grammar.html'];
   var s1Pages = ['index.html','setup.html','1-1.html','1-2.html','1-3.html','1-4.html'];
   var s2Pages = ['stage2.html','2-1.html','2-2.html','2-3.html','2-4.html'];
   var isS1 = s1Pages.indexOf(page) !== -1;

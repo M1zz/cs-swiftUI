@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2-4 Building Animated UI | Stage 2 | 개발자리</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+  <style>
+    .ch-hero { padding:56px 40px 48px; max-width:1400px; margin:0 auto; position:relative; z-index:1; }
+    .ch-hero h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(36px,6vw,64px); font-weight:800; letter-spacing:-.03em; margin-bottom:12px; }
+    .ch-hero h1 .accent { color:var(--orange); }
+    .ch-hero .trigger { font-size:14px; color:var(--muted); font-style:italic; margin-bottom:32px; }
+    .ch-hero .trigger::before { content:'↳ '; color:var(--orange); }
+    .ch-nav { display:flex; justify-content:space-between; gap:16px; max-width:1400px; margin:0 auto; padding:0 40px 80px; flex-wrap:wrap; position:relative; z-index:1; }
+    .ch-nav a { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px 24px; text-decoration:none; display:flex; flex-direction:column; gap:4px; flex:1; min-width:200px; transition:border-color .2s; }
+    .ch-nav a:hover { border-color:var(--orange); }
+    .ch-nav .nav-dir { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.08em; color:var(--muted); }
+    .ch-nav .nav-title { font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; }
+    .ch-nav .next { text-align:right; }
+    @media(max-width:768px){ .ch-hero{padding:36px 20px 36px;} .ch-nav{padding:0 20px 60px;} }
+  </style>
+</head>
+<body>
+
+<nav class="nav"></nav>
+<script src="../assets/nav.js"></script>
+
+<div class="breadcrumb">
+  <a href="stage2.html">Stage 2</a>
+  <span class="sep">/</span>
+  <span class="current">2-4 Building Animated UI</span>
+</div>
+
+<header class="ch-hero fade-in">
+  <div class="badge badge-orange" style="margin-bottom:20px;">
+    <span class="badge-dot"></span>
+    Challenge 2-4 · 6 Topics
+  </div>
+  <h1>✨ Building Animated <span class="accent">UI</span></h1>
+  <p class="trigger">The app feels too static</p>
+  <div class="chip-row">
+    <span class="chip orange">withAnimation</span>
+    <span class="chip orange">.animation()</span>
+    <span class="chip orange">.transition()</span>
+    <span class="chip orange">matchedGeometryEffect</span>
+    <span class="chip orange">Custom ViewModifier</span>
+    <span class="chip orange">Gesture</span>
+  </div>
+</header>
+
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 40px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">Questions to Ask Before You Start</div>
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--orange);flex-shrink:0;margin-top:1px;">01</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">What is the UX difference between an app with and without animations?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--orange-dim,#fff3e8);color:var(--orange);padding:2px 6px;border-radius:4px;">iOS animation UX importance user perception</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--orange);flex-shrink:0;margin-top:1px;">02</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">What do stiffness and damping control in a spring animation?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--orange-dim,#fff3e8);color:var(--orange);padding:2px 6px;border-radius:4px;">SwiftUI spring animation stiffness damping response</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--orange);flex-shrink:0;margin-top:1px;">03</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">How does matchedGeometryEffect implement hero animations under the hood?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">Search → <span style="background:var(--orange-dim,#fff3e8);color:var(--orange);padding:2px 6px;border-radius:4px;">SwiftUI matchedGeometryEffect hero animation namespace</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="split-layout">
+  <div class="content-col">
+
+    <!-- Topic 01: withAnimation & .animation() -->
+    <div class="content-section" data-preview="pv-1">
+      <div class="cs-label">Topic 01</div>
+      <h2 class="cs-title">withAnimation &amp; .animation() — Smooth State Changes</h2>
+      <div class="cs-subtitle">Wrap @State changes in animation and SwiftUI interpolates between before and after for smooth transitions</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">struct AnimationDemo: View {
+    @State private var isExpanded = false
+    @State private var rotation: Double = 0
+    @State private var scale: CGFloat = 1.0
+
+    var body: some View {
+        VStack(spacing: 32) {
+
+            // withAnimation — animates all state changes in the closure
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.orange)
+                .frame(
+                    width: isExpanded ? 280 : 120,
+                    height: isExpanded ? 160 : 60
+                )
+                .onTapGesture {
+                    withAnimation(.spring(response: 0.4,
+                                         dampingFraction: 0.7)) {
+                        isExpanded.toggle()
+                    }
+                }
+
+            // .animation() view modifier — when a specific value changes
+            Image(systemName: "star.fill")
+                .font(.system(size: 40))
+                .foregroundStyle(.orange)
+                .rotationEffect(.degrees(rotation))
+                .scaleEffect(scale)
+                .animation(.easeInOut(duration: 0.3), value: rotation)
+                .animation(.spring(), value: scale)
+                .onTapGesture {
+                    rotation += 45
+                    scale = scale == 1.0 ? 1.5 : 1.0
+                }
+
+            // Various animation curves
+            Button("easeIn") {
+                withAnimation(.easeIn(duration: 0.5)) { isExpanded.toggle() }
+            }
+            Button("spring") {
+                withAnimation(.spring(
+                    response: 0.5,
+                    dampingFraction: 0.6,
+                    blendDuration: 0
+                )) { isExpanded.toggle() }
+            }
+            Button("delay + repeat") {
+                withAnimation(
+                    .easeInOut(duration: 0.3)
+                    .delay(0.1)
+                    .repeatCount(3, autoreverses: true)
+                ) { scale = 1.3 }
+            }
+        }
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--orange);background:var(--orange-dim,#fff3e8);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--orange);">Think About It</div>
+        <ul>
+          <li>What is the difference in scope between <code>withAnimation</code> and <code>.animation(value:)</code>?</li>
+          <li>In <code>.spring(response:dampingFraction:)</code>, what happens as dampingFraction approaches 1.0?</li>
+          <li>How do you get a callback when an animation completes? (<code>withAnimation(completion:)</code> iOS 17+)</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-orange">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">withAnimation</div>
+            <div class="item-desc">Wraps all @State changes within the closure as animated. Ideal for animating multiple states simultaneously</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">.animation(value:)</div>
+            <div class="item-desc">Applies animation only to this view when a specific value changes. Finer-grained control. Value must be Equatable</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Animation Curves</div>
+            <div class="item-desc">.easeIn/.easeOut/.easeInOut: consistent acceleration/deceleration | .spring: physics-based bounce | .linear: constant speed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 02: .transition() -->
+    <div class="content-section" data-preview="pv-2">
+      <div class="cs-label">Topic 02</div>
+      <h2 class="cs-title">.transition() — View Appear/Disappear Animations</h2>
+      <div class="cs-subtitle">Defines the animation when a View is added to or removed from the view hierarchy</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">struct TransitionDemo: View {
+    @State private var showBanner = false
+    @State private var showCard = false
+    @State private var showModal = false
+
+    var body: some View {
+        VStack(spacing: 20) {
+
+            // Basic transition
+            Button("Toggle Banner") {
+                withAnimation(.spring()) {
+                    showBanner.toggle()
+                }
+            }
+            if showBanner {
+                Text("🎉 Sale event in progress!")
+                    .padding()
+                    .background(Color.orange.opacity(0.15))
+                    .cornerRadius(12)
+                    .transition(.slide)       // slides in from the side
+            }
+
+            // .scale + .opacity combined
+            Button("Toggle Card") {
+                withAnimation(.easeOut(duration: 0.3)) {
+                    showCard.toggle()
+                }
+            }
+            if showCard {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color.orange.opacity(0.2))
+                    .frame(height: 100)
+                    .transition(.scale.combined(with: .opacity))
+            }
+
+            // asymmetric — different enter/exit
+            Button("Toggle Modal") {
+                withAnimation(.spring(response: 0.45)) {
+                    showModal.toggle()
+                }
+            }
+            if showModal {
+                Text("Slides up from bottom, exits to top")
+                    .padding()
+                    .background(Color.orange)
+                    .foregroundStyle(.white)
+                    .cornerRadius(12)
+                    .transition(.asymmetric(
+                        insertion: .move(edge: .bottom)
+                            .combined(with: .opacity),
+                        removal: .move(edge: .top)
+                            .combined(with: .opacity)
+                    ))
+            }
+        }
+        .padding()
+    }
+}
+
+// AnyTransition extension — custom transition
+extension AnyTransition {
+    static var popUp: AnyTransition {
+        .scale(scale: 0.1, anchor: .bottom)
+        .combined(with: .opacity)
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--orange);background:var(--orange-dim,#fff3e8);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--orange);">Think About It</div>
+        <ul>
+          <li>Why does <code>.transition()</code> require <code>withAnimation</code> to work?</li>
+          <li>What is the difference between <code>.move(edge: .bottom)</code> and <code>.slide</code>?</li>
+          <li>How do you apply transitions to item additions/removals in a List?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-orange">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Built-in Transitions</div>
+            <div class="item-desc">.opacity · .scale · .slide · .move(edge:) · .push(from:) — can be combined</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">.combined(with:)</div>
+            <div class="item-desc">Apply two transitions simultaneously. Chain like <code>.scale.combined(with: .opacity)</code></div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">.asymmetric</div>
+            <div class="item-desc">Apply different transitions for insertion and removal. Creates directional UX</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 03: matchedGeometryEffect -->
+    <div class="content-section" data-preview="pv-3">
+      <div class="cs-label">Topic 03</div>
+      <h2 class="cs-title">matchedGeometryEffect — Hero Animations</h2>
+      <div class="cs-subtitle">Create continuity between two views — like a list item naturally expanding into a detail card</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">struct HeroAnimationView: View {
+    @Namespace private var heroNS
+    @State private var selectedCard: Int? = nil
+
+    let cards = [1, 2, 3]
+
+    var body: some View {
+        ZStack {
+            // List — small cards
+            if selectedCard == nil {
+                VStack(spacing: 12) {
+                    ForEach(cards, id: \.self) { id in
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(Color.orange.opacity(0.15))
+                            .frame(height: 80)
+                            .overlay(
+                                Text("Card \(id)")
+                                    .font(.headline)
+                            )
+                            // Assign heroNS + "card\(id)" to this view
+                            .matchedGeometryEffect(
+                                id: "card\(id)",
+                                in: heroNS
+                            )
+                            .onTapGesture {
+                                withAnimation(.spring(
+                                    response: 0.45,
+                                    dampingFraction: 0.8
+                                )) {
+                                    selectedCard = id
+                                }
+                            }
+                    }
+                }
+                .padding()
+            }
+
+            // Detail — expanded card
+            if let id = selectedCard {
+                RoundedRectangle(cornerRadius: 24)
+                    .fill(Color.orange.opacity(0.25))
+                    .ignoresSafeArea()
+                    .overlay(
+                        VStack {
+                            Text("Card \(id) Detail")
+                                .font(.largeTitle.bold())
+                            Button("Close") {
+                                withAnimation(.spring(
+                                    response: 0.45,
+                                    dampingFraction: 0.8
+                                )) {
+                                    selectedCard = nil
+                                }
+                            }
+                            .padding(.top)
+                        }
+                    )
+                    // Same id + namespace → SwiftUI interpolates
+                    .matchedGeometryEffect(
+                        id: "card\(id)",
+                        in: heroNS
+                    )
+            }
+        }
+    }
+}
+
+// @Namespace: an ID space shared between views
+// matchedGeometryEffect interpolates position/size when
+// views with the same namespace + id are swapped</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--orange);background:var(--orange-dim,#fff3e8);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--orange);">Think About It</div>
+        <ul>
+          <li>How does <code>matchedGeometryEffect</code> behave if both views are on screen simultaneously? (isSource parameter)</li>
+          <li>Can you create multiple <code>@Namespace</code>s? When should you separate them?</li>
+          <li>What is the new iOS 18 API for applying hero animations to NavigationStack page transitions?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-orange">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@Namespace</div>
+            <div class="item-desc">A unique ID space shared between views. Views with the same namespace + id are connected by animation</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Interpolated Elements</div>
+            <div class="item-desc">Automatically interpolates position, size, and cornerRadius. Adjustable via the properties parameter</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">ZStack + if/else Pattern</div>
+            <div class="item-desc">Swap list view and detail view with if/else inside a ZStack. Both views should not render simultaneously for smooth results</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 04: Custom ViewModifier -->
+    <div class="content-section" data-preview="pv-4">
+      <div class="cs-label">Topic 04</div>
+      <h2 class="cs-title">Custom ViewModifier — Reusable Styles</h2>
+      <div class="cs-subtitle">Encapsulate repeated modifier combinations into a single type — the UI version of Protocol + Extension</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// Card style modifier
+struct CardModifier: ViewModifier {
+    var color: Color = .orange
+
+    func body(content: Content) -> some View {
+        content
+            .padding(20)
+            .background(color.opacity(0.1))
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(color.opacity(0.3), lineWidth: 1)
+            )
+            .cornerRadius(16)
+            .shadow(color: color.opacity(0.15),
+                    radius: 8, x: 0, y: 4)
+    }
+}
+
+// Shimmer loading effect modifier
+struct ShimmerModifier: ViewModifier {
+    @State private var phase: CGFloat = 0
+
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        .clear,
+                        .white.opacity(0.5),
+                        .clear
+                    ]),
+                    startPoint: .init(x: phase - 0.3, y: 0),
+                    endPoint: .init(x: phase + 0.3, y: 0)
+                )
+                .blendMode(.screen)
+            )
+            .onAppear {
+                withAnimation(
+                    .linear(duration: 1.5)
+                    .repeatForever(autoreverses: false)
+                ) {
+                    phase = 1.3
+                }
+            }
+    }
+}
+
+// Pressable effect modifier
+struct PressableModifier: ViewModifier {
+    @State private var isPressed = false
+
+    func body(content: Content) -> some View {
+        content
+            .scaleEffect(isPressed ? 0.95 : 1.0)
+            .opacity(isPressed ? 0.8 : 1.0)
+            .animation(.easeOut(duration: 0.1), value: isPressed)
+            .simultaneousGesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { _ in isPressed = true }
+                    .onEnded   { _ in isPressed = false }
+            )
+    }
+}
+
+// View Extension for convenient usage
+extension View {
+    func cardStyle(color: Color = .orange) -> some View {
+        modifier(CardModifier(color: color))
+    }
+    func shimmer() -> some View {
+        modifier(ShimmerModifier())
+    }
+    func pressable() -> some View {
+        modifier(PressableModifier())
+    }
+}
+
+// Usage
+Text("Hello").cardStyle()
+Rectangle().shimmer()
+Button("Tap!") { }.pressable()</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--orange);background:var(--orange-dim,#fff3e8);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--orange);">Think About It</div>
+        <ul>
+          <li>What is the difference between a ViewModifier and a custom View? When do you choose which?</li>
+          <li>Why does ShimmerModifier have <code>@State</code>? Does each view instance have its own independent state?</li>
+          <li>Does the order matter when chaining multiple ViewModifiers?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-orange">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">ViewModifier Protocol</div>
+            <div class="item-desc">Implement <code>body(content:)</code>. content is the existing view. Add modifiers and return a new view</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">View Extension Pattern</div>
+            <div class="item-desc"><code>extension View { func myStyle() → some View }</code> makes it chainable like built-in SwiftUI modifiers</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@State in Modifier</div>
+            <div class="item-desc">ViewModifiers can have @State. Each view the modifier is applied to gets its own independent state instance</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 05: Gesture -->
+    <div class="content-section" data-preview="pv-5">
+      <div class="cs-label">Topic 05</div>
+      <h2 class="cs-title">Gesture — Tap · Drag · Swipe</h2>
+      <div class="cs-subtitle">Detect user finger movements and build interactive UI that responds to them</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">struct GestureDemo: View {
+    @State private var offset: CGSize = .zero
+    @State private var isDragging = false
+    @State private var tapCount = 0
+    @State private var isLongPressed = false
+
+    var body: some View {
+        VStack(spacing: 40) {
+
+            // TapGesture
+            Text("Tap count: \(tapCount)")
+                .padding()
+                .background(Color.orange.opacity(0.15))
+                .cornerRadius(12)
+                .onTapGesture(count: 2) {   // double tap
+                    tapCount += 1
+                }
+
+            // DragGesture — drag to move
+            Circle()
+                .fill(isDragging ? Color.orange : Color.orange.opacity(0.5))
+                .frame(width: 80, height: 80)
+                .offset(offset)
+                .scaleEffect(isDragging ? 1.1 : 1.0)
+                .animation(.spring(), value: isDragging)
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            offset = value.translation
+                            isDragging = true
+                        }
+                        .onEnded { _ in
+                            withAnimation(.spring()) {
+                                offset = .zero  // snap back
+                                isDragging = false
+                            }
+                        }
+                )
+
+            // LongPressGesture
+            RoundedRectangle(cornerRadius: 16)
+                .fill(isLongPressed ? Color.orange : Color.gray.opacity(0.2))
+                .frame(height: 60)
+                .overlay(
+                    Text(isLongPressed ? "Long pressing..." : "Long press me")
+                )
+                .gesture(
+                    LongPressGesture(minimumDuration: 0.5)
+                        .onChanged { _ in
+                            withAnimation { isLongPressed = true }
+                        }
+                        .onEnded { _ in
+                            withAnimation { isLongPressed = false }
+                        }
+                )
+
+            // simultaneousGesture — recognize multiple gestures at once
+            Text("Simultaneous tap + drag")
+                .onTapGesture { print("Tap!") }
+                .simultaneousGesture(
+                    DragGesture().onChanged { _ in print("Drag!") }
+                )
+        }
+        .padding()
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--orange);background:var(--orange-dim,#fff3e8);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--orange);">Think About It</div>
+        <ul>
+          <li>What is the difference between <code>.gesture()</code> and <code>.onTapGesture()</code>? How is gesture priority determined?</li>
+          <li>What is the difference between <code>DragGesture</code>'s <code>value.translation</code> and <code>value.predictedEndTranslation</code>?</li>
+          <li>If you were to implement swipe-to-delete yourself, which gesture would you use?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-orange">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Key Gesture Types</div>
+            <div class="item-desc">TapGesture · DragGesture · LongPressGesture · MagnificationGesture · RotationGesture</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">onChanged / onEnded</div>
+            <div class="item-desc">onChanged: called every frame during the gesture | onEnded: called once when the finger lifts</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">simultaneousGesture</div>
+            <div class="item-desc">Recognizes parent-child view gestures without conflict. Use <code>.highPriorityGesture</code> for priority control</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 06: Path & Shape -->
+    <div class="content-section" data-preview="pv-6">
+      <div class="cs-label">Topic 06</div>
+      <h2 class="cs-title">Path &amp; Shape — Custom Shapes</h2>
+      <div class="cs-subtitle">Draw things that basic shapes can't express — waves, progress indicators, speech bubbles, and more</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// Custom Shape — adopts the Shape protocol
+struct Wave: Shape {
+    var amplitude: CGFloat = 10
+    var frequency: CGFloat = 2
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: 0, y: rect.midY))
+
+        let wavelength = rect.width / frequency
+        for x in stride(from: 0, to: rect.width, by: 1) {
+            let y = rect.midY + amplitude *
+                sin(2 * .pi * x / wavelength)
+            path.addLine(to: CGPoint(x: x, y: y))
+        }
+        return path
+    }
+}
+
+// Circular progress indicator
+struct ArcProgressShape: Shape {
+    var progress: Double   // 0.0 ~ 1.0
+    var animatableData: Double {
+        get { progress }
+        set { progress = newValue }
+    }
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        let center = CGPoint(x: rect.midX, y: rect.midY)
+        let radius = min(rect.width, rect.height) / 2 - 8
+
+        path.addArc(
+            center: center,
+            radius: radius,
+            startAngle: .degrees(-90),
+            endAngle: .degrees(-90 + 360 * progress),
+            clockwise: false
+        )
+        return path
+    }
+}
+
+// Actual usage
+struct ProgressRing: View {
+    @State private var progress = 0.0
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .stroke(Color.orange.opacity(0.2),
+                        lineWidth: 12)
+            ArcProgressShape(progress: progress)
+                .stroke(
+                    Color.orange,
+                    style: StrokeStyle(
+                        lineWidth: 12,
+                        lineCap: .round
+                    )
+                )
+                .animation(.easeInOut(duration: 1.5),
+                           value: progress)
+            Text("\(Int(progress * 100))%")
+                .font(.title2.bold())
+        }
+        .frame(width: 140, height: 140)
+        .onAppear { progress = 0.75 }
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--orange);background:var(--orange-dim,#fff3e8);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--orange);">Think About It</div>
+        <ul>
+          <li>When you implement <code>animatableData</code>, which values of a Shape can be animated?</li>
+          <li>In <code>Path.addArc</code>, how does the SwiftUI coordinate system's direction differ from mathematics?</li>
+          <li>How does <code>Shape</code> differ from <code>Canvas</code>? Is there a performance difference for complex graphics?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-orange">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Shape Protocol</div>
+            <div class="item-desc">Implement <code>path(in rect:)</code>. rect is the space the view occupies. Draw the desired form with Path and return it</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">animatableData</div>
+            <div class="item-desc">Specifies which property of the Shape to animate. SwiftUI interpolates from start to end values, calling it each frame</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">StrokeStyle</div>
+            <div class="item-desc">Fine-tune line styles: lineWidth, lineCap(.round/.square), dash pattern, etc. Use .stroke(style:) instead of .stroke()</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Preview Column -->
+  <div class="preview-col">
+    <div class="sticky-phone">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <div id="pv-1" class="preview-content active">
+            <div class="preview-label">withAnimation</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:0 8px;">
+              <div style="background:#FF8C00;border-radius:12px;height:60px;display:flex;align-items:center;justify-content:center;">
+                <span style="color:white;font-size:11px;font-weight:600;">Tap to expand →</span>
+              </div>
+              <div style="display:flex;gap:8px;justify-content:center;">
+                <div style="background:#FFF3E8;border-radius:8px;padding:6px 10px;font-size:9px;font-family:'DM Mono',monospace;color:#E85D1A;">.spring()</div>
+                <div style="background:#FFF3E8;border-radius:8px;padding:6px 10px;font-size:9px;font-family:'DM Mono',monospace;color:#E85D1A;">.easeInOut</div>
+              </div>
+              <div style="background:#1E1F2E;border-radius:8px;padding:10px;font-family:'DM Mono',monospace;font-size:9px;line-height:1.8;color:#E4E6F0;">
+                <span style="color:#FFB86C;">withAnimation</span>(<br>
+                &nbsp;&nbsp;.spring(<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;response: <span style="color:#BD93F9;">0.4</span>)<br>
+                ) { isExpanded.toggle() }
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-2" class="preview-content">
+            <div class="preview-label">.transition()</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 8px;">
+              <div style="background:#FFF3E8;border-radius:10px;padding:10px;text-align:center;">
+                <div style="font-size:10px;font-family:'DM Mono',monospace;color:#E85D1A;margin-bottom:4px;">.slide</div>
+                <div style="font-size:11px;">← Slides in from side</div>
+              </div>
+              <div style="background:#FFF3E8;border-radius:10px;padding:10px;text-align:center;">
+                <div style="font-size:10px;font-family:'DM Mono',monospace;color:#E85D1A;margin-bottom:4px;">.scale + .opacity</div>
+                <div style="font-size:11px;">⊙ Scale + Fade</div>
+              </div>
+              <div style="background:#FFF3E8;border-radius:10px;padding:10px;text-align:center;">
+                <div style="font-size:10px;font-family:'DM Mono',monospace;color:#E85D1A;margin-bottom:4px;">.asymmetric</div>
+                <div style="font-size:11px;">↑ From bottom · To top ↑</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-3" class="preview-content">
+            <div class="preview-label">matchedGeometry</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 8px;">
+              <div style="display:flex;gap:6px;">
+                <div style="flex:1;background:#FFF3E8;border-radius:8px;height:40px;display:flex;align-items:center;justify-content:center;font-size:10px;border:2px solid #FF8C00;">Card 1</div>
+                <div style="flex:1;background:#F7F8FA;border-radius:8px;height:40px;display:flex;align-items:center;justify-content:center;font-size:10px;">Card 2</div>
+              </div>
+              <div style="text-align:center;font-size:18px;color:var(--muted);">↕ tap</div>
+              <div style="background:#FFF3E8;border-radius:12px;height:100px;display:flex;align-items:center;justify-content:center;border:2px solid #FF8C00;">
+                <div style="text-align:center;">
+                  <div style="font-size:12px;font-weight:600;">Card 1 Detail</div>
+                  <div style="font-size:10px;color:#E85D1A;font-family:'DM Mono',monospace;">Hero Expand</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-4" class="preview-content">
+            <div class="preview-label">ViewModifier</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 8px;">
+              <div style="padding:10px;background:#FFF3E8;border-radius:12px;border:1px solid rgba(255,140,0,0.3);box-shadow:0 4px 12px rgba(255,140,0,0.15);">
+                <div style="font-size:11px;font-weight:600;">CardModifier</div>
+                <div style="font-size:10px;color:#E85D1A;">Padding + BG + Border + Shadow</div>
+              </div>
+              <div style="padding:10px;background:#E8E8E8;border-radius:12px;position:relative;overflow:hidden;">
+                <div style="font-size:11px;font-weight:600;color:#999;">ShimmerModifier</div>
+                <div style="position:absolute;top:0;left:30%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.7),transparent);border-radius:12px;"></div>
+              </div>
+              <div style="font-family:'DM Mono',monospace;font-size:9px;color:#E85D1A;text-align:center;">
+                Text("...").cardStyle()<br>.shimmer().pressable()
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-5" class="preview-content">
+            <div class="preview-label">Gesture</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 8px;">
+              <div style="background:#FFF3E8;border-radius:10px;padding:10px;text-align:center;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:#E85D1A;">TapGesture(count: 2)</div>
+                <div style="font-size:11px;margin-top:4px;">Double tap 👆👆</div>
+              </div>
+              <div style="background:#FFF3E8;border-radius:10px;padding:10px;text-align:center;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:#E85D1A;">DragGesture → offset</div>
+                <div style="font-size:18px;margin-top:4px;">⬤ →→</div>
+              </div>
+              <div style="background:#FFF3E8;border-radius:10px;padding:10px;text-align:center;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:#E85D1A;">LongPressGesture(0.5s)</div>
+                <div style="font-size:11px;margin-top:4px;">Hold 👆 ...</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-6" class="preview-content">
+            <div class="preview-label">Path &amp; Shape</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:0 8px;">
+              <div style="position:relative;width:90px;height:90px;">
+                <svg viewBox="0 0 90 90" style="width:90px;height:90px;">
+                  <circle cx="45" cy="45" r="36" fill="none" stroke="rgba(255,140,0,0.2)" stroke-width="8"/>
+                  <circle cx="45" cy="45" r="36" fill="none" stroke="#FF8C00" stroke-width="8" stroke-linecap="round"
+                    stroke-dasharray="169.6" stroke-dashoffset="42.4" transform="rotate(-90 45 45)"/>
+                </svg>
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;">75%</div>
+              </div>
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:#E85D1A;text-align:center;">ArcProgressShape<br>animatableData</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Homework -->
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;">Homework</div>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">After Completing Challenge 2-4</h2>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);background:var(--orange-dim,#fff3e8);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">Required</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Card Flip Animation</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Implement a card that flips front/back on tap using <code>rotation3DEffect</code> and <code>withAnimation</code>. Front and back should show different content</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);background:var(--orange-dim,#fff3e8);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">Required</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Drag-to-Swipe Card UI</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Use DragGesture to swipe cards left/right. After dragging beyond a threshold, the card flies off and the next one appears. Include spring snap-back animation</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">Stretch</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">List → Detail Hero Transition</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Use matchedGeometryEffect to smoothly expand a grid thumbnail into a detail screen header image</div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Completion Checklist</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can use withAnimation and .animation(value:) appropriately</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can customize view appear/disappear animations with .transition()</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can implement hero animations with matchedGeometryEffect</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can create ViewModifiers and use them conveniently via View Extension</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> I can build interactive drag UI with DragGesture</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Challenge nav -->
+<div class="ch-nav">
+  <a href="2-3.html">
+    <span class="nav-dir">← Previous Challenge</span>
+    <span class="nav-title">2-3 Writing Reusable Code</span>
+  </a>
+  <a href="stage2.html" class="next">
+    <span class="nav-dir">Stage 2 Complete →</span>
+    <span class="nav-title">Stage 2 Overview</span>
+  </a>
+</div>
+
+<!-- Comments -->
+<div class="comment-donation-wrap">
+  <div class="section-heading">Comments</div>
+  <div class="utterances-wrap">
+    <script src="https://utteranc.es/client.js"
+      repo="M1zz/cs-swiftUI"
+      issue-term="title"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!-- Donation floating button -->
+<div class="donation-float">
+  <div class="donation-float-card" id="donationCard">
+    <div class="section-heading" style="margin-bottom:4px;">Support Us</div>
+    <div class="donation-desc">If this content helped you,<br>a coffee-sized donation would mean a lot :)</div>
+    <img class="donation-qr" src="../kakao-pay-qr.jpg" alt="KakaoPay QR">
+    <div class="donation-name">Hyunho Lee</div>
+    <div class="donation-kakao-badge">KakaoPay</div>
+  </div>
+  <button class="donation-float-btn" onclick="toggleDonation()" aria-label="Support Us">☕</button>
+</div>
+
+<footer class="footer">
+  개발자리 · Stage 2 — Challenge 2-4 · Building Animated UI
+</footer>
+
+<script>
+  function highlightSwift(el) {
+    let html = el.textContent;
+    html = html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    html = html.replace(/(\/\/.*)/gm,'<span class="cm">$1</span>');
+    html = html.replace(/"([^"]*?)"/g,'<span class="str">"$1</span>');
+    html = html.replace(/@(\w+)/g,'<span class="pr">@$1</span>');
+    html = html.replace(/#(\w+)/g,'<span class="pr">#$1</span>');
+    html = html.replace(/(<[^>]+>)|\b(struct|class|var|let|func|import|return|if|else|guard|for|in|case|enum|protocol|some|private|true|false|nil|self|mutating|static|init|try|throw|throws|async|await|actor|do|catch|extension|where|typealias|inout|switch|any)\b/g, (m, tag, kw) => tag || `<span class="kw">${kw}</span>`);
+    html = html.replace(/\b(\d+\.?\d*)\b/g,'<span class="num">$1</span>');
+    el.innerHTML = html;
+  }
+  document.querySelectorAll('.swift-code').forEach(highlightSwift);
+
+  const sections = document.querySelectorAll('.content-section');
+  const previews = document.querySelectorAll('.preview-content');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.dataset.preview;
+        previews.forEach(p => p.classList.remove('active'));
+        const t = document.getElementById(id);
+        if (t) t.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
+  sections.forEach(s => observer.observe(s));
+
+  function toggleDonation() {
+    document.getElementById('donationCard').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const float = document.querySelector('.donation-float');
+    if (!float.contains(e.target)) {
+      document.getElementById('donationCard').classList.remove('open');
+    }
+  });
+</script>
+<script src="../assets/progress.js"></script>
+<script src="../assets/analytics.js"></script>
+</body>
+</html>
