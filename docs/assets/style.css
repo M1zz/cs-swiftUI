@@ -682,6 +682,87 @@ body::before {
   white-space: pre-wrap;
 }
 
+/* ── COMMENTS & DONATION ── */
+.comment-donation-wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px 60px;
+  position: relative; z-index: 1;
+}
+
+.comment-donation-grid {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 32px;
+  align-items: start;
+}
+
+.section-heading {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.utterances-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  min-height: 120px;
+}
+
+.utterances-wrap .utterances {
+  max-height: none !important;
+}
+
+.donation-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  position: sticky;
+  top: 80px;
+}
+
+.donation-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.donation-qr {
+  width: 140px;
+  height: 140px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.donation-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.donation-kakao-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .06em;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: #FEE500;
+  color: #3C1E1E;
+  font-weight: 600;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .nav { padding: 0 20px; }
@@ -701,4 +782,7 @@ body::before {
   .output-box { width: 100%; }
   .code-preview > .phone-preview,
   .code-preview > .output-box { flex: none; }
+  .comment-donation-wrap { padding: 0 20px 60px; }
+  .comment-donation-grid { grid-template-columns: 1fr; }
+  .donation-box { position: static; }
 }
