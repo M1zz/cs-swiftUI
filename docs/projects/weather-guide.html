@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<title>날씨 앱 클론 코딩 — 학습 가이드</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Noto Sans KR',sans-serif;background:#fff;color:#111;font-size:13px;line-height:1.8;}
+  @media print{.page{page-break-after:always;}@page{size:A4;margin:20mm 18mm;}}
+  .page{max-width:794px;margin:0 auto;padding:32px 40px 40px;}
+  .cover{min-height:297mm;display:flex;flex-direction:column;justify-content:center;background:#0a1a3a;}
+  .cover-tag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#5AB4FF;margin-bottom:20px;}
+  .cover-title{font-family:'Syne',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1.0;letter-spacing:-.03em;margin-bottom:16px;}
+  .cover-sub{font-size:15px;color:#7a9bcc;line-height:1.75;max-width:420px;margin-bottom:40px;}
+  .cover-meta{display:flex;flex-direction:column;gap:10px;}
+  .meta-row{display:flex;align-items:center;gap:12px;font-size:13px;color:#5a7aaa;}
+  .meta-dot{width:6px;height:6px;border-radius:50%;background:#5AB4FF;flex-shrink:0;}
+  .cover-logo{margin-top:auto;padding-top:60px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#3a5a8a;}
+  .cover-logo span{color:#5AB4FF;}
+  .toc-title{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;margin-bottom:32px;padding-bottom:12px;border-bottom:2px solid #111;}
+  .toc-item{display:flex;align-items:baseline;padding:10px 0;border-bottom:1px solid #eee;}
+  .toc-num{font-family:'DM Mono',monospace;font-size:11px;color:#2E8BD8;width:36px;flex-shrink:0;}
+  .toc-name{flex:1;font-size:14px;font-weight:500;}
+  .toc-page{font-family:'DM Mono',monospace;font-size:11px;color:#999;}
+  .ch-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#2E8BD8;margin-bottom:8px;}
+  .ch-title{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;line-height:1.1;margin-bottom:8px;}
+  .ch-sub{font-size:13px;color:#666;margin-bottom:28px;}
+  .ch-divider{height:2px;background:#111;margin-bottom:28px;}
+  .section-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin:28px 0 12px;}
+  pre{background:#0d0f17;border-radius:10px;padding:20px;overflow-x:auto;margin:16px 0;}
+  code{font-family:'DM Mono',monospace;font-size:12px;line-height:1.75;color:#cdd6f4;}
+  .kw{color:#cba6f7;} .ty{color:#89dceb;} .str{color:#a6e3a1;} .cm{color:#585b70;font-style:italic;} .num{color:#fab387;} .fn{color:#89b4fa;}
+  .info-box{background:#f0f7ff;border-left:3px solid #2E8BD8;border-radius:0 8px 8px 0;padding:16px 18px;margin:16px 0;}
+  .info-box-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#2E8BD8;margin-bottom:6px;}
+  .tip-box{background:#f0fff4;border-left:3px solid #22c55e;border-radius:0 8px 8px 0;padding:16px 18px;margin:16px 0;}
+  .tip-box-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#22c55e;margin-bottom:6px;}
+  .warn-box{background:#fff5f5;border-left:3px solid #ef4444;border-radius:0 8px 8px 0;padding:16px 18px;margin:16px 0;}
+  .warn-box-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#ef4444;margin-bottom:6px;}
+  .concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+  .concept-card{background:#f5f5f7;border-radius:8px;padding:14px;}
+  .concept-card-title{font-family:'DM Mono',monospace;font-size:11px;color:#2E8BD8;margin-bottom:6px;}
+  .concept-card-desc{font-size:12px;color:#555;line-height:1.6;}
+  .quiz-box{background:#f5f5f7;border-radius:10px;padding:20px;margin:20px 0;}
+  .quiz-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#111;margin-bottom:12px;}
+  .quiz-item{display:flex;gap:10px;margin-bottom:8px;}
+  .quiz-q{width:20px;flex-shrink:0;font-weight:700;color:#2E8BD8;}
+  .hw-box{background:#0d0f17;border-radius:10px;padding:24px;margin:20px 0;color:#fff;}
+  .hw-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:12px;color:#5AB4FF;}
+  .hw-item{display:flex;gap:10px;margin-bottom:8px;font-size:12px;color:#aaa;}
+  .hw-check{color:#5AB4FF;flex-shrink:0;}
+  p{margin-bottom:12px;} ul,ol{padding-left:20px;margin-bottom:12px;} li{margin-bottom:6px;font-size:13px;}
+</style>
+</head>
+<body>
+
+<div class="page cover">
+  <div class="cover-tag">Clone Coding Project 05</div>
+  <div class="cover-title">🌤 날씨 앱<br>클론 코딩</div>
+  <div class="cover-sub">Apple Weather UI를 클론하고<br>실제 API에서 실시간 날씨 데이터를 받아온다.</div>
+  <div class="cover-meta">
+    <div class="meta-row"><div class="meta-dot"></div>Open-Meteo 무료 API 연동 (키 불필요)</div>
+    <div class="meta-row"><div class="meta-dot"></div>async/await + URLSession 실전 패턴</div>
+    <div class="meta-row"><div class="meta-dot"></div>난이도 ⭐⭐⭐ 중급 — Stage 1 전체 + Stage 2-2</div>
+  </div>
+  <div class="cover-logo">개발자<span>리</span></div>
+</div>
+
+<div class="page" style="padding-top:48px;">
+  <div class="toc-title">목차</div>
+  <div class="toc-item"><div class="toc-num">00</div><div class="toc-name">시작 전에 — API 연동의 흐름</div><div class="toc-page">03</div></div>
+  <div class="toc-item"><div class="toc-num">01</div><div class="toc-name">데이터 모델 (Codable + CodingKeys)</div><div class="toc-page">04</div></div>
+  <div class="toc-item"><div class="toc-num">02</div><div class="toc-name">WeatherService — async/await + URLSession</div><div class="toc-page">07</div></div>
+  <div class="toc-item"><div class="toc-num">03</div><div class="toc-name">메인 화면 — 그라디언트 배경 + 현재 날씨</div><div class="toc-page">09</div></div>
+  <div class="toc-item"><div class="toc-num">04</div><div class="toc-name">시간별 / 주간 예보 섹션</div><div class="toc-page">11</div></div>
+  <div class="toc-item"><div class="toc-num">05</div><div class="toc-name">TabView 페이지 스와이프 (여러 도시)</div><div class="toc-page">13</div></div>
+  <div class="toc-item"><div class="toc-num">06</div><div class="toc-name">도전 과제 — 위치 권한 + CoreLocation</div><div class="toc-page">15</div></div>
+</div>
+
+<!-- Step 00 -->
+<div class="page">
+  <div class="ch-tag">Step 00</div>
+  <div class="ch-title">API 연동의 흐름</div>
+  <div class="ch-sub">인터넷에서 데이터를 받아오는 전체 과정을 먼저 이해한다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="concept-grid">
+    <div class="concept-card">
+      <div class="concept-card-title">URLSession</div>
+      <div class="concept-card-desc">HTTP 요청을 보내고 응답을 받는 Apple 내장 라이브러리. data(from: url) 한 줄로 GET 요청 완료.</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title">async/await</div>
+      <div class="concept-card-desc">네트워크 요청은 시간이 걸린다. async 함수를 await으로 기다리면 완료 후 다음 줄이 실행된다.</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title">Codable 디코딩</div>
+      <div class="concept-card-desc">API가 반환하는 JSON을 Swift struct로 자동 변환. CodingKeys로 snake_case → camelCase 매핑.</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title">@MainActor</div>
+      <div class="concept-card-desc">네트워크 응답은 백그라운드 스레드에서 옴. UI 업데이트는 메인 스레드에서 해야 한다.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Open-Meteo API 소개</div>
+  <p>이 프로젝트에서는 <strong>Open-Meteo</strong> (open-meteo.com) 무료 날씨 API를 사용합니다. API 키가 필요 없고, 회원가입도 불필요합니다.</p>
+  <pre><code><span class="cm">// 서울 현재 날씨 요청 예시</span>
+https://api.open-meteo.com/v1/forecast
+  ?latitude=37.5665
+  &longitude=126.9780
+  &current=temperature_2m,weathercode
+  &timezone=Asia/Seoul</code></pre>
+
+  <div class="tip-box">
+    <div class="tip-box-title">브라우저에서 먼저 테스트</div>
+    위 URL을 브라우저에 붙여넣으면 JSON 응답을 바로 볼 수 있습니다. Codable 모델을 만들기 전에 응답 구조를 확인하세요.
+  </div>
+</div>
+
+<!-- Step 01 -->
+<div class="page">
+  <div class="ch-tag">Step 01</div>
+  <div class="ch-title">데이터 모델</div>
+  <div class="ch-sub">API JSON 구조를 Codable struct로 정확히 매핑한다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="section-title">JSON 응답 구조</div>
+  <pre><code>{
+  <span class="str">"current"</span>: {
+    <span class="str">"temperature_2m"</span>: <span class="num">22.5</span>,
+    <span class="str">"weathercode"</span>: <span class="num">0</span>
+  },
+  <span class="str">"hourly"</span>: {
+    <span class="str">"time"</span>: [<span class="str">"2024-03-01T00:00"</span>, ...],
+    <span class="str">"temperature_2m"</span>: [<span class="num">18.2</span>, ...]
+  },
+  <span class="str">"daily"</span>: {
+    <span class="str">"temperature_2m_max"</span>: [<span class="num">24.0</span>, ...],
+    <span class="str">"temperature_2m_min"</span>: [<span class="num">16.0</span>, ...]
+  }
+}</code></pre>
+
+  <div class="section-title">CodingKeys — snake_case 매핑</div>
+  <p>Swift는 camelCase를 선호하지만, API는 snake_case를 씁니다. <code>CodingKeys</code>로 매핑합니다:</p>
+  <pre><code><span class="kw">struct</span> <span class="ty">CurrentWeather</span>: <span class="ty">Codable</span> {
+    <span class="kw">let</span> temperature2m: <span class="ty">Double</span>   <span class="cm">// Swift: camelCase</span>
+    <span class="kw">let</span> weathercode: <span class="ty">Int</span>
+
+    <span class="kw">enum</span> <span class="ty">CodingKeys</span>: <span class="ty">String</span>, <span class="ty">CodingKey</span> {
+        <span class="kw">case</span> temperature2m = <span class="str">"temperature_2m"</span>  <span class="cm">// JSON: snake_case</span>
+        <span class="kw">case</span> weathercode                         <span class="cm">// 같으면 그냥 씀</span>
+    }
+}</code></pre>
+
+  <div class="section-title">날씨 코드 → 이모지 Extension</div>
+  <pre><code><span class="kw">extension</span> <span class="ty">Int</span> {
+    <span class="kw">var</span> weatherEmoji: <span class="ty">String</span> {
+        <span class="kw">switch self</span> {
+        <span class="kw">case</span> <span class="num">0</span>:        <span class="kw">return</span> <span class="str">"☀️"</span>   <span class="cm">// 맑음</span>
+        <span class="kw">case</span> <span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>:  <span class="kw">return</span> <span class="str">"⛅"</span>   <span class="cm">// 구름</span>
+        <span class="kw">case</span> <span class="num">51</span>...<span class="num">67</span>:  <span class="kw">return</span> <span class="str">"🌧"</span>   <span class="cm">// 비</span>
+        <span class="kw">case</span> <span class="num">71</span>...<span class="num">77</span>:  <span class="kw">return</span> <span class="str">"❄️"</span>   <span class="cm">// 눈</span>
+        <span class="kw">case</span> <span class="num">95</span>:        <span class="kw">return</span> <span class="str">"⛈"</span>   <span class="cm">// 뇌우</span>
+        <span class="kw">default</span>:        <span class="kw">return</span> <span class="str">"🌤"</span>
+        }
+    }
+}</code></pre>
+</div>
+
+<!-- Step 02 -->
+<div class="page">
+  <div class="ch-tag">Step 02</div>
+  <div class="ch-title">WeatherService</div>
+  <div class="ch-sub">async/await + URLSession으로 API를 호출하고, 에러를 처리한다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="section-title">전체 fetch 흐름</div>
+  <pre><code><span class="kw">func</span> <span class="fn">fetch</span>(city: <span class="ty">City</span>) <span class="kw">async</span> {
+    isLoading = <span class="kw">true</span>
+
+    <span class="cm">// 1. URL 조립</span>
+    <span class="kw">var</span> components = <span class="ty">URLComponents</span>(string: baseURL)!
+    components.queryItems = params.<span class="fn">map</span> { <span class="ty">URLQueryItem</span>(name: $0.key, value: $0.value) }
+    <span class="kw">guard let</span> url = components.url <span class="kw">else</span> { <span class="kw">return</span> }
+
+    <span class="kw">do</span> {
+        <span class="cm">// 2. 네트워크 요청 (await — 완료될 때까지 대기)</span>
+        <span class="kw">let</span> (data, _) = <span class="kw">try await</span> <span class="ty">URLSession</span>.shared.<span class="fn">data</span>(from: url)
+
+        <span class="cm">// 3. JSON → Swift struct</span>
+        <span class="kw">let</span> response = <span class="kw">try</span> <span class="ty">JSONDecoder</span>().<span class="fn">decode</span>(<span class="ty">WeatherResponse</span>.self, from: data)
+
+        <span class="cm">// 4. 메인 스레드에서 UI 업데이트</span>
+        <span class="kw">await</span> <span class="ty">MainActor</span>.<span class="fn">run</span> {
+            weatherData[city.id] = response
+            isLoading = <span class="kw">false</span>
+        }
+    } <span class="kw">catch</span> {
+        <span class="kw">await</span> <span class="ty">MainActor</span>.<span class="fn">run</span> {
+            errorMessage = error.localizedDescription
+            isLoading = <span class="kw">false</span>
+        }
+    }
+}</code></pre>
+
+  <div class="info-box">
+    <div class="info-box-title">try + await — 두 가지 실패 가능성</div>
+    <strong>await</strong>: 완료를 기다린다 (비동기)<br>
+    <strong>try</strong>: 실패할 수 있다 (에러 던짐 가능)<br>
+    네트워크 요청은 두 경우 모두 해당하므로 <code>try await</code>를 함께 씁니다.
+  </div>
+
+  <div class="section-title">뷰에서 호출 — .task</div>
+  <pre><code><span class="ty">WeatherView</span>(city: city)
+    .<span class="fn">task</span> {
+        <span class="cm">// 뷰가 나타날 때 자동 실행, 뷰가 사라지면 자동 취소</span>
+        <span class="kw">await</span> service.<span class="fn">fetch</span>(city: city)
+    }</code></pre>
+
+  <div class="warn-box">
+    <div class="warn-box-title">Info.plist — App Transport Security</div>
+    HTTP(비보안) URL을 사용할 경우 Info.plist에 NSAppTransportSecurity 설정이 필요합니다. Open-Meteo는 HTTPS를 사용하므로 별도 설정이 없어도 됩니다.
+  </div>
+</div>
+
+<!-- Step 03 -->
+<div class="page">
+  <div class="ch-tag">Step 03</div>
+  <div class="ch-title">메인 화면 UI</div>
+  <div class="ch-sub">날씨 코드에 따라 그라디언트 배경이 바뀌는 화면을 만든다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="section-title">날씨 코드 → 그라디언트</div>
+  <pre><code><span class="kw">private var</span> gradient: <span class="ty">LinearGradient</span> {
+    <span class="kw">let</span> code = weather?.current.weathercode ?? <span class="num">0</span>
+    <span class="kw">let</span> colors: [<span class="ty">Color</span>]
+    <span class="kw">switch</span> code {
+    <span class="kw">case</span> <span class="num">0</span>:       colors = [<span class="ty">Color</span>(hex: <span class="str">"1E90FF"</span>), <span class="ty">Color</span>(hex: <span class="str">"87CEEB"</span>)] <span class="cm">// 맑음</span>
+    <span class="kw">case</span> <span class="num">51</span>...<span class="num">82</span>: colors = [<span class="ty">Color</span>(hex: <span class="str">"4A5568"</span>), <span class="ty">Color</span>(hex: <span class="str">"718096"</span>)] <span class="cm">// 비</span>
+    <span class="kw">default</span>:      colors = [<span class="ty">Color</span>(hex: <span class="str">"4A7AB5"</span>), <span class="ty">Color</span>(hex: <span class="str">"8CA7C8"</span>)]
+    }
+    <span class="kw">return</span> <span class="ty">LinearGradient</span>(colors: colors, startPoint: .top, endPoint: .bottom)
+}</code></pre>
+
+  <div class="section-title">로딩 / 에러 / 데이터 분기</div>
+  <pre><code><span class="kw">if</span> service.isLoading && weather == <span class="kw">nil</span> {
+    <span class="ty">ProgressView</span>().tint(.white)
+} <span class="kw">else if let</span> w = weather {
+    <span class="cm">// 날씨 데이터 표시</span>
+    <span class="ty">ScrollView</span> { ... }
+} <span class="kw">else if let</span> err = service.errorMessage {
+    <span class="ty">Text</span>(err).foregroundStyle(.white)
+}</code></pre>
+
+  <div class="section-title">유리(Glass) 카드 ViewModifier</div>
+  <pre><code><span class="kw">struct</span> <span class="ty">GlassCard</span>: <span class="ty">ViewModifier</span> {
+    <span class="kw">func</span> <span class="fn">body</span>(content: <span class="ty">Content</span>) -> <span class="kw">some</span> <span class="ty">View</span> {
+        content
+            .background(.white.opacity(<span class="num">0.1</span>))
+            .clipShape(<span class="ty">RoundedRectangle</span>(cornerRadius: <span class="num">16</span>))
+            .padding(.horizontal)
+            .padding(.top, <span class="num">12</span>)
+    }
+}
+
+<span class="kw">extension</span> <span class="ty">View</span> {
+    <span class="kw">func</span> <span class="fn">glassCard</span>() -> <span class="kw">some</span> <span class="ty">View</span> { modifier(<span class="ty">GlassCard</span>()) }
+}</code></pre>
+</div>
+
+<!-- Step 04 + 05 -->
+<div class="page">
+  <div class="ch-tag">Step 04</div>
+  <div class="ch-title">예보 섹션 & 도전 과제</div>
+  <div class="ch-sub">시간별/주간 예보와 여러 도시 스와이프 구현.</div>
+  <div class="ch-divider"></div>
+
+  <div class="section-title">시간별 예보 — 가로 스크롤</div>
+  <pre><code><span class="ty">ScrollView</span>(.horizontal, showsIndicators: <span class="kw">false</span>) {
+    <span class="ty">HStack</span>(spacing: <span class="num">16</span>) {
+        <span class="ty">ForEach</span>(w.hourly.next24) { item <span class="kw">in</span>
+            <span class="ty">HourlyItemView</span>(item: item)
+        }
+    }
+    .padding(.horizontal)
+}</code></pre>
+
+  <div class="section-title">여러 도시 — TabView .page 스타일</div>
+  <pre><code><span class="ty">TabView</span>(selection: $selectedIndex) {
+    <span class="ty">ForEach</span>(<span class="ty">Array</span>(cities.enumerated()), id: \.offset) { index, city <span class="kw">in</span>
+        <span class="ty">WeatherView</span>(city: city)
+            .tag(index)
+    }
+}
+.tabViewStyle(.page)         <span class="cm">// 좌우 스와이프</span>
+.ignoresSafeArea()</code></pre>
+
+  <div class="hw-box" style="margin-top:24px;">
+    <div class="hw-title">도전 1 — CoreLocation으로 현재 위치 날씨</div>
+    <div class="hw-item"><div class="hw-check">□</div><div>Info.plist에 NSLocationWhenInUseUsageDescription 추가</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>CLLocationManager로 위도/경도 수신</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>현재 위치를 cities 배열 첫 번째에 추가</div></div>
+  </div>
+
+  <div class="hw-box" style="margin-top:16px;">
+    <div class="hw-title">도전 2 — 도시 추가/삭제</div>
+    <div class="hw-item"><div class="hw-check">□</div><div>도시 검색 기능 (Geocoding API 활용)</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>도시 목록을 UserDefaults에 저장</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>편집 모드에서 도시 삭제/순서 변경</div></div>
+  </div>
+
+  <div style="margin-top:32px;padding:24px;background:#f5f5f7;border-radius:10px;">
+    <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;margin-bottom:8px;">다음 프로젝트</div>
+    <div style="font-size:13px;color:#555;margin-bottom:12px;">💰 가계부 앱 — SwiftData + Swift Charts 종합 프로젝트</div>
+    <div style="font-family:'DM Mono',monospace;font-size:11px;color:#2E8BD8;">개발자리 Clone Coding Project 06 →</div>
+  </div>
+</div>
+
+</body>
+</html>

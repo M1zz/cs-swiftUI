@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<title>장바구니 앱 클론 코딩 — 학습 가이드</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Noto Sans KR',sans-serif;background:#fff;color:#111;font-size:13px;line-height:1.8;}
+  @media print{
+    .page{page-break-after:always;}
+    @page{size:A4;margin:20mm 18mm;}
+  }
+  .page{max-width:794px;margin:0 auto;padding:32px 40px 40px;}
+
+  /* cover */
+  .cover{min-height:297mm;display:flex;flex-direction:column;justify-content:center;background:#0d0f17;}
+  .cover-tag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#FF6B2B;margin-bottom:20px;}
+  .cover-title{font-family:'Syne',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1.0;letter-spacing:-.03em;margin-bottom:16px;}
+  .cover-sub{font-size:15px;color:#888;line-height:1.75;max-width:420px;margin-bottom:40px;}
+  .cover-meta{display:flex;flex-direction:column;gap:10px;}
+  .meta-row{display:flex;align-items:center;gap:12px;font-size:13px;color:#666;}
+  .meta-dot{width:6px;height:6px;border-radius:50%;background:#FF6B2B;flex-shrink:0;}
+  .cover-logo{margin-top:auto;padding-top:60px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#333;}
+  .cover-logo span{color:#FF6B2B;}
+
+  /* contents page */
+  .toc-title{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;margin-bottom:32px;padding-bottom:12px;border-bottom:2px solid #111;}
+  .toc-item{display:flex;align-items:baseline;gap:0;padding:10px 0;border-bottom:1px solid #eee;}
+  .toc-num{font-family:'DM Mono',monospace;font-size:11px;color:#FF6B2B;width:36px;flex-shrink:0;}
+  .toc-name{flex:1;font-size:14px;font-weight:500;}
+  .toc-page{font-family:'DM Mono',monospace;font-size:11px;color:#999;}
+
+  /* chapter header */
+  .ch-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#FF6B2B;margin-bottom:8px;}
+  .ch-title{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;line-height:1.1;margin-bottom:8px;}
+  .ch-sub{font-size:13px;color:#666;margin-bottom:28px;}
+  .ch-divider{height:2px;background:#111;margin-bottom:28px;}
+
+  /* section */
+  .section-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin:28px 0 12px;}
+  .section-sub{font-size:12px;color:#888;font-style:italic;margin-bottom:16px;}
+
+  /* code block */
+  pre{background:#0d0f17;border-radius:10px;padding:20px;overflow-x:auto;margin:16px 0;}
+  code{font-family:'DM Mono',monospace;font-size:12px;line-height:1.75;color:#cdd6f4;}
+  .kw{color:#cba6f7;}   /* keyword */
+  .ty{color:#89dceb;}   /* type */
+  .str{color:#a6e3a1;}  /* string */
+  .cm{color:#585b70;font-style:italic;} /* comment */
+  .num{color:#fab387;} /* number */
+  .fn{color:#89b4fa;}  /* function */
+
+  /* info box */
+  .info-box{background:#fff8f5;border-left:3px solid #FF6B2B;border-radius:0 8px 8px 0;padding:16px 18px;margin:16px 0;}
+  .info-box-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#FF6B2B;margin-bottom:6px;}
+  .tip-box{background:#f0fff4;border-left:3px solid #22c55e;border-radius:0 8px 8px 0;padding:16px 18px;margin:16px 0;}
+  .tip-box-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#22c55e;margin-bottom:6px;}
+
+  /* step */
+  .step-row{display:flex;gap:16px;margin-bottom:20px;}
+  .step-num{font-family:'DM Mono',monospace;font-size:24px;font-weight:500;color:#FF6B2B;flex-shrink:0;width:36px;line-height:1;}
+  .step-body{flex:1;}
+  .step-title{font-weight:700;font-size:14px;margin-bottom:4px;}
+  .step-desc{font-size:12px;color:#555;line-height:1.7;}
+
+  /* quiz */
+  .quiz-box{background:#f5f5f7;border-radius:10px;padding:20px;margin:20px 0;}
+  .quiz-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#111;margin-bottom:12px;}
+  .quiz-item{display:flex;gap:10px;margin-bottom:8px;}
+  .quiz-q{width:20px;flex-shrink:0;font-weight:700;color:#FF6B2B;}
+
+  /* concept card */
+  .concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+  .concept-card{background:#f5f5f7;border-radius:8px;padding:14px;}
+  .concept-card-title{font-family:'DM Mono',monospace;font-size:11px;color:#FF6B2B;margin-bottom:6px;}
+  .concept-card-desc{font-size:12px;color:#555;line-height:1.6;}
+
+  /* homework */
+  .hw-box{background:#0d0f17;border-radius:10px;padding:24px;margin:20px 0;color:#fff;}
+  .hw-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:12px;color:#FF6B2B;}
+  .hw-item{display:flex;gap:10px;margin-bottom:8px;font-size:12px;color:#aaa;}
+  .hw-check{color:#FF6B2B;flex-shrink:0;}
+
+  p{margin-bottom:12px;}
+  ul,ol{padding-left:20px;margin-bottom:12px;}
+  li{margin-bottom:6px;font-size:13px;}
+  strong{font-weight:700;}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ 표지 ══════════════ -->
+<div class="page cover">
+  <div class="cover-tag">Clone Coding Project 03</div>
+  <div class="cover-title">🛒 장바구니<br>앱 클론 코딩</div>
+  <div class="cover-sub">쇼핑 앱의 상품 목록과 장바구니를 SwiftUI로 만들면서<br>@Observable, .environment, reduce 패턴을 익힌다.</div>
+  <div class="cover-meta">
+    <div class="meta-row"><div class="meta-dot"></div>완성 Xcode 프로젝트 포함</div>
+    <div class="meta-row"><div class="meta-dot"></div>단계별 학습 가이드 (PDF)</div>
+    <div class="meta-row"><div class="meta-dot"></div>난이도 ⭐⭐ 초급 — Stage 1-2, 1-3 선수 조건</div>
+  </div>
+  <div class="cover-logo">개발자<span>리</span></div>
+</div>
+
+<!-- ══════════════ 목차 ══════════════ -->
+<div class="page" style="padding-top:48px;">
+  <div class="toc-title">목차</div>
+  <div class="toc-item"><div class="toc-num">00</div><div class="toc-name">시작 전에 — 배울 것 (@Observable, environment, reduce)</div><div class="toc-page">03</div></div>
+  <div class="toc-item"><div class="toc-num">01</div><div class="toc-name">모델 설계 — Product, CartItem, CartStore</div><div class="toc-page">04</div></div>
+  <div class="toc-item"><div class="toc-num">02</div><div class="toc-name">앱 진입점과 환경 주입 — .environment(store) 패턴</div><div class="toc-page">06</div></div>
+  <div class="toc-item"><div class="toc-num">03</div><div class="toc-name">상품 목록 화면 — List, .searchable, 카테고리 필터</div><div class="toc-page">08</div></div>
+  <div class="toc-item"><div class="toc-num">04</div><div class="toc-name">장바구니 화면 — .onDelete, reduce, confirmationDialog</div><div class="toc-page">11</div></div>
+  <div class="toc-item"><div class="toc-num">05</div><div class="toc-name">도전 과제 — 즐겨찾기, 쿠폰 코드, SwiftData</div><div class="toc-page">14</div></div>
+</div>
+
+<!-- ══════════════ Step 00: 시작 전에 ══════════════ -->
+<div class="page">
+  <div class="ch-tag">Step 00</div>
+  <div class="ch-title">시작 전에 —<br>무엇을 배우는가</div>
+  <div class="ch-sub">커리큘럼 어디와 연결되는지 먼저 파악하고 시작한다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="concept-grid">
+    <div class="concept-card">
+      <div class="concept-card-title">@Observable</div>
+      <div class="concept-card-desc">iOS 17+의 새 관찰 매크로. class에 붙이면 프로퍼티가 바뀔 때 구독 중인 뷰가 자동으로 다시 그려진다.</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title">.environment()</div>
+      <div class="concept-card-desc">상위 뷰에서 객체를 주입하면 하위 어느 뷰에서든 @Environment로 꺼내 쓸 수 있다. 전역 상태 공유에 적합.</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title">reduce</div>
+      <div class="concept-card-desc">배열을 단일 값으로 합산. 장바구니 총 금액 계산에 딱 맞는 고차 함수.</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title">.searchable</div>
+      <div class="concept-card-desc">NavigationStack 안에서 한 줄로 검색 바를 추가. 바인딩된 텍스트로 목록을 실시간 필터링한다.</div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <div class="info-box-title">선수 조건</div>
+    Stage 1-2 (@State, Button, List), Stage 1-3 (NavigationStack, Sheet, @Environment) 을 먼저 완료해야 합니다.
+  </div>
+
+  <div class="section-title">완성 앱 미리보기</div>
+  <p>실제 쇼핑 앱처럼 동작하는 두 화면을 만듭니다:</p>
+  <ul>
+    <li>상품 목록: 카테고리 필터 칩 + 검색 바 + 수량 조절 Stepper</li>
+    <li>장바구니: 담긴 상품 목록 + 스와이프 삭제 + 총 금액 표시</li>
+    <li>상품을 담으면 장바구니 탭 배지 숫자가 즉시 업데이트</li>
+    <li>결제 전 confirmationDialog로 재확인</li>
+  </ul>
+
+  <div class="tip-box">
+    <div class="tip-box-title">공부하는 방법</div>
+    완성 코드를 먼저 실행해서 동작을 확인한 뒤, 빈 프로젝트에서 이 가이드를 따라 직접 처음부터 만들어보세요. 막히면 완성 코드를 참고하되, 복붙은 피하고 직접 타이핑하는 것이 훨씬 효과적입니다.
+  </div>
+</div>
+
+<!-- ══════════════ Step 01: 모델 설계 ══════════════ -->
+<div class="page">
+  <div class="ch-tag">Step 01</div>
+  <div class="ch-title">모델 설계</div>
+  <div class="ch-sub">Product, CartItem struct와 CartStore @Observable class를 정의한다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="section-title">데이터 모델 구조</div>
+  <div class="step-row">
+    <div class="step-num">①</div>
+    <div class="step-body">
+      <div class="step-title">Product — 판매 상품</div>
+      <div class="step-desc">ID, 이름, 가격, 카테고리, 이미지 이름. 변하지 않는 정보이므로 struct + let으로 정의.</div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">②</div>
+    <div class="step-body">
+      <div class="step-title">CartItem — 장바구니 항목</div>
+      <div class="step-desc">Product를 담고 수량(quantity)을 추가. subtotal 계산 프로퍼티 포함.</div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">③</div>
+    <div class="step-body">
+      <div class="step-title">CartStore — 상태 저장소</div>
+      <div class="step-desc">items 배열을 소유하고 담기/수량변경/삭제 메서드를 제공하는 @Observable class.</div>
+    </div>
+  </div>
+
+  <div class="section-title">Product & CartItem</div>
+  <pre><code><span class="kw">struct</span> <span class="ty">Product</span>: <span class="ty">Identifiable</span> {
+    <span class="kw">let</span> id = <span class="ty">UUID</span>()
+    <span class="kw">let</span> name: <span class="ty">String</span>
+    <span class="kw">let</span> price: <span class="ty">Int</span>
+    <span class="kw">let</span> category: <span class="ty">String</span>
+    <span class="kw">let</span> imageName: <span class="ty">String</span>
+}
+
+<span class="kw">struct</span> <span class="ty">CartItem</span>: <span class="ty">Identifiable</span> {
+    <span class="kw">let</span> id = <span class="ty">UUID</span>()
+    <span class="kw">let</span> product: <span class="ty">Product</span>
+    <span class="kw">var</span> quantity: <span class="ty">Int</span>
+
+    <span class="kw">var</span> subtotal: <span class="ty">Int</span> { product.price * quantity }
+}</code></pre>
+
+  <div class="section-title">CartStore @Observable class</div>
+  <pre><code><span class="kw">@Observable
+class</span> <span class="ty">CartStore</span> {
+    <span class="kw">var</span> items: [<span class="ty">CartItem</span>] = []
+
+    <span class="kw">var</span> totalPrice: <span class="ty">Int</span> {
+        items.<span class="fn">reduce</span>(<span class="num">0</span>) { $0 + $1.subtotal }
+    }
+
+    <span class="kw">func</span> <span class="fn">add</span>(_ product: <span class="ty">Product</span>) {
+        <span class="kw">if let</span> i = items.firstIndex(where: { $0.product.id == product.id }) {
+            items[i].quantity += <span class="num">1</span>
+        } <span class="kw">else</span> {
+            items.append(<span class="ty">CartItem</span>(product: product, quantity: <span class="num">1</span>))
+        }
+    }
+
+    <span class="kw">func</span> <span class="fn">delete</span>(at offsets: <span class="ty">IndexSet</span>) {
+        items.<span class="fn">remove</span>(atOffsets: offsets)
+    }
+}</code></pre>
+
+  <div class="info-box">
+    <div class="info-box-title">struct vs class 선택 기준</div>
+    Product와 CartItem은 값 타입(struct)으로 충분합니다. 하지만 CartStore는 여러 뷰에서 "같은 인스턴스"를 공유해야 하므로 참조 타입(class) + @Observable 조합을 사용합니다.
+  </div>
+</div>
+
+<!-- ══════════════ Step 02: 환경 주입 ══════════════ -->
+<div class="page">
+  <div class="ch-tag">Step 02</div>
+  <div class="ch-title">앱 진입점과 환경 주입</div>
+  <div class="ch-sub">.environment(store)로 CartStore를 전체 뷰 트리에 공유한다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="section-title">왜 .environment를 쓰는가?</div>
+  <p>상품 목록 화면과 장바구니 화면은 화면 계층상 형제 관계입니다. @State로 상위 뷰에 두고 @Binding으로 내려보내도 되지만, 화면이 깊어질수록 바인딩 체인이 길어집니다. .environment를 쓰면 중간 뷰를 거치지 않고 어느 깊이에서든 꺼내 쓸 수 있습니다.</p>
+
+  <div class="section-title">CartApp — 진입점</div>
+  <pre><code><span class="kw">@main
+struct</span> <span class="ty">CartApp</span>: <span class="ty">App</span> {
+    <span class="cm">// 앱 생명주기 동안 단 하나의 인스턴스 유지</span>
+    <span class="kw">@State private var</span> store = <span class="ty">CartStore</span>()
+
+    <span class="kw">var</span> body: <span class="kw">some</span> <span class="ty">Scene</span> {
+        <span class="ty">WindowGroup</span> {
+            <span class="ty">ContentView</span>()
+                .environment(store)   <span class="cm">// 전체 뷰 트리에 주입</span>
+        }
+    }
+}</code></pre>
+
+  <div class="section-title">하위 뷰에서 꺼내 쓰기</div>
+  <pre><code><span class="kw">struct</span> <span class="ty">ProductListView</span>: <span class="ty">View</span> {
+    <span class="cm">// @Observable 객체는 타입으로 꺼낸다 (key path 불필요)</span>
+    <span class="kw">@Environment</span>(<span class="ty">CartStore</span>.<span class="kw">self</span>) <span class="kw">private var</span> store
+
+    <span class="kw">var</span> body: <span class="kw">some</span> <span class="ty">View</span> {
+        <span class="ty">Button</span>(<span class="str">"담기"</span>) {
+            store.<span class="fn">add</span>(product)
+        }
+    }
+}
+
+<span class="kw">struct</span> <span class="ty">CartView</span>: <span class="ty">View</span> {
+    <span class="kw">@Environment</span>(<span class="ty">CartStore</span>.<span class="kw">self</span>) <span class="kw">private var</span> store
+
+    <span class="kw">var</span> body: <span class="kw">some</span> <span class="ty">View</span> {
+        <span class="ty">Text</span>(<span class="str">"총 \(store.totalPrice)원"</span>)
+    }
+}</code></pre>
+
+  <div class="tip-box">
+    <div class="tip-box-title">@Environment vs @EnvironmentObject</div>
+    iOS 17 이전에는 ObservableObject + @EnvironmentObject를 사용했습니다. iOS 17+에서는 @Observable + @Environment(Type.self) 조합이 더 간결하고 성능도 좋습니다. 이 프로젝트는 iOS 17+ 타겟을 기준으로 합니다.
+  </div>
+
+  <div class="quiz-box">
+    <div class="quiz-title">셀프 체크</div>
+    <div class="quiz-item"><div class="quiz-q">Q1</div><div>.environment(store) 없이 @Environment(CartStore.self)를 쓰면 어떻게 되는가?</div></div>
+    <div class="quiz-item"><div class="quiz-q">Q2</div><div>CartStore를 @State 대신 let으로 선언하면 어떤 문제가 생기는가?</div></div>
+  </div>
+</div>
+
+<!-- ══════════════ Step 03: 상품 목록 화면 ══════════════ -->
+<div class="page">
+  <div class="ch-tag">Step 03</div>
+  <div class="ch-title">상품 목록 화면</div>
+  <div class="ch-sub">List, .searchable, 카테고리 필터 칩, QuantityStepper를 구현한다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="section-title">.searchable 검색 바</div>
+  <p>NavigationStack 안에서 .searchable modifier 한 줄로 검색 바가 생깁니다:</p>
+  <pre><code><span class="kw">struct</span> <span class="ty">ProductListView</span>: <span class="ty">View</span> {
+    <span class="kw">@Environment</span>(<span class="ty">CartStore</span>.<span class="kw">self</span>) <span class="kw">private var</span> store
+    <span class="kw">@State private var</span> searchText = <span class="str">""</span>
+    <span class="kw">@State private var</span> selectedCategory: <span class="ty">String</span>? = <span class="kw">nil</span>
+
+    <span class="kw">private var</span> filtered: [<span class="ty">Product</span>] {
+        <span class="ty">SampleData</span>.products
+            .filter { selectedCategory == <span class="kw">nil</span> || $0.category == selectedCategory }
+            .filter { searchText.isEmpty || $0.name.contains(searchText) }
+    }
+
+    <span class="kw">var</span> body: <span class="kw">some</span> <span class="ty">View</span> {
+        <span class="ty">NavigationStack</span> {
+            <span class="ty">VStack</span>(spacing: <span class="num">0</span>) {
+                categoryFilterChips
+                <span class="ty">List</span>(filtered) { product <span class="kw">in</span>
+                    <span class="ty">ProductRow</span>(product: product)
+                }
+            }
+            .navigationTitle(<span class="str">"상품 목록"</span>)
+            .searchable(text: $searchText, prompt: <span class="str">"상품 검색"</span>)
+        }
+    }
+}</code></pre>
+
+  <div class="section-title">카테고리 필터 칩</div>
+  <pre><code><span class="kw">private var</span> categoryFilterChips: <span class="kw">some</span> <span class="ty">View</span> {
+    <span class="ty">ScrollView</span>(.horizontal, showsIndicators: <span class="kw">false</span>) {
+        <span class="ty">HStack</span>(spacing: <span class="num">8</span>) {
+            <span class="ty">ForEach</span>(categories, id: \.self) { cat <span class="kw">in</span>
+                <span class="ty">Button</span>(cat) {
+                    selectedCategory = selectedCategory == cat ? <span class="kw">nil</span> : cat
+                }
+                .padding(.horizontal, <span class="num">14</span>)
+                .padding(.vertical, <span class="num">6</span>)
+                .background(selectedCategory == cat ? <span class="ty">Color</span>.orange : <span class="ty">Color</span>(.systemGray6))
+                .foregroundStyle(selectedCategory == cat ? .white : .primary)
+                .clipShape(<span class="ty">Capsule</span>())
+                .font(.footnote.weight(.medium))
+            }
+        }
+        .padding(.horizontal)
+        .padding(.vertical, <span class="num">8</span>)
+    }
+}</code></pre>
+
+  <div class="section-title">QuantityStepper — 수량 조절</div>
+  <pre><code><span class="kw">struct</span> <span class="ty">QuantityStepper</span>: <span class="ty">View</span> {
+    <span class="kw">let</span> product: <span class="ty">Product</span>
+    <span class="kw">@Environment</span>(<span class="ty">CartStore</span>.<span class="kw">self</span>) <span class="kw">private var</span> store
+
+    <span class="kw">private var</span> quantity: <span class="ty">Int</span> {
+        store.items.first(where: { $0.product.id == product.id })?.quantity ?? <span class="num">0</span>
+    }
+
+    <span class="kw">var</span> body: <span class="kw">some</span> <span class="ty">View</span> {
+        <span class="ty">HStack</span>(spacing: <span class="num">12</span>) {
+            <span class="ty">Button</span> { store.<span class="fn">decrease</span>(product) } label: {
+                <span class="ty">Image</span>(systemName: <span class="str">"minus.circle.fill"</span>)
+            }
+            <span class="ty">Text</span>(<span class="str">"\(quantity)"</span>).frame(minWidth: <span class="num">20</span>)
+            <span class="ty">Button</span> { store.<span class="fn">add</span>(product) } label: {
+                <span class="ty">Image</span>(systemName: <span class="str">"plus.circle.fill"</span>)
+            }
+        }
+        .foregroundStyle(.orange)
+    }
+}</code></pre>
+</div>
+
+<!-- ══════════════ Step 04: 장바구니 화면 ══════════════ -->
+<div class="page">
+  <div class="ch-tag">Step 04</div>
+  <div class="ch-title">장바구니 화면</div>
+  <div class="ch-sub">.onDelete, reduce로 총 금액을 계산하고 confirmationDialog로 결제를 확인한다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="section-title">CartView 전체 구조</div>
+  <pre><code><span class="kw">struct</span> <span class="ty">CartView</span>: <span class="ty">View</span> {
+    <span class="kw">@Environment</span>(<span class="ty">CartStore</span>.<span class="kw">self</span>) <span class="kw">private var</span> store
+    <span class="kw">@State private var</span> showCheckout = <span class="kw">false</span>
+
+    <span class="kw">var</span> body: <span class="kw">some</span> <span class="ty">View</span> {
+        <span class="ty">NavigationStack</span> {
+            <span class="ty">List</span> {
+                <span class="ty">ForEach</span>(store.items) { item <span class="kw">in</span>
+                    <span class="ty">CartRow</span>(item: item)
+                }
+                .onDelete { store.<span class="fn">delete</span>(at: $0) }
+            }
+            .navigationTitle(<span class="str">"장바구니"</span>)
+            .safeAreaInset(edge: .bottom) {
+                checkoutBar
+            }
+        }
+    }
+}</code></pre>
+
+  <div class="section-title">총 금액 — reduce</div>
+  <pre><code><span class="cm">// CartStore 안에서 계산 프로퍼티로 정의</span>
+<span class="kw">var</span> totalPrice: <span class="ty">Int</span> {
+    items.<span class="fn">reduce</span>(<span class="num">0</span>) { $0 + $1.subtotal }
+}
+
+<span class="cm">// 뷰에서 사용</span>
+<span class="ty">Text</span>(<span class="str">"합계 \(store.totalPrice)원"</span>)
+    .font(.headline)</code></pre>
+
+  <div class="section-title">.onDelete — 스와이프 삭제</div>
+  <pre><code><span class="ty">ForEach</span>(store.items) { item <span class="kw">in</span>
+    <span class="ty">CartRow</span>(item: item)
+}
+.onDelete { offsets <span class="kw">in</span>
+    store.<span class="fn">delete</span>(at: offsets)
+}</code></pre>
+
+  <div class="section-title">결제 확인 — confirmationDialog</div>
+  <pre><code><span class="ty">Button</span>(<span class="str">"결제하기"</span>) {
+    showCheckout = <span class="kw">true</span>
+}
+.confirmationDialog(
+    <span class="str">"총 \(store.totalPrice)원을 결제하시겠습니까?"</span>,
+    isPresented: $showCheckout,
+    titleVisibility: .visible
+) {
+    <span class="ty">Button</span>(<span class="str">"결제"</span>, role: .destructive) {
+        store.<span class="fn">checkout</span>()
+    }
+    <span class="ty">Button</span>(<span class="str">"취소"</span>, role: .cancel) {}
+}</code></pre>
+
+  <div class="info-box">
+    <div class="info-box-title">safeAreaInset(edge: .bottom)</div>
+    결제 바를 List 위에 고정하면서 List 스크롤이 결제 바에 가려지지 않도록 safeAreaInset을 사용합니다. padding을 직접 계산하지 않아도 됩니다.
+  </div>
+
+  <div class="quiz-box">
+    <div class="quiz-title">셀프 체크</div>
+    <div class="quiz-item"><div class="quiz-q">Q1</div><div>items.reduce(0) { $0 + $1.subtotal } 에서 0은 무엇인가?</div></div>
+    <div class="quiz-item"><div class="quiz-q">Q2</div><div>.onDelete가 전달하는 IndexSet은 어떤 인덱스를 담고 있는가?</div></div>
+    <div class="quiz-item"><div class="quiz-q">Q3</div><div>confirmationDialog와 alert의 차이는 무엇인가?</div></div>
+  </div>
+</div>
+
+<!-- ══════════════ Step 05: 도전 과제 ══════════════ -->
+<div class="page">
+  <div class="ch-tag">Step 05</div>
+  <div class="ch-title">도전 과제</div>
+  <div class="ch-sub">완성 후 스스로 기능을 추가해본다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="hw-box">
+    <div class="hw-title">도전 1 — 즐겨찾기 기능</div>
+    <div class="hw-item"><div class="hw-check">□</div><div>Product에 isFavorite 상태를 CartStore에서 Set&lt;UUID&gt;로 관리</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>상품 행에 하트 버튼 추가 → 탭 시 토글 (filled/unfilled)</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>즐겨찾기 필터 칩을 카테고리 칩 옆에 추가</div></div>
+  </div>
+
+  <div class="hw-box" style="margin-top:16px;">
+    <div class="hw-title">도전 2 — 쿠폰 코드</div>
+    <div class="hw-item"><div class="hw-check">□</div><div>결제 바에 쿠폰 코드 입력 TextField 추가</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>"SAVE10" 입력 시 총 금액에서 10% 할인된 금액을 표시</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>유효하지 않은 코드 입력 시 흔들기 애니메이션 (withAnimation + offset)</div></div>
+  </div>
+
+  <div class="hw-box" style="margin-top:16px;">
+    <div class="hw-title">도전 3 — SwiftData로 주문 내역 저장</div>
+    <div class="hw-item"><div class="hw-check">□</div><div>@Model class Order 정의 (주문 일시, 총 금액, 상품 목록)</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>결제 완료 시 ModelContext에 Order 저장</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>"주문 내역" 탭 추가 → @Query로 저장된 주문 목록 표시</div></div>
+  </div>
+
+  <div style="margin-top:32px;padding:24px;background:#f5f5f7;border-radius:10px;">
+    <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;margin-bottom:8px;">다음 프로젝트</div>
+    <div style="font-size:13px;color:#555;margin-bottom:12px;">📝 메모 앱 — SwiftData, @Query, 마크다운 렌더링으로 노트 앱 만들기</div>
+    <div style="font-family:'DM Mono',monospace;font-size:11px;color:#FF6B2B;">개발자리 Clone Coding Project 04 →</div>
+  </div>
+</div>
+
+</body>
+</html>

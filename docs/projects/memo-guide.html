@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<title>메모 앱 클론 코딩 — 학습 가이드</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Noto Sans KR',sans-serif;background:#fff;color:#111;font-size:13px;line-height:1.8;}
+  @media print{.page{page-break-after:always;}@page{size:A4;margin:20mm 18mm;}}
+  .page{max-width:794px;margin:0 auto;padding:32px 40px 40px;}
+  .cover{min-height:297mm;display:flex;flex-direction:column;justify-content:center;background:#0d0f17;}
+  .cover-tag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#FFD60A;margin-bottom:20px;}
+  .cover-title{font-family:'Syne',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1.0;letter-spacing:-.03em;margin-bottom:16px;}
+  .cover-sub{font-size:15px;color:#888;line-height:1.75;max-width:420px;margin-bottom:40px;}
+  .cover-meta{display:flex;flex-direction:column;gap:10px;}
+  .meta-row{display:flex;align-items:center;gap:12px;font-size:13px;color:#666;}
+  .meta-dot{width:6px;height:6px;border-radius:50%;background:#FFD60A;flex-shrink:0;}
+  .cover-logo{margin-top:auto;padding-top:60px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#333;}
+  .cover-logo span{color:#FFD60A;}
+  .toc-title{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;margin-bottom:32px;padding-bottom:12px;border-bottom:2px solid #111;}
+  .toc-item{display:flex;align-items:baseline;padding:10px 0;border-bottom:1px solid #eee;}
+  .toc-num{font-family:'DM Mono',monospace;font-size:11px;color:#FFD60A;width:36px;flex-shrink:0;}
+  .toc-name{flex:1;font-size:14px;font-weight:500;}
+  .toc-page{font-family:'DM Mono',monospace;font-size:11px;color:#999;}
+  .ch-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#FFD60A;margin-bottom:8px;}
+  .ch-title{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;line-height:1.1;margin-bottom:8px;}
+  .ch-sub{font-size:13px;color:#666;margin-bottom:28px;}
+  .ch-divider{height:2px;background:#111;margin-bottom:28px;}
+  .section-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin:28px 0 12px;}
+  pre{background:#0d0f17;border-radius:10px;padding:20px;overflow-x:auto;margin:16px 0;}
+  code{font-family:'DM Mono',monospace;font-size:12px;line-height:1.75;color:#cdd6f4;}
+  .kw{color:#cba6f7;} .ty{color:#89dceb;} .str{color:#a6e3a1;} .cm{color:#585b70;font-style:italic;} .num{color:#fab387;} .fn{color:#89b4fa;}
+  .info-box{background:#fffdf0;border-left:3px solid #FFD60A;border-radius:0 8px 8px 0;padding:16px 18px;margin:16px 0;}
+  .info-box-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#b8860b;margin-bottom:6px;}
+  .tip-box{background:#f0fff4;border-left:3px solid #22c55e;border-radius:0 8px 8px 0;padding:16px 18px;margin:16px 0;}
+  .tip-box-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#22c55e;margin-bottom:6px;}
+  .step-row{display:flex;gap:16px;margin-bottom:20px;}
+  .step-num{font-family:'DM Mono',monospace;font-size:24px;font-weight:500;color:#FFD60A;flex-shrink:0;width:36px;line-height:1;}
+  .step-body{flex:1;}
+  .step-title{font-weight:700;font-size:14px;margin-bottom:4px;}
+  .step-desc{font-size:12px;color:#555;line-height:1.7;}
+  .concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+  .concept-card{background:#f5f5f7;border-radius:8px;padding:14px;}
+  .concept-card-title{font-family:'DM Mono',monospace;font-size:11px;color:#b8860b;margin-bottom:6px;}
+  .concept-card-desc{font-size:12px;color:#555;line-height:1.6;}
+  .quiz-box{background:#f5f5f7;border-radius:10px;padding:20px;margin:20px 0;}
+  .quiz-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#111;margin-bottom:12px;}
+  .quiz-item{display:flex;gap:10px;margin-bottom:8px;}
+  .quiz-q{width:20px;flex-shrink:0;font-weight:700;color:#FFD60A;}
+  .hw-box{background:#0d0f17;border-radius:10px;padding:24px;margin:20px 0;color:#fff;}
+  .hw-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:12px;color:#FFD60A;}
+  .hw-item{display:flex;gap:10px;margin-bottom:8px;font-size:12px;color:#aaa;}
+  .hw-check{color:#FFD60A;flex-shrink:0;}
+  p{margin-bottom:12px;} ul,ol{padding-left:20px;margin-bottom:12px;} li{margin-bottom:6px;font-size:13px;}
+</style>
+</head>
+<body>
+
+<!-- 표지 -->
+<div class="page cover">
+  <div class="cover-tag">Clone Coding Project 04</div>
+  <div class="cover-title">📝 메모 앱<br>클론 코딩</div>
+  <div class="cover-sub">Apple Notes 간소판을 직접 만들면서<br>Codable, UserDefaults, CRUD 패턴을 완전히 익힌다.</div>
+  <div class="cover-meta">
+    <div class="meta-row"><div class="meta-dot"></div>완성 Xcode 프로젝트 포함</div>
+    <div class="meta-row"><div class="meta-dot"></div>단계별 PDF 학습 가이드</div>
+    <div class="meta-row"><div class="meta-dot"></div>난이도 ⭐⭐ 초급 — Stage 1-2, 1-3, 1-4</div>
+  </div>
+  <div class="cover-logo">개발자<span>리</span></div>
+</div>
+
+<!-- 목차 -->
+<div class="page" style="padding-top:48px;">
+  <div class="toc-title">목차</div>
+  <div class="toc-item"><div class="toc-num">00</div><div class="toc-name">시작 전에 — 영속성이란 무엇인가</div><div class="toc-page">03</div></div>
+  <div class="toc-item"><div class="toc-num">01</div><div class="toc-name">Memo 모델 설계 (Codable + Identifiable)</div><div class="toc-page">04</div></div>
+  <div class="toc-item"><div class="toc-num">02</div><div class="toc-name">MemoStore — UserDefaults 영속성</div><div class="toc-page">06</div></div>
+  <div class="toc-item"><div class="toc-num">03</div><div class="toc-name">메모 목록 화면 (.searchable + 정렬)</div><div class="toc-page">08</div></div>
+  <div class="toc-item"><div class="toc-num">04</div><div class="toc-name">메모 편집 화면 (TextEditor + 저장 흐름)</div><div class="toc-page">11</div></div>
+  <div class="toc-item"><div class="toc-num">05</div><div class="toc-name">도전 과제 — 태그 & 잠금 기능</div><div class="toc-page">13</div></div>
+</div>
+
+<!-- Step 00 -->
+<div class="page">
+  <div class="ch-tag">Step 00</div>
+  <div class="ch-title">영속성이란<br>무엇인가</div>
+  <div class="ch-sub">앱을 껐다 켜도 데이터가 남는 것. 이 프로젝트의 핵심 목표.</div>
+  <div class="ch-divider"></div>
+
+  <div class="concept-grid">
+    <div class="concept-card">
+      <div class="concept-card-title">Codable</div>
+      <div class="concept-card-desc">struct를 JSON Data로 변환하거나, JSON Data를 struct로 복원한다. UserDefaults에 저장하기 위한 필수 단계.</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title">UserDefaults</div>
+      <div class="concept-card-desc">앱 설정과 소량 데이터를 키-값 쌍으로 영구 저장. JSON Data → set(data, forKey:) → data(forKey:) 패턴.</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title">didSet 자동 저장</div>
+      <div class="concept-card-desc">var memos: [Memo] = [] { didSet { save() } } — 배열이 바뀔 때마다 자동으로 UserDefaults에 저장.</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title">@Observable</div>
+      <div class="concept-card-desc">MemoStore를 @Observable로 선언하면 뷰가 store.memos 변경을 자동으로 감지해 리렌더링.</div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <div class="info-box-title">데이터 흐름</div>
+    뷰 → store.add() → memos 배열 변경 → didSet → save() → UserDefaults<br>
+    앱 시작 → MemoStore.init() → load() → UserDefaults → memos 복원
+  </div>
+
+  <p>이 프로젝트를 완성하면 <strong>앱을 껐다 켜도 데이터가 유지</strong>되는 경험을 처음으로 하게 됩니다. Stage 2-1에서 SwiftData를 배우기 전, UserDefaults 수동 저장으로 영속성의 원리를 이해하는 데 목적이 있습니다.</p>
+
+  <div class="tip-box">
+    <div class="tip-box-title">완성 앱 기능</div>
+    메모 추가 / 편집 / 삭제 (CRUD) · 날짜순/이름순 정렬 · 제목+본문 검색 (.searchable) · 앱 재시작 후 데이터 유지
+  </div>
+</div>
+
+<!-- Step 01 -->
+<div class="page">
+  <div class="ch-tag">Step 01</div>
+  <div class="ch-title">Memo 모델 설계</div>
+  <div class="ch-sub">Codable + Identifiable을 채택한 struct를 만든다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="section-title">왜 struct인가?</div>
+  <p>메모 데이터는 뷰끼리 공유할 필요가 없는 <strong>값 타입</strong>입니다. struct를 사용하면 배열에서 수정할 때 새 복사본이 만들어지므로, SwiftUI의 상태 관리와 자연스럽게 맞습니다.</p>
+
+  <pre><code><span class="kw">struct</span> <span class="ty">Memo</span>: <span class="ty">Codable</span>, <span class="ty">Identifiable</span> {
+    <span class="kw">var</span> id: <span class="ty">UUID</span> = <span class="ty">UUID</span>()    <span class="cm">// List/ForEach 식별자</span>
+    <span class="kw">var</span> title: <span class="ty">String</span>
+    <span class="kw">var</span> body: <span class="ty">String</span>
+    <span class="kw">var</span> updatedAt: <span class="ty">Date</span> = <span class="ty">Date</span>()
+
+    <span class="cm">// 목록에 보여줄 첫 번째 줄 미리보기</span>
+    <span class="kw">var</span> preview: <span class="ty">String</span> {
+        <span class="kw">let</span> firstLine = body.components(separatedBy: <span class="str">"\n"</span>).first ?? <span class="str">""</span>
+        <span class="kw">return</span> firstLine.isEmpty ? <span class="str">"내용 없음"</span> : firstLine
+    }
+}</code></pre>
+
+  <div class="info-box">
+    <div class="info-box-title">Codable = Encodable + Decodable</div>
+    <code>Codable</code>을 채택하면 Swift가 자동으로 프로퍼티 이름 기반의 JSON 인코딩/디코딩 코드를 생성합니다. 프로퍼티 이름이 JSON 키와 다를 때는 <code>CodingKeys</code> enum을 정의합니다.
+  </div>
+
+  <div class="section-title">Codable 동작 확인</div>
+  <pre><code><span class="kw">let</span> memo = <span class="ty">Memo</span>(title: <span class="str">"테스트"</span>, body: <span class="str">"내용"</span>)
+
+<span class="cm">// 인코딩 (Memo → Data)</span>
+<span class="kw">let</span> data = <span class="kw">try</span>? <span class="ty">JSONEncoder</span>().<span class="fn">encode</span>(memo)
+
+<span class="cm">// 디코딩 (Data → Memo)</span>
+<span class="kw">if let</span> data,
+   <span class="kw">let</span> decoded = <span class="kw">try</span>? <span class="ty">JSONDecoder</span>().<span class="fn">decode</span>(<span class="ty">Memo</span>.self, from: data) {
+    print(decoded.title)  <span class="cm">// "테스트"</span>
+}</code></pre>
+
+  <div class="section-title">배열 저장</div>
+  <p>메모가 여러 개이므로 <code>[Memo]</code> 배열 자체를 인코딩합니다. 배열도 Codable의 요소가 Codable이면 자동으로 Codable입니다.</p>
+  <pre><code><span class="cm">// 배열 인코딩</span>
+<span class="kw">let</span> memos: [<span class="ty">Memo</span>] = [...]
+<span class="kw">let</span> data = <span class="kw">try</span>? <span class="ty">JSONEncoder</span>().<span class="fn">encode</span>(memos)  <span class="cm">// OK</span>
+
+<span class="cm">// 배열 디코딩</span>
+<span class="kw">let</span> restored = <span class="kw">try</span>? <span class="ty">JSONDecoder</span>().<span class="fn">decode</span>([<span class="ty">Memo</span>].self, from: data!)</code></pre>
+</div>
+
+<!-- Step 02 -->
+<div class="page">
+  <div class="ch-tag">Step 02</div>
+  <div class="ch-title">MemoStore</div>
+  <div class="ch-sub">@Observable 클래스로 CRUD + UserDefaults 자동 저장을 구현한다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="section-title">didSet으로 자동 저장</div>
+  <p>memos 배열이 변경될 때마다 자동으로 저장되도록 <code>didSet</code>을 활용합니다.</p>
+  <pre><code><span class="kw">@Observable
+class</span> <span class="ty">MemoStore</span> {
+    <span class="kw">private let</span> key = <span class="str">"memos_v1"</span>
+
+    <span class="kw">var</span> memos: [<span class="ty">Memo</span>] = [] {
+        <span class="kw">didSet</span> { <span class="fn">save</span>() }   <span class="cm">// 변경 감지 → 즉시 저장</span>
+    }
+
+    <span class="kw">init</span>() { <span class="fn">load</span>() }    <span class="cm">// 앱 시작 시 복원</span>
+}</code></pre>
+
+  <div class="section-title">CRUD 메서드</div>
+  <pre><code><span class="cm">// Create — 최신 순으로 맨 앞에 추가</span>
+<span class="kw">func</span> <span class="fn">add</span>(title: <span class="ty">String</span> = <span class="str">"새 메모"</span>) {
+    memos.<span class="fn">insert</span>(<span class="ty">Memo</span>(title: title, body: <span class="str">""</span>), at: <span class="num">0</span>)
+}
+
+<span class="cm">// Update</span>
+<span class="kw">func</span> <span class="fn">update</span>(_ memo: <span class="ty">Memo</span>) {
+    <span class="kw">guard let</span> i = memos.<span class="fn">firstIndex</span>(where: { $0.id == memo.id }) <span class="kw">else</span> { <span class="kw">return</span> }
+    <span class="kw">var</span> updated = memo
+    updated.updatedAt = <span class="ty">Date</span>()
+    memos[i] = updated    <span class="cm">// struct 교체 → didSet 발동 → 저장</span>
+}
+
+<span class="cm">// Delete</span>
+<span class="kw">func</span> <span class="fn">delete</span>(at offsets: <span class="ty">IndexSet</span>) {
+    memos.<span class="fn">remove</span>(atOffsets: offsets)
+}</code></pre>
+
+  <div class="section-title">저장 / 불러오기</div>
+  <pre><code><span class="kw">private func</span> <span class="fn">save</span>() {
+    <span class="kw">guard let</span> data = <span class="kw">try</span>? <span class="ty">JSONEncoder</span>().<span class="fn">encode</span>(memos) <span class="kw">else</span> { <span class="kw">return</span> }
+    <span class="ty">UserDefaults</span>.standard.<span class="fn">set</span>(data, forKey: key)
+}
+
+<span class="kw">private func</span> <span class="fn">load</span>() {
+    <span class="kw">guard
+        let</span> data = <span class="ty">UserDefaults</span>.standard.<span class="fn">data</span>(forKey: key),
+        <span class="kw">let</span> saved = <span class="kw">try</span>? <span class="ty">JSONDecoder</span>().<span class="fn">decode</span>([<span class="ty">Memo</span>].self, from: data)
+    <span class="kw">else</span> { <span class="kw">return</span> }
+    memos = saved
+}</code></pre>
+
+  <div class="info-box">
+    <div class="info-box-title">key 버전 관리 — "memos_v1"</div>
+    나중에 Memo struct에 새 프로퍼티를 추가하면 기존 저장 데이터와 호환이 안 될 수 있습니다. key를 "memos_v2"로 바꾸면 깔끔하게 초기화됩니다.
+  </div>
+</div>
+
+<!-- Step 03 -->
+<div class="page">
+  <div class="ch-tag">Step 03</div>
+  <div class="ch-title">메모 목록 화면</div>
+  <div class="ch-sub">.searchable, 정렬, NavigationLink, .onDelete를 조합한다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="section-title">.searchable — 한 줄로 검색창 추가</div>
+  <pre><code><span class="kw">@State private var</span> searchText = <span class="str">""</span>
+
+<span class="ty">List</span> { ... }
+    .<span class="fn">searchable</span>(text: $searchText, prompt: <span class="str">"검색"</span>)
+
+<span class="cm">// 필터링 — title 또는 body에 검색어 포함 여부</span>
+<span class="kw">var</span> displayed: [<span class="ty">Memo</span>] {
+    <span class="kw">guard</span> !searchText.isEmpty <span class="kw">else</span> { <span class="kw">return</span> store.memos }
+    <span class="kw">return</span> store.memos.<span class="fn">filter</span> {
+        $0.title.<span class="fn">localizedCaseInsensitiveContains</span>(searchText) ||
+        $0.body.<span class="fn">localizedCaseInsensitiveContains</span>(searchText)
+    }
+}</code></pre>
+
+  <div class="section-title">정렬 메뉴</div>
+  <pre><code><span class="ty">Menu</span> {
+    <span class="ty">Button</span>(<span class="str">"날짜순"</span>) { sortByDate = <span class="kw">true</span>  }
+    <span class="ty">Button</span>(<span class="str">"이름순"</span>) { sortByDate = <span class="kw">false</span> }
+} label: {
+    <span class="ty">Label</span>(<span class="str">"정렬"</span>, systemImage: <span class="str">"arrow.up.arrow.down"</span>)
+}</code></pre>
+
+  <div class="section-title">스와이프 삭제 (.onDelete)</div>
+  <pre><code><span class="ty">ForEach</span>(displayed) { memo <span class="kw">in</span>
+    <span class="ty">NavigationLink</span>(destination: <span class="ty">MemoEditView</span>(memo: memo)) {
+        <span class="ty">MemoRowView</span>(memo: memo)
+    }
+}
+.<span class="fn">onDelete</span> { store.<span class="fn">delete</span>(at: $0) }</code></pre>
+
+  <div class="section-title">빈 상태 처리 (ContentUnavailableView)</div>
+  <pre><code>.<span class="fn">overlay</span> {
+    <span class="kw">if</span> displayed.isEmpty {
+        <span class="ty">ContentUnavailableView</span>(
+            searchText.isEmpty ? <span class="str">"메모 없음"</span> : <span class="str">"검색 결과 없음"</span>,
+            systemImage: <span class="str">"note.text"</span>
+        )
+    }
+}</code></pre>
+
+  <div class="quiz-box">
+    <div class="quiz-title">셀프 체크</div>
+    <div class="quiz-item"><div class="quiz-q">Q1</div><div>.searchable는 어떤 뷰에 붙여야 하는가? List에 붙이는가 NavigationStack에 붙이는가?</div></div>
+    <div class="quiz-item"><div class="quiz-q">Q2</div><div>검색 중에 새 메모를 추가하면 어떻게 되는가? 검색어가 유지되는가 초기화되는가?</div></div>
+    <div class="quiz-item"><div class="quiz-q">Q3</div><div>ForEach에 id: \.self 대신 Identifiable을 쓰는 이유는?</div></div>
+  </div>
+</div>
+
+<!-- Step 04 -->
+<div class="page">
+  <div class="ch-tag">Step 04</div>
+  <div class="ch-title">메모 편집 화면</div>
+  <div class="ch-sub">로컬 복사본(@State)으로 편집하고 저장 버튼에서 store.update()를 호출한다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="section-title">편집의 핵심 — 로컬 복사본</div>
+  <p>편집 화면에서 바로 store.memos를 수정하면, 사용자가 "취소"를 눌러도 이미 변경이 반영됩니다. <strong>@State 로컬 복사본</strong>으로 편집하고, 저장 버튼에서만 store에 반영합니다.</p>
+
+  <pre><code><span class="kw">struct</span> <span class="ty">MemoEditView</span>: <span class="ty">View</span> {
+    <span class="kw">@State private var</span> title: <span class="ty">String</span>
+    <span class="kw">@State private var</span> body: <span class="ty">String</span>
+    <span class="kw">private let</span> originalMemo: <span class="ty">Memo</span>
+
+    <span class="cm">// init에서 @State 초기값 설정</span>
+    <span class="kw">init</span>(memo: <span class="ty">Memo</span>) {
+        self.originalMemo = memo
+        _title = <span class="ty">State</span>(initialValue: memo.title)
+        _body  = <span class="ty">State</span>(initialValue: memo.body)
+    }
+}</code></pre>
+
+  <div class="info-box">
+    <div class="info-box-title">_title = State(initialValue:) 패턴</div>
+    init에서 @State를 초기화할 때는 언더스코어(_title)로 접근해서 State 래퍼 자체를 초기화해야 합니다. 일반 할당(self.title = ...)은 작동하지 않습니다.
+  </div>
+
+  <div class="section-title">저장 버튼</div>
+  <pre><code><span class="ty">Button</span>(<span class="str">"저장"</span>) {
+    <span class="kw">var</span> updated = originalMemo
+    updated.title = title.isEmpty ? <span class="str">"새 메모"</span> : title
+    updated.body  = body
+    store.<span class="fn">update</span>(updated)   <span class="cm">// store → didSet → save()</span>
+    dismiss()
+}</code></pre>
+
+  <div class="section-title">TextEditor vs TextField</div>
+  <ul>
+    <li><strong>TextField</strong>: 한 줄 입력. 제목에 사용.</li>
+    <li><strong>TextEditor</strong>: 여러 줄 입력. 본문에 사용. 자체 배경색이 있어 .scrollContentBackground(.hidden)으로 제거 가능.</li>
+  </ul>
+  <pre><code><span class="ty">TextEditor</span>(text: $body)
+    .<span class="fn">scrollContentBackground</span>(.hidden) <span class="cm">// 기본 흰 배경 제거</span>
+    .background(.clear)</code></pre>
+</div>
+
+<!-- Step 05 -->
+<div class="page">
+  <div class="ch-tag">Step 05</div>
+  <div class="ch-title">도전 과제</div>
+  <div class="ch-sub">완성 후 스스로 확장해본다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="hw-box">
+    <div class="hw-title">도전 1 — 태그 기능</div>
+    <div class="hw-item"><div class="hw-check">□</div><div>Memo에 tags: [String] 프로퍼티 추가 (Codable 자동 지원)</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>편집 화면에서 태그 추가/제거 UI 구현</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>목록에서 태그별 필터링</div></div>
+  </div>
+
+  <div class="hw-box" style="margin-top:16px;">
+    <div class="hw-title">도전 2 — Face ID / 비밀번호 잠금</div>
+    <div class="hw-item"><div class="hw-check">□</div><div>LocalAuthentication 프레임워크 import</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>LAContext().evaluatePolicy로 생체 인증</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>특정 메모에 isLocked: Bool 플래그 추가</div></div>
+  </div>
+
+  <div class="hw-box" style="margin-top:16px;">
+    <div class="hw-title">도전 3 — SwiftData로 마이그레이션</div>
+    <div class="hw-item"><div class="hw-check">□</div><div>Memo struct → @Model class로 전환</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>UserDefaults 저장 코드 → @Query로 교체</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>두 방식의 차이점 비교 (Stage 2-1과 연결)</div></div>
+  </div>
+
+  <div style="margin-top:32px;padding:24px;background:#f5f5f7;border-radius:10px;">
+    <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;margin-bottom:8px;">다음 프로젝트</div>
+    <div style="font-size:13px;color:#555;margin-bottom:12px;">🌤 날씨 앱 — URLSession + async/await + Open-Meteo API 실전 연결</div>
+    <div style="font-family:'DM Mono',monospace;font-size:11px;color:#FFD60A;">개발자리 Clone Coding Project 05 →</div>
+  </div>
+</div>
+
+</body>
+</html>
