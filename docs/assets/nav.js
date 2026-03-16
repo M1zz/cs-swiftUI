@@ -6,7 +6,10 @@
 // ═══════════════════════════════════════════════
 
 (function() {
-  var page = location.pathname.split('/').pop() || 'index.html';
+  var path = location.pathname;
+  var page = path.split('/').pop() || 'index.html';
+  var isEN = path.indexOf('/en/') !== -1;
+  var prefix = isEN ? '' : ''; // EN pages use ../assets/nav.js, links are relative to /en/
 
   var s1Pages = ['index.html','setup.html','1-1.html','1-2.html','1-3.html','1-4.html'];
   var s2Pages = ['stage2.html','2-1.html','2-2.html','2-3.html','2-4.html'];
@@ -38,28 +41,35 @@
     '}';
   document.head.appendChild(style);
 
-  function active(href) {
-    return page === href ? ' class="active"' : '';
+  // EN 페이지에서 KO 전용 페이지는 상위 디렉토리로 링크
+  function href(file) {
+    if (!isEN) return file;
+    if (enAvailable.indexOf(file) !== -1) return file; // EN 버전 있음
+    return '../' + file; // EN 버전 없으면 KO로
   }
 
-  function activeStyled(href, s) {
-    var cls = page === href ? 'active' : '';
+  function active(h) {
+    return page === h ? ' class="active"' : '';
+  }
+
+  function activeStyled(h, s) {
+    var cls = page === h ? 'active' : '';
     return ' class="' + cls + '" style="' + s + '"';
   }
 
-  function subItem(href, label, delay) {
-    var cls = page === href ? 'active' : '';
-    return '<li class="nav-sub" data-delay="' + delay + '"><a href="' + href + '" class="' + cls + '">' + label + '</a></li>';
+  function subItem(h, label, delay) {
+    var cls = page === h ? 'active' : '';
+    return '<li class="nav-sub" data-delay="' + delay + '"><a href="' + href(h) + '" class="' + cls + '">' + label + '</a></li>';
   }
 
   var items = '';
 
   // 시작하기
-  items += '<li><a href="setup.html"' + active('setup.html') + '>시작하기</a></li>';
+  items += '<li><a href="' + href('setup.html') + '"' + active('setup.html') + '>' + (isEN ? 'Setup' : '시작하기') + '</a></li>';
 
   // Stage 1 + sub
   var s1Active = (isS1 && page !== 'setup.html') ? ' class="active"' : '';
-  items += '<li><a href="index.html"' + s1Active + '>Stage 1</a></li>';
+  items += '<li><a href="' + href('index.html') + '"' + s1Active + '>Stage 1</a></li>';
   if (isS1) {
     items += subItem('1-1.html', '1-1', 0);
     items += subItem('1-2.html', '1-2', 1);
@@ -68,11 +78,11 @@
   }
 
   // Swift 문법
-  items += '<li><a href="swift-grammar.html"' + activeStyled('swift-grammar.html', 'color:#a855f7;') + '>Swift 문법</a></li>';
+  items += '<li><a href="' + href('swift-grammar.html') + '"' + activeStyled('swift-grammar.html', 'color:#a855f7;') + '>' + (isEN ? 'Swift Grammar' : 'Swift 문법') + '</a></li>';
 
   // Stage 2 + sub
   var s2Active = isS2 ? ' class="active"' : '';
-  items += '<li><a href="stage2.html"' + s2Active + ' style="color:var(--blue);">Stage 2</a></li>';
+  items += '<li><a href="' + href('stage2.html') + '"' + s2Active + ' style="color:var(--blue);">Stage 2</a></li>';
   if (isS2) {
     items += subItem('2-1.html', '2-1', 0);
     items += subItem('2-2.html', '2-2', 1);
@@ -81,28 +91,27 @@
   }
 
   // Clone Coding
-  items += '<li><a href="clone-coding.html"' + activeStyled('clone-coding.html', 'color:var(--orange);') + '>Clone Coding</a></li>';
+  items += '<li><a href="' + href('clone-coding.html') + '"' + activeStyled('clone-coding.html', 'color:var(--orange);') + '>Clone Coding</a></li>';
 
-  // EN 링크
-  var enPages = {
-    'index.html': 'en/index.html',
-    'setup.html': 'en/setup.html',
-    '1-1.html': 'en/1-1.html',
-    '1-2.html': 'en/1-2.html',
-    '1-3.html': 'en/1-3.html',
-    '1-4.html': 'en/1-4.html'
-  };
-  var enLink = enPages[page]
-    ? '<a href="' + enPages[page] + '" class="nav-en-link" style="font-family:\'DM Mono\',monospace;font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid var(--border2);color:var(--muted);text-decoration:none;margin-left:auto;">EN</a>'
-    : '';
+  // 언어 토글 링크
+  var langToggleStyle = 'font-family:\'DM Mono\',monospace;font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid var(--border2);color:var(--muted);text-decoration:none;margin-left:auto;';
+  var enAvailable = ['index.html','setup.html','1-1.html','1-2.html','1-3.html','1-4.html'];
+  var langLink = '';
+  if (isEN) {
+    // EN → KO
+    langLink = '<a href="../' + page + '" style="' + langToggleStyle + '">KO</a>';
+  } else if (enAvailable.indexOf(page) !== -1) {
+    // KO → EN
+    langLink = '<a href="en/' + page + '" style="' + langToggleStyle + '">EN</a>';
+  }
 
   var nav = document.querySelector('nav.nav');
   if (nav) {
     nav.innerHTML =
-      '<a href="index.html" class="nav-logo">개발자<span>리</span></a>' +
+      '<a href="' + (isEN ? '../index.html' : 'index.html') + '" class="nav-logo">개발자<span>리</span></a>' +
       '<button class="nav-hamburger" aria-label="메뉴"><span></span><span></span><span></span></button>' +
       '<ul class="nav-links">' + items + '</ul>' +
-      enLink;
+      langLink;
 
     // 햄버거 토글
     var btn = nav.querySelector('.nav-hamburger');

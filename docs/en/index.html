@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Stage 1 — Just Build It | 개발자리 CS Curriculum</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/style.css" />
   <style>
     .hero {
@@ -21,7 +21,7 @@
       pointer-events:none;
     }
     .hero-title {
-      font-family:'Syne',sans-serif;
+      font-family:'Space Grotesk',sans-serif;
       font-size:clamp(48px,7vw,80px);
       font-weight:800; line-height:1.0;
       letter-spacing:-.035em; margin-bottom:16px;
@@ -38,7 +38,7 @@
       letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
     }
     .meta-value {
-      font-family:'Syne',sans-serif; font-weight:700; font-size:16px;
+      font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16px;
     }
 
     /* Challenge cards */
@@ -73,7 +73,7 @@
     }
     .ch-emoji { font-size:32px; display:block; margin-bottom:14px; }
     .ch-title {
-      font-family:'Syne',sans-serif; font-size:19px; font-weight:800;
+      font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:800;
       color:var(--text); margin-bottom:6px; letter-spacing:-.02em;
     }
     .ch-problem {
@@ -140,18 +140,8 @@
 </head>
 <body>
 
-<nav class="nav">
-  <a href="index.html" class="nav-logo">개발자<span>리</span></a>
-  <ul class="nav-links">
-    <li><a href="setup.html">Setup</a></li>
-    <li><a href="index.html" class="active">Stage 1</a></li>
-    <li><a href="1-1.html">1-1</a></li>
-    <li><a href="1-2.html">1-2</a></li>
-    <li><a href="1-3.html">1-3</a></li>
-    <li><a href="1-4.html">1-4</a></li>
-  </ul>
-  <a href="../index.html" style="font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid var(--border2);color:var(--muted);text-decoration:none;margin-left:auto;">KO</a>
-</nav>
+<nav class="nav"></nav>
+<script src="../assets/nav.js"></script>
 
 <a href="setup.html" style="display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 40px;background:linear-gradient(90deg,#1A1D2A,#2A2D40);color:#fff;text-decoration:none;font-size:13px;font-weight:500;position:relative;z-index:1;">
   <span style="font-size:16px;">🔧</span>
@@ -288,7 +278,7 @@
 
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
       <div style="font-size:28px;margin-bottom:10px;">🧮</div>
-      <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Calculator</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Calculator</div>
       <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Clone the Apple Calculator UI. Grid layout, button styling, calculation logic with @State</div>
       <div style="display:flex;flex-wrap:wrap;gap:4px;">
         <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-1 Layout</span>
@@ -298,7 +288,7 @@
 
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
       <div style="font-size:28px;margin-bottom:10px;">⏱</div>
-      <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Timer / Stopwatch</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Timer / Stopwatch</div>
       <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Clone the Timer tab from Apple Clock. Timer.publish, @State, circular progress bar, start/stop/reset</div>
       <div style="display:flex;flex-wrap:wrap;gap:4px;">
         <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-1 Layout</span>
@@ -309,7 +299,7 @@
 
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
       <div style="font-size:28px;margin-bottom:10px;">🛒</div>
-      <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Shopping Cart App</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Shopping Cart App</div>
       <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Product list → add to cart → adjust quantity → calculate total. List, NavigationStack, shared state with @Observable</div>
       <div style="display:flex;flex-wrap:wrap;gap:4px;">
         <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-2 List</span>
@@ -320,7 +310,7 @@
 
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
       <div style="font-size:28px;margin-bottom:10px;">📝</div>
-      <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Notes App (Simplified Apple Notes)</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Notes App (Simplified Apple Notes)</div>
       <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Create/edit/delete notes. TabView + NavigationStack combo. UserDefaults persistence. Search with .searchable</div>
       <div style="display:flex;flex-wrap:wrap;gap:4px;">
         <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-2 CRUD</span>
@@ -331,7 +321,7 @@
 
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
       <div style="font-size:28px;margin-bottom:10px;">🌤</div>
-      <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Weather App UI</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Weather App UI</div>
       <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Clone Apple Weather UI (hardcoded data is OK). ScrollView, ZStack gradient backgrounds, GeometryReader scroll effects</div>
       <div style="display:flex;flex-wrap:wrap;gap:4px;">
         <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-1 ZStack</span>
@@ -342,7 +332,7 @@
 
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
       <div style="font-size:28px;margin-bottom:10px;">💰</div>
-      <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Budget App</div>
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Budget App</div>
       <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Track income/expenses, filter by category, monthly totals. A comprehensive project that uses all of Stage 1</div>
       <div style="display:flex;flex-wrap:wrap;gap:4px;">
         <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--orange-dim);color:var(--orange);border:1px solid #FF6B2B44;">All of Stage 1</span>
@@ -356,5 +346,6 @@
   개발자리 · Top-Down CS Curriculum for App Developers
 </footer>
 <script src="../assets/analytics.js"></script>
+<script src="../assets/progress.js"></script>
 </body>
 </html>

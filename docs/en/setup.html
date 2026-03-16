@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Getting Started — Xcode & Swift Setup | devjari</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/style.css" />
   <style>
     .setup-wrap {
@@ -17,7 +17,7 @@
       position:relative; z-index:1;
     }
     .setup-hero h1 {
-      font-family:'Syne',sans-serif; font-size:clamp(36px,6vw,56px);
+      font-family:'Space Grotesk',sans-serif; font-size:clamp(36px,6vw,56px);
       font-weight:800; letter-spacing:-.03em; margin-bottom:12px;
     }
     .setup-hero h1 .accent { color:var(--orange); }
@@ -30,14 +30,14 @@
       margin-bottom:24px;
     }
     .setup-section h2 {
-      font-family:'Syne',sans-serif; font-size:22px; font-weight:800;
+      font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:800;
       letter-spacing:-.02em; margin-bottom:6px;
     }
     .setup-section .section-sub {
       font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:20px;
     }
     .setup-section h3 {
-      font-family:'Syne',sans-serif; font-size:16px; font-weight:700;
+      font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:700;
       margin-top:24px; margin-bottom:8px;
     }
     .setup-section p {
@@ -59,7 +59,7 @@
       display:inline-flex; align-items:center; justify-content:center;
       width:28px; height:28px; border-radius:50%;
       background:var(--orange); color:#fff;
-      font-family:'Syne',sans-serif; font-size:13px; font-weight:800;
+      font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:800;
       margin-right:10px; flex-shrink:0;
     }
     .step {
@@ -96,18 +96,8 @@
 </head>
 <body>
 
-<nav class="nav">
-  <a href="index.html" class="nav-logo">개발자<span>리</span></a>
-  <ul class="nav-links">
-    <li><a href="setup.html" class="active">Getting Started</a></li>
-    <li><a href="index.html">Stage 1</a></li>
-    <li><a href="1-1.html">1-1</a></li>
-    <li><a href="1-2.html">1-2</a></li>
-    <li><a href="1-3.html">1-3</a></li>
-    <li><a href="1-4.html">1-4</a></li>
-  </ul>
-  <a href="../setup.html" style="font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid var(--border2);color:var(--muted);text-decoration:none;margin-left:auto;">KO</a>
-</nav>
+<nav class="nav"></nav>
+<script src="../assets/nav.js"></script>
 
 <div class="breadcrumb">
   <a href="index.html">Stage 1</a>
@@ -281,5 +271,6 @@
   devjari · Top-Down CS Curriculum for App Developers
 </footer>
 <script src="../assets/analytics.js"></script>
+<script src="../assets/progress.js"></script>
 </body>
 </html>

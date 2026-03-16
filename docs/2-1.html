@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2-1 데이터를 앱에 저장하기 | Stage 2 | 개발자리</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
   <style>
     .ch-hero { padding:56px 40px 48px; max-width:1400px; margin:0 auto; position:relative; z-index:1; }
-    .ch-hero h1 { font-family:'Syne',sans-serif; font-size:clamp(36px,6vw,64px); font-weight:800; letter-spacing:-.03em; margin-bottom:12px; }
+    .ch-hero h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(36px,6vw,64px); font-weight:800; letter-spacing:-.03em; margin-bottom:12px; }
     .ch-hero h1 .accent { color:var(--blue); }
     .ch-hero .trigger { font-size:14px; color:var(--muted); font-style:italic; margin-bottom:32px; }
     .ch-hero .trigger::before { content:'↳ '; color:var(--blue); }
@@ -18,7 +18,7 @@
     .ch-nav a { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px 24px; text-decoration:none; display:flex; flex-direction:column; gap:4px; flex:1; min-width:200px; transition:border-color .2s; }
     .ch-nav a:hover { border-color:var(--blue); }
     .ch-nav .nav-dir { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.08em; color:var(--muted); }
-    .ch-nav .nav-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; }
+    .ch-nav .nav-title { font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; }
     .ch-nav .next { text-align:right; }
     @media(max-width:768px){ .ch-hero{padding:36px 20px 36px;} .ch-nav{padding:0 20px 60px;} }
   </style>
@@ -56,21 +56,21 @@
     <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">시작 전에 던져볼 질문</div>
     <div style="display:flex;flex-direction:column;gap:20px;">
       <div style="display:flex;gap:14px;align-items:flex-start;">
-        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">01</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">01</span>
         <div>
           <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">iOS 앱이 데이터를 저장하는 방법에는 어떤 것들이 있는가?</div>
           <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">iOS data persistence options UserDefaults CoreData SwiftData</span></div>
         </div>
       </div>
       <div style="display:flex;gap:14px;align-items:flex-start;">
-        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">02</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">02</span>
         <div>
           <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">Swift의 Codable은 무엇이며 왜 필요한가?</div>
           <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">Swift Codable Encodable Decodable JSON tutorial</span></div>
         </div>
       </div>
       <div style="display:flex;gap:14px;align-items:flex-start;">
-        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">03</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">03</span>
         <div>
           <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">SwiftData와 CoreData의 차이는 무엇인가?</div>
           <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">SwiftData vs CoreData iOS 17 differences</span></div>
@@ -615,7 +615,7 @@ struct MyApp: App {
 <div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
     <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">Homework</div>
-    <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">챌린지 2-1을 마쳤다면</h2>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">챌린지 2-1을 마쳤다면</h2>
     <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
       <div style="display:flex;gap:12px;align-items:flex-start;">
         <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);background:var(--blue-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>

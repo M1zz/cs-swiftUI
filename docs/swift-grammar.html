@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Swift 핵심 문법 | Stage 1.5 | 개발자리</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
   <style>
     .ch-hero { padding:56px 40px 48px; max-width:1400px; margin:0 auto; position:relative; z-index:1; }
-    .ch-hero h1 { font-family:'Syne',sans-serif; font-size:clamp(36px,6vw,64px); font-weight:800; letter-spacing:-.03em; margin-bottom:12px; }
+    .ch-hero h1 { font-family:'Space Grotesk',sans-serif; font-size:clamp(36px,6vw,64px); font-weight:800; letter-spacing:-.03em; margin-bottom:12px; }
     .ch-hero h1 .accent { color:var(--purple); }
     .ch-hero .trigger { font-size:14px; color:var(--muted); font-style:italic; margin-bottom:32px; }
     .ch-hero .trigger::before { content:'↳ '; color:var(--purple); }
@@ -19,7 +19,7 @@
     .ch-nav a { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px 24px; text-decoration:none; display:flex; flex-direction:column; gap:4px; flex:1; min-width:200px; transition:border-color .2s; }
     .ch-nav a:hover { border-color:var(--purple); }
     .ch-nav .nav-dir { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.08em; color:var(--muted); }
-    .ch-nav .nav-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; }
+    .ch-nav .nav-title { font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; }
     .ch-nav .next { text-align:right; }
     .topic-questions.purple { background:#7C5DC712; border-left-color:var(--purple); }
     .topic-questions.purple li::before { color:var(--purple); }
@@ -65,21 +65,21 @@
     <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">시작 전에 던져볼 질문</div>
     <div style="display:flex;flex-direction:column;gap:20px;">
       <div style="display:flex;gap:14px;align-items:flex-start;">
-        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--purple);flex-shrink:0;margin-top:1px;">01</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--purple);flex-shrink:0;margin-top:1px;">01</span>
         <div>
           <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">Swift에서 struct와 class는 언제 선택하는가?</div>
           <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:#7C5DC712;color:var(--purple);padding:2px 6px;border-radius:4px;">Swift struct vs class when to use value reference type</span></div>
         </div>
       </div>
       <div style="display:flex;gap:14px;align-items:flex-start;">
-        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--purple);flex-shrink:0;margin-top:1px;">02</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--purple);flex-shrink:0;margin-top:1px;">02</span>
         <div>
           <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">computed property와 함수의 차이는 무엇인가?</div>
           <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:#7C5DC712;color:var(--purple);padding:2px 6px;border-radius:4px;">Swift computed property vs function difference</span></div>
         </div>
       </div>
       <div style="display:flex;gap:14px;align-items:flex-start;">
-        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--purple);flex-shrink:0;margin-top:1px;">03</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--purple);flex-shrink:0;margin-top:1px;">03</span>
         <div>
           <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">access control은 왜 필요한가? private을 안 쓰면 어떤 문제가 생기는가?</div>
           <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:#7C5DC712;color:var(--purple);padding:2px 6px;border-radius:4px;">Swift access control private internal public fileprivate</span></div>
@@ -952,7 +952,7 @@ struct Product: Identifiable, Codable {
 <div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
     <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:8px;">Homework</div>
-    <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">Swift 핵심 문법을 익혔다면</h2>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">Swift 핵심 문법을 익혔다면</h2>
     <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
       <div style="display:flex;gap:12px;align-items:flex-start;">
         <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);background:#7C5DC712;padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>

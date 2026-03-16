@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>1-2 버튼 누르면 화면이 바뀌게 | Stage 1 | 개발자리</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
   <style>
     .ch-hero {
@@ -19,7 +19,7 @@
       pointer-events:none;
     }
     .ch-hero h1 {
-      font-family:'Syne',sans-serif; font-size:clamp(36px,6vw,64px);
+      font-family:'Space Grotesk',sans-serif; font-size:clamp(36px,6vw,64px);
       font-weight:800; letter-spacing:-.03em; margin-bottom:12px;
     }
     .ch-hero h1 .accent { color:var(--blue); }
@@ -44,7 +44,7 @@
       letter-spacing:.08em; color:var(--muted);
     }
     .ch-nav .nav-title {
-      font-family:'Syne',sans-serif; font-size:15px; font-weight:700;
+      font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700;
     }
     .ch-nav .next { text-align:right; }
     @media(max-width:768px){
@@ -88,7 +88,7 @@
     <div style="display:flex;flex-direction:column;gap:20px;">
 
       <div style="display:flex;gap:14px;align-items:flex-start;">
-        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">01</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">01</span>
         <div>
           <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">버튼을 눌렀는데 텍스트가 안 바뀐다면, SwiftUI에서 화면을 업데이트하려면 어떻게 해야 하는가?</div>
           <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">SwiftUI @State property wrapper</span></div>
@@ -96,7 +96,7 @@
       </div>
 
       <div style="display:flex;gap:14px;align-items:flex-start;">
-        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">02</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">02</span>
         <div>
           <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">부모 화면의 데이터를 자식 화면에서 바꾸려면 어떻게 전달하는가?</div>
           <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">SwiftUI @Binding parent child</span></div>
@@ -104,7 +104,7 @@
       </div>
 
       <div style="display:flex;gap:14px;align-items:flex-start;">
-        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">03</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">03</span>
         <div>
           <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">배열 데이터를 목록으로 보여주고, 스와이프로 삭제하려면 어떻게 하는가?</div>
           <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">SwiftUI List ForEach onDelete</span></div>
@@ -762,7 +762,7 @@ func load() -> [Todo] {
 <div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
     <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">Homework</div>
-    <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">챌린지 1-2를 마쳤다면</h2>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">챌린지 1-2를 마쳤다면</h2>
 
     <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
       <div style="display:flex;gap:12px;align-items:flex-start;">
@@ -1033,7 +1033,7 @@ struct PreviewCard: View {
 
 <!-- 챌린지 완료 버튼 -->
 <div style="max-width:1400px;margin:0 auto;padding:0 40px 40px;position:relative;z-index:1;text-align:center;">
-  <button id="complete-btn" data-chapter="1-2" data-label="챌린지 완료 표시하기" onclick="GaebalProgress.toggleComplete(this.getAttribute('data-chapter'))" style="display:inline-flex;align-items:center;gap:10px;padding:16px 40px;border-radius:14px;border:2px solid #2DA55D;background:transparent;color:#2DA55D;font-family:'Syne',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:all .25s;">
+  <button id="complete-btn" data-chapter="1-2" data-label="챌린지 완료 표시하기" onclick="GaebalProgress.toggleComplete(this.getAttribute('data-chapter'))" style="display:inline-flex;align-items:center;gap:10px;padding:16px 40px;border-radius:14px;border:2px solid #2DA55D;background:transparent;color:#2DA55D;font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:all .25s;">
     챌린지 완료 표시하기
   </button>
   <style>
@@ -1049,28 +1049,28 @@ struct PreviewCard: View {
     <a href="clone-coding.html" style="display:flex;align-items:center;gap:14px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
       <span style="font-size:24px;">🧮</span>
       <div>
-        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);">계산기</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:var(--text);">계산기</div>
         <div style="font-size:11px;color:var(--muted);">@State로 연산 로직 구현</div>
       </div>
     </a>
     <a href="clone-coding.html" style="display:flex;align-items:center;gap:14px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
       <span style="font-size:24px;">⏱</span>
       <div>
-        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);">타이머 / 스톱워치</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:var(--text);">타이머 / 스톱워치</div>
         <div style="font-size:11px;color:var(--muted);">@State + Timer.publish 카운트다운</div>
       </div>
     </a>
     <a href="clone-coding.html" style="display:flex;align-items:center;gap:14px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
       <span style="font-size:24px;">📝</span>
       <div>
-        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);">메모 앱</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:var(--text);">메모 앱</div>
         <div style="font-size:11px;color:var(--muted);">List + ForEach CRUD 실전</div>
       </div>
     </a>
     <a href="clone-coding.html" style="display:flex;align-items:center;gap:14px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
       <span style="font-size:24px;">🛒</span>
       <div>
-        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);">장바구니 앱</div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:var(--text);">장바구니 앱</div>
         <div style="font-size:11px;color:var(--muted);">List + @Binding 수량 조절</div>
       </div>
     </a>
