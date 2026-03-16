@@ -869,7 +869,7 @@ struct NewMemoView: View {
     html = html.replace(/(\/\/.*)/gm, '<span class="cm">$1</span>');
     html = html.replace(/"([^"]*?)"/g, '<span class="str">"$1"</span>');
     html = html.replace(/@(\w+)/g, '<span class="pr">@$1</span>');
-    html = html.replace(/\b(struct|var|let|func|import|return|if|else|guard|for|in|case|enum|protocol|class|some|private|true|false|nil|self|mutating|static)\b/g, '<span class="kw">$1</span>');
+    html = html.replace(/(<[^>]+>)|\b(struct|var|let|func|import|return|if|else|guard|for|in|case|enum|protocol|class|some|private|true|false|nil|self|mutating|static)\b/g, (m, tag, kw) => tag || `<span class="kw">${kw}</span>`);
     html = html.replace(/\b(\d+\.?\d*)\b/g, '<span class="num">$1</span>');
     el.innerHTML = html;
   }
