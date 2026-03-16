@@ -454,7 +454,7 @@ body::before {
 }
 
 .preview-col {
-  flex: 0 0 210px;
+  flex: 0 0 316px;
   position: relative;
 }
 
@@ -467,9 +467,9 @@ body::before {
 }
 
 .sticky-phone .phone-frame {
-  width: 192px;
-  min-height: 420px;
-  border-radius: 36px;
+  width: 288px;
+  min-height: 630px;
+  border-radius: 54px;
   border: 3px solid #1A1D2A;
   background: #FFFFFF;
   position: relative;
@@ -479,19 +479,19 @@ body::before {
 
 .sticky-phone .phone-notch {
   position: absolute;
-  top: 12px;
+  top: 18px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80px;
-  height: 26px;
+  width: 120px;
+  height: 39px;
   background: #1A1D2A;
-  border-radius: 14px;
+  border-radius: 21px;
   z-index: 2;
 }
 
 .sticky-phone .phone-screen {
-  padding: 52px 16px 24px;
-  min-height: 380px;
+  padding: 78px 24px 36px;
+  min-height: 570px;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
   font-size: 15px;
   color: #1A1D2A;
@@ -500,7 +500,7 @@ body::before {
 .preview-content {
   display: none;
   flex-direction: column;
-  min-height: 320px;
+  min-height: 480px;
 }
 
 .preview-content.active {
