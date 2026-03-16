@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swift 핵심 문법 | Stage 1.5 | 개발자리</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    .ch-hero { padding:56px 40px 48px; max-width:1400px; margin:0 auto; position:relative; z-index:1; }
+    .ch-hero h1 { font-family:'Syne',sans-serif; font-size:clamp(36px,6vw,64px); font-weight:800; letter-spacing:-.03em; margin-bottom:12px; }
+    .ch-hero h1 .accent { color:var(--purple); }
+    .ch-hero .trigger { font-size:14px; color:var(--muted); font-style:italic; margin-bottom:32px; }
+    .ch-hero .trigger::before { content:'↳ '; color:var(--purple); }
+    .chip.purple { border-color:#9B7FFF44; color:var(--purple); }
+    .badge-purple { color:var(--purple); background:#7C5DC712; border:1px solid #9B7FFF44; }
+    .ch-nav { display:flex; justify-content:space-between; gap:16px; max-width:1400px; margin:0 auto; padding:0 40px 80px; flex-wrap:wrap; position:relative; z-index:1; }
+    .ch-nav a { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px 24px; text-decoration:none; display:flex; flex-direction:column; gap:4px; flex:1; min-width:200px; transition:border-color .2s; }
+    .ch-nav a:hover { border-color:var(--purple); }
+    .ch-nav .nav-dir { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.08em; color:var(--muted); }
+    .ch-nav .nav-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; }
+    .ch-nav .next { text-align:right; }
+    .topic-questions.purple { background:#7C5DC712; border-left-color:var(--purple); }
+    .topic-questions.purple li::before { color:var(--purple); }
+    .color-purple .item-dot { background:var(--purple); }
+    .color-purple .item-title { color:var(--purple); }
+    @media(max-width:768px){ .ch-hero{padding:36px 20px 36px;} .ch-nav{padding:0 20px 60px;} }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">개발자<span>리</span></a>
+  <ul class="nav-links">
+    <li><a href="setup.html">시작하기</a></li>
+    <li><a href="index.html">Stage 1</a></li>
+    <li><a href="swift-grammar.html" class="active" style="color:var(--purple);">Swift 문법</a></li>
+    <li><a href="stage2.html">Stage 2</a></li>
+  </ul>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">Stage 1</a>
+  <span class="sep">/</span>
+  <span class="current">Swift 핵심 문법</span>
+  <span class="sep">/</span>
+  <a href="stage2.html">Stage 2</a>
+</div>
+
+<header class="ch-hero fade-in">
+  <div class="badge badge-purple" style="margin-bottom:20px;">
+    <span class="badge-dot"></span>
+    Stage 1.5 · 8 Topics · Stage 2 선수 조건
+  </div>
+  <h1>🔩 Swift <span class="accent">핵심 문법</span></h1>
+  <p class="trigger">Stage 1을 마쳤는데 코드가 왜 이렇게 동작하는지 모르겠다</p>
+  <div class="chip-row">
+    <span class="chip purple">Computed Property</span>
+    <span class="chip purple">Property Observer</span>
+    <span class="chip purple">struct vs class</span>
+    <span class="chip purple">mutating</span>
+    <span class="chip purple">Access Control</span>
+    <span class="chip purple">init 패턴</span>
+    <span class="chip purple">Type Casting</span>
+    <span class="chip purple">static · lazy · inout</span>
+  </div>
+</header>
+
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 40px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">시작 전에 던져볼 질문</div>
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--purple);flex-shrink:0;margin-top:1px;">01</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">Swift에서 struct와 class는 언제 선택하는가?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:#7C5DC712;color:var(--purple);padding:2px 6px;border-radius:4px;">Swift struct vs class when to use value reference type</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--purple);flex-shrink:0;margin-top:1px;">02</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">computed property와 함수의 차이는 무엇인가?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:#7C5DC712;color:var(--purple);padding:2px 6px;border-radius:4px;">Swift computed property vs function difference</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--purple);flex-shrink:0;margin-top:1px;">03</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">access control은 왜 필요한가? private을 안 쓰면 어떤 문제가 생기는가?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:#7C5DC712;color:var(--purple);padding:2px 6px;border-radius:4px;">Swift access control private internal public fileprivate</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="split-layout">
+  <div class="content-col">
+
+    <!-- Topic 01: Computed Property -->
+    <div class="content-section" data-preview="pv-1">
+      <div class="cs-label">Topic 01</div>
+      <h2 class="cs-title">Computed Property</h2>
+      <div class="cs-subtitle">저장하지 않고 계산으로 만드는 프로퍼티</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">struct Rectangle {
+    var width: Double
+    var height: Double
+
+    // Computed Property — get만 있으면 get 생략 가능
+    var area: Double {
+        width * height
+    }
+
+    // get + set
+    var perimeter: Double {
+        get { (width + height) * 2 }
+        set { width = newValue / 2 - height }
+    }
+}
+
+var rect = Rectangle(width: 10, height: 5)
+print(rect.area)      // 50.0
+print(rect.perimeter) // 30.0
+
+// SwiftUI에서 자주 쓰는 패턴
+struct UserProfile {
+    var firstName: String
+    var lastName: String
+
+    // 저장하지 않고 조합
+    var fullName: String { "\(firstName) \(lastName)" }
+
+    // 조건 판단
+    var isNameValid: Bool { !firstName.isEmpty && !lastName.isEmpty }
+
+    // 포맷팅
+    var initials: String {
+        let f = firstName.first.map(String.init) ?? ""
+        let l = lastName.first.map(String.init) ?? ""
+        return f + l
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li>computed property와 함수 중 어느 것을 써야 하는가? 계산 비용이 클 때는?</li>
+          <li>read-only computed property에서 <code>get { }</code>을 생략할 수 있는 이유는?</li>
+          <li><code>set</code>의 <code>newValue</code>는 어떻게 이름을 바꿀 수 있는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">read-only computed property</div>
+            <div class="item-desc"><code>get { }</code> 블록만 있으면 생략 가능. <code>var area: Double { width * height }</code></div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">get + set</div>
+            <div class="item-desc"><code>set</code>에서 <code>newValue</code>로 새 값 접근. 양방향 변환이 필요할 때 (온도: 섭씨 ↔ 화씨)</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">함수 vs computed property</div>
+            <div class="item-desc">파라미터가 없고 부작용이 없는 계산 → computed property. 부작용이 있거나 파라미터가 필요 → 함수</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 02: Property Observer -->
+    <div class="content-section" data-preview="pv-2">
+      <div class="cs-label">Topic 02</div>
+      <h2 class="cs-title">Property Observer — willSet / didSet</h2>
+      <div class="cs-subtitle">프로퍼티 값이 바뀌기 전/후에 코드를 실행하는 방법</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">class StepCounter {
+    var steps: Int = 0 {
+        willSet {
+            // 바뀌기 직전 — newValue로 새 값 접근
+            print("곧 \(newValue)로 변경됩니다")
+        }
+        didSet {
+            // 바뀐 직후 — oldValue로 이전 값 접근
+            print("\(oldValue)에서 \(steps)으로 변경됨")
+            if steps >= 10000 {
+                print("목표 달성!")
+            }
+        }
+    }
+}
+
+// SwiftUI ViewModel에서 실용적인 패턴
+class CartViewModel: ObservableObject {
+    @Published var items: [CartItem] = [] {
+        didSet {
+            // 아이템이 바뀔 때마다 자동 저장
+            save()
+        }
+    }
+
+    @Published var searchText: String = "" {
+        didSet {
+            // 검색어 변경 시 결과 갱신 (단순 필터)
+            filterItems()
+        }
+    }
+
+    private func save() { /* UserDefaults 저장 */ }
+    private func filterItems() { /* 필터링 */ }
+}
+
+// 주의: @State에는 didSet을 직접 붙일 수 없다
+// → .onChange(of:) modifier 사용
+struct ContentView: View {
+    @State private var count = 0
+
+    var body: some View {
+        Stepper("\(count)", value: $count)
+            .onChange(of: count) { old, new in
+                print("\(old) → \(new)")
+            }
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>willSet</code>에서 값을 바꿀 수 있는가? <code>didSet</code>에서는?</li>
+          <li>init 내에서 프로퍼티에 값을 할당할 때 <code>didSet</code>이 호출되는가?</li>
+          <li>SwiftUI의 <code>@State</code>에 <code>didSet</code>을 쓸 수 없는 이유는?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">willSet</div>
+            <div class="item-desc">값이 바뀌기 직전 호출. <code>newValue</code>로 새 값 접근. 값을 바꿀 수는 없다</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">didSet</div>
+            <div class="item-desc">값이 바뀐 직후 호출. <code>oldValue</code>로 이전 값 접근. <code>didSet</code> 안에서 같은 프로퍼티를 수정하면 재귀 호출 없이 한 번만 실행</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">init에서는 호출 안 됨</div>
+            <div class="item-desc">이니셜라이저 내부 할당에서는 observer가 호출되지 않는다. 의도적 설계</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 03: struct vs class -->
+    <div class="content-section" data-preview="pv-3">
+      <div class="cs-label">Topic 03</div>
+      <h2 class="cs-title">struct vs class — 값 타입 vs 참조 타입</h2>
+      <div class="cs-subtitle">Swift에서 가장 중요한 타입 선택의 기준</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// struct — 값 타입 (복사)
+struct PointS {
+    var x: Int
+    var y: Int
+}
+
+var a = PointS(x: 1, y: 2)
+var b = a        // 복사본 생성
+b.x = 99
+print(a.x) // 1  ← a는 변하지 않는다
+
+// class — 참조 타입 (같은 객체를 가리킴)
+class PointC {
+    var x: Int
+    var y: Int
+    init(x: Int, y: Int) { self.x = x; self.y = y }
+}
+
+var c = PointC(x: 1, y: 2)
+var d = c        // 같은 객체를 가리킴
+d.x = 99
+print(c.x) // 99 ← c도 바뀐다!
+
+// SwiftUI에서의 선택 기준
+// struct: 데이터 모델, View (SwiftUI View는 항상 struct)
+// class: ObservableObject, 네트워크 매니저, 싱글톤
+
+// struct에서 자신을 수정하는 함수 — mutating
+struct Counter {
+    var count = 0
+
+    mutating func increment() {
+        count += 1  // mutating 없으면 컴파일 에러
+    }
+
+    mutating func reset() {
+        count = 0
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li>SwiftUI View가 struct인 이유는 무엇인가? class로 만들면 어떤 문제가 생기는가?</li>
+          <li><code>let a = SomeClass()</code>로 선언된 클래스 인스턴스의 프로퍼티를 바꿀 수 있는가?</li>
+          <li>Copy-on-Write란 무엇이며 Swift의 Array/Dictionary가 이를 어떻게 활용하는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">struct = 값 타입</div>
+            <div class="item-desc">할당/전달 시 복사. 독립적인 상태. 스레드 안전. SwiftUI View, 데이터 모델에 적합</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">class = 참조 타입</div>
+            <div class="item-desc">할당/전달 시 같은 인스턴스를 공유. 상속 가능. ObservableObject, 공유 상태에 사용</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">mutating</div>
+            <div class="item-desc">struct의 메서드가 self(인스턴스)를 수정할 때 필수. enum의 메서드에도 적용</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 04: Access Control -->
+    <div class="content-section" data-preview="pv-4">
+      <div class="cs-label">Topic 04</div>
+      <h2 class="cs-title">Access Control — 접근 제어</h2>
+      <div class="cs-subtitle">외부에 무엇을 보여주고 무엇을 숨길지 결정하는 방법</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// 접근 제어 수준 (넓은 순서)
+// open > public > internal(기본값) > fileprivate > private
+
+class BankAccount {
+    // private: 이 클래스 안에서만 접근 가능
+    private var balance: Double = 0
+
+    // internal(기본값): 같은 모듈에서 접근 가능
+    var owner: String
+
+    // public: 외부 모듈에서도 읽기 가능
+    public var accountNumber: String
+
+    init(owner: String, number: String) {
+        self.owner = owner
+        self.accountNumber = number
+    }
+
+    // private(set): 읽기는 내부/외부 모두, 쓰기는 내부만
+    private(set) var transactionCount = 0
+
+    func deposit(_ amount: Double) {
+        guard amount > 0 else { return }
+        balance += amount
+        transactionCount += 1
+    }
+
+    func withdraw(_ amount: Double) -> Bool {
+        guard amount <= balance else { return false }
+        balance -= amount
+        transactionCount += 1
+        return true
+    }
+}
+
+// SwiftUI ViewModel에서 실용적인 패턴
+class CounterViewModel: ObservableObject {
+    @Published private(set) var count = 0  // 외부에서 읽기만 가능
+
+    func increment() { count += 1 }   // 내부에서만 수정
+    func decrement() { count -= 1 }
+    func reset()     { count = 0  }
+}</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>private</code>와 <code>fileprivate</code>의 차이는? 같은 파일의 extension에서 <code>private</code> 멤버에 접근할 수 있는가?</li>
+          <li><code>@Published private(set) var count</code>처럼 쓰는 이유는 무엇인가?</li>
+          <li>접근 제어를 안 쓰면 어떤 문제가 생기는가? 팀 프로젝트에서의 의미는?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">private</div>
+            <div class="item-desc">선언된 타입 + 같은 파일의 extension 안에서만 접근. 가장 자주 쓰는 수준</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">internal (기본값)</div>
+            <div class="item-desc">키워드를 안 쓰면 내부(internal). 같은 모듈(앱 타깃) 전체에서 접근 가능</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">private(set)</div>
+            <div class="item-desc">읽기는 누구나, 쓰기는 내부만. ViewModel의 @Published 프로퍼티 보호에 자주 사용</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 05: init -->
+    <div class="content-section" data-preview="pv-5">
+      <div class="cs-label">Topic 05</div>
+      <h2 class="cs-title">init — 이니셜라이저 패턴</h2>
+      <div class="cs-subtitle">인스턴스를 안전하게 초기화하는 방법</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// struct: 자동으로 memberwise init 생성
+struct Point {
+    var x: Double
+    var y: Double
+    // Swift가 자동으로 init(x:y:) 생성
+}
+let p = Point(x: 1, y: 2)
+
+// 커스텀 init을 추가하면 memberwise init이 사라짐
+// extension으로 분리하면 두 가지 모두 유지 가능
+extension Point {
+    init(value: Double) {
+        self.x = value
+        self.y = value
+    }
+}
+
+// class: 직접 init을 작성해야 함
+class Person {
+    let name: String
+    var age: Int
+    var email: String?   // Optional이면 init에서 안 써도 됨
+
+    // 지정 이니셜라이저 (Designated)
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+
+    // 편의 이니셜라이저 (Convenience) — 다른 init 재사용
+    convenience init(name: String) {
+        self.init(name: name, age: 0)
+    }
+}
+
+// Failable init — 실패할 수 있는 초기화
+struct Color {
+    let hex: String
+
+    init?(hex: String) {  // ? 주의
+        guard hex.hasPrefix("#"), hex.count == 7 else {
+            return nil  // 초기화 실패 → nil 반환
+        }
+        self.hex = hex
+    }
+}
+
+let valid = Color(hex: "#FF6B2B")   // Optional<Color>
+let invalid = Color(hex: "bad")     // nil</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li>struct에 커스텀 init을 추가했더니 기존 코드가 컴파일 에러가 났다. 왜인가? 어떻게 해결하는가?</li>
+          <li><code>convenience init</code>은 왜 반드시 <code>self.init(...)</code>을 호출해야 하는가?</li>
+          <li><code>init?</code>(failable)을 쓰는 것과 <code>throws</code>로 에러를 던지는 것의 차이는?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">memberwise init (struct 자동 생성)</div>
+            <div class="item-desc">커스텀 init이 없으면 모든 stored property를 파라미터로 받는 init이 자동 생성. extension으로 추가하면 두 가지 모두 유지</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">convenience init</div>
+            <div class="item-desc">class에서 다른 designated init을 재사용하는 편의 이니셜라이저. 반드시 같은 클래스의 init을 호출해야 함</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">failable init — init?</div>
+            <div class="item-desc">초기화 조건이 충족되지 않으면 nil 반환. 결과가 Optional. URL, 형변환 등에서 자주 사용</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 06: Type Casting -->
+    <div class="content-section" data-preview="pv-6">
+      <div class="cs-label">Topic 06</div>
+      <h2 class="cs-title">Type Casting — as? / as! / is</h2>
+      <div class="cs-subtitle">런타임에 타입을 확인하고 변환하는 방법</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">class Animal { var name: String; init(_ n: String) { name = n } }
+class Dog: Animal { func bark() { print("멍!") } }
+class Cat: Animal { func meow() { print("야옹") } }
+
+let animals: [Animal] = [Dog("바둑이"), Cat("나비"), Dog("흰둥이")]
+
+// is — 타입 확인
+for animal in animals {
+    if animal is Dog {
+        print("\(animal.name)은 강아지")
+    }
+}
+
+// as? — 안전한 다운캐스팅 (Optional 반환)
+for animal in animals {
+    if let dog = animal as? Dog {
+        dog.bark()  // Dog 전용 메서드 호출 가능
+    }
+}
+
+// as! — 강제 다운캐스팅 (실패 시 크래시)
+let firstAnimal = animals[0]
+let dog = firstAnimal as! Dog  // 확실할 때만 사용
+
+// 업캐스팅 as (항상 성공, 옵셔널 불필요)
+let d = Dog("강아지")
+let a: Animal = d as Animal
+
+// 실전: Codable + Any 타입 처리
+let json: [String: Any] = ["count": 5, "name": "test"]
+if let count = json["count"] as? Int {
+    print(count) // 5
+}
+
+// switch + pattern matching
+for animal in animals {
+    switch animal {
+    case let dog as Dog:
+        dog.bark()
+    case let cat as Cat:
+        cat.meow()
+    default:
+        break
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>as?</code>를 쓰지 않고 <code>as!</code>를 남용하면 어떤 문제가 생기는가?</li>
+          <li>업캐스팅(자식 → 부모)과 다운캐스팅(부모 → 자식) 중 어느 것이 안전하고 왜인가?</li>
+          <li>SwiftUI에서 <code>[any View]</code> 대신 <code>AnyView</code>를 써야 하는 이유는?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">as? — 조건부 캐스팅</div>
+            <div class="item-desc">실패 시 nil 반환. <code>if let</code>과 함께 안전하게 사용. 실무에서 가장 많이 쓰는 형태</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">as! — 강제 캐스팅</div>
+            <div class="item-desc">타입이 확실할 때만 사용. 실패 시 런타임 크래시. 확실하지 않으면 항상 <code>as?</code>를 쓸 것</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">is — 타입 체크</div>
+            <div class="item-desc">Bool 반환. switch문의 case에서 <code>case let x as Type</code> 패턴으로도 활용</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 07: static / lazy -->
+    <div class="content-section" data-preview="pv-7">
+      <div class="cs-label">Topic 07</div>
+      <h2 class="cs-title">static · lazy · inout</h2>
+      <div class="cs-subtitle">코드를 더 유연하게 만드는 세 가지 키워드</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// static — 인스턴스가 아닌 타입에 속하는 멤버
+struct AppConfig {
+    static let baseURL = "https://api.example.com"
+    static let timeout: TimeInterval = 30
+
+    static func makeURL(_ path: String) -> URL? {
+        URL(string: baseURL + path)
+    }
+}
+
+AppConfig.baseURL  // 인스턴스 없이 접근
+AppConfig.makeURL("/posts")
+
+// 싱글톤 패턴
+class NetworkManager {
+    static let shared = NetworkManager()
+    private init() {}  // 외부에서 생성 불가
+}
+
+// lazy — 처음 접근할 때 초기화
+class DataManager {
+    // 비용이 큰 초기화를 처음 쓸 때까지 미룸
+    lazy var cache: [String: Data] = [:]
+
+    lazy var formatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateStyle = .medium
+        f.locale = Locale(identifier: "ko_KR")
+        return f
+    }()
+}
+
+// inout — 함수 밖 변수를 직접 수정
+func doubleValue(_ value: inout Int) {
+    value *= 2
+}
+
+var number = 5
+doubleValue(&number)  // & 필수
+print(number) // 10
+
+// swap 구현
+func swap<T>(_ a: inout T, _ b: inout T) {
+    let temp = a
+    a = b
+    b = temp
+}</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>static</code>과 <code>class</code> 키워드의 차이는? struct에서 <code>class</code>를 쓸 수 있는가?</li>
+          <li><code>lazy var</code>를 struct에서 쓰면 <code>mutating</code>이 필요한 이유는?</li>
+          <li><code>inout</code>과 반환값으로 수정된 값을 돌려주는 방식의 차이는? 어느 것이 더 Swift스러운가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">static</div>
+            <div class="item-desc">타입 자체에 속하는 프로퍼티/메서드. 인스턴스 없이 접근. 상수, 유틸리티 함수, 싱글톤에 활용</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">lazy var</div>
+            <div class="item-desc">처음 접근 시 초기화. 비용이 큰 객체(DateFormatter, 큰 배열)에 적합. <code>let</code>에는 사용 불가</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">inout</div>
+            <div class="item-desc">함수가 파라미터를 직접 수정. 호출 시 <code>&</code> 필요. 함수형 프로그래밍 관점에서는 반환값 선호</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 08: 종합 패턴 -->
+    <div class="content-section" data-preview="pv-8">
+      <div class="cs-label">Topic 08</div>
+      <h2 class="cs-title">실전에서 자주 만나는 패턴</h2>
+      <div class="cs-subtitle">앞에서 배운 문법이 실제 코드에서 어떻게 결합되는가</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// 실전 ViewModel — 지금까지 배운 문법 총동원
+@MainActor
+class ProductViewModel: ObservableObject {
+
+    // private(set): 외부 읽기 O, 쓰기 X
+    @Published private(set) var products: [Product] = []
+    @Published private(set) var isLoading = false
+
+    // computed property: 파생 데이터
+    var discountedProducts: [Product] {
+        products.filter { $0.discount > 0 }
+    }
+
+    var totalCount: Int { products.count }
+
+    // static: 공유 상수
+    static let maxItemsPerPage = 20
+
+    // lazy: 처음 쓸 때만 생성
+    private lazy var cache: [Int: Product] = [:]
+
+    // didSet: 캐시 동기화
+    // (내부적으로 products 업데이트 시 활용)
+
+    func load() async {
+        isLoading = true
+        defer { isLoading = false }  // defer: 블록 종료 시 항상 실행
+        do {
+            products = try await ProductService.fetchAll()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+}
+
+// struct 모델 — 값 타입
+struct Product: Identifiable, Codable {
+    let id: Int
+    let name: String
+    let price: Double
+    var discount: Double = 0
+
+    // computed property
+    var finalPrice: Double { price * (1 - discount) }
+    var isOnSale: Bool { discount > 0 }
+
+    // static factory method
+    static func mock() -> Product {
+        Product(id: 0, name: "테스트 상품", price: 9900)
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li>이 코드에서 <code>defer</code>가 하는 역할은? <code>isLoading = false</code>를 함수 끝에 쓰는 것과 어떤 차이가 있는가?</li>
+          <li><code>Product</code>를 struct로, <code>ProductViewModel</code>을 class로 만든 이유는?</li>
+          <li><code>@Published private(set)</code>를 쓰는 것과 <code>@Published private</code>를 쓰는 것의 차이는?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">defer</div>
+            <div class="item-desc">블록이 종료될 때(return/throw/정상 종료 모두) 실행. 정리 코드(isLoading = false, 파일 닫기)에 유용</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Static factory method</div>
+            <div class="item-desc"><code>static func mock()</code> 패턴. Preview나 테스트에서 샘플 데이터 생성에 유용</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">모든 문법의 연결</div>
+            <div class="item-desc">각 문법은 독립적으로 배우지만, 실제 코드에서는 조합해서 사용. 읽는 훈련이 쓰는 것보다 먼저다</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Preview Column -->
+  <div class="preview-col">
+    <div class="sticky-phone">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <div id="pv-1" class="preview-content active">
+            <div class="preview-label">Computed Property</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 4px;">
+              <div style="background:#1E1F2E;border-radius:10px;padding:10px;font-family:'DM Mono',monospace;font-size:9px;line-height:1.9;color:#E4E6F0;">
+                <span style="color:#FF79C6;">var</span> area: Double {<br>
+                &nbsp;&nbsp;width * height<br>
+                }<br>
+                <span style="color:#6272A4;">// 저장 ✗, 계산 ✓</span>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:10px;font-size:11px;">
+                <div style="color:#7C5DC7;font-family:'DM Mono',monospace;font-size:9px;margin-bottom:4px;">RESULT</div>
+                10 × 5 = <strong>50.0</strong>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-2" class="preview-content">
+            <div class="preview-label">willSet / didSet</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="flex:1;height:6px;background:#EEE;border-radius:3px;overflow:hidden;"><div style="width:65%;height:100%;background:var(--purple);border-radius:3px;"></div></div>
+                <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--purple);">6,500</div>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;font-size:10px;color:#6B7190;">
+                willSet → <span style="color:var(--purple);">7,000</span><br>
+                didSet ← <span style="color:#6B7190;">6,500</span>
+              </div>
+              <div style="background:#F0EDFF;border-radius:8px;padding:8px;font-size:11px;color:var(--purple);">목표까지 3,500보</div>
+            </div>
+          </div>
+
+          <div id="pv-3" class="preview-content">
+            <div class="preview-label">struct vs class</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:0 4px;">
+              <div style="background:#F0FFF4;border-radius:8px;padding:10px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:#2DA55D;margin-bottom:4px;">STRUCT (복사)</div>
+                <div style="font-size:11px;">a = {x:1} → b = {x:1}</div>
+                <div style="font-size:11px;color:#6B7190;">b.x = 99</div>
+                <div style="font-size:11px;">a.x = <strong>1</strong> ← 변하지 않음</div>
+              </div>
+              <div style="background:#FFF0F0;border-radius:8px;padding:10px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:#DC3545;margin-bottom:4px;">CLASS (참조)</div>
+                <div style="font-size:11px;">c → d (같은 객체)</div>
+                <div style="font-size:11px;color:#6B7190;">d.x = 99</div>
+                <div style="font-size:11px;">c.x = <strong style="color:#DC3545;">99</strong> ← 같이 변함!</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-4" class="preview-content">
+            <div class="preview-label">Access Control</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 4px;">
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--purple);margin-bottom:4px;">BANK ACCOUNT</div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:10px;">balance</span>
+                <span style="font-size:9px;background:#FFE8E8;color:#DC3545;padding:2px 6px;border-radius:4px;font-family:'DM Mono',monospace;">private 🔒</span>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:10px;">owner</span>
+                <span style="font-size:9px;background:#EEF5FF;color:#2E8BD8;padding:2px 6px;border-radius:4px;font-family:'DM Mono',monospace;">internal</span>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:10px;">deposit()</span>
+                <span style="font-size:9px;background:#F0FFF4;color:#2DA55D;padding:2px 6px;border-radius:4px;font-family:'DM Mono',monospace;">public</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-5" class="preview-content">
+            <div class="preview-label">init 패턴</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
+              <div style="background:#F0EDFF;border-radius:8px;padding:8px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--purple);margin-bottom:4px;">MEMBERWISE (자동)</div>
+                <div style="font-size:10px;">Point(x: 1, y: 2)</div>
+              </div>
+              <div style="background:#F0EDFF;border-radius:8px;padding:8px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--purple);margin-bottom:4px;">CONVENIENCE</div>
+                <div style="font-size:10px;">Person(name: "홍길동")</div>
+              </div>
+              <div style="background:#FFF8EE;border-radius:8px;padding:8px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:#D4950A;margin-bottom:4px;">FAILABLE (init?)</div>
+                <div style="font-size:10px;">Color(hex: "bad") → nil</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-6" class="preview-content">
+            <div class="preview-label">Type Casting</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--purple);margin-bottom:4px;">[Animal] 배열</div>
+              <div style="background:#F0EDFF;border-radius:8px;padding:8px;display:flex;align-items:center;gap:6px;">
+                <span style="font-size:14px;">🐕</span>
+                <span style="font-size:11px;">as? Dog → </span>
+                <span style="font-size:11px;color:#2DA55D;font-weight:600;">bark() ✓</span>
+              </div>
+              <div style="background:#F0EDFF;border-radius:8px;padding:8px;display:flex;align-items:center;gap:6px;">
+                <span style="font-size:14px;">🐈</span>
+                <span style="font-size:11px;">as? Dog → </span>
+                <span style="font-size:11px;color:#DC3545;">nil</span>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:8px;font-size:10px;color:#6B7190;">as? 실패 시 nil, 크래시 없음</div>
+            </div>
+          </div>
+
+          <div id="pv-7" class="preview-content">
+            <div class="preview-label">static · lazy</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
+              <div style="background:#1E1F2E;border-radius:10px;padding:10px;font-family:'DM Mono',monospace;font-size:9px;line-height:1.9;color:#E4E6F0;">
+                <span style="color:#FF79C6;">static let</span> shared<br>
+                &nbsp;&nbsp;= Manager()<br>
+                <span style="color:#FF79C6;">lazy var</span> cache<br>
+                &nbsp;&nbsp;= [String: Data]()
+              </div>
+              <div style="text-align:center;font-size:10px;color:#6B7190;">lazy: 처음 쓸 때만 초기화</div>
+            </div>
+          </div>
+
+          <div id="pv-8" class="preview-content">
+            <div class="preview-label">종합 패턴</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 4px;">
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:var(--purple);margin-bottom:4px;">ProductViewModel</div>
+              <div style="background:#F7F8FA;border-radius:6px;padding:6px;font-size:10px;display:flex;gap:4px;align-items:center;"><span style="color:var(--purple);">●</span> private(set) products</div>
+              <div style="background:#F7F8FA;border-radius:6px;padding:6px;font-size:10px;display:flex;gap:4px;align-items:center;"><span style="color:var(--blue);">●</span> computed: discounted</div>
+              <div style="background:#F7F8FA;border-radius:6px;padding:6px;font-size:10px;display:flex;gap:4px;align-items:center;"><span style="color:#D4950A);">●</span> lazy cache</div>
+              <div style="background:#F7F8FA;border-radius:6px;padding:6px;font-size:10px;display:flex;gap:4px;align-items:center;"><span style="color:#2DA55D;">●</span> defer: isLoading</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Homework -->
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:8px;">Homework</div>
+    <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">Swift 핵심 문법을 익혔다면</h2>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);background:#7C5DC712;padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">BankAccount 클래스 리팩터링</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;"><code>balance</code>를 private으로, 잔액을 computed property로 외부 노출, 입출금 기록을 didSet으로 자동 저장, failable init으로 초기 잔액 유효성 검사 추가</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);background:#7C5DC712;padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Stage 1 Todo 앱 리팩터링</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">기존 Todo 앱에 access control 적용, computed property로 완료 개수/미완료 개수 추출, static으로 샘플 데이터 생성 메서드 추가</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">도전</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">Generic Stack 자료구조 구현</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">push / pop / peek / isEmpty를 가진 Generic Stack struct 구현. pop()은 failable(Optional 반환), Equatable을 준수하는 타입에서만 contains() 사용 가능하도록 extension + where 절 추가</div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">완료 체크리스트</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> computed property를 언제 쓰는지 알고, SwiftUI View에서 직접 활용할 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> struct와 class의 차이를 설명하고, 각각 언제 써야 하는지 이유를 말할 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> private / private(set) / internal을 적절히 사용할 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> as? 와 as! 의 차이를 알고, 실제 코드에서 안전하게 사용할 수 있다</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Challenge nav -->
+<div class="ch-nav">
+  <a href="1-4.html">
+    <span class="nav-dir">← Stage 1 마지막</span>
+    <span class="nav-title">1-4 막히는 Swift 문법</span>
+  </a>
+  <a href="stage2.html" class="next">
+    <span class="nav-dir">다음 단계 →</span>
+    <span class="nav-title">Stage 2 — 제대로 만든다</span>
+  </a>
+</div>
+
+<!-- 코멘트 -->
+<div class="comment-donation-wrap">
+  <div class="section-heading">코멘트</div>
+  <div class="utterances-wrap">
+    <script src="https://utteranc.es/client.js"
+      repo="M1zz/cs-swiftUI"
+      issue-term="title"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!-- 후원 플로팅 버튼 -->
+<div class="donation-float">
+  <div class="donation-float-card" id="donationCard">
+    <div class="section-heading" style="margin-bottom:4px;">후원하기</div>
+    <div class="donation-desc">콘텐츠가 도움이 됐다면<br>커피 한 잔의 후원을 부탁드려요 :)</div>
+    <img class="donation-qr" src="kakao-pay-qr.jpg" alt="카카오페이 QR">
+    <div class="donation-name">이현호</div>
+    <div class="donation-kakao-badge">카카오페이</div>
+  </div>
+  <button class="donation-float-btn" onclick="toggleDonation()" aria-label="후원하기">☕</button>
+</div>
+
+<footer class="footer">
+  개발자리 · Stage 1.5 — Swift 핵심 문법
+</footer>
+
+<script>
+  function highlightSwift(el) {
+    let html = el.textContent;
+    html = html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    html = html.replace(/(\/\/.*)/gm,'<span class="cm">$1</span>');
+    html = html.replace(/"([^"]*?)"/g,'<span class="str">"$1"</span>');
+    html = html.replace(/@(\w+)/g,'<span class="pr">@$1</span>');
+    html = html.replace(/\b(struct|class|var|let|func|import|return|if|else|guard|for|in|case|enum|protocol|some|private|fileprivate|internal|public|open|true|false|nil|self|mutating|static|init|try|throw|throws|async|await|actor|do|catch|lazy|inout|defer|convenience|override|super|get|set|willSet|didSet|is|as)\b/g,'<span class="kw">$1</span>');
+    html = html.replace(/\b(\d+\.?\d*)\b/g,'<span class="num">$1</span>');
+    el.innerHTML = html;
+  }
+  document.querySelectorAll('.swift-code').forEach(highlightSwift);
+
+  const sections = document.querySelectorAll('.content-section');
+  const previews = document.querySelectorAll('.preview-content');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.dataset.preview;
+        previews.forEach(p => p.classList.remove('active'));
+        const t = document.getElementById(id);
+        if (t) t.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
+  sections.forEach(s => observer.observe(s));
+
+  function toggleDonation() {
+    document.getElementById('donationCard').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const float = document.querySelector('.donation-float');
+    if (!float.contains(e.target)) {
+      document.getElementById('donationCard').classList.remove('open');
+    }
+  });
+</script>
+</body>
+</html>
