@@ -682,19 +682,12 @@ body::before {
   white-space: pre-wrap;
 }
 
-/* ── COMMENTS & DONATION ── */
+/* ── COMMENTS ── */
 .comment-donation-wrap {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 40px 60px;
   position: relative; z-index: 1;
-}
-
-.comment-donation-grid {
-  display: grid;
-  grid-template-columns: 1fr 220px;
-  gap: 32px;
-  align-items: start;
 }
 
 .section-heading {
@@ -714,22 +707,63 @@ body::before {
   min-height: 120px;
 }
 
-.utterances-wrap .utterances {
-  max-height: none !important;
+/* ── DONATION FLOAT ── */
+.donation-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
 }
 
-.donation-box {
-  background: var(--surface);
+.donation-float-btn {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--orange);
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  box-shadow: 0 4px 20px rgba(232,93,26,.45);
+  transition: transform .2s, box-shadow .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.donation-float-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(232,93,26,.55);
+}
+
+.donation-float-card {
+  background: #fff;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 24px;
+  padding: 22px 20px;
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  text-align: center;
-  position: sticky;
-  top: 80px;
+  gap: 10px;
+  box-shadow: 0 8px 40px rgba(0,0,0,.13);
+  transform-origin: bottom right;
+  transform: scale(.85) translateY(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .25s cubic-bezier(.4,0,.2,1), opacity .2s;
+  width: 200px;
+}
+
+.donation-float-card.open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .donation-desc {
@@ -739,8 +773,8 @@ body::before {
 }
 
 .donation-qr {
-  width: 140px;
-  height: 140px;
+  width: 148px;
+  height: 148px;
   border-radius: 12px;
   object-fit: cover;
 }
@@ -783,6 +817,7 @@ body::before {
   .code-preview > .phone-preview,
   .code-preview > .output-box { flex: none; }
   .comment-donation-wrap { padding: 0 20px 60px; }
-  .comment-donation-grid { grid-template-columns: 1fr; }
-  .donation-box { position: static; }
+  .donation-float { bottom: 20px; right: 20px; }
+  .donation-float-card { width: 180px; }
+  .donation-qr { width: 130px; height: 130px; }
 }
