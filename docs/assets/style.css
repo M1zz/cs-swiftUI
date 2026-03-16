@@ -804,7 +804,7 @@ body::before {
   .page-wrap { padding: 0 20px; }
   .topics-grid { grid-template-columns: 1fr; }
   .section-title { font-size: 20px; }
-  .nav-links { display: none; }
+  /* nav-links는 nav.js의 햄버거 메뉴가 관리 */
   .split-layout { flex-direction: column; gap: 24px; padding: 0 20px 60px; }
   .preview-col { flex: none; position: static; }
   .sticky-phone { position: static; padding-top: 0; }
