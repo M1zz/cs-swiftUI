@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<title>계산기 클론 코딩 — 학습 가이드</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Noto Sans KR',sans-serif;background:#fff;color:#111;font-size:13px;line-height:1.8;}
+  @media print{
+    .page{page-break-after:always;}
+    @page{size:A4;margin:20mm 18mm;}
+  }
+  .page{max-width:794px;margin:0 auto;padding:32px 40px 40px;}
+
+  /* cover */
+  .cover{min-height:297mm;display:flex;flex-direction:column;justify-content:center;background:#0d0f17;}
+  .cover-tag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#FF6B2B;margin-bottom:20px;}
+  .cover-title{font-family:'Syne',sans-serif;font-size:56px;font-weight:800;color:#fff;line-height:1.0;letter-spacing:-.03em;margin-bottom:16px;}
+  .cover-sub{font-size:15px;color:#888;line-height:1.75;max-width:420px;margin-bottom:40px;}
+  .cover-meta{display:flex;flex-direction:column;gap:10px;}
+  .meta-row{display:flex;align-items:center;gap:12px;font-size:13px;color:#666;}
+  .meta-dot{width:6px;height:6px;border-radius:50%;background:#FF6B2B;flex-shrink:0;}
+  .cover-logo{margin-top:auto;padding-top:60px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#333;}
+  .cover-logo span{color:#FF6B2B;}
+
+  /* contents page */
+  .toc-title{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;margin-bottom:32px;padding-bottom:12px;border-bottom:2px solid #111;}
+  .toc-item{display:flex;align-items:baseline;gap:0;padding:10px 0;border-bottom:1px solid #eee;}
+  .toc-num{font-family:'DM Mono',monospace;font-size:11px;color:#FF6B2B;width:36px;flex-shrink:0;}
+  .toc-name{flex:1;font-size:14px;font-weight:500;}
+  .toc-page{font-family:'DM Mono',monospace;font-size:11px;color:#999;}
+
+  /* chapter header */
+  .ch-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#FF6B2B;margin-bottom:8px;}
+  .ch-title{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;line-height:1.1;margin-bottom:8px;}
+  .ch-sub{font-size:13px;color:#666;margin-bottom:28px;}
+  .ch-divider{height:2px;background:#111;margin-bottom:28px;}
+
+  /* section */
+  .section-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin:28px 0 12px;}
+  .section-sub{font-size:12px;color:#888;font-style:italic;margin-bottom:16px;}
+
+  /* code block */
+  pre{background:#0d0f17;border-radius:10px;padding:20px;overflow-x:auto;margin:16px 0;}
+  code{font-family:'DM Mono',monospace;font-size:12px;line-height:1.75;color:#cdd6f4;}
+  .kw{color:#cba6f7;}   /* keyword */
+  .ty{color:#89dceb;}   /* type */
+  .str{color:#a6e3a1;}  /* string */
+  .cm{color:#585b70;font-style:italic;} /* comment */
+  .num{color:#fab387;} /* number */
+  .fn{color:#89b4fa;}  /* function */
+
+  /* info box */
+  .info-box{background:#fff8f5;border-left:3px solid #FF6B2B;border-radius:0 8px 8px 0;padding:16px 18px;margin:16px 0;}
+  .info-box-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#FF6B2B;margin-bottom:6px;}
+  .tip-box{background:#f0fff4;border-left:3px solid #22c55e;border-radius:0 8px 8px 0;padding:16px 18px;margin:16px 0;}
+  .tip-box-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#22c55e;margin-bottom:6px;}
+
+  /* step */
+  .step-row{display:flex;gap:16px;margin-bottom:20px;}
+  .step-num{font-family:'DM Mono',monospace;font-size:24px;font-weight:500;color:#FF6B2B;flex-shrink:0;width:36px;line-height:1;}
+  .step-body{flex:1;}
+  .step-title{font-weight:700;font-size:14px;margin-bottom:4px;}
+  .step-desc{font-size:12px;color:#555;line-height:1.7;}
+
+  /* quiz */
+  .quiz-box{background:#f5f5f7;border-radius:10px;padding:20px;margin:20px 0;}
+  .quiz-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#111;margin-bottom:12px;}
+  .quiz-item{display:flex;gap:10px;margin-bottom:8px;}
+  .quiz-q{width:20px;flex-shrink:0;font-weight:700;color:#FF6B2B;}
+
+  /* concept card */
+  .concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+  .concept-card{background:#f5f5f7;border-radius:8px;padding:14px;}
+  .concept-card-title{font-family:'DM Mono',monospace;font-size:11px;color:#FF6B2B;margin-bottom:6px;}
+  .concept-card-desc{font-size:12px;color:#555;line-height:1.6;}
+
+  /* homework */
+  .hw-box{background:#0d0f17;border-radius:10px;padding:24px;margin:20px 0;color:#fff;}
+  .hw-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;margin-bottom:12px;color:#FF6B2B;}
+  .hw-item{display:flex;gap:10px;margin-bottom:8px;font-size:12px;color:#aaa;}
+  .hw-check{color:#FF6B2B;flex-shrink:0;}
+
+  p{margin-bottom:12px;}
+  ul,ol{padding-left:20px;margin-bottom:12px;}
+  li{margin-bottom:6px;font-size:13px;}
+  strong{font-weight:700;}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ 표지 ══════════════ -->
+<div class="page cover">
+  <div class="cover-tag">Clone Coding Project 01</div>
+  <div class="cover-title">🧮 계산기<br>클론 코딩</div>
+  <div class="cover-sub">Apple 기본 계산기를 SwiftUI로 직접 만들면서<br>LazyVGrid, enum, @Observable 패턴을 익힌다.</div>
+  <div class="cover-meta">
+    <div class="meta-row"><div class="meta-dot"></div>완성 Xcode 프로젝트 포함</div>
+    <div class="meta-row"><div class="meta-dot"></div>단계별 학습 가이드 (PDF)</div>
+    <div class="meta-row"><div class="meta-dot"></div>난이도 ⭐ 입문 — Stage 1-1, 1-2 선수 조건</div>
+  </div>
+  <div class="cover-logo">개발자<span>리</span></div>
+</div>
+
+<!-- ══════════════ 목차 ══════════════ -->
+<div class="page" style="padding-top:48px;">
+  <div class="toc-title">목차</div>
+  <div class="toc-item"><div class="toc-num">00</div><div class="toc-name">시작 전에 — 이 프로젝트로 무엇을 배우는가</div><div class="toc-page">03</div></div>
+  <div class="toc-item"><div class="toc-num">01</div><div class="toc-name">앱 구조 설계 — 화면 분해 & 데이터 모델</div><div class="toc-page">04</div></div>
+  <div class="toc-item"><div class="toc-num">02</div><div class="toc-name">버튼 UI 구성 — LazyVGrid + 커스텀 ButtonStyle</div><div class="toc-page">06</div></div>
+  <div class="toc-item"><div class="toc-num">03</div><div class="toc-name">연산 로직 — @Observable + enum 연산자</div><div class="toc-page">09</div></div>
+  <div class="toc-item"><div class="toc-num">04</div><div class="toc-name">엣지 케이스 처리 & 완성</div><div class="toc-page">12</div></div>
+  <div class="toc-item"><div class="toc-num">05</div><div class="toc-name">도전 과제 — 히스토리 기능 추가</div><div class="toc-page">14</div></div>
+</div>
+
+<!-- ══════════════ Step 00: 시작 전에 ══════════════ -->
+<div class="page">
+  <div class="ch-tag">Step 00</div>
+  <div class="ch-title">이 프로젝트로<br>무엇을 배우는가</div>
+  <div class="ch-sub">커리큘럼 어디와 연결되는지 먼저 파악하고 시작한다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="concept-grid">
+    <div class="concept-card">
+      <div class="concept-card-title">LazyVGrid</div>
+      <div class="concept-card-desc">버튼 4열 배치. columns를 정의하고 데이터 배열로 반복 렌더링하는 패턴.</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title">enum + rawValue</div>
+      <div class="concept-card-desc">버튼 종류를 타입으로 추상화. switch로 분기하는 Swift의 핵심 패턴.</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title">@Observable</div>
+      <div class="concept-card-desc">로직과 뷰를 분리. 데이터가 바뀌면 뷰가 자동으로 다시 그려진다.</div>
+    </div>
+    <div class="concept-card">
+      <div class="concept-card-title">ViewModifier 재사용</div>
+      <div class="concept-card-desc">버튼 스타일을 하나의 modifier로 정의해서 모든 버튼에 적용.</div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <div class="info-box-title">선수 조건</div>
+    Stage 1-1 (View 구조, VStack/HStack), Stage 1-2 (@State, Button) 을 먼저 완료해야 합니다.
+  </div>
+
+  <div class="section-title">완성 앱 미리보기</div>
+  <p>Apple 기본 계산기와 동일한 UI를 구현합니다:</p>
+  <ul>
+    <li>숫자 버튼 (0~9), 연산자 버튼 (+, −, ×, ÷, =)</li>
+    <li>기능 버튼 (AC, +/−, %)</li>
+    <li>0 버튼은 두 칸 너비 (isWide)</li>
+    <li>숫자가 길어지면 폰트 크기 자동 축소</li>
+    <li>연속 연산 지원 (3 + 5 × 2 등)</li>
+  </ul>
+
+  <div class="tip-box">
+    <div class="tip-box-title">공부하는 방법</div>
+    완성 코드를 먼저 실행해서 동작을 확인한 뒤, 빈 프로젝트에서 이 가이드를 따라 직접 처음부터 만들어보세요. 막히면 완성 코드를 참고하되, 복붙은 피하고 직접 타이핑하는 것이 훨씬 효과적입니다.
+  </div>
+</div>
+
+<!-- ══════════════ Step 01: 구조 설계 ══════════════ -->
+<div class="page">
+  <div class="ch-tag">Step 01</div>
+  <div class="ch-title">앱 구조 설계</div>
+  <div class="ch-sub">화면을 분해하고 데이터 모델을 먼저 정의한다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="section-title">화면 분해</div>
+  <p>Apple 계산기를 보면 화면은 크게 두 부분으로 나뉩니다:</p>
+  <div class="step-row">
+    <div class="step-num">①</div>
+    <div class="step-body">
+      <div class="step-title">디스플레이 영역</div>
+      <div class="step-desc">숫자가 표시되는 오른쪽 정렬 텍스트. 숫자가 길면 글자가 작아진다.</div>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">②</div>
+    <div class="step-body">
+      <div class="step-title">버튼 그리드 영역</div>
+      <div class="step-desc">4열 × 5행. 단, 마지막 행의 0 버튼은 두 칸 너비.</div>
+    </div>
+  </div>
+
+  <div class="section-title">파일 구조</div>
+  <pre><code><span class="cm">// Xcode 프로젝트 파일 구조</span>
+Calculator/
+├── CalculatorApp.swift    <span class="cm">// 앱 진입점 (@main)</span>
+├── ContentView.swift      <span class="cm">// 메인 화면 (UI 담당)</span>
+├── CalcButton.swift       <span class="cm">// 버튼 모델 (enum)</span>
+└── CalculatorLogic.swift  <span class="cm">// 계산 로직 (@Observable)</span></code></pre>
+
+  <div class="section-title">CalcButton enum 설계</div>
+  <p>버튼을 문자열로 관리하면 실수가 생깁니다. enum으로 타입 안전하게 표현합니다:</p>
+  <pre><code><span class="kw">enum</span> <span class="ty">CalcButton</span>: <span class="ty">String</span> {
+    <span class="cm">// rawValue = 버튼에 표시할 텍스트</span>
+    <span class="kw">case</span> zero = <span class="str">"0"</span>, one = <span class="str">"1"</span> <span class="cm">/* ... */</span>
+    <span class="kw">case</span> plus = <span class="str">"+"</span>, minus = <span class="str">"−"</span>
+    <span class="kw">case</span> ac = <span class="str">"AC"</span>, equals = <span class="str">"="</span>
+
+    <span class="cm">// 버튼 색상도 enum에서 직접 정의</span>
+    <span class="kw">var</span> backgroundColor: <span class="ty">Color</span> {
+        <span class="kw">switch self</span> {
+        <span class="kw">case</span> .ac, .plusMinus, .percent: <span class="kw">return</span> .gray
+        <span class="kw">case</span> .plus, .minus, .multiply, .divide, .equals: <span class="kw">return</span> .orange
+        <span class="kw">default</span>: <span class="kw">return</span> Color(.darkGray)
+        }
+    }
+}</code></pre>
+
+  <div class="info-box">
+    <div class="info-box-title">왜 enum인가?</div>
+    String으로 버튼을 식별하면 오타가 나도 컴파일러가 잡을 수 없습니다. enum을 쓰면 존재하지 않는 케이스를 쓸 때 컴파일 에러가 납니다. switch의 exhaustive check도 큰 장점입니다.
+  </div>
+</div>
+
+<!-- ══════════════ Step 02: UI 구성 ══════════════ -->
+<div class="page">
+  <div class="ch-tag">Step 02</div>
+  <div class="ch-title">버튼 UI 구성</div>
+  <div class="ch-sub">LazyVGrid로 4열 버튼 그리드를 만들고 스타일을 입힌다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="section-title">버튼 레이아웃 데이터</div>
+  <p>버튼 배치를 2D 배열로 정의합니다. 뷰 코드에 직접 하드코딩하지 않는 게 핵심입니다:</p>
+  <pre><code><span class="kw">let</span> buttonLayout: [[<span class="ty">CalcButton</span>]] = [
+    [.ac,    .plusMinus, .percent, .divide  ],
+    [.seven, .eight,    .nine,   .multiply],
+    [.four,  .five,     .six,    .minus   ],
+    [.one,   .two,      .three,  .plus    ],
+    [.zero,             .dot,    .equals  ],  <span class="cm">// zero는 두 칸</span>
+]</code></pre>
+
+  <div class="section-title">ContentView 구조</div>
+  <pre><code><span class="kw">struct</span> <span class="ty">ContentView</span>: <span class="ty">View</span> {
+    <span class="kw">@State private var</span> logic = <span class="ty">CalculatorLogic</span>()
+
+    <span class="kw">var</span> body: <span class="kw">some</span> <span class="ty">View</span> {
+        <span class="ty">ZStack</span> {
+            <span class="ty">Color</span>.black.ignoresSafeArea()
+            <span class="ty">VStack</span>(spacing: <span class="num">12</span>) {
+                <span class="ty">Spacer</span>()
+                displayView     <span class="cm">// 숫자 표시</span>
+                buttonGrid      <span class="cm">// 버튼 그리드</span>
+            }
+            .padding(<span class="num">12</span>)
+        }
+    }
+}</code></pre>
+
+  <div class="section-title">버튼 그리드 (행 단위 HStack)</div>
+  <p>LazyVGrid 대신 행 단위 HStack을 중첩하는 방식을 씁니다. 0 버튼의 두 칸 처리가 더 직관적이기 때문입니다:</p>
+  <pre><code><span class="kw">private var</span> buttonGrid: <span class="kw">some</span> <span class="ty">View</span> {
+    <span class="ty">VStack</span>(spacing: <span class="num">12</span>) {
+        <span class="ty">ForEach</span>(buttonLayout, id: \.self) { row <span class="kw">in</span>
+            <span class="ty">HStack</span>(spacing: <span class="num">12</span>) {
+                <span class="ty">ForEach</span>(row, id: \.self) { button <span class="kw">in</span>
+                    <span class="ty">CalcButtonView</span>(button: button, size: buttonSize) {
+                        logic.tap(button)
+                    }
+                }
+            }
+        }
+    }
+}</code></pre>
+
+  <div class="section-title">개별 버튼 뷰</div>
+  <pre><code><span class="kw">struct</span> <span class="ty">CalcButtonView</span>: <span class="ty">View</span> {
+    <span class="kw">let</span> button: <span class="ty">CalcButton</span>
+    <span class="kw">let</span> size: <span class="ty">CGFloat</span>
+    <span class="kw">let</span> action: () -> <span class="ty">Void</span>
+
+    <span class="cm">// 0 버튼이면 두 칸 너비</span>
+    <span class="kw">private var</span> width: <span class="ty">CGFloat</span> {
+        button.isWide ? size * <span class="num">2</span> + <span class="num">12</span> : size
+    }
+
+    <span class="kw">var</span> body: <span class="kw">some</span> <span class="ty">View</span> {
+        <span class="ty">Button</span>(action: action) {
+            <span class="ty">Text</span>(button.rawValue)
+                .font(.system(size: <span class="num">32</span>, weight: .medium))
+                .foregroundStyle(button.foregroundColor)
+                .frame(width: width, height: size)
+                .background(button.backgroundColor)
+                .clipShape(<span class="ty">Capsule</span>())
+        }
+    }
+}</code></pre>
+
+  <div class="tip-box">
+    <div class="tip-box-title">buttonSize 계산</div>
+    버튼 크기는 화면 너비에서 동적으로 계산합니다:<br>
+    <code>buttonSize = (UIScreen.main.bounds.width - 5 × gap) / 4</code><br>
+    기기 크기에 상관없이 항상 4등분이 됩니다.
+  </div>
+</div>
+
+<!-- ══════════════ Step 03: 연산 로직 ══════════════ -->
+<div class="page">
+  <div class="ch-tag">Step 03</div>
+  <div class="ch-title">연산 로직</div>
+  <div class="ch-sub">@Observable 클래스로 로직과 뷰를 분리한다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="section-title">왜 로직을 뷰에서 분리하는가?</div>
+  <p>ContentView에 모든 계산 로직을 넣으면 뷰 코드가 200줄 이상이 됩니다. 로직을 별도 클래스로 분리하면:</p>
+  <ul>
+    <li>뷰는 "어떻게 보여줄지"만 담당</li>
+    <li>로직 클래스는 "어떻게 계산할지"만 담당</li>
+    <li>테스트와 유지보수가 쉬워짐</li>
+  </ul>
+
+  <div class="section-title">CalculatorLogic 핵심 상태</div>
+  <pre><code><span class="kw">@Observable
+class</span> <span class="ty">CalculatorLogic</span> {
+    <span class="cm">// 뷰가 관찰하는 단 하나의 프로퍼티</span>
+    <span class="kw">var</span> displayText: <span class="ty">String</span> = <span class="str">"0"</span>
+
+    <span class="cm">// 내부 상태 (뷰에서 볼 필요 없음 → private)</span>
+    <span class="kw">private var</span> currentValue: <span class="ty">Double</span> = <span class="num">0</span>
+    <span class="kw">private var</span> previousValue: <span class="ty">Double</span> = <span class="num">0</span>
+    <span class="kw">private var</span> currentOperator: <span class="ty">Operator</span>?
+    <span class="kw">private var</span> shouldResetDisplay = <span class="kw">false</span>
+}</code></pre>
+
+  <div class="section-title">버튼 탭 → 분기</div>
+  <pre><code><span class="kw">func</span> <span class="fn">tap</span>(_ button: <span class="ty">CalcButton</span>) {
+    <span class="kw">switch</span> button {
+    <span class="kw">case</span> .ac:                  reset()
+    <span class="kw">case</span> .plusMinus:          toggleSign()
+    <span class="kw">case</span> .percent:             applyPercent()
+    <span class="kw">case</span> .plus:               setOperator(.add)
+    <span class="kw">case</span> .minus:              setOperator(.subtract)
+    <span class="kw">case</span> .multiply:           setOperator(.multiply)
+    <span class="kw">case</span> .divide:             setOperator(.divide)
+    <span class="kw">case</span> .equals:             calculate()
+    <span class="kw">case</span> .dot:                appendDot()
+    <span class="kw">default</span>:                  appendDigit(button.rawValue)
+    }
+}</code></pre>
+
+  <div class="section-title">연산자 처리 — shouldResetDisplay 플래그</div>
+  <p>연산자를 누른 뒤 다음 숫자를 입력할 때 화면을 초기화해야 합니다. 플래그 하나로 제어합니다:</p>
+  <pre><code><span class="kw">private func</span> <span class="fn">appendDigit</span>(_ digit: <span class="ty">String</span>) {
+    <span class="kw">if</span> shouldResetDisplay {
+        displayText = digit       <span class="cm">// 화면 초기화</span>
+        shouldResetDisplay = <span class="kw">false</span>
+    } <span class="kw">else</span> {
+        <span class="cm">// "0" 상태면 그냥 교체, 아니면 뒤에 붙임</span>
+        displayText = displayText == <span class="str">"0"</span> ? digit : displayText + digit
+    }
+    currentValue = <span class="ty">Double</span>(displayText) ?? <span class="num">0</span>
+}</code></pre>
+
+  <div class="section-title">계산 실행</div>
+  <pre><code><span class="kw">private func</span> <span class="fn">calculate</span>() {
+    <span class="kw">guard let</span> op = currentOperator <span class="kw">else</span> { <span class="kw">return</span> }
+    <span class="kw">let</span> result: <span class="ty">Double</span>
+    <span class="kw">switch</span> op {
+    <span class="kw">case</span> .add:      result = previousValue + currentValue
+    <span class="kw">case</span> .subtract: result = previousValue - currentValue
+    <span class="kw">case</span> .multiply: result = previousValue * currentValue
+    <span class="kw">case</span> .divide:   result = previousValue / currentValue
+    }
+    displayText = <span class="fn">formatted</span>(result)
+    shouldResetDisplay = <span class="kw">true</span>
+}</code></pre>
+</div>
+
+<!-- ══════════════ Step 04: 완성 ══════════════ -->
+<div class="page">
+  <div class="ch-tag">Step 04</div>
+  <div class="ch-title">엣지 케이스 처리 & 완성</div>
+  <div class="ch-sub">실제 계산기처럼 동작하도록 예외 상황을 처리한다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="section-title">처리해야 할 엣지 케이스</div>
+
+  <div class="step-row">
+    <div class="step-num">①</div>
+    <div class="step-body">
+      <div class="step-title">0으로 나누기</div>
+      <div class="step-desc">currentValue == 0일 때 나누기를 누르면 앱이 크래시합니다. guard 또는 삼항 연산자로 방어합니다.</div>
+    </div>
+  </div>
+  <pre><code><span class="kw">case</span> .divide:
+    result = currentValue == <span class="num">0</span> ? <span class="num">0</span> : previousValue / currentValue</code></pre>
+
+  <div class="step-row" style="margin-top:16px;">
+    <div class="step-num">②</div>
+    <div class="step-body">
+      <div class="step-title">소수점 중복 입력</div>
+      <div class="step-desc">"1.2." 처럼 소수점이 두 번 찍히지 않도록 방어합니다.</div>
+    </div>
+  </div>
+  <pre><code><span class="kw">private func</span> <span class="fn">appendDot</span>() {
+    <span class="kw">if</span> !displayText.contains(<span class="str">"."</span>) {
+        displayText += <span class="str">"."</span>
+    }
+}</code></pre>
+
+  <div class="step-row" style="margin-top:16px;">
+    <div class="step-num">③</div>
+    <div class="step-body">
+      <div class="step-title">결과 포맷 (1.0 → 1)</div>
+      <div class="step-desc">3 + 5 = 8.0 이 아니라 8로 표시되어야 합니다. 정수면 소수점을 생략합니다.</div>
+    </div>
+  </div>
+  <pre><code><span class="kw">private func</span> <span class="fn">formatted</span>(_ value: <span class="ty">Double</span>) -> <span class="ty">String</span> {
+    <span class="kw">if</span> value.truncatingRemainder(dividingBy: <span class="num">1</span>) == <span class="num">0</span> {
+        <span class="kw">return</span> <span class="ty">String</span>(<span class="ty">Int</span>(value))   <span class="cm">// 정수면 Int로 변환</span>
+    }
+    <span class="kw">return</span> <span class="ty">String</span>(value)          <span class="cm">// 소수면 그대로</span>
+}</code></pre>
+
+  <div class="step-row" style="margin-top:16px;">
+    <div class="step-num">④</div>
+    <div class="step-body">
+      <div class="step-title">디스플레이 폰트 자동 축소</div>
+      <div class="step-desc">숫자가 10자리 이상이면 글자를 작게 만들어 화면을 넘치지 않게 합니다.</div>
+    </div>
+  </div>
+  <pre><code><span class="kw">private var</span> displayFontSize: <span class="ty">CGFloat</span> {
+    logic.displayText.count > <span class="num">9</span> ? <span class="num">56</span> : <span class="num">88</span>
+}
+
+<span class="ty">Text</span>(logic.displayText)
+    .font(.system(size: displayFontSize, weight: .thin))
+    .minimumScaleFactor(<span class="num">0.4</span>)  <span class="cm">// 더 줄어들 여지</span></code></pre>
+
+  <div class="quiz-box" style="margin-top:24px;">
+    <div class="quiz-title">셀프 체크</div>
+    <div class="quiz-item"><div class="quiz-q">Q1</div><div>3 + 5 × 2 를 누르면 결과가 16인가 13인가? 왜 그런가?</div></div>
+    <div class="quiz-item"><div class="quiz-q">Q2</div><div>연산자를 연속으로 누르면 (5 + +) 어떻게 처리되는가?</div></div>
+    <div class="quiz-item"><div class="quiz-q">Q3</div><div>= 을 연속으로 누르면 어떻게 동작해야 하는가?</div></div>
+  </div>
+</div>
+
+<!-- ══════════════ Step 05: 도전 과제 ══════════════ -->
+<div class="page">
+  <div class="ch-tag">Step 05</div>
+  <div class="ch-title">도전 과제</div>
+  <div class="ch-sub">완성 후 스스로 기능을 추가해본다.</div>
+  <div class="ch-divider"></div>
+
+  <div class="hw-box">
+    <div class="hw-title">도전 1 — 계산 히스토리</div>
+    <div class="hw-item"><div class="hw-check">□</div><div>계산 결과를 배열에 저장 (예: ["3 + 5 = 8", "8 × 2 = 16"])</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>별도 Sheet 또는 아래 스크롤 영역에 히스토리 표시</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>히스토리 항목을 탭하면 그 숫자를 현재 값으로 불러오기</div></div>
+  </div>
+
+  <div class="hw-box" style="margin-top:16px;">
+    <div class="hw-title">도전 2 — 사운드 피드백</div>
+    <div class="hw-item"><div class="hw-check">□</div><div>버튼 탭 시 시스템 햅틱 피드백 추가 (UIImpactFeedbackGenerator)</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>숫자 입력 시와 연산자 입력 시 햅틱 강도를 다르게</div></div>
+  </div>
+
+  <div class="hw-box" style="margin-top:16px;">
+    <div class="hw-title">도전 3 — 테마 전환</div>
+    <div class="hw-item"><div class="hw-check">□</div><div>라이트 / 다크 테마를 버튼으로 전환</div></div>
+    <div class="hw-item"><div class="hw-check">□</div><div>테마 선택을 UserDefaults에 저장 (앱 재시작 후에도 유지)</div></div>
+  </div>
+
+  <div style="margin-top:32px;padding:24px;background:#f5f5f7;border-radius:10px;">
+    <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;margin-bottom:8px;">다음 프로젝트</div>
+    <div style="font-size:13px;color:#555;margin-bottom:12px;">⏱ 타이머 / 스톱워치 — Timer.publish, Path로 원형 프로그레스 바</div>
+    <div style="font-family:'DM Mono',monospace;font-size:11px;color:#FF6B2B;">개발자리 Clone Coding Project 02 →</div>
+  </div>
+</div>
+
+</body>
+</html>
