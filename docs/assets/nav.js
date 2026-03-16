@@ -9,8 +9,8 @@
   var path = location.pathname;
   var page = path.split('/').pop() || 'index.html';
   var isEN = path.indexOf('/en/') !== -1;
-  var prefix = isEN ? '' : ''; // EN pages use ../assets/nav.js, links are relative to /en/
 
+  var enAvailable = ['index.html','setup.html','1-1.html','1-2.html','1-3.html','1-4.html'];
   var s1Pages = ['index.html','setup.html','1-1.html','1-2.html','1-3.html','1-4.html'];
   var s2Pages = ['stage2.html','2-1.html','2-2.html','2-3.html','2-4.html'];
   var isS1 = s1Pages.indexOf(page) !== -1;
@@ -95,7 +95,6 @@
 
   // 언어 토글 링크
   var langToggleStyle = 'font-family:\'DM Mono\',monospace;font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid var(--border2);color:var(--muted);text-decoration:none;margin-left:auto;';
-  var enAvailable = ['index.html','setup.html','1-1.html','1-2.html','1-3.html','1-4.html'];
   var langLink = '';
   if (isEN) {
     // EN → KO
