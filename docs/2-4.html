@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2-4 움직이는 UI 만들기 | Stage 2 | 개발자리</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    .ch-hero { padding:56px 40px 48px; max-width:1400px; margin:0 auto; position:relative; z-index:1; }
+    .ch-hero h1 { font-family:'Syne',sans-serif; font-size:clamp(36px,6vw,64px); font-weight:800; letter-spacing:-.03em; margin-bottom:12px; }
+    .ch-hero h1 .accent { color:var(--orange); }
+    .ch-hero .trigger { font-size:14px; color:var(--muted); font-style:italic; margin-bottom:32px; }
+    .ch-hero .trigger::before { content:'↳ '; color:var(--orange); }
+    .ch-nav { display:flex; justify-content:space-between; gap:16px; max-width:1400px; margin:0 auto; padding:0 40px 80px; flex-wrap:wrap; position:relative; z-index:1; }
+    .ch-nav a { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px 24px; text-decoration:none; display:flex; flex-direction:column; gap:4px; flex:1; min-width:200px; transition:border-color .2s; }
+    .ch-nav a:hover { border-color:var(--orange); }
+    .ch-nav .nav-dir { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.08em; color:var(--muted); }
+    .ch-nav .nav-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; }
+    .ch-nav .next { text-align:right; }
+    @media(max-width:768px){ .ch-hero{padding:36px 20px 36px;} .ch-nav{padding:0 20px 60px;} }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">개발자<span>리</span></a>
+  <ul class="nav-links">
+    <li><a href="setup.html">시작하기</a></li>
+    <li><a href="index.html">Stage 1</a></li>
+    <li><a href="stage2.html">Stage 2</a></li>
+    <li><a href="2-1.html">2-1</a></li>
+    <li><a href="2-2.html">2-2</a></li>
+    <li><a href="2-3.html">2-3</a></li>
+    <li><a href="2-4.html" class="active">2-4</a></li>
+  </ul>
+</nav>
+
+<div class="breadcrumb">
+  <a href="stage2.html">Stage 2</a>
+  <span class="sep">/</span>
+  <span class="current">2-4 움직이는 UI 만들기</span>
+</div>
+
+<header class="ch-hero fade-in">
+  <div class="badge badge-orange" style="margin-bottom:20px;">
+    <span class="badge-dot"></span>
+    챌린지 2-4 · 6 Topics
+  </div>
+  <h1>✨ 움직이는 UI <span class="accent">만들기</span></h1>
+  <p class="trigger">앱이 너무 정적으로 보인다</p>
+  <div class="chip-row">
+    <span class="chip orange">withAnimation</span>
+    <span class="chip orange">.animation()</span>
+    <span class="chip orange">.transition()</span>
+    <span class="chip orange">matchedGeometryEffect</span>
+    <span class="chip orange">Custom ViewModifier</span>
+    <span class="chip orange">Gesture</span>
+  </div>
+</header>
+
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 40px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">시작 전에 던져볼 질문</div>
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--orange);flex-shrink:0;margin-top:1px;">01</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">애니메이션이 없는 앱과 있는 앱의 사용자 경험 차이는 무엇인가?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--orange-dim,#fff3e8);color:var(--orange);padding:2px 6px;border-radius:4px;">iOS animation UX importance user perception</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--orange);flex-shrink:0;margin-top:1px;">02</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">Spring 애니메이션의 stiffness와 damping은 각각 무엇을 제어하는가?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--orange-dim,#fff3e8);color:var(--orange);padding:2px 6px;border-radius:4px;">SwiftUI spring animation stiffness damping response</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--orange);flex-shrink:0;margin-top:1px;">03</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">matchedGeometryEffect는 어떤 원리로 Hero 애니메이션을 구현하는가?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--orange-dim,#fff3e8);color:var(--orange);padding:2px 6px;border-radius:4px;">SwiftUI matchedGeometryEffect hero animation namespace</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="split-layout">
+  <div class="content-col">
+
+    <!-- Topic 01: withAnimation & .animation() -->
+    <div class="content-section" data-preview="pv-1">
+      <div class="cs-label">Topic 01</div>
+      <h2 class="cs-title">withAnimation &amp; .animation() — 상태 변화를 부드럽게</h2>
+      <div class="cs-subtitle">@State 변화를 애니메이션으로 감싸면 SwiftUI가 변화 전후를 보간(interpolate)해 부드럽게 만든다</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">struct AnimationDemo: View {
+    @State private var isExpanded = false
+    @State private var rotation: Double = 0
+    @State private var scale: CGFloat = 1.0
+
+    var body: some View {
+        VStack(spacing: 32) {
+
+            // withAnimation — 클로저 내 모든 상태 변화를 애니메이션
+            RoundedRectangle(cornerRadius: 16)
+                .fill(Color.orange)
+                .frame(
+                    width: isExpanded ? 280 : 120,
+                    height: isExpanded ? 160 : 60
+                )
+                .onTapGesture {
+                    withAnimation(.spring(response: 0.4,
+                                         dampingFraction: 0.7)) {
+                        isExpanded.toggle()
+                    }
+                }
+
+            // .animation() 뷰 모디파이어 — 특정 값이 변할 때
+            Image(systemName: "star.fill")
+                .font(.system(size: 40))
+                .foregroundStyle(.orange)
+                .rotationEffect(.degrees(rotation))
+                .scaleEffect(scale)
+                .animation(.easeInOut(duration: 0.3), value: rotation)
+                .animation(.spring(), value: scale)
+                .onTapGesture {
+                    rotation += 45
+                    scale = scale == 1.0 ? 1.5 : 1.0
+                }
+
+            // 다양한 애니메이션 커브
+            Button("easeIn") {
+                withAnimation(.easeIn(duration: 0.5)) { isExpanded.toggle() }
+            }
+            Button("spring") {
+                withAnimation(.spring(
+                    response: 0.5,
+                    dampingFraction: 0.6,
+                    blendDuration: 0
+                )) { isExpanded.toggle() }
+            }
+            Button("delay + repeat") {
+                withAnimation(
+                    .easeInOut(duration: 0.3)
+                    .delay(0.1)
+                    .repeatCount(3, autoreverses: true)
+                ) { scale = 1.3 }
+            }
+        }
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--orange);background:var(--orange-dim,#fff3e8);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--orange);">생각해보기</div>
+        <ul>
+          <li><code>withAnimation</code>과 <code>.animation(value:)</code>의 적용 범위 차이는?</li>
+          <li><code>.spring(response:dampingFraction:)</code>에서 dampingFraction이 1.0에 가까울수록 어떻게 달라지는가?</li>
+          <li>애니메이션이 완료된 후 콜백을 받는 방법은? (<code>withAnimation(completion:)</code> iOS 17+)</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-orange">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">withAnimation</div>
+            <div class="item-desc">클로저 내에서 변경되는 모든 @State를 애니메이션으로 감쌈. 여러 상태 동시 애니메이션에 적합</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">.animation(value:)</div>
+            <div class="item-desc">특정 값이 변할 때만 해당 뷰에 애니메이션 적용. 더 세밀한 제어 가능. value가 Equatable이어야 함</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Animation 커브</div>
+            <div class="item-desc">.easeIn/.easeOut/.easeInOut: 일정한 가속/감속 | .spring: 물리 기반 탄성 | .linear: 등속</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 02: .transition() -->
+    <div class="content-section" data-preview="pv-2">
+      <div class="cs-label">Topic 02</div>
+      <h2 class="cs-title">.transition() — 뷰 등장/퇴장 애니메이션</h2>
+      <div class="cs-subtitle">View가 뷰 계층에 추가되거나 제거될 때의 애니메이션을 정의한다</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">struct TransitionDemo: View {
+    @State private var showBanner = false
+    @State private var showCard = false
+    @State private var showModal = false
+
+    var body: some View {
+        VStack(spacing: 20) {
+
+            // 기본 transition
+            Button("배너 토글") {
+                withAnimation(.spring()) {
+                    showBanner.toggle()
+                }
+            }
+            if showBanner {
+                Text("🎉 할인 이벤트 진행 중!")
+                    .padding()
+                    .background(Color.orange.opacity(0.15))
+                    .cornerRadius(12)
+                    .transition(.slide)       // 옆에서 밀려 들어옴
+            }
+
+            // .scale + .opacity 조합
+            Button("카드 토글") {
+                withAnimation(.easeOut(duration: 0.3)) {
+                    showCard.toggle()
+                }
+            }
+            if showCard {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color.orange.opacity(0.2))
+                    .frame(height: 100)
+                    .transition(.scale.combined(with: .opacity))
+            }
+
+            // asymmetric — 등장/퇴장 다르게
+            Button("모달 토글") {
+                withAnimation(.spring(response: 0.45)) {
+                    showModal.toggle()
+                }
+            }
+            if showModal {
+                Text("아래서 올라오고 위로 사라져요")
+                    .padding()
+                    .background(Color.orange)
+                    .foregroundStyle(.white)
+                    .cornerRadius(12)
+                    .transition(.asymmetric(
+                        insertion: .move(edge: .bottom)
+                            .combined(with: .opacity),
+                        removal: .move(edge: .top)
+                            .combined(with: .opacity)
+                    ))
+            }
+        }
+        .padding()
+    }
+}
+
+// AnyTransition 확장 — 커스텀 트랜지션
+extension AnyTransition {
+    static var popUp: AnyTransition {
+        .scale(scale: 0.1, anchor: .bottom)
+        .combined(with: .opacity)
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--orange);background:var(--orange-dim,#fff3e8);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--orange);">생각해보기</div>
+        <ul>
+          <li><code>.transition()</code>이 작동하려면 반드시 <code>withAnimation</code>이 필요한 이유는?</li>
+          <li><code>.move(edge: .bottom)</code>과 <code>.slide</code>의 차이는?</li>
+          <li>List 내 항목 추가/삭제에 transition을 적용하려면 어떻게 하는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-orange">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">내장 Transition</div>
+            <div class="item-desc">.opacity · .scale · .slide · .move(edge:) · .push(from:) — 조합 가능</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">.combined(with:)</div>
+            <div class="item-desc">두 transition을 동시에 적용. <code>.scale.combined(with: .opacity)</code>처럼 체이닝</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">.asymmetric</div>
+            <div class="item-desc">등장(insertion)과 퇴장(removal)에 서로 다른 transition 적용. 방향성 있는 UX 연출</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 03: matchedGeometryEffect -->
+    <div class="content-section" data-preview="pv-3">
+      <div class="cs-label">Topic 03</div>
+      <h2 class="cs-title">matchedGeometryEffect — Hero 애니메이션</h2>
+      <div class="cs-subtitle">두 뷰 사이에 연속성을 부여해 목록 아이템 → 상세 카드처럼 자연스럽게 확장되는 애니메이션</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">struct HeroAnimationView: View {
+    @Namespace private var heroNS
+    @State private var selectedCard: Int? = nil
+
+    let cards = [1, 2, 3]
+
+    var body: some View {
+        ZStack {
+            // 목록 — 작은 카드
+            if selectedCard == nil {
+                VStack(spacing: 12) {
+                    ForEach(cards, id: \.self) { id in
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(Color.orange.opacity(0.15))
+                            .frame(height: 80)
+                            .overlay(
+                                Text("카드 \(id)")
+                                    .font(.headline)
+                            )
+                            // 이 뷰에 heroNS + "card\(id)" 지정
+                            .matchedGeometryEffect(
+                                id: "card\(id)",
+                                in: heroNS
+                            )
+                            .onTapGesture {
+                                withAnimation(.spring(
+                                    response: 0.45,
+                                    dampingFraction: 0.8
+                                )) {
+                                    selectedCard = id
+                                }
+                            }
+                    }
+                }
+                .padding()
+            }
+
+            // 상세 — 펼쳐진 카드
+            if let id = selectedCard {
+                RoundedRectangle(cornerRadius: 24)
+                    .fill(Color.orange.opacity(0.25))
+                    .ignoresSafeArea()
+                    .overlay(
+                        VStack {
+                            Text("카드 \(id) 상세")
+                                .font(.largeTitle.bold())
+                            Button("닫기") {
+                                withAnimation(.spring(
+                                    response: 0.45,
+                                    dampingFraction: 0.8
+                                )) {
+                                    selectedCard = nil
+                                }
+                            }
+                            .padding(.top)
+                        }
+                    )
+                    // 같은 id + namespace → SwiftUI가 보간 처리
+                    .matchedGeometryEffect(
+                        id: "card\(id)",
+                        in: heroNS
+                    )
+            }
+        }
+    }
+}
+
+// @Namespace: 두 뷰를 연결하는 ID 공간
+// matchedGeometryEffect는 같은 namespace의
+// 같은 id를 가진 뷰가 교체될 때 위치/크기를 보간</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--orange);background:var(--orange-dim,#fff3e8);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--orange);">생각해보기</div>
+        <ul>
+          <li>두 뷰가 동시에 화면에 존재하면 <code>matchedGeometryEffect</code>는 어떻게 동작하는가? (isSource 파라미터)</li>
+          <li><code>@Namespace</code>를 여러 개 만들 수 있는가? 언제 분리해야 하는가?</li>
+          <li>NavigationStack의 페이지 전환에 Hero 애니메이션을 적용하는 iOS 18의 새 API는?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-orange">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@Namespace</div>
+            <div class="item-desc">뷰 간 공유되는 고유 ID 공간. 같은 namespace + 같은 id를 가진 뷰들이 애니메이션으로 연결됨</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">보간 요소</div>
+            <div class="item-desc">위치(position), 크기(size), 모서리(cornerRadius)를 자동 보간. properties 파라미터로 조절 가능</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">ZStack + if/else 패턴</div>
+            <div class="item-desc">목록 뷰와 상세 뷰를 ZStack 내에서 if/else로 교체. 두 뷰가 동시에 렌더링되지 않아야 자연스러움</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 04: Custom ViewModifier -->
+    <div class="content-section" data-preview="pv-4">
+      <div class="cs-label">Topic 04</div>
+      <h2 class="cs-title">Custom ViewModifier — 재사용 가능한 스타일</h2>
+      <div class="cs-subtitle">반복되는 modifier 조합을 하나의 타입으로 캡슐화 — Protocol + Extension 패턴의 UI 버전</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// 카드 스타일 modifier
+struct CardModifier: ViewModifier {
+    var color: Color = .orange
+
+    func body(content: Content) -> some View {
+        content
+            .padding(20)
+            .background(color.opacity(0.1))
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(color.opacity(0.3), lineWidth: 1)
+            )
+            .cornerRadius(16)
+            .shadow(color: color.opacity(0.15),
+                    radius: 8, x: 0, y: 4)
+    }
+}
+
+// Shimmer 로딩 효과 modifier
+struct ShimmerModifier: ViewModifier {
+    @State private var phase: CGFloat = 0
+
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        .clear,
+                        .white.opacity(0.5),
+                        .clear
+                    ]),
+                    startPoint: .init(x: phase - 0.3, y: 0),
+                    endPoint: .init(x: phase + 0.3, y: 0)
+                )
+                .blendMode(.screen)
+            )
+            .onAppear {
+                withAnimation(
+                    .linear(duration: 1.5)
+                    .repeatForever(autoreverses: false)
+                ) {
+                    phase = 1.3
+                }
+            }
+    }
+}
+
+// Pressable 효과 modifier
+struct PressableModifier: ViewModifier {
+    @State private var isPressed = false
+
+    func body(content: Content) -> some View {
+        content
+            .scaleEffect(isPressed ? 0.95 : 1.0)
+            .opacity(isPressed ? 0.8 : 1.0)
+            .animation(.easeOut(duration: 0.1), value: isPressed)
+            .simultaneousGesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { _ in isPressed = true }
+                    .onEnded   { _ in isPressed = false }
+            )
+    }
+}
+
+// View Extension으로 편리하게 사용
+extension View {
+    func cardStyle(color: Color = .orange) -> some View {
+        modifier(CardModifier(color: color))
+    }
+    func shimmer() -> some View {
+        modifier(ShimmerModifier())
+    }
+    func pressable() -> some View {
+        modifier(PressableModifier())
+    }
+}
+
+// 사용
+Text("안녕하세요").cardStyle()
+Rectangle().shimmer()
+Button("탭!") { }.pressable()</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--orange);background:var(--orange-dim,#fff3e8);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--orange);">생각해보기</div>
+        <ul>
+          <li>ViewModifier와 custom View를 만드는 것의 차이는? 언제 어느 쪽을 선택하는가?</li>
+          <li>ShimmerModifier가 <code>@State</code>를 갖는 이유는? 각 뷰 인스턴스마다 독립적으로 동작하는가?</li>
+          <li>여러 ViewModifier를 체이닝할 때 순서가 중요한가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-orange">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">ViewModifier 프로토콜</div>
+            <div class="item-desc"><code>body(content:)</code>를 구현. content는 기존 뷰. 여기에 modifier를 추가해 새 뷰를 반환</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">View Extension 패턴</div>
+            <div class="item-desc"><code>extension View { func myStyle() → some View }</code>로 SwiftUI 내장 modifier처럼 체이닝 가능하게 만들기</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@State in Modifier</div>
+            <div class="item-desc">ViewModifier도 @State를 가질 수 있다. modifier가 적용된 각 뷰에 독립적인 상태 인스턴스</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 05: Gesture -->
+    <div class="content-section" data-preview="pv-5">
+      <div class="cs-label">Topic 05</div>
+      <h2 class="cs-title">Gesture — 탭·드래그·스와이프</h2>
+      <div class="cs-subtitle">사용자의 손가락 움직임을 감지하고 그에 반응하는 인터랙티브한 UI 만들기</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">struct GestureDemo: View {
+    @State private var offset: CGSize = .zero
+    @State private var isDragging = false
+    @State private var tapCount = 0
+    @State private var isLongPressed = false
+
+    var body: some View {
+        VStack(spacing: 40) {
+
+            // TapGesture
+            Text("탭 횟수: \(tapCount)")
+                .padding()
+                .background(Color.orange.opacity(0.15))
+                .cornerRadius(12)
+                .onTapGesture(count: 2) {   // 더블탭
+                    tapCount += 1
+                }
+
+            // DragGesture — 드래그로 이동
+            Circle()
+                .fill(isDragging ? Color.orange : Color.orange.opacity(0.5))
+                .frame(width: 80, height: 80)
+                .offset(offset)
+                .scaleEffect(isDragging ? 1.1 : 1.0)
+                .animation(.spring(), value: isDragging)
+                .gesture(
+                    DragGesture()
+                        .onChanged { value in
+                            offset = value.translation
+                            isDragging = true
+                        }
+                        .onEnded { _ in
+                            withAnimation(.spring()) {
+                                offset = .zero  // 제자리 복귀
+                                isDragging = false
+                            }
+                        }
+                )
+
+            // LongPressGesture
+            RoundedRectangle(cornerRadius: 16)
+                .fill(isLongPressed ? Color.orange : Color.gray.opacity(0.2))
+                .frame(height: 60)
+                .overlay(
+                    Text(isLongPressed ? "꾹 누르는 중..." : "꾹 눌러보세요")
+                )
+                .gesture(
+                    LongPressGesture(minimumDuration: 0.5)
+                        .onChanged { _ in
+                            withAnimation { isLongPressed = true }
+                        }
+                        .onEnded { _ in
+                            withAnimation { isLongPressed = false }
+                        }
+                )
+
+            // simultaneousGesture — 여러 제스처 동시 인식
+            Text("동시 탭 + 드래그")
+                .onTapGesture { print("탭!") }
+                .simultaneousGesture(
+                    DragGesture().onChanged { _ in print("드래그!") }
+                )
+        }
+        .padding()
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--orange);background:var(--orange-dim,#fff3e8);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--orange);">생각해보기</div>
+        <ul>
+          <li><code>.gesture()</code>와 <code>.onTapGesture()</code>의 차이는? 제스처 우선순위는 어떻게 결정되는가?</li>
+          <li><code>DragGesture</code>의 <code>value.translation</code>과 <code>value.predictedEndTranslation</code>의 차이는?</li>
+          <li>스와이프로 항목 삭제(swipe to delete)를 직접 구현한다면 어떤 gesture를 사용하는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-orange">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">주요 Gesture 타입</div>
+            <div class="item-desc">TapGesture · DragGesture · LongPressGesture · MagnificationGesture · RotationGesture</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">onChanged / onEnded</div>
+            <div class="item-desc">onChanged: 제스처 진행 중 매 프레임 호출 | onEnded: 손가락을 뗐을 때 한 번 호출</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">simultaneousGesture</div>
+            <div class="item-desc">부모-자식 뷰의 제스처 충돌 없이 동시 인식. <code>.highPriorityGesture</code>로 우선순위 제어 가능</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 06: Path & Shape -->
+    <div class="content-section" data-preview="pv-6">
+      <div class="cs-label">Topic 06</div>
+      <h2 class="cs-title">Path &amp; Shape — 커스텀 도형</h2>
+      <div class="cs-subtitle">기본 도형으로 표현할 수 없는 것들 — 웨이브, 진행 인디케이터, 말풍선 등을 직접 그린다</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// Custom Shape — Shape 프로토콜 채택
+struct Wave: Shape {
+    var amplitude: CGFloat = 10
+    var frequency: CGFloat = 2
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: 0, y: rect.midY))
+
+        let wavelength = rect.width / frequency
+        for x in stride(from: 0, to: rect.width, by: 1) {
+            let y = rect.midY + amplitude *
+                sin(2 * .pi * x / wavelength)
+            path.addLine(to: CGPoint(x: x, y: y))
+        }
+        return path
+    }
+}
+
+// 원형 진행 인디케이터
+struct ArcProgressShape: Shape {
+    var progress: Double   // 0.0 ~ 1.0
+    var animatableData: Double {
+        get { progress }
+        set { progress = newValue }
+    }
+
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        let center = CGPoint(x: rect.midX, y: rect.midY)
+        let radius = min(rect.width, rect.height) / 2 - 8
+
+        path.addArc(
+            center: center,
+            radius: radius,
+            startAngle: .degrees(-90),
+            endAngle: .degrees(-90 + 360 * progress),
+            clockwise: false
+        )
+        return path
+    }
+}
+
+// 실제 사용
+struct ProgressRing: View {
+    @State private var progress = 0.0
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .stroke(Color.orange.opacity(0.2),
+                        lineWidth: 12)
+            ArcProgressShape(progress: progress)
+                .stroke(
+                    Color.orange,
+                    style: StrokeStyle(
+                        lineWidth: 12,
+                        lineCap: .round
+                    )
+                )
+                .animation(.easeInOut(duration: 1.5),
+                           value: progress)
+            Text("\(Int(progress * 100))%")
+                .font(.title2.bold())
+        }
+        .frame(width: 140, height: 140)
+        .onAppear { progress = 0.75 }
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions" style="border-left:3px solid var(--orange);background:var(--orange-dim,#fff3e8);border-radius:0 var(--radius) var(--radius) 0;padding:16px 20px;margin-bottom:20px;">
+        <div class="tq-label" style="color:var(--orange);">생각해보기</div>
+        <ul>
+          <li><code>animatableData</code>를 구현하면 Shape의 어떤 값을 애니메이션으로 만들 수 있는가?</li>
+          <li><code>Path.addArc</code>에서 각도 계산 시 SwiftUI 좌표계의 방향은 수학과 어떻게 다른가?</li>
+          <li><code>Shape</code>와 <code>Canvas</code>는 어떻게 다른가? 복잡한 그래픽에서 성능 차이가 있는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-orange">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Shape 프로토콜</div>
+            <div class="item-desc"><code>path(in rect:)</code>를 구현. rect는 뷰가 차지하는 공간. Path로 원하는 형태를 그려 반환</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">animatableData</div>
+            <div class="item-desc">Shape의 어떤 프로퍼티를 애니메이션 대상으로 할지 지정. SwiftUI가 시작값→끝값을 보간해 매 프레임 호출</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">StrokeStyle</div>
+            <div class="item-desc">lineWidth, lineCap(.round/.square), dash 패턴 등 선 스타일 세부 조정. .stroke() 대신 .stroke(style:) 사용</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Preview Column -->
+  <div class="preview-col">
+    <div class="sticky-phone">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <div id="pv-1" class="preview-content active">
+            <div class="preview-label">withAnimation</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:0 8px;">
+              <div style="background:#FF8C00;border-radius:12px;height:60px;display:flex;align-items:center;justify-content:center;">
+                <span style="color:white;font-size:11px;font-weight:600;">탭해서 확장 →</span>
+              </div>
+              <div style="display:flex;gap:8px;justify-content:center;">
+                <div style="background:#FFF3E8;border-radius:8px;padding:6px 10px;font-size:9px;font-family:'DM Mono',monospace;color:#E85D1A;">.spring()</div>
+                <div style="background:#FFF3E8;border-radius:8px;padding:6px 10px;font-size:9px;font-family:'DM Mono',monospace;color:#E85D1A;">.easeInOut</div>
+              </div>
+              <div style="background:#1E1F2E;border-radius:8px;padding:10px;font-family:'DM Mono',monospace;font-size:9px;line-height:1.8;color:#E4E6F0;">
+                <span style="color:#FFB86C;">withAnimation</span>(<br>
+                &nbsp;&nbsp;.spring(<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;response: <span style="color:#BD93F9;">0.4</span>)<br>
+                ) { isExpanded.toggle() }
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-2" class="preview-content">
+            <div class="preview-label">.transition()</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 8px;">
+              <div style="background:#FFF3E8;border-radius:10px;padding:10px;text-align:center;">
+                <div style="font-size:10px;font-family:'DM Mono',monospace;color:#E85D1A;margin-bottom:4px;">.slide</div>
+                <div style="font-size:11px;">← 옆에서 등장</div>
+              </div>
+              <div style="background:#FFF3E8;border-radius:10px;padding:10px;text-align:center;">
+                <div style="font-size:10px;font-family:'DM Mono',monospace;color:#E85D1A;margin-bottom:4px;">.scale + .opacity</div>
+                <div style="font-size:11px;">⊙ 스케일 + 페이드</div>
+              </div>
+              <div style="background:#FFF3E8;border-radius:10px;padding:10px;text-align:center;">
+                <div style="font-size:10px;font-family:'DM Mono',monospace;color:#E85D1A;margin-bottom:4px;">.asymmetric</div>
+                <div style="font-size:11px;">↑ 아래서 · 위로 ↑</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-3" class="preview-content">
+            <div class="preview-label">matchedGeometry</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 8px;">
+              <div style="display:flex;gap:6px;">
+                <div style="flex:1;background:#FFF3E8;border-radius:8px;height:40px;display:flex;align-items:center;justify-content:center;font-size:10px;border:2px solid #FF8C00;">카드 1</div>
+                <div style="flex:1;background:#F7F8FA;border-radius:8px;height:40px;display:flex;align-items:center;justify-content:center;font-size:10px;">카드 2</div>
+              </div>
+              <div style="text-align:center;font-size:18px;color:var(--muted);">↕ tap</div>
+              <div style="background:#FFF3E8;border-radius:12px;height:100px;display:flex;align-items:center;justify-content:center;border:2px solid #FF8C00;">
+                <div style="text-align:center;">
+                  <div style="font-size:12px;font-weight:600;">카드 1 상세</div>
+                  <div style="font-size:10px;color:#E85D1A;font-family:'DM Mono',monospace;">Hero 확장</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-4" class="preview-content">
+            <div class="preview-label">ViewModifier</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 8px;">
+              <div style="padding:10px;background:#FFF3E8;border-radius:12px;border:1px solid rgba(255,140,0,0.3);box-shadow:0 4px 12px rgba(255,140,0,0.15);">
+                <div style="font-size:11px;font-weight:600;">CardModifier</div>
+                <div style="font-size:10px;color:#E85D1A;">패딩 + 배경 + 테두리 + 그림자</div>
+              </div>
+              <div style="padding:10px;background:#E8E8E8;border-radius:12px;position:relative;overflow:hidden;">
+                <div style="font-size:11px;font-weight:600;color:#999;">ShimmerModifier</div>
+                <div style="position:absolute;top:0;left:30%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.7),transparent);border-radius:12px;"></div>
+              </div>
+              <div style="font-family:'DM Mono',monospace;font-size:9px;color:#E85D1A;text-align:center;">
+                Text("...").cardStyle()<br>.shimmer().pressable()
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-5" class="preview-content">
+            <div class="preview-label">Gesture</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 8px;">
+              <div style="background:#FFF3E8;border-radius:10px;padding:10px;text-align:center;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:#E85D1A;">TapGesture(count: 2)</div>
+                <div style="font-size:11px;margin-top:4px;">더블탭 👆👆</div>
+              </div>
+              <div style="background:#FFF3E8;border-radius:10px;padding:10px;text-align:center;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:#E85D1A;">DragGesture → offset</div>
+                <div style="font-size:18px;margin-top:4px;">⬤ →→</div>
+              </div>
+              <div style="background:#FFF3E8;border-radius:10px;padding:10px;text-align:center;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:#E85D1A;">LongPressGesture(0.5s)</div>
+                <div style="font-size:11px;margin-top:4px;">꾹 👆 ...</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-6" class="preview-content">
+            <div class="preview-label">Path &amp; Shape</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;padding:0 8px;">
+              <div style="position:relative;width:90px;height:90px;">
+                <svg viewBox="0 0 90 90" style="width:90px;height:90px;">
+                  <circle cx="45" cy="45" r="36" fill="none" stroke="rgba(255,140,0,0.2)" stroke-width="8"/>
+                  <circle cx="45" cy="45" r="36" fill="none" stroke="#FF8C00" stroke-width="8" stroke-linecap="round"
+                    stroke-dasharray="169.6" stroke-dashoffset="42.4" transform="rotate(-90 45 45)"/>
+                </svg>
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;">75%</div>
+              </div>
+              <div style="font-size:9px;font-family:'DM Mono',monospace;color:#E85D1A;text-align:center;">ArcProgressShape<br>animatableData</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Homework -->
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;">Homework</div>
+    <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">챌린지 2-4를 마쳤다면</h2>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);background:var(--orange-dim,#fff3e8);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">카드 플립 애니메이션</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">카드를 탭하면 앞/뒤가 뒤집히는 애니메이션 구현. <code>rotation3DEffect</code>와 <code>withAnimation</code> 활용. 앞면과 뒷면이 각각 다른 내용을 보여야 함</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);background:var(--orange-dim,#fff3e8);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">드래그로 카드 스와이프 UI</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">DragGesture로 카드를 좌/우로 드래그. 일정 거리 이상 드래그 시 카드 날아가고 다음 카드 등장. 원점 복귀 스프링 애니메이션 포함</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">도전</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">목록 → 상세 Hero 트랜지션</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">matchedGeometryEffect로 그리드 목록의 썸네일이 상세 화면의 헤더 이미지로 자연스럽게 확장되는 애니메이션 구현</div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">완료 체크리스트</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> withAnimation과 .animation(value:)를 상황에 맞게 사용할 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> .transition()으로 뷰 등장/퇴장 애니메이션을 커스터마이즈할 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> matchedGeometryEffect로 Hero 애니메이션을 구현할 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> ViewModifier를 만들고 View Extension으로 편리하게 사용할 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> DragGesture로 인터랙티브한 드래그 UI를 구현할 수 있다</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Challenge nav -->
+<div class="ch-nav">
+  <a href="2-3.html">
+    <span class="nav-dir">← 이전 챌린지</span>
+    <span class="nav-title">2-3 재사용 가능한 코드 짜기</span>
+  </a>
+  <a href="stage2.html" class="next">
+    <span class="nav-dir">Stage 2 완료 →</span>
+    <span class="nav-title">Stage 2 전체 보기</span>
+  </a>
+</div>
+
+<!-- 코멘트 -->
+<div class="comment-donation-wrap">
+  <div class="section-heading">코멘트</div>
+  <div class="utterances-wrap">
+    <script src="https://utteranc.es/client.js"
+      repo="M1zz/cs-swiftUI"
+      issue-term="title"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!-- 후원 플로팅 버튼 -->
+<div class="donation-float">
+  <div class="donation-float-card" id="donationCard">
+    <div class="section-heading" style="margin-bottom:4px;">후원하기</div>
+    <div class="donation-desc">콘텐츠가 도움이 됐다면<br>커피 한 잔의 후원을 부탁드려요 :)</div>
+    <img class="donation-qr" src="kakao-pay-qr.jpg" alt="카카오페이 QR">
+    <div class="donation-name">이현호</div>
+    <div class="donation-kakao-badge">카카오페이</div>
+  </div>
+  <button class="donation-float-btn" onclick="toggleDonation()" aria-label="후원하기">☕</button>
+</div>
+
+<footer class="footer">
+  개발자리 · Stage 2 — 챌린지 2-4 · 움직이는 UI 만들기
+</footer>
+
+<script>
+  function highlightSwift(el) {
+    let html = el.textContent;
+    html = html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    html = html.replace(/(\/\/.*)/gm,'<span class="cm">$1</span>');
+    html = html.replace(/"([^"]*?)"/g,'<span class="str">"$1</span>');
+    html = html.replace(/@(\w+)/g,'<span class="pr">@$1</span>');
+    html = html.replace(/#(\w+)/g,'<span class="pr">#$1</span>');
+    html = html.replace(/\b(struct|class|var|let|func|import|return|if|else|guard|for|in|case|enum|protocol|some|private|true|false|nil|self|mutating|static|init|try|throw|throws|async|await|actor|do|catch|extension|where|typealias|inout|switch|any)\b/g,'<span class="kw">$1</span>');
+    html = html.replace(/\b(\d+\.?\d*)\b/g,'<span class="num">$1</span>');
+    el.innerHTML = html;
+  }
+  document.querySelectorAll('.swift-code').forEach(highlightSwift);
+
+  const sections = document.querySelectorAll('.content-section');
+  const previews = document.querySelectorAll('.preview-content');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.dataset.preview;
+        previews.forEach(p => p.classList.remove('active'));
+        const t = document.getElementById(id);
+        if (t) t.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
+  sections.forEach(s => observer.observe(s));
+
+  function toggleDonation() {
+    document.getElementById('donationCard').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const float = document.querySelector('.donation-float');
+    if (!float.contains(e.target)) {
+      document.getElementById('donationCard').classList.remove('open');
+    }
+  });
+</script>
+</body>
+</html>

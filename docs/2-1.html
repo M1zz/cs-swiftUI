@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2-1 데이터를 앱에 저장하기 | Stage 2 | 개발자리</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    .ch-hero { padding:56px 40px 48px; max-width:1400px; margin:0 auto; position:relative; z-index:1; }
+    .ch-hero h1 { font-family:'Syne',sans-serif; font-size:clamp(36px,6vw,64px); font-weight:800; letter-spacing:-.03em; margin-bottom:12px; }
+    .ch-hero h1 .accent { color:var(--blue); }
+    .ch-hero .trigger { font-size:14px; color:var(--muted); font-style:italic; margin-bottom:32px; }
+    .ch-hero .trigger::before { content:'↳ '; color:var(--blue); }
+    .chip.blue { border-color:#5AB4FF44; color:var(--blue); }
+    .ch-nav { display:flex; justify-content:space-between; gap:16px; max-width:1400px; margin:0 auto; padding:0 40px 80px; flex-wrap:wrap; position:relative; z-index:1; }
+    .ch-nav a { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px 24px; text-decoration:none; display:flex; flex-direction:column; gap:4px; flex:1; min-width:200px; transition:border-color .2s; }
+    .ch-nav a:hover { border-color:var(--blue); }
+    .ch-nav .nav-dir { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:.08em; color:var(--muted); }
+    .ch-nav .nav-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; }
+    .ch-nav .next { text-align:right; }
+    @media(max-width:768px){ .ch-hero{padding:36px 20px 36px;} .ch-nav{padding:0 20px 60px;} }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">개발자<span>리</span></a>
+  <ul class="nav-links">
+    <li><a href="setup.html">시작하기</a></li>
+    <li><a href="index.html">Stage 1</a></li>
+    <li><a href="stage2.html">Stage 2</a></li>
+    <li><a href="2-1.html" class="active">2-1</a></li>
+    <li><a href="2-2.html">2-2</a></li>
+    <li><a href="2-3.html">2-3</a></li>
+    <li><a href="2-4.html">2-4</a></li>
+  </ul>
+</nav>
+
+<div class="breadcrumb">
+  <a href="stage2.html">Stage 2</a>
+  <span class="sep">/</span>
+  <span class="current">2-1 데이터를 앱에 저장하기</span>
+</div>
+
+<header class="ch-hero fade-in">
+  <div class="badge badge-blue" style="margin-bottom:20px;">
+    <span class="badge-dot"></span>
+    챌린지 2-1 · 6 Topics
+  </div>
+  <h1>💾 데이터를 앱에 <span class="accent">저장하기</span></h1>
+  <p class="trigger">앱을 껐다 켜도 데이터가 남아야 한다</p>
+  <div class="chip-row">
+    <span class="chip blue">Codable · JSON</span>
+    <span class="chip blue">UserDefaults</span>
+    <span class="chip blue">@Model</span>
+    <span class="chip blue">ModelContainer · ModelContext</span>
+    <span class="chip blue">@Query</span>
+    <span class="chip blue">CRUD — Create · Read · Update · Delete</span>
+  </div>
+</header>
+
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 40px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">시작 전에 던져볼 질문</div>
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">01</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">iOS 앱이 데이터를 저장하는 방법에는 어떤 것들이 있는가?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">iOS data persistence options UserDefaults CoreData SwiftData</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">02</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">Swift의 Codable은 무엇이며 왜 필요한가?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">Swift Codable Encodable Decodable JSON tutorial</span></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:var(--blue);flex-shrink:0;margin-top:1px;">03</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:6px;">SwiftData와 CoreData의 차이는 무엇인가?</div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.6;">검색 → <span style="background:var(--blue-dim);color:var(--blue);padding:2px 6px;border-radius:4px;">SwiftData vs CoreData iOS 17 differences</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="split-layout">
+
+  <div class="content-col">
+
+    <!-- Topic 01: Codable -->
+    <div class="content-section" data-preview="pv-1">
+      <div class="cs-label">Topic 01</div>
+      <h2 class="cs-title">Codable — Swift ↔ JSON</h2>
+      <div class="cs-subtitle">데이터를 JSON으로 변환하고 다시 복원하는 방법</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// Codable = Encodable + Decodable
+struct User: Codable {
+    let id: Int
+    let name: String
+    let email: String
+}
+
+// Swift → JSON (Encoding)
+let user = User(id: 1, name: "이현호", email: "test@test.com")
+let encoder = JSONEncoder()
+encoder.outputFormatting = .prettyPrinted
+if let data = try? encoder.encode(user),
+   let json = String(data: data, encoding: .utf8) {
+    print(json)
+    // { "id": 1, "name": "이현호", "email": "test@test.com" }
+}
+
+// JSON → Swift (Decoding)
+let jsonString = """
+{ "id": 1, "name": "이현호", "email": "test@test.com" }
+"""
+let decoder = JSONDecoder()
+if let data = jsonString.data(using: .utf8),
+   let decoded = try? decoder.decode(User.self, from: data) {
+    print(decoded.name) // 이현호
+}</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li>서버의 JSON 키가 <code>user_name</code>인데 Swift 속성을 <code>userName</code>으로 쓰려면 어떻게 하는가? (<code>CodingKeys</code>)</li>
+          <li><code>try?</code>와 <code>try!</code>의 차이는 무엇인가? 실제 앱에서 어느 쪽이 더 안전한가?</li>
+          <li>중첩 JSON 구조(객체 안에 객체)는 어떻게 Codable로 표현하는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Codable 프로토콜</div>
+            <div class="item-desc"><code>Encodable + Decodable</code>의 타입 별칭. struct의 모든 프로퍼티가 Codable이면 자동으로 구현이 생성된다</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">JSONEncoder / JSONDecoder</div>
+            <div class="item-desc">Swift 표준 라이브러리 제공. <code>keyDecodingStrategy</code>로 snake_case ↔ camelCase 자동 변환 가능</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">CodingKeys enum</div>
+            <div class="item-desc">JSON 키와 Swift 프로퍼티 이름이 다를 때 매핑. <code>case userName = "user_name"</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 02: UserDefaults -->
+    <div class="content-section" data-preview="pv-2">
+      <div class="cs-label">Topic 02</div>
+      <h2 class="cs-title">UserDefaults — 간단한 설정 저장</h2>
+      <div class="cs-subtitle">작은 데이터를 앱이 꺼져도 유지하는 가장 빠른 방법</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// 기본 타입 저장/불러오기
+UserDefaults.standard.set(true, forKey: "isDarkMode")
+UserDefaults.standard.set(42, forKey: "launchCount")
+UserDefaults.standard.set("한국어", forKey: "language")
+
+let isDark = UserDefaults.standard.bool(forKey: "isDarkMode")
+let count = UserDefaults.standard.integer(forKey: "launchCount")
+
+// Codable 구조체 저장 (JSON으로 변환 후 Data로 저장)
+struct AppSettings: Codable {
+    var theme: String
+    var fontSize: Int
+}
+
+let settings = AppSettings(theme: "dark", fontSize: 16)
+if let data = try? JSONEncoder().encode(settings) {
+    UserDefaults.standard.set(data, forKey: "appSettings")
+}
+
+// 불러오기
+if let data = UserDefaults.standard.data(forKey: "appSettings"),
+   let saved = try? JSONDecoder().decode(
+       AppSettings.self, from: data) {
+    print(saved.theme) // dark
+}
+
+// @AppStorage — SwiftUI 전용 UserDefaults
+struct ContentView: View {
+    @AppStorage("isDarkMode") var isDarkMode = false
+
+    var body: some View {
+        Toggle("다크 모드", isOn: $isDarkMode)
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li>UserDefaults는 어떤 데이터에 적합하고 어떤 데이터에 부적합한가? (사용자 토큰, 장바구니 목록, 결제 정보는?)</li>
+          <li><code>@AppStorage</code>와 <code>@State</code>의 가장 큰 차이는 무엇인가?</li>
+          <li>UserDefaults에 저장된 값을 앱 삭제 없이 초기화하려면 어떻게 하는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">언제 UserDefaults를 쓰는가</div>
+            <div class="item-desc">앱 설정, 사용자 선택값, 마지막 실행 날짜 등 소량의 단순 데이터. 대용량 데이터나 민감 정보에는 부적합</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@AppStorage</div>
+            <div class="item-desc">SwiftUI에서 UserDefaults를 <code>@State</code>처럼 바인딩으로 사용. 값이 바뀌면 자동으로 View가 다시 그려진다</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 03: @Model -->
+    <div class="content-section" data-preview="pv-3">
+      <div class="cs-label">Topic 03</div>
+      <h2 class="cs-title">@Model — SwiftData 데이터 모델</h2>
+      <div class="cs-subtitle">iOS 17+에서 Core Data를 대체하는 현대적인 데이터 저장소</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">import SwiftData
+
+// @Model 매크로로 영구 저장 모델 선언
+@Model
+class TodoItem {
+    var title: String
+    var isCompleted: Bool
+    var createdAt: Date
+
+    init(title: String) {
+        self.title = title
+        self.isCompleted = false
+        self.createdAt = Date()
+    }
+}
+
+// 앱 진입점에서 ModelContainer 연결
+@main
+struct MyApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+        .modelContainer(for: TodoItem.self)
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li>SwiftData의 <code>@Model</code>은 왜 <code>struct</code>가 아닌 <code>class</code>여야 하는가?</li>
+          <li><code>.modelContainer(for:)</code>를 최상위 App에 달면 하위 모든 View에서 사용할 수 있는 이유는 무엇인가?</li>
+          <li>여러 Model 타입을 함께 사용하려면 <code>.modelContainer</code>를 어떻게 설정하는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@Model 매크로</div>
+            <div class="item-desc">class에 붙이면 SwiftData가 영구 저장, 변경 추적, 관계 관리를 자동 처리. iOS 17+ 필요</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">ModelContainer</div>
+            <div class="item-desc">데이터베이스 파일 관리. <code>.modelContainer(for: [A.self, B.self])</code>로 여러 모델 등록 가능</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">ModelContext</div>
+            <div class="item-desc">CRUD 작업의 진입점. <code>@Environment(\.modelContext)</code>로 View에서 접근. insert / delete / save</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 04: @Query -->
+    <div class="content-section" data-preview="pv-4">
+      <div class="cs-label">Topic 04</div>
+      <h2 class="cs-title">@Query — 데이터 조회</h2>
+      <div class="cs-subtitle">SwiftData에서 데이터를 읽고 필터링하고 정렬하는 방법</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">struct TodoListView: View {
+    // @Query: DB에서 자동으로 데이터를 가져오고
+    // 변경 시 View를 자동으로 업데이트
+    @Query(sort: \TodoItem.createdAt, order: .reverse)
+    var todos: [TodoItem]
+
+    // 필터 조건 추가
+    @Query(filter: #Predicate<TodoItem> { !$0.isCompleted },
+           sort: \TodoItem.createdAt)
+    var activeTodos: [TodoItem]
+
+    var body: some View {
+        List(todos) { todo in
+            Text(todo.title)
+        }
+    }
+}
+
+// ModelContext로 CRUD
+struct AddTodoView: View {
+    @Environment(\.modelContext) private var context
+    @State private var title = ""
+
+    var body: some View {
+        HStack {
+            TextField("할 일", text: $title)
+            Button("추가") {
+                let item = TodoItem(title: title)
+                context.insert(item)  // Create
+                title = ""
+            }
+        }
+    }
+}
+
+// Delete
+func delete(_ item: TodoItem) {
+    context.delete(item)
+}</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>@Query</code>로 가져온 배열은 <code>@State</code>와 어떻게 다른가? 직접 수정할 수 있는가?</li>
+          <li><code>context.insert()</code> 후 <code>try context.save()</code>를 해야 하는가, 안 해도 되는가?</li>
+          <li><code>#Predicate</code>에서 여러 조건을 AND / OR 로 결합하려면?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@Query 프로퍼티 래퍼</div>
+            <div class="item-desc">DB를 관찰하는 라이브 쿼리. 데이터 변경 시 View 자동 갱신. sort, filter, order 파라미터 지원</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">#Predicate 매크로</div>
+            <div class="item-desc">타입 안전한 필터 조건. <code>#Predicate&lt;TodoItem&gt; { $0.isCompleted == false }</code></div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">자동 저장</div>
+            <div class="item-desc">SwiftData는 변경 사항을 자동으로 저장. 명시적 save()는 선택적이지만 중요한 시점에는 호출 권장</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 05: Relationships -->
+    <div class="content-section" data-preview="pv-5">
+      <div class="cs-label">Topic 05</div>
+      <h2 class="cs-title">관계 (Relationship) — 연결된 데이터</h2>
+      <div class="cs-subtitle">모델 간의 일대다, 다대다 관계를 표현하는 방법</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">@Model
+class Category {
+    var name: String
+    // 일대다: 하나의 카테고리에 여러 Todo
+    @Relationship(deleteRule: .cascade)
+    var todos: [TodoItem] = []
+
+    init(name: String) { self.name = name }
+}
+
+@Model
+class TodoItem {
+    var title: String
+    var isCompleted: Bool
+    // 역방향 관계
+    var category: Category?
+
+    init(title: String) {
+        self.title = title
+        self.isCompleted = false
+    }
+}
+
+// 관계 설정
+let category = Category(name: "업무")
+let todo = TodoItem(title: "회의 준비")
+todo.category = category
+context.insert(category)
+
+// deleteRule: .cascade → category 삭제 시 하위 todos도 삭제</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>deleteRule: .cascade</code>와 <code>.nullify</code>의 차이는? 어느 상황에서 각각 적합한가?</li>
+          <li>양방향 관계를 설정할 때 양쪽 모델에 모두 @Relationship을 달아야 하는가?</li>
+          <li>Category를 먼저 저장해야 하는가, TodoItem을 먼저 저장해야 하는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">@Relationship</div>
+            <div class="item-desc">deleteRule로 연쇄 삭제 제어. .cascade / .nullify / .deny / .noAction</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">역방향 관계</div>
+            <div class="item-desc">양쪽 모델에 서로를 참조하면 SwiftData가 자동으로 동기화. 한쪽만 설정해도 동작</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 06: Migration & Preview -->
+    <div class="content-section" data-preview="pv-6">
+      <div class="cs-label">Topic 06</div>
+      <h2 class="cs-title">Preview와 테스트용 컨테이너</h2>
+      <div class="cs-subtitle">SwiftUI Preview에서 SwiftData를 사용하는 방법</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// Preview용 인메모리 컨테이너
+#Preview {
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(
+        for: TodoItem.self,
+        configurations: config
+    )
+
+    // 샘플 데이터 삽입
+    let context = container.mainContext
+    context.insert(TodoItem(title: "SwiftData 공부"))
+    context.insert(TodoItem(title: "앱 배포하기"))
+
+    return TodoListView()
+        .modelContainer(container)
+}
+
+// 실제 앱 — 영구 저장
+@main
+struct MyApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+        .modelContainer(for: TodoItem.self)
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions blue">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li><code>isStoredInMemoryOnly: true</code>로 만든 컨테이너는 앱을 재실행하면 데이터가 사라진다. 어떤 상황에서 유용한가?</li>
+          <li>@Model 클래스에 새 프로퍼티를 추가하면 기존 앱 사용자의 데이터는 어떻게 되는가? (Schema Migration)</li>
+          <li>Unit Test에서 SwiftData를 사용하려면 어떻게 설정하는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-blue">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">인메모리 컨테이너</div>
+            <div class="item-desc">Preview와 테스트에서 디스크에 저장하지 않는 임시 DB. <code>isStoredInMemoryOnly: true</code></div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Schema Migration</div>
+            <div class="item-desc">모델 구조 변경 시 기존 데이터 유지를 위한 마이그레이션. VersionedSchema와 SchemaMigrationPlan 활용</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Preview Column -->
+  <div class="preview-col">
+    <div class="sticky-phone">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+
+          <div id="pv-1" class="preview-content active">
+            <div class="preview-label">Codable</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 4px;gap:10px;">
+              <div style="background:#1E1F2E;border-radius:10px;padding:12px;font-family:'DM Mono',monospace;font-size:10px;color:#50FA7B;line-height:1.7;">{<br>&nbsp;&nbsp;"id": 1,<br>&nbsp;&nbsp;"name": "이현호",<br>&nbsp;&nbsp;"email": "test@.."<br>}</div>
+              <div style="display:flex;align-items:center;justify-content:center;gap:8px;">
+                <div style="font-size:10px;color:#2E8BD8;font-family:'DM Mono',monospace;">Swift</div>
+                <div style="font-size:16px;">⇄</div>
+                <div style="font-size:10px;color:#2DA55D;font-family:'DM Mono',monospace;">JSON</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-2" class="preview-content">
+            <div class="preview-label">UserDefaults</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:0 4px;">
+              <div style="background:#F7F8FA;border-radius:10px;padding:12px;border:1px solid #E2E4EA;">
+                <div style="font-size:9px;color:#6B7190;margin-bottom:8px;font-family:'DM Mono',monospace;">APP STORAGE</div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                  <span style="font-size:13px;">다크 모드</span>
+                  <div style="width:36px;height:20px;background:#E85D1A;border-radius:10px;display:flex;align-items:center;justify-content:flex-end;padding-right:2px;"><div style="width:16px;height:16px;background:white;border-radius:50%;"></div></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <span style="font-size:13px;">알림</span>
+                  <div style="width:36px;height:20px;background:#D0D3DC;border-radius:10px;display:flex;align-items:center;padding-left:2px;"><div style="width:16px;height:16px;background:white;border-radius:50%;"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-3" class="preview-content">
+            <div class="preview-label">@Model</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
+              <div style="font-size:9px;color:#2E8BD8;font-family:'DM Mono',monospace;margin-bottom:4px;">SWIFTDATA ▸ TODO</div>
+              <div style="background:#EEF5FF;border-radius:8px;padding:10px;border-left:3px solid #2E8BD8;font-size:12px;">💾 영구 저장됨</div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:10px;font-size:12px;color:#1A1D2A;">SwiftData 공부</div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:10px;font-size:12px;color:#1A1D2A;">앱 배포하기</div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:10px;font-size:12px;color:#1A1D2A;opacity:.5;">+ 새 항목 추가</div>
+            </div>
+          </div>
+
+          <div id="pv-4" class="preview-content">
+            <div class="preview-label">@Query</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 4px;">
+              <div style="font-size:9px;color:#2E8BD8;font-family:'DM Mono',monospace;margin-bottom:4px;">DB → VIEW 자동 동기화</div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:10px;display:flex;align-items:center;gap:8px;">
+                <div style="width:16px;height:16px;border-radius:50%;background:#2DA55D;display:flex;align-items:center;justify-content:center;color:white;font-size:9px;">✓</div>
+                <span style="font-size:11px;text-decoration:line-through;color:#6B7190;">SwiftData 공부</span>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:10px;display:flex;align-items:center;gap:8px;">
+                <div style="width:16px;height:16px;border-radius:50%;border:1.5px solid #D0D3DC;"></div>
+                <span style="font-size:11px;">앱 배포하기</span>
+              </div>
+              <div style="background:#F7F8FA;border-radius:8px;padding:10px;display:flex;align-items:center;gap:8px;">
+                <div style="width:16px;height:16px;border-radius:50%;border:1.5px solid #D0D3DC;"></div>
+                <span style="font-size:11px;">코드 리뷰</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-5" class="preview-content">
+            <div class="preview-label">Relationship</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 4px;">
+              <div style="background:#EEF5FF;border-radius:10px;padding:12px;">
+                <div style="font-size:10px;font-family:'DM Mono',monospace;color:#2E8BD8;margin-bottom:8px;">📁 업무</div>
+                <div style="padding-left:12px;display:flex;flex-direction:column;gap:4px;">
+                  <div style="font-size:11px;color:#1A1D2A;">• 회의 준비</div>
+                  <div style="font-size:11px;color:#1A1D2A;">• 보고서 작성</div>
+                </div>
+              </div>
+              <div style="background:#F0FFF4;border-radius:10px;padding:12px;">
+                <div style="font-size:10px;font-family:'DM Mono',monospace;color:#2DA55D;margin-bottom:8px;">📁 개인</div>
+                <div style="padding-left:12px;display:flex;flex-direction:column;gap:4px;">
+                  <div style="font-size:11px;color:#1A1D2A;">• 운동하기</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-6" class="preview-content">
+            <div class="preview-label">Preview 컨테이너</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 4px;">
+              <div style="background:#1E1F2E;border-radius:10px;padding:12px;font-family:'DM Mono',monospace;font-size:10px;color:#6272A4;line-height:1.7;"><span style="color:#FF79C6;">#Preview</span> {<br>&nbsp;<span style="color:#8BE9FD;">inMemory</span><br>&nbsp;<span style="color:#50FA7B;">+ sampleData</span><br>}</div>
+              <div style="text-align:center;font-size:11px;color:#6B7190;">디스크에 저장 ✗<br>Preview 전용</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Homework -->
+<div style="max-width:1400px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px 28px;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">Homework</div>
+    <h2 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:20px;">챌린지 2-1을 마쳤다면</h2>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);background:var(--blue-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">SwiftData로 일기 앱 만들기</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">@Model로 DiaryEntry(title, content, date) 정의. @Query로 목록 표시. ModelContext로 추가/삭제. 앱 재실행 시 데이터 유지 확인</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue);background:var(--blue-dim);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;">필수</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">@AppStorage로 설정 화면 만들기</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">다크 모드 토글, 폰트 크기 슬라이더를 @AppStorage로 연결. 앱을 껐다 켜도 설정이 유지되는지 확인</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;">
+        <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:6px;flex-shrink:0;margin-top:2px;border:1px solid var(--border);">도전</span>
+        <div>
+          <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;">카테고리 분류 기능 추가</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;">Category 모델을 만들고 DiaryEntry와 일대다 관계 설정. 카테고리별 필터 기능 구현 (#Predicate 활용)</div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:20px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">완료 체크리스트</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> Codable로 Swift 구조체를 JSON으로 변환/역변환할 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> @AppStorage로 설정값을 영구 저장할 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> @Model 클래스를 선언하고 .modelContainer()를 연결할 수 있다</div>
+        <div style="font-size:13px;color:var(--text);padding-left:20px;position:relative;"><span style="position:absolute;left:0;">☐</span> @Query로 데이터를 불러오고 ModelContext로 추가/삭제할 수 있다</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Challenge nav -->
+<div class="ch-nav">
+  <a href="stage2.html">
+    <span class="nav-dir">← Stage 2 목록</span>
+    <span class="nav-title">Stage 2 인덱스</span>
+  </a>
+  <a href="2-2.html" class="next">
+    <span class="nav-dir">다음 챌린지 →</span>
+    <span class="nav-title">2-2 인터넷에서 데이터 가져오기</span>
+  </a>
+</div>
+
+<!-- 코멘트 -->
+<div class="comment-donation-wrap">
+  <div class="section-heading">코멘트</div>
+  <div class="utterances-wrap">
+    <script src="https://utteranc.es/client.js"
+      repo="M1zz/cs-swiftUI"
+      issue-term="title"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+<!-- 후원 플로팅 버튼 -->
+<div class="donation-float">
+  <div class="donation-float-card" id="donationCard">
+    <div class="section-heading" style="margin-bottom:4px;">후원하기</div>
+    <div class="donation-desc">콘텐츠가 도움이 됐다면<br>커피 한 잔의 후원을 부탁드려요 :)</div>
+    <img class="donation-qr" src="kakao-pay-qr.jpg" alt="카카오페이 QR">
+    <div class="donation-name">이현호</div>
+    <div class="donation-kakao-badge">카카오페이</div>
+  </div>
+  <button class="donation-float-btn" onclick="toggleDonation()" aria-label="후원하기">☕</button>
+</div>
+
+<footer class="footer">
+  개발자리 · Stage 2 — 챌린지 2-1 · 데이터를 앱에 저장하기
+</footer>
+
+<script>
+  function highlightSwift(el) {
+    let html = el.textContent;
+    html = html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    html = html.replace(/(\/\/.*)/gm,'<span class="cm">$1</span>');
+    html = html.replace(/"([^"]*?)"/g,'<span class="str">"$1"</span>');
+    html = html.replace(/@(\w+)/g,'<span class="pr">@$1</span>');
+    html = html.replace(/#(\w+)/g,'<span class="pr">#$1</span>');
+    html = html.replace(/\b(struct|class|var|let|func|import|return|if|else|guard|for|in|case|enum|protocol|some|private|true|false|nil|self|mutating|static|init|try|throw|throws|async|await|actor)\b/g,'<span class="kw">$1</span>');
+    html = html.replace(/\b(\d+\.?\d*)\b/g,'<span class="num">$1</span>');
+    el.innerHTML = html;
+  }
+  document.querySelectorAll('.swift-code').forEach(highlightSwift);
+
+  const sections = document.querySelectorAll('.content-section');
+  const previews = document.querySelectorAll('.preview-content');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.dataset.preview;
+        previews.forEach(p => p.classList.remove('active'));
+        const t = document.getElementById(id);
+        if (t) t.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
+  sections.forEach(s => observer.observe(s));
+
+  function toggleDonation() {
+    document.getElementById('donationCard').classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const float = document.querySelector('.donation-float');
+    if (!float.contains(e.target)) {
+      document.getElementById('donationCard').classList.remove('open');
+    }
+  });
+</script>
+</body>
+</html>
