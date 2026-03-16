@@ -1054,6 +1054,41 @@ struct PreviewCard: View {
   </style>
 </div>
 
+<!-- 관련 실전 프로젝트 -->
+<section style="max-width:1400px;margin:0 auto;padding:0 40px 40px;position:relative;z-index:1;">
+  <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">이 챌린지를 활용한 실전 프로젝트</div>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">
+    <a href="clone-coding.html" style="display:flex;align-items:center;gap:14px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
+      <span style="font-size:24px;">🧮</span>
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);">계산기</div>
+        <div style="font-size:11px;color:var(--muted);">@State로 연산 로직 구현</div>
+      </div>
+    </a>
+    <a href="clone-coding.html" style="display:flex;align-items:center;gap:14px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
+      <span style="font-size:24px;">⏱</span>
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);">타이머 / 스톱워치</div>
+        <div style="font-size:11px;color:var(--muted);">@State + Timer.publish 카운트다운</div>
+      </div>
+    </a>
+    <a href="clone-coding.html" style="display:flex;align-items:center;gap:14px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
+      <span style="font-size:24px;">📝</span>
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);">메모 앱</div>
+        <div style="font-size:11px;color:var(--muted);">List + ForEach CRUD 실전</div>
+      </div>
+    </a>
+    <a href="clone-coding.html" style="display:flex;align-items:center;gap:14px;padding:18px 20px;background:var(--surface);border:1px solid var(--border);border-radius:14px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
+      <span style="font-size:24px;">🛒</span>
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);">장바구니 앱</div>
+        <div style="font-size:11px;color:var(--muted);">List + @Binding 수량 조절</div>
+      </div>
+    </a>
+  </div>
+</section>
+
 <footer class="footer">
   개발자리 · Stage 1 — 챌린지 1-2 · 버튼 누르면 화면이 바뀌게
 </footer>

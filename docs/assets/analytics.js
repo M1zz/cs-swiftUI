@@ -79,4 +79,36 @@
       }
     });
   }, { passive: true });
+
+  // ── 전환 이벤트 ──
+
+  // 이메일 폼 제출
+  document.addEventListener('submit', function(e) {
+    var form = e.target;
+    if (form.id === 'notifyForm') {
+      gtag('event', 'email_submit', {
+        page: path,
+        project: project
+      });
+    }
+  });
+
+  // 번들 섹션 노출 추적
+  var bundleEl = document.querySelector('.bundle-card, #notify-section');
+  if (bundleEl && typeof IntersectionObserver !== 'undefined') {
+    var bundleTracked = false;
+    var bundleObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && !bundleTracked) {
+          bundleTracked = true;
+          gtag('event', 'section_view', {
+            section: entry.target.classList.contains('bundle-card') ? 'bundle' : 'notify',
+            page: path,
+            project: project
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+    bundleObs.observe(bundleEl);
+  }
 })();
