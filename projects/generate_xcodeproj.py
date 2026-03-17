@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 """
 Xcode 프로젝트 파일(.xcodeproj) 자동 생성 스크립트
-각 클론 코딩 프로젝트에 바로 실행 가능한 Xcode 프로젝트를 생성합니다.
+
+Xcode 프로젝트 네비게이터 구조:
+  📁 final/           ← 완성 소스 (컴파일 대상)
+  📁 start/           ← 스켈레톤 소스 (레퍼런스만, 컴파일 안 됨)
+  📄 StudyGuide.html  ← PDF 학습 가이드 (리소스로 포함)
+  📁 Products/
 """
 
 import os
@@ -15,10 +20,10 @@ PROJECTS = [
         "name": "Calculator",
         "bundle": "com.devari.calculator",
         "files": [
-            "CalculatorApp.swift",
             "CalcButton.swift",
             "CalculatorLogic.swift",
             "ContentView.swift",
+            "CalculatorApp.swift",
         ],
     },
     {
@@ -26,11 +31,11 @@ PROJECTS = [
         "name": "TimerApp",
         "bundle": "com.devari.timerapp",
         "files": [
-            "TimerApp.swift",
-            "ContentView.swift",
             "RingProgressView.swift",
             "TimerView.swift",
             "StopwatchView.swift",
+            "ContentView.swift",
+            "TimerApp.swift",
         ],
     },
     {
@@ -38,12 +43,12 @@ PROJECTS = [
         "name": "ShoppingCart",
         "bundle": "com.devari.shoppingcart",
         "files": [
-            "CartApp.swift",
             "Models.swift",
             "CartStore.swift",
-            "ContentView.swift",
             "ProductListView.swift",
             "CartView.swift",
+            "ContentView.swift",
+            "CartApp.swift",
         ],
     },
     {
@@ -51,11 +56,11 @@ PROJECTS = [
         "name": "MemoApp",
         "bundle": "com.devari.memoapp",
         "files": [
-            "MemoApp.swift",
             "Memo.swift",
             "MemoStore.swift",
             "MemoListView.swift",
             "MemoEditView.swift",
+            "MemoApp.swift",
         ],
     },
     {
@@ -63,11 +68,11 @@ PROJECTS = [
         "name": "WeatherApp",
         "bundle": "com.devari.weatherapp",
         "files": [
-            "WeatherApp.swift",
             "WeatherModel.swift",
             "WeatherService.swift",
-            "ContentView.swift",
             "WeatherView.swift",
+            "ContentView.swift",
+            "WeatherApp.swift",
         ],
     },
     {
@@ -75,71 +80,80 @@ PROJECTS = [
         "name": "BudgetApp",
         "bundle": "com.devari.budgetapp",
         "files": [
-            "BudgetApp.swift",
             "Transaction.swift",
-            "ContentView.swift",
+            "AddTransactionView.swift",
             "DashboardView.swift",
             "TransactionListView.swift",
-            "AddTransactionView.swift",
+            "ContentView.swift",
+            "BudgetApp.swift",
         ],
     },
 ]
 
 
 def uid(seed):
-    """24자리 결정적 UUID 생성"""
     return hashlib.md5(seed.encode()).hexdigest()[:24].upper()
 
 
 def make_pbxproj(proj):
-    name = proj["name"]
-    bundle = proj["bundle"]
-    files = proj["files"]
+    name    = proj["name"]
+    bundle  = proj["bundle"]
+    files   = proj["files"]
 
-    def u(s):
-        return uid(f"{name}:{s}")
+    def u(s): return uid(f"{name}:{s}")
 
-    # ── UUID 정의 ─────────────────────────────────────────
-    main_grp   = u("MainGroup")
-    src_grp    = u("SourcesGroup")
-    prod_grp   = u("ProductsGroup")
-    target     = u("Target")
-    project    = u("Project")
-    fw_phase   = u("FrameworksPhase")
-    src_phase  = u("SourcesPhase")
-    res_phase  = u("ResourcesPhase")
-    assets_ref = u("AssetsRef")
-    assets_bld = u("AssetsBuild")
-    app_ref    = u("AppRef")
-    dbg_prj    = u("DebugProject")
-    rel_prj    = u("ReleaseProject")
-    dbg_tgt    = u("DebugTarget")
-    rel_tgt    = u("ReleaseTarget")
-    prj_cfg    = u("ProjectConfigList")
-    tgt_cfg    = u("TargetConfigList")
+    # ── 구조 UUID ──────────────────────────────────────────────────────
+    main_grp    = u("MainGroup")
+    final_grp   = u("FinalGroup")
+    start_grp   = u("StartGroup")
+    prod_grp    = u("ProductsGroup")
+    target      = u("Target")
+    project     = u("Project")
+    fw_phase    = u("FrameworksPhase")
+    src_phase   = u("SourcesPhase")
+    res_phase   = u("ResourcesPhase")
 
-    frefs = {f: u(f"FileRef:{f}") for f in files}
-    bldfs = {f: u(f"BuildFile:{f}") for f in files}
+    # final 파일 UUID
+    final_refs  = {f: u(f"FinalRef:{f}") for f in files}
+    final_blds  = {f: u(f"FinalBld:{f}") for f in files}
 
-    # ── PBXBuildFile ───────────────────────────────────────
-    build_file_sec = "\n".join(
-        f"\t\t{bldfs[f]} /* {f} in Sources */ = {{isa = PBXBuildFile; fileRef = {frefs[f]} /* {f} */; }};"
-        for f in files
-    )
-    build_file_sec += f"\n\t\t{assets_bld} /* Assets.xcassets in Resources */ = {{isa = PBXBuildFile; fileRef = {assets_ref} /* Assets.xcassets */; }};"
+    # start 파일 UUID (컴파일 안 됨, 레퍼런스만)
+    start_refs  = {f: u(f"StartRef:{f}") for f in files}
 
-    # ── PBXFileReference ───────────────────────────────────
-    file_ref_sec = f"\t\t{app_ref} /* {name}.app */ = {{isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = {name}.app; sourceTree = BUILT_PRODUCTS_DIR; }};\n"
+    # Assets / App / StudyGuide
+    assets_ref  = u("AssetsRef")
+    assets_bld  = u("AssetsBld")
+    app_ref     = u("AppRef")
+    guide_ref   = u("GuideRef")
+    guide_bld   = u("GuideBld")
+
+    # 설정 UUID
+    dbg_prj = u("DebugProject");  rel_prj = u("ReleaseProject")
+    dbg_tgt = u("DebugTarget");   rel_tgt = u("ReleaseTarget")
+    prj_cfg = u("ProjectCfgList"); tgt_cfg = u("TargetCfgList")
+
+    # ── PBXBuildFile (final 소스 + assets + studyguide) ────────────────
+    bld_sec = ""
     for f in files:
-        file_ref_sec += f"\t\t{frefs[f]} /* {f} */ = {{isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = {f}; sourceTree = \"<group>\"; }};\n"
-    file_ref_sec += f"\t\t{assets_ref} /* Assets.xcassets */ = {{isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = \"<group>\"; }};"
+        bld_sec += f"\t\t{final_blds[f]} /* {f} in Sources */ = {{isa = PBXBuildFile; fileRef = {final_refs[f]} /* {f} */; }};\n"
+    bld_sec += f"\t\t{assets_bld} /* Assets.xcassets in Resources */ = {{isa = PBXBuildFile; fileRef = {assets_ref} /* Assets.xcassets */; }};\n"
+    bld_sec += f"\t\t{guide_bld} /* StudyGuide.html in Resources */ = {{isa = PBXBuildFile; fileRef = {guide_ref} /* StudyGuide.html */; }};\n"
 
-    # ── Group children ─────────────────────────────────────
-    src_children = "\n".join(f"\t\t\t\t{frefs[f]} /* {f} */," for f in files)
-    src_children += f"\n\t\t\t\t{assets_ref} /* Assets.xcassets */,"
+    # ── PBXFileReference ───────────────────────────────────────────────
+    ref_sec = f"\t\t{app_ref} /* {name}.app */ = {{isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = {name}.app; sourceTree = BUILT_PRODUCTS_DIR; }};\n"
+    for f in files:
+        ref_sec += f"\t\t{final_refs[f]} /* {f} */ = {{isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = {f}; sourceTree = \"<group>\"; }};\n"
+        ref_sec += f"\t\t{start_refs[f]} /* {f} */ = {{isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = {f}; sourceTree = \"<group>\"; }};\n"
+    ref_sec += f"\t\t{assets_ref} /* Assets.xcassets */ = {{isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = \"<group>\"; }};\n"
+    ref_sec += f"\t\t{guide_ref} /* StudyGuide.html */ = {{isa = PBXFileReference; lastKnownFileType = text.html; path = StudyGuide.html; sourceTree = \"<group>\"; }};\n"
 
-    # ── Sources build phase ────────────────────────────────
-    src_bld_files = "\n".join(f"\t\t\t\t{bldfs[f]} /* {f} in Sources */," for f in files)
+    # ── Group children ─────────────────────────────────────────────────
+    final_children = "\n".join(f"\t\t\t\t{final_refs[f]} /* {f} */," for f in files)
+    final_children += f"\n\t\t\t\t{assets_ref} /* Assets.xcassets */,"
+    start_children = "\n".join(f"\t\t\t\t{start_refs[f]} /* {f} */," for f in files)
+
+    # ── Sources build phase (final only) ──────────────────────────────
+    src_bld = "\n".join(f"\t\t\t\t{final_blds[f]} /* {f} in Sources */," for f in files)
 
     return f"""// !$*UTF8*$!
 {{
@@ -150,12 +164,10 @@ def make_pbxproj(proj):
 \tobjects = {{
 
 /* Begin PBXBuildFile section */
-{build_file_sec}
-/* End PBXBuildFile section */
+{bld_sec}/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-{file_ref_sec}
-/* End PBXFileReference section */
+{ref_sec}/* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 \t\t{fw_phase} /* Frameworks */ = {{
@@ -171,9 +183,27 @@ def make_pbxproj(proj):
 \t\t{main_grp} = {{
 \t\t\tisa = PBXGroup;
 \t\t\tchildren = (
-\t\t\t\t{src_grp} /* Sources */,
+\t\t\t\t{final_grp} /* final */,
+\t\t\t\t{start_grp} /* start */,
+\t\t\t\t{guide_ref} /* StudyGuide.html */,
 \t\t\t\t{prod_grp} /* Products */,
 \t\t\t);
+\t\t\tsourceTree = "<group>";
+\t\t}};
+\t\t{final_grp} /* final */ = {{
+\t\t\tisa = PBXGroup;
+\t\t\tchildren = (
+{final_children}
+\t\t\t);
+\t\t\tpath = final;
+\t\t\tsourceTree = "<group>";
+\t\t}};
+\t\t{start_grp} /* start */ = {{
+\t\t\tisa = PBXGroup;
+\t\t\tchildren = (
+{start_children}
+\t\t\t);
+\t\t\tpath = start;
 \t\t\tsourceTree = "<group>";
 \t\t}};
 \t\t{prod_grp} /* Products */ = {{
@@ -182,14 +212,6 @@ def make_pbxproj(proj):
 \t\t\t\t{app_ref} /* {name}.app */,
 \t\t\t);
 \t\t\tname = Products;
-\t\t\tsourceTree = "<group>";
-\t\t}};
-\t\t{src_grp} /* Sources */ = {{
-\t\t\tisa = PBXGroup;
-\t\t\tchildren = (
-{src_children}
-\t\t\t);
-\t\t\tpath = Sources;
 \t\t\tsourceTree = "<group>";
 \t\t}};
 /* End PBXGroup section */
@@ -252,6 +274,7 @@ def make_pbxproj(proj):
 \t\t\tbuildActionMask = 2147483647;
 \t\t\tfiles = (
 \t\t\t\t{assets_bld} /* Assets.xcassets in Resources */,
+\t\t\t\t{guide_bld} /* StudyGuide.html in Resources */,
 \t\t\t);
 \t\t\trunOnlyForDeploymentPostprocessing = 0;
 \t\t}};
@@ -262,7 +285,7 @@ def make_pbxproj(proj):
 \t\t\tisa = PBXSourcesBuildPhase;
 \t\t\tbuildActionMask = 2147483647;
 \t\t\tfiles = (
-{src_bld_files}
+{src_bld}
 \t\t\t);
 \t\t\trunOnlyForDeploymentPostprocessing = 0;
 \t\t}};
@@ -404,9 +427,8 @@ def make_pbxproj(proj):
 
 
 def make_xcscheme(proj):
-    name = proj["name"]
+    name   = proj["name"]
     target = uid(f"{name}:Target")
-    project = uid(f"{name}:Project")
     return f"""<?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1500"
@@ -476,52 +498,15 @@ def make_xcscheme(proj):
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
-   <AnalyzeAction
-      buildConfiguration = "Debug">
-   </AnalyzeAction>
-   <ArchiveAction
-      buildConfiguration = "Release"
-      revealArchiveInOrganizer = "YES">
-   </ArchiveAction>
+   <AnalyzeAction buildConfiguration = "Debug"/>
+   <ArchiveAction buildConfiguration = "Release" revealArchiveInOrganizer = "YES"/>
 </Scheme>
 """
 
 
-ASSETS_CONTENTS = """{
-  "info" : {
-    "author" : "xcode",
-    "version" : 1
-  }
-}
-"""
-
-APPICON_CONTENTS = """{
-  "images" : [
-    {
-      "idiom" : "universal",
-      "platform" : "ios",
-      "size" : "1024x1024"
-    }
-  ],
-  "info" : {
-    "author" : "xcode",
-    "version" : 1
-  }
-}
-"""
-
-ACCENT_CONTENTS = """{
-  "colors" : [
-    {
-      "idiom" : "universal"
-    }
-  ],
-  "info" : {
-    "author" : "xcode",
-    "version" : 1
-  }
-}
-"""
+ASSETS_CONTENTS = '{\n  "info" : {\n    "author" : "xcode",\n    "version" : 1\n  }\n}\n'
+APPICON_CONTENTS = '{\n  "images" : [{"idiom":"universal","platform":"ios","size":"1024x1024"}],\n  "info" : {"author":"xcode","version":1}\n}\n'
+ACCENT_CONTENTS  = '{\n  "colors" : [{"idiom":"universal"}],\n  "info" : {"author":"xcode","version":1}\n}\n'
 
 
 def write(path, content):
@@ -532,33 +517,27 @@ def write(path, content):
 
 
 def generate(proj):
-    d = os.path.join(BASE, proj["dir"])
+    d    = os.path.join(BASE, proj["dir"])
     name = proj["name"]
 
     print(f"\n🔨 {proj['dir']} — {name}")
 
-    # .xcodeproj
     xp = os.path.join(d, f"{name}.xcodeproj")
     write(os.path.join(xp, "project.pbxproj"), make_pbxproj(proj))
-    write(
-        os.path.join(xp, "xcshareddata", "xcschemes", f"{name}.xcscheme"),
-        make_xcscheme(proj),
-    )
+    write(os.path.join(xp, "xcshareddata", "xcschemes", f"{name}.xcscheme"), make_xcscheme(proj))
 
-    # Assets.xcassets
-    assets = os.path.join(d, "Sources", "Assets.xcassets")
+    # Assets.xcassets (final/ 안에 위치)
+    assets = os.path.join(d, "final", "Assets.xcassets")
     write(os.path.join(assets, "Contents.json"), ASSETS_CONTENTS)
     write(os.path.join(assets, "AppIcon.appiconset", "Contents.json"), APPICON_CONTENTS)
     write(os.path.join(assets, "AccentColor.colorset", "Contents.json"), ACCENT_CONTENTS)
 
-    print(f"  ✓ Assets.xcassets 생성")
-
 
 if __name__ == "__main__":
-    print("🚀 Xcode 프로젝트 생성 시작")
-    print("=" * 50)
+    print("🚀 Xcode 프로젝트 재생성 (final + start + StudyGuide 구조)")
+    print("=" * 60)
     for proj in PROJECTS:
         generate(proj)
-    print("\n" + "=" * 50)
-    print("✅ 완료! 각 프로젝트 폴더의 .xcodeproj 파일을 Xcode로 열어주세요.")
-    print("   예: open projects/01-calculator/Calculator.xcodeproj")
+    print("\n" + "=" * 60)
+    print("✅ 완료!")
+    print("   Xcode 네비게이터에서 final / start / StudyGuide.html 확인 가능")

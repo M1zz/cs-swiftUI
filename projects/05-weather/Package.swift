@@ -7,7 +7,7 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "WeatherApp",
-            path: "Sources"
+            path: "final"
         )
     ]
 )

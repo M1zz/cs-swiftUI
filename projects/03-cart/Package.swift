@@ -7,7 +7,7 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "ShoppingCart",
-            path: "Sources"
+            path: "final"
         )
     ]
 )

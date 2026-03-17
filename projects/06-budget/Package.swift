@@ -7,7 +7,7 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "BudgetApp",
-            path: "Sources",
+            path: "final",
             swiftSettings: [
                 .enableExperimentalFeature("StrictConcurrency")
             ]

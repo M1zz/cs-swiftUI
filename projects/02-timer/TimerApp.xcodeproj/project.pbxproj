@@ -7,22 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A3F69D731FCCC14D72C2E6D /* TimerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8386A272B83FD3B3ED6A6532 /* TimerApp.swift */; };
-		47E331E60DE116C071D59A93 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C251AA073EF9A67E27FDBB /* ContentView.swift */; };
-		82B6AE9D4D6FAE9F982EF7BE /* RingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014D68CF1A198A9795F1F86D /* RingProgressView.swift */; };
-		36DA4006BE06921E8CC393D9 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8899ADA1F4841E113D19208C /* TimerView.swift */; };
-		3D88B4A81C5D883EFA0A5120 /* StopwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA19F4D9A47AF3EF86615CC /* StopwatchView.swift */; };
-		86C2FD13469BA10A32A188BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C536A56CFF60EDEAD32C5E57 /* Assets.xcassets */; };
+		81FD49FE67985F716769D5EC /* RingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079D6D435E550A544E8F3AA2 /* RingProgressView.swift */; };
+		9C946C5E0F3702C8222B6A44 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58EA0AB72EC35F829B72EEE /* TimerView.swift */; };
+		25FB7EFABF873AE9E9B8CF9A /* StopwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA83F0000600B1344B587B /* StopwatchView.swift */; };
+		71B00354E376A11288B3F2C0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC7CD50F704E4B5BB6B4379 /* ContentView.swift */; };
+		1947778A0915FE24E04C48E1 /* TimerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA25A5512C194B1E98C9BF5B /* TimerApp.swift */; };
+		284BB26D1353C6B3C2ABF0FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C536A56CFF60EDEAD32C5E57 /* Assets.xcassets */; };
+		21691C610428F4331A620414 /* StudyGuide.html in Resources */ = {isa = PBXBuildFile; fileRef = E152A0756FE1FD4028BBBCA2 /* StudyGuide.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A59FB3F60623422F9891628A /* TimerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8386A272B83FD3B3ED6A6532 /* TimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerApp.swift; sourceTree = "<group>"; };
-		12C251AA073EF9A67E27FDBB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		014D68CF1A198A9795F1F86D /* RingProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingProgressView.swift; sourceTree = "<group>"; };
-		8899ADA1F4841E113D19208C /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
-		2BA19F4D9A47AF3EF86615CC /* StopwatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchView.swift; sourceTree = "<group>"; };
+		079D6D435E550A544E8F3AA2 /* RingProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingProgressView.swift; sourceTree = "<group>"; };
+		D787375BDEE090B06DA6B874 /* RingProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingProgressView.swift; sourceTree = "<group>"; };
+		B58EA0AB72EC35F829B72EEE /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		7ACBC3FA7FB7253669CC58D0 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		33BA83F0000600B1344B587B /* StopwatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchView.swift; sourceTree = "<group>"; };
+		9855AFA3E493769FD5B3C921 /* StopwatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchView.swift; sourceTree = "<group>"; };
+		EEC7CD50F704E4B5BB6B4379 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E09534E3409D3E8DB106A978 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AA25A5512C194B1E98C9BF5B /* TimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerApp.swift; sourceTree = "<group>"; };
+		43DAD363206F5FA09DC0672F /* TimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerApp.swift; sourceTree = "<group>"; };
 		C536A56CFF60EDEAD32C5E57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E152A0756FE1FD4028BBBCA2 /* StudyGuide.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = StudyGuide.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,9 +46,36 @@
 		C0AD3D3D51CC41CF43ABE429 = {
 			isa = PBXGroup;
 			children = (
-				BE97811B6908148D369828B1 /* Sources */,
+				A966041553B87CBA3EC9B0BE /* final */,
+				A11806E875B03C14FFC99E48 /* start */,
+				E152A0756FE1FD4028BBBCA2 /* StudyGuide.html */,
 				074AF89F9EBDACD2C4A6AB1E /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		A966041553B87CBA3EC9B0BE /* final */ = {
+			isa = PBXGroup;
+			children = (
+				079D6D435E550A544E8F3AA2 /* RingProgressView.swift */,
+				B58EA0AB72EC35F829B72EEE /* TimerView.swift */,
+				33BA83F0000600B1344B587B /* StopwatchView.swift */,
+				EEC7CD50F704E4B5BB6B4379 /* ContentView.swift */,
+				AA25A5512C194B1E98C9BF5B /* TimerApp.swift */,
+				C536A56CFF60EDEAD32C5E57 /* Assets.xcassets */,
+			);
+			path = final;
+			sourceTree = "<group>";
+		};
+		A11806E875B03C14FFC99E48 /* start */ = {
+			isa = PBXGroup;
+			children = (
+				D787375BDEE090B06DA6B874 /* RingProgressView.swift */,
+				7ACBC3FA7FB7253669CC58D0 /* TimerView.swift */,
+				9855AFA3E493769FD5B3C921 /* StopwatchView.swift */,
+				E09534E3409D3E8DB106A978 /* ContentView.swift */,
+				43DAD363206F5FA09DC0672F /* TimerApp.swift */,
+			);
+			path = start;
 			sourceTree = "<group>";
 		};
 		074AF89F9EBDACD2C4A6AB1E /* Products */ = {
@@ -52,25 +86,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BE97811B6908148D369828B1 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				8386A272B83FD3B3ED6A6532 /* TimerApp.swift */,
-				12C251AA073EF9A67E27FDBB /* ContentView.swift */,
-				014D68CF1A198A9795F1F86D /* RingProgressView.swift */,
-				8899ADA1F4841E113D19208C /* TimerView.swift */,
-				2BA19F4D9A47AF3EF86615CC /* StopwatchView.swift */,
-				C536A56CFF60EDEAD32C5E57 /* Assets.xcassets */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
 		40DAC54B50696ED1381083F6 /* TimerApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C3746581ECFE20918B6A07E9 /* Build configuration list for PBXNativeTarget "TimerApp" */;
+			buildConfigurationList = 1D2DE1F9178CEE82F1429B76 /* Build configuration list for PBXNativeTarget "TimerApp" */;
 			buildPhases = (
 				DABE58DB9F709EE92279FE03 /* Sources */,
 				F5A72B3B8D446E5251CB37E8 /* Frameworks */,
@@ -100,7 +121,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A29E655305BB9A8A17A207E7 /* Build configuration list for PBXProject "TimerApp" */;
+			buildConfigurationList = 139FA6CD909C7730411FA4AD /* Build configuration list for PBXProject "TimerApp" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = ko;
 			hasScannedForEncodings = 0;
@@ -124,7 +145,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86C2FD13469BA10A32A188BE /* Assets.xcassets in Resources */,
+				284BB26D1353C6B3C2ABF0FE /* Assets.xcassets in Resources */,
+				21691C610428F4331A620414 /* StudyGuide.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,11 +157,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A3F69D731FCCC14D72C2E6D /* TimerApp.swift in Sources */,
-				47E331E60DE116C071D59A93 /* ContentView.swift in Sources */,
-				82B6AE9D4D6FAE9F982EF7BE /* RingProgressView.swift in Sources */,
-				36DA4006BE06921E8CC393D9 /* TimerView.swift in Sources */,
-				3D88B4A81C5D883EFA0A5120 /* StopwatchView.swift in Sources */,
+				81FD49FE67985F716769D5EC /* RingProgressView.swift in Sources */,
+				9C946C5E0F3702C8222B6A44 /* TimerView.swift in Sources */,
+				25FB7EFABF873AE9E9B8CF9A /* StopwatchView.swift in Sources */,
+				71B00354E376A11288B3F2C0 /* ContentView.swift in Sources */,
+				1947778A0915FE24E04C48E1 /* TimerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,7 +277,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A29E655305BB9A8A17A207E7 /* Build configuration list for PBXProject "TimerApp" */ = {
+		139FA6CD909C7730411FA4AD /* Build configuration list for PBXProject "TimerApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F95109432B59F704A84FF145 /* Debug */,
@@ -264,7 +286,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C3746581ECFE20918B6A07E9 /* Build configuration list for PBXNativeTarget "TimerApp" */ = {
+		1D2DE1F9178CEE82F1429B76 /* Build configuration list for PBXNativeTarget "TimerApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5025F73B955CEB71D4381F5C /* Debug */,

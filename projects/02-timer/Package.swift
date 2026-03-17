@@ -7,7 +7,7 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "TimerApp",
-            path: "Sources"
+            path: "final"
         )
     ]
 )

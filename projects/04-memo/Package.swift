@@ -7,7 +7,7 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "MemoApp",
-            path: "Sources"
+            path: "final"
         )
     ]
 )

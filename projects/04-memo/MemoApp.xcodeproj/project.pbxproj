@@ -7,22 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		750381C5F5E733F1D1CEFEB3 /* MemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08F629BFB48C130CAA97DFA /* MemoApp.swift */; };
-		12AB00389F63118C86E566E5 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318CE32B215E26B08951F43F /* Memo.swift */; };
-		71B1D918FBD45399293B9E21 /* MemoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D1D0CC48FC5E446EEA8FF1D /* MemoStore.swift */; };
-		145F41C8B9EA543694E22053 /* MemoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4C401441A0B0D949D876A2 /* MemoListView.swift */; };
-		E968AC06AA19E9C4D6ADBD8D /* MemoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304AD3ECD701CC13DDBDA398 /* MemoEditView.swift */; };
-		D767E352533F283352FF210D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A27D41E909F6C6A7D7500DDA /* Assets.xcassets */; };
+		3FD84CE15F506CA98C680A1B /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFD1DF64874A20271EA4FDF /* Memo.swift */; };
+		7AB039C00AE67096F6D25CA1 /* MemoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201AC37152667B5A370C50E3 /* MemoStore.swift */; };
+		8B891F9C1F601419219719C0 /* MemoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C9BB6E4A51370B8177C9F3 /* MemoListView.swift */; };
+		A45B6C06C398568BDAC8CBD8 /* MemoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7608706A173B2E214834A8 /* MemoEditView.swift */; };
+		3178364825ECF2DE93DA1DC4 /* MemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61EE4322AE3A18FC8DF2517A /* MemoApp.swift */; };
+		C85B89264A43CF5894B6B1EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A27D41E909F6C6A7D7500DDA /* Assets.xcassets */; };
+		5EE913733ECFE98301D2AB0C /* StudyGuide.html in Resources */ = {isa = PBXBuildFile; fileRef = 03103D21A8E3C5395DFFD7A0 /* StudyGuide.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F597890A4697816C51890E2C /* MemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B08F629BFB48C130CAA97DFA /* MemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoApp.swift; sourceTree = "<group>"; };
-		318CE32B215E26B08951F43F /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
-		0D1D0CC48FC5E446EEA8FF1D /* MemoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoStore.swift; sourceTree = "<group>"; };
-		4A4C401441A0B0D949D876A2 /* MemoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListView.swift; sourceTree = "<group>"; };
-		304AD3ECD701CC13DDBDA398 /* MemoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditView.swift; sourceTree = "<group>"; };
+		7AFD1DF64874A20271EA4FDF /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
+		9CCADCAC52A6CBCFB8026496 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
+		201AC37152667B5A370C50E3 /* MemoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoStore.swift; sourceTree = "<group>"; };
+		E5426B434106D7723FE3D284 /* MemoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoStore.swift; sourceTree = "<group>"; };
+		03C9BB6E4A51370B8177C9F3 /* MemoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListView.swift; sourceTree = "<group>"; };
+		E48BB80AFFBD0770130EADEC /* MemoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListView.swift; sourceTree = "<group>"; };
+		0F7608706A173B2E214834A8 /* MemoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditView.swift; sourceTree = "<group>"; };
+		AB2685F996E5C4D8EBDC7AAF /* MemoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditView.swift; sourceTree = "<group>"; };
+		61EE4322AE3A18FC8DF2517A /* MemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoApp.swift; sourceTree = "<group>"; };
+		4128CBEA043AB9E077841FC6 /* MemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoApp.swift; sourceTree = "<group>"; };
 		A27D41E909F6C6A7D7500DDA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		03103D21A8E3C5395DFFD7A0 /* StudyGuide.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = StudyGuide.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,9 +46,36 @@
 		DC4EFB7C6709BDBA7C1F1CAD = {
 			isa = PBXGroup;
 			children = (
-				154F6664690D543EC8A0BE54 /* Sources */,
+				CC971576E9399482726798D9 /* final */,
+				223FCCC087DD181C81D00B12 /* start */,
+				03103D21A8E3C5395DFFD7A0 /* StudyGuide.html */,
 				A92087F85DAD7782D2863835 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		CC971576E9399482726798D9 /* final */ = {
+			isa = PBXGroup;
+			children = (
+				7AFD1DF64874A20271EA4FDF /* Memo.swift */,
+				201AC37152667B5A370C50E3 /* MemoStore.swift */,
+				03C9BB6E4A51370B8177C9F3 /* MemoListView.swift */,
+				0F7608706A173B2E214834A8 /* MemoEditView.swift */,
+				61EE4322AE3A18FC8DF2517A /* MemoApp.swift */,
+				A27D41E909F6C6A7D7500DDA /* Assets.xcassets */,
+			);
+			path = final;
+			sourceTree = "<group>";
+		};
+		223FCCC087DD181C81D00B12 /* start */ = {
+			isa = PBXGroup;
+			children = (
+				9CCADCAC52A6CBCFB8026496 /* Memo.swift */,
+				E5426B434106D7723FE3D284 /* MemoStore.swift */,
+				E48BB80AFFBD0770130EADEC /* MemoListView.swift */,
+				AB2685F996E5C4D8EBDC7AAF /* MemoEditView.swift */,
+				4128CBEA043AB9E077841FC6 /* MemoApp.swift */,
+			);
+			path = start;
 			sourceTree = "<group>";
 		};
 		A92087F85DAD7782D2863835 /* Products */ = {
@@ -52,25 +86,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		154F6664690D543EC8A0BE54 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				B08F629BFB48C130CAA97DFA /* MemoApp.swift */,
-				318CE32B215E26B08951F43F /* Memo.swift */,
-				0D1D0CC48FC5E446EEA8FF1D /* MemoStore.swift */,
-				4A4C401441A0B0D949D876A2 /* MemoListView.swift */,
-				304AD3ECD701CC13DDBDA398 /* MemoEditView.swift */,
-				A27D41E909F6C6A7D7500DDA /* Assets.xcassets */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
 		0FBB4123D58897559DB15DC2 /* MemoApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CE249F4CA9A87774C8AC13B9 /* Build configuration list for PBXNativeTarget "MemoApp" */;
+			buildConfigurationList = 78AD5FA0B65AAE526E6F74E0 /* Build configuration list for PBXNativeTarget "MemoApp" */;
 			buildPhases = (
 				3E2DE798AA0C344B652A1885 /* Sources */,
 				BF96F4C7119AF425CEF54B2E /* Frameworks */,
@@ -100,7 +121,7 @@
 					};
 				};
 			};
-			buildConfigurationList = EF428749BEA5C21D3C5C109E /* Build configuration list for PBXProject "MemoApp" */;
+			buildConfigurationList = F3BB30A4C7513DDBEE841D79 /* Build configuration list for PBXProject "MemoApp" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = ko;
 			hasScannedForEncodings = 0;
@@ -124,7 +145,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D767E352533F283352FF210D /* Assets.xcassets in Resources */,
+				C85B89264A43CF5894B6B1EB /* Assets.xcassets in Resources */,
+				5EE913733ECFE98301D2AB0C /* StudyGuide.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,11 +157,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				750381C5F5E733F1D1CEFEB3 /* MemoApp.swift in Sources */,
-				12AB00389F63118C86E566E5 /* Memo.swift in Sources */,
-				71B1D918FBD45399293B9E21 /* MemoStore.swift in Sources */,
-				145F41C8B9EA543694E22053 /* MemoListView.swift in Sources */,
-				E968AC06AA19E9C4D6ADBD8D /* MemoEditView.swift in Sources */,
+				3FD84CE15F506CA98C680A1B /* Memo.swift in Sources */,
+				7AB039C00AE67096F6D25CA1 /* MemoStore.swift in Sources */,
+				8B891F9C1F601419219719C0 /* MemoListView.swift in Sources */,
+				A45B6C06C398568BDAC8CBD8 /* MemoEditView.swift in Sources */,
+				3178364825ECF2DE93DA1DC4 /* MemoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,7 +277,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EF428749BEA5C21D3C5C109E /* Build configuration list for PBXProject "MemoApp" */ = {
+		F3BB30A4C7513DDBEE841D79 /* Build configuration list for PBXProject "MemoApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				29EFCFEEF38C82981EADCD56 /* Debug */,
@@ -264,7 +286,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CE249F4CA9A87774C8AC13B9 /* Build configuration list for PBXNativeTarget "MemoApp" */ = {
+		78AD5FA0B65AAE526E6F74E0 /* Build configuration list for PBXNativeTarget "MemoApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0B81B9FB3EA33B8DFE2491DD /* Debug */,
