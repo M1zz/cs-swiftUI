@@ -1,3 +1,8 @@
+// ============================================================
+// 📖 읽기 순서: 2번째 / 전체 6개
+// 파일 역할: 전역 상태 관리 (@Observable, CRUD)
+// ============================================================
+
 import Foundation
 
 // MARK: - 장바구니 스토어 (전체 앱에서 공유하는 상태)
@@ -6,6 +11,8 @@ class CartStore {
 
     var items: [CartItem] = []
 
+    // 💡 TODO: 배송비 계산 (totalPrice < 30000 ? 3000 : 0)
+    //    추가 위치: 바로 아래 totalPrice 옆 또는 아래
     // 총 금액
     var totalPrice: Int {
         items.reduce(0) { $0 + $1.subtotal }
@@ -45,6 +52,8 @@ class CartStore {
         items.remove(atOffsets: offsets)
     }
 
+    // 💡 TODO: 쿠폰 코드 적용 (var couponDiscount: Double = 0)
+    //    추가 위치: 바로 아래 clear() 옆 또는 아래
     // 장바구니 비우기
     func clear() {
         items.removeAll()

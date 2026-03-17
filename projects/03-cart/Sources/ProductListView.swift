@@ -1,3 +1,8 @@
+// ============================================================
+// 📖 읽기 순서: 3번째 / 전체 6개
+// 파일 역할: 상품 목록 UI (검색, 카테고리 필터)
+// ============================================================
+
 import SwiftUI
 
 struct ProductListView: View {
@@ -47,6 +52,8 @@ struct ProductListView: View {
             .listStyle(.plain)
             .navigationTitle("상품 목록")
             .searchable(text: $searchText, prompt: "상품 검색")
+            // 💡 TODO: 가격 범위 필터 (RangeSlider)
+            //    추가 위치: 바로 아래 .searchable 옆 또는 아래
         }
     }
 }
@@ -89,6 +96,8 @@ struct ProductRow: View {
 
             Spacer()
 
+            // 💡 TODO: 상품 상세 화면 (NavigationLink → ProductDetailView)
+            //    추가 위치: 바로 아래 QuantityStepper 옆 또는 아래
             // 수량 조절 (장바구니에 담겨있을 때)
             if store.quantity(of: product) > 0 {
                 QuantityStepper(product: product, store: store)

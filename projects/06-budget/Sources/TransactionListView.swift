@@ -1,3 +1,7 @@
+// ============================================================
+// 📖 읽기 순서: 4번째 / 전체 6개
+// 파일 역할: 거래 내역 목록 (날짜 그룹핑, 필터, 삭제)
+// ============================================================
 import SwiftUI
 import SwiftData
 
@@ -25,6 +29,8 @@ struct TransactionListView: View {
         let dict = Dictionary(grouping: filtered) { dateKey($0.date) }
         return dict.sorted { $0.key > $1.key }
     }
+    // 💡 TODO: 월별 합계 섹션 헤더에 표시 (수입/지출 소계)
+    //    추가 위치: 바로 아래 grouped 프로퍼티 아래
 
     var body: some View {
         NavigationStack {
@@ -47,6 +53,8 @@ struct TransactionListView: View {
                         .onDelete { offsets in
                             for i in offsets { context.delete(items[i]) }
                         }
+                        // 💡 TODO: Swipe action으로 수정 버튼 추가 (편집 시트)
+                        //    추가 위치: 바로 아래 .onDelete 아래
                     }
                 }
             }

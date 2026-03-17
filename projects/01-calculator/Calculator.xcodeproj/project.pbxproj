@@ -7,20 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D69F650F311485B0061C3DC1 /* CalculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E4C118A800A1F28B156E5C /* CalculatorApp.swift */; };
-		CC9236905E5F43A5F21E4ACC /* CalcButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4547551E8D8240624A33A1F2 /* CalcButton.swift */; };
 		231B387F5945894E1B07A1C5 /* CalculatorLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB93851FAAEA94068D8176 /* CalculatorLogic.swift */; };
 		A4FBB95F78A7EFEE950341D8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C92C56A01AF27B4AB45E16 /* ContentView.swift */; };
+		CC9236905E5F43A5F21E4ACC /* CalcButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4547551E8D8240624A33A1F2 /* CalcButton.swift */; };
+		D69F650F311485B0061C3DC1 /* CalculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E4C118A800A1F28B156E5C /* CalculatorApp.swift */; };
 		F9867B85EED20E439A00828C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99B915E8379D6CF873608E8D /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		850D823E387F723728CDA873 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16E4C118A800A1F28B156E5C /* CalculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorApp.swift; sourceTree = "<group>"; };
 		4547551E8D8240624A33A1F2 /* CalcButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcButton.swift; sourceTree = "<group>"; };
+		850D823E387F723728CDA873 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		99B915E8379D6CF873608E8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AECB93851FAAEA94068D8176 /* CalculatorLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorLogic.swift; sourceTree = "<group>"; };
 		B5C92C56A01AF27B4AB45E16 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		99B915E8379D6CF873608E8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,14 +34,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		96B45FA931D6CA8241E9B800 = {
-			isa = PBXGroup;
-			children = (
-				7E49BFF4E89E2B6222E5F3D3 /* Sources */,
-				126763D41008A5271E60F4F9 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
 		126763D41008A5271E60F4F9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +52,14 @@
 				99B915E8379D6CF873608E8D /* Assets.xcassets */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		96B45FA931D6CA8241E9B800 = {
+			isa = PBXGroup;
+			children = (
+				7E49BFF4E89E2B6222E5F3D3 /* Sources */,
+				126763D41008A5271E60F4F9 /* Products */,
+			);
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,6 +171,33 @@
 			};
 			name = Debug;
 		};
+		6D7E57A8331ED4BE2027348B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSET_CATALOG_COMPILER_OPTIMIZATION = space;
+				BUNDLE_IDENTIFIER = com.devari.calculator;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LE_SWIFT_VERSION = 5.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.devari.calculator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		717FB31D819355CC38525EF9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -207,7 +234,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LE_SWIFT_VERSION = 5.0;
 				MARKETING_VERSION = 1.0;
@@ -220,33 +247,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
-		};
-		6D7E57A8331ED4BE2027348B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSET_CATALOG_COMPILER_OPTIMIZATION = space;
-				BUNDLE_IDENTIFIER = com.devari.calculator;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LE_SWIFT_VERSION = 5.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.devari.calculator;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
 		};
 /* End XCBuildConfiguration section */
 

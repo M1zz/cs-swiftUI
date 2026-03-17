@@ -1,3 +1,7 @@
+// ============================================================
+// 📖 읽기 순서: 3번째 / 전체 5개
+// 파일 역할: 날씨 UI (GlassCard, 그라디언트, 시간별/일별 섹션)
+// ============================================================
 import SwiftUI
 
 struct WeatherView: View {
@@ -17,6 +21,8 @@ struct WeatherView: View {
         default:      colors = [Color(hex: "2D3748"), Color(hex: "4A5568")]
         }
         return LinearGradient(colors: colors, startPoint: .top, endPoint: .bottom)
+        // 💡 TODO: 날씨 파티클 효과 (TimelineView + Canvas for rain/snow)
+        //    추가 위치: 바로 아래 gradient 프로퍼티 아래 (ZStack 배경에 추가)
     }
 
     var body: some View {
@@ -67,6 +73,9 @@ struct WeatherView: View {
         .padding(.top, 60)
         .padding(.bottom, 32)
     }
+
+    // 💡 TODO: 강수 확률 막대 (Swift Charts BarMark)
+    //    추가 위치: 바로 아래 hourlySection 위
 
     // MARK: - 시간별 예보
     @ViewBuilder
@@ -214,6 +223,9 @@ struct GlassCard: ViewModifier {
 extension View {
     func glassCard() -> some View { modifier(GlassCard()) }
 }
+
+// 💡 TODO: WidgetKit 연동 (같은 WeatherService를 앱 그룹으로 공유)
+//    추가 위치: 바로 아래 파일 끝
 
 // MARK: - Hex 색상
 extension Color {

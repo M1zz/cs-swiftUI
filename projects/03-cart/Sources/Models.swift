@@ -1,3 +1,8 @@
+// ============================================================
+// 📖 읽기 순서: 1번째 / 전체 6개
+// 파일 역할: 데이터 모델 (Product, CartItem, 샘플 데이터)
+// ============================================================
+
 import Foundation
 
 // MARK: - 상품 모델
@@ -7,6 +12,8 @@ struct Product: Identifiable {
     let price: Int
     let emoji: String
     let category: String
+    // 💡 TODO: 찜하기 기능 → var isFavorited: Bool = false 추가
+    //    추가 위치: 바로 아래 category 옆 또는 아래
 }
 
 // MARK: - 장바구니 아이템 (상품 + 수량)
@@ -19,6 +26,8 @@ struct CartItem: Identifiable {
 }
 
 // MARK: - 샘플 상품 데이터
+// 💡 TODO: 실제 서버 API에서 상품 목록 로드 (WeatherService 패턴 참고)
+//    추가 위치: 바로 아래 samples 옆 또는 아래
 extension Product {
     static let samples: [Product] = [
         Product(name: "아이폰 케이스", price: 12_000, emoji: "📱", category: "액세서리"),

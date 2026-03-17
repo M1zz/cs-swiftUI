@@ -1,3 +1,8 @@
+// ============================================================
+// 📖 읽기 순서: 2번째 / 전체 5개
+// 파일 역할: 타이머 로직 (Timer.publish, onReceive)
+// ============================================================
+
 import SwiftUI
 
 struct TimerView: View {
@@ -76,8 +81,12 @@ struct TimerView: View {
                 // 완료
                 isRunning = false
                 UINotificationFeedbackGenerator().notificationOccurred(.success)
+                // 💡 TODO: UNUserNotificationCenter로 로컬 알림 발송
+                //    추가 위치: 바로 아래 isRunning = false 옆 또는 아래
             }
         }
+        // 💡 TODO: 프리셋 버튼 (1분, 3분, 5분, 10분) 빠른 설정
+        //    추가 위치: 바로 아래 .sheet 옆 또는 아래
         // 시간 설정 피커
         .sheet(isPresented: $showPicker) {
             TimePickerSheet(seconds: $totalSeconds) {
@@ -92,6 +101,8 @@ struct TimerView: View {
         remainingSeconds = totalSeconds
     }
 }
+// 💡 TODO: 백그라운드 진입 시 타이머 유지 (scenePhase + BackgroundTasks)
+//    추가 위치: 바로 아래 TimerView 끝 옆 또는 아래
 
 // MARK: - 원형 컨트롤 버튼
 struct CircleButton: View {

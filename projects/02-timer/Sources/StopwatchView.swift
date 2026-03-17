@@ -1,3 +1,8 @@
+// ============================================================
+// 📖 읽기 순서: 3번째 / 전체 5개
+// 파일 역할: 스톱워치 로직 (랩 기록, 색상 계산)
+// ============================================================
+
 import SwiftUI
 
 struct StopwatchView: View {
@@ -6,6 +11,8 @@ struct StopwatchView: View {
     @State private var elapsedTime: Double = 0      // 누적 시간 (초)
     @State private var isRunning = false
     @State private var laps: [Double] = []          // 랩 기록
+    // 💡 TODO: 랩 데이터를 SwiftData로 영구 저장 (@Model Lap)
+    //    추가 위치: 바로 아래 laps 옆 또는 아래
     @State private var lapStartTime: Double = 0     // 이번 랩 시작 시점
 
     let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
@@ -107,6 +114,8 @@ struct StopwatchView: View {
         lapStartTime = 0
     }
 
+    // 💡 TODO: 랩 삭제 기능 (.onDelete)
+    //    추가 위치: 바로 아래 lapColor 옆 또는 아래
     // MARK: - 최단/최장 랩 색상
     private func lapColor(index: Int) -> Color {
         guard laps.count > 1 else { return .white }

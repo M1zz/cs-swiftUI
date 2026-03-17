@@ -1,3 +1,7 @@
+// ============================================================
+// 📖 읽기 순서: 3번째 / 전체 5개
+// 파일 역할: 메모 목록 UI (검색, 정렬, NavigationStack)
+// ============================================================
 import SwiftUI
 
 struct MemoListView: View {
@@ -26,6 +30,8 @@ struct MemoListView: View {
             .listStyle(.plain)
             .navigationTitle("메모")
             .searchable(text: $searchText, prompt: "검색")
+            // 💡 TODO: 태그 필터 칩 (selectedTag: String?)
+            //    추가 위치: 바로 아래 .searchable 아래
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Menu {
@@ -43,6 +49,8 @@ struct MemoListView: View {
                         Image(systemName: "square.and.pencil")
                     }
                 }
+                // 💡 TODO: 내보내기 (ShareLink + 전체 메모 텍스트 변환)
+                //    추가 위치: 바로 아래 topBarTrailing ToolbarItem 아래
             }
             .overlay {
                 if displayed.isEmpty {

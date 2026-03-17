@@ -1,3 +1,7 @@
+// ============================================================
+// 📖 읽기 순서: 2번째 / 전체 6개
+// 파일 역할: 거래 데이터 입력 UI (Form, Picker, DatePicker)
+// ============================================================
 import SwiftUI
 import SwiftData
 
@@ -61,6 +65,8 @@ struct AddTransactionView: View {
                     TextEditor(text: $note)
                         .frame(height: 80)
                 }
+                // 💡 TODO: 사진 첨부 기능 (PhotosPickerItem → Data 저장)
+                //    추가 위치: 바로 아래 Section("메모") 아래
             }
             .navigationTitle("거래 추가")
             .navigationBarTitleDisplayMode(.inline)
@@ -88,5 +94,7 @@ struct AddTransactionView: View {
         )
         context.insert(t)
         dismiss()
+        // 💡 TODO: 반복 거래 설정 시 N개 Transaction 일괄 생성
+        //    추가 위치: 바로 아래 save 함수 아래
     }
 }

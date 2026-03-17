@@ -1,3 +1,7 @@
+// ============================================================
+// 📖 읽기 순서: 4번째 / 전체 5개
+// 파일 역할: 메모 편집 UI (State 초기화 패턴, 저장/삭제)
+// ============================================================
 import SwiftUI
 
 struct MemoEditView: View {
@@ -30,6 +34,8 @@ struct MemoEditView: View {
             TextEditor(text: $body)
                 .font(.body)
                 .padding(.horizontal, 12)
+            // 💡 TODO: 마크다운 프리뷰 토글 (Text(LocalizedStringKey(body)))
+            //    추가 위치: 바로 아래 TextEditor 아래
         }
         .navigationTitle("메모 편집")
         .navigationBarTitleDisplayMode(.inline)
@@ -39,6 +45,8 @@ struct MemoEditView: View {
                     var updated = originalMemo
                     updated.title = title.isEmpty ? "새 메모" : title
                     updated.body  = body
+                    // 💡 TODO: 최근 편집 날짜 자동 업데이트 (memo.updatedAt = Date())
+                    //    추가 위치: 바로 아래 store.update(updated) 옆 또는 아래
                     store.update(updated)
                     dismiss()
                 }

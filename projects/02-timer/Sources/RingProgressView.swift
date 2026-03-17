@@ -1,3 +1,8 @@
+// ============================================================
+// 📖 읽기 순서: 1번째 / 전체 5개
+// 파일 역할: 링 애니메이션 UI 컴포넌트
+// ============================================================
+
 import SwiftUI
 
 // MARK: - 원형 프로그레스 바
@@ -28,6 +33,8 @@ struct RingProgressView: View {
                 // 기본은 3시 방향부터 시작 → -90도 회전해서 12시부터 시작
                 .rotationEffect(.degrees(-90))
                 .animation(.linear(duration: 1), value: progress)
+            // 💡 TODO: 잔여 시간에 따라 색상 변경 (>50%: green, >20%: yellow, else: red)
+            //    추가 위치: 바로 아래 .animation 옆 또는 아래
         }
     }
 }

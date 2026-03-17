@@ -1,3 +1,8 @@
+// ============================================================
+// 📖 읽기 순서: 4번째 / 전체 6개
+// 파일 역할: 장바구니 UI (결제, 삭제)
+// ============================================================
+
 import SwiftUI
 
 struct CartView: View {
@@ -23,6 +28,8 @@ struct CartView: View {
                     }
                 }
             }
+            // 💡 TODO: 결제 완료 후 주문 내역 저장 (SwiftData OrderHistory)
+            //    추가 위치: 바로 아래 .confirmationDialog 옆 또는 아래
             .confirmationDialog("장바구니를 비울까요?", isPresented: $showConfirm) {
                 Button("비우기", role: .destructive) { store.clear() }
             }
@@ -81,6 +88,9 @@ struct CartView: View {
         }
     }
 }
+
+// 💡 TODO: 공유 기능 (ShareLink로 장바구니 목록 텍스트 공유)
+//    추가 위치: 바로 아래 CartView 끝 옆 또는 아래
 
 // MARK: - 장바구니 아이템 행
 struct CartItemRow: View {

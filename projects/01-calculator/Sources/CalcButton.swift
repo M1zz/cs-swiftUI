@@ -1,3 +1,8 @@
+// ============================================================
+// 📖 읽기 순서: 1번째 / 전체 4개
+// 파일 역할: 버튼 열거형 정의 및 레이아웃 배열
+// ============================================================
+
 import SwiftUI
 
 // MARK: - 버튼 종류 enum
@@ -16,6 +21,8 @@ enum CalcButton: String {
     // 기능
     case ac = "AC", plusMinus = "+/−", percent = "%"
 
+    // 💡 TODO: 눌렸을 때 밝아지는 효과 (isPressed 상태 추가)
+    //    추가 위치: 바로 아래 backgroundColor 옆 또는 아래
     // 버튼 배경색
     var backgroundColor: Color {
         switch self {
@@ -42,6 +49,8 @@ enum CalcButton: String {
     var isWide: Bool { self == .zero }
 }
 
+// 💡 TODO: 공학용 계산기 모드 (landscape 시 추가 버튼 행 삽입)
+//    추가 위치: 바로 아래 buttonLayout 옆 또는 아래
 // MARK: - 버튼 레이아웃 (행 × 열)
 // 2D 배열 그대로 LazyVGrid에 넘긴다.
 let buttonLayout: [[CalcButton]] = [

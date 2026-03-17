@@ -1,3 +1,7 @@
+// ============================================================
+// 📖 읽기 순서: 1번째 / 전체 5개
+// 파일 역할: Codable 날씨 모델 (CodingKeys, 확장 프로퍼티들)
+// ============================================================
 import Foundation
 
 // MARK: - Open-Meteo API 응답 모델
@@ -126,6 +130,9 @@ extension Int {
         default:       return "흐림"
         }
     }
+
+    // 💡 TODO: 날씨 코드별 배경 애니메이션 ID 매핑
+    //    추가 위치: 바로 아래 weatherDescription 프로퍼티 아래
 }
 
 // MARK: - 도시 모델
@@ -140,4 +147,7 @@ struct City: Identifiable, Codable {
         City(id: UUID(), name: "부산",    latitude: 35.1796, longitude: 129.0756),
         City(id: UUID(), name: "제주",    latitude: 33.4996, longitude: 126.5312),
     ]
+
+    // 💡 TODO: 사용자 정의 도시 추가 기능 (UserDefaults에 저장)
+    //    추가 위치: 바로 아래 defaults 프로퍼티 아래
 }

@@ -1,3 +1,7 @@
+// ============================================================
+// 📖 읽기 순서: 2번째 / 전체 5개
+// 파일 역할: 메모 저장소 (UserDefaults + JSONEncoder/Decoder, didSet)
+// ============================================================
 import Foundation
 
 // MARK: - 메모 스토어 (UserDefaults 영속성)
@@ -8,6 +12,8 @@ class MemoStore {
 
     var memos: [Memo] = [] {
         didSet { save() }   // 변경될 때마다 자동 저장
+        // 💡 TODO: iCloud 동기화 (NSUbiquitousKeyValueStore 대신 CloudKit)
+        //    추가 위치: 바로 아래 didSet 블록 안 또는 save() 호출 아래
     }
 
     init() { load() }
@@ -34,6 +40,9 @@ class MemoStore {
         memos.removeAll { $0.id == memo.id }
     }
 
+    // 💡 TODO: 휴지통 기능 (isDeleted 플래그로 soft delete)
+    //    추가 위치: 바로 아래 delete 함수 아래
+
     // MARK: - 검색
     func search(_ query: String) -> [Memo] {
         guard !query.isEmpty else { return memos }
@@ -44,6 +53,8 @@ class MemoStore {
     }
 
     // MARK: - 저장 / 불러오기 (UserDefaults + Codable)
+    // 💡 TODO: SwiftData로 마이그레이션 (@Model class Memo + @Query)
+    //    추가 위치: 바로 아래 save 메서드 옆 또는 아래
     private func save() {
         guard let data = try? JSONEncoder().encode(memos) else { return }
         UserDefaults.standard.set(data, forKey: key)

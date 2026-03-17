@@ -1,3 +1,7 @@
+// ============================================================
+// 📖 읽기 순서: 1번째 / 전체 6개
+// 파일 역할: SwiftData @Model 클래스 (BudgetCategory 포함)
+// ============================================================
 import SwiftData
 import Foundation
 
@@ -28,9 +32,14 @@ class Transaction {
 
     var isIncome: Bool { amount > 0 }
     var absAmount: Double { abs(amount) }
+
+    // 💡 TODO: 반복 거래 → var isRecurring: Bool = false, recurringInterval: Int? = nil
+    //    추가 위치: 바로 아래 absAmount 프로퍼티 아래
 }
 
 // MARK: - 카테고리 정의
+// 💡 TODO: 사용자 정의 카테고리 (SwiftData @Model BudgetCategoryModel)
+//    추가 위치: 바로 아래 BudgetCategory 구조체 아래
 struct BudgetCategory {
     let name: String
     let emoji: String

@@ -1,9 +1,15 @@
+// ============================================================
+// 📖 읽기 순서: 3번째 / 전체 6개
+// 파일 역할: 차트 대시보드 (@Query, Swift Charts)
+// ============================================================
 import SwiftUI
 import SwiftData
 import Charts
 
 struct DashboardView: View {
     @Query private var transactions: [Transaction]
+    // 💡 TODO: #Predicate로 이번 달만 필터링 → @Query(filter: #Predicate { ... })
+    //    추가 위치: 바로 아래 @Query 아래
     @State private var selectedMonth: Date = Date()
 
     // 선택 월의 거래만 필터
@@ -125,12 +131,17 @@ struct DashboardView: View {
                 }
             }
             .frame(height: CGFloat(expenseByCategory.count) * 36 + 20)
+            // 💡 TODO: 월별 추이 꺾은선 차트 (LineMark으로 전월 대비 비교)
+            //    추가 위치: 바로 아래 Chart 블록 아래
         }
         .padding()
         .background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 }
+
+// 💡 TODO: 예산 목표 대비 달성률 ProgressView
+//    추가 위치: 바로 아래 SummaryTile 아래
 
 // MARK: - 수입/지출 타일
 struct SummaryTile: View {

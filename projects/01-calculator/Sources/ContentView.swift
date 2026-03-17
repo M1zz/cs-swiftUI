@@ -1,3 +1,8 @@
+// ============================================================
+// 📖 읽기 순서: 3번째 / 전체 4개
+// 파일 역할: UI 레이아웃 (GeometryReader, 버튼 그리드)
+// ============================================================
+
 import SwiftUI
 
 struct ContentView: View {
@@ -15,6 +20,8 @@ struct ContentView: View {
 
             VStack(spacing: 12) {
                 Spacer()
+                // 💡 TODO: 계산 히스토리 목록 (DisclosureGroup으로 접기/펼치기)
+                //    추가 위치: 바로 아래 displayView 옆 또는 아래
 
                 // ── 디스플레이 ──
                 displayView
@@ -88,6 +95,8 @@ struct CalcButtonView: View {
     }
 }
 
+// 💡 TODO: 가로 모드에서 공학용 버튼 행 추가 (UIDevice.current.orientation)
+//    추가 위치: 바로 아래 #Preview 옆 또는 아래
 #Preview {
     ContentView()
 }
