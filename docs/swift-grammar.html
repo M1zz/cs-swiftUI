@@ -49,10 +49,10 @@
   <h1>🔩 Swift <span class="accent">핵심 문법</span></h1>
   <p class="trigger">Stage 1을 마쳤는데 코드가 왜 이렇게 동작하는지 모르겠다</p>
   <div class="chip-row">
-    <span class="chip purple">Computed Property</span>
-    <span class="chip purple">Property Observer</span>
     <span class="chip purple">struct vs class</span>
     <span class="chip purple">mutating</span>
+    <span class="chip purple">Computed Property</span>
+    <span class="chip purple">Property Observer</span>
     <span class="chip purple">Access Control</span>
     <span class="chip purple">init 패턴</span>
     <span class="chip purple">Type Casting</span>
@@ -92,9 +92,92 @@
 <div class="split-layout">
   <div class="content-col">
 
-    <!-- Topic 01: Computed Property -->
+    <!-- Topic 01: struct vs class -->
     <div class="content-section" data-preview="pv-1">
       <div class="cs-label">Topic 01</div>
+      <h2 class="cs-title">struct vs class — 값 타입 vs 참조 타입</h2>
+      <div class="cs-subtitle">Swift에서 가장 중요한 타입 선택의 기준</div>
+
+      <div class="code-block" style="margin-bottom:20px;">
+        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
+        <pre class="swift-code">// struct — 값 타입 (복사)
+struct PointS {
+    var x: Int
+    var y: Int
+}
+
+var a = PointS(x: 1, y: 2)
+var b = a        // 복사본 생성
+b.x = 99
+print(a.x) // 1  ← a는 변하지 않는다
+
+// class — 참조 타입 (같은 객체를 가리킴)
+class PointC {
+    var x: Int
+    var y: Int
+    init(x: Int, y: Int) { self.x = x; self.y = y }
+}
+
+var c = PointC(x: 1, y: 2)
+var d = c        // 같은 객체를 가리킴
+d.x = 99
+print(c.x) // 99 ← c도 바뀐다!
+
+// SwiftUI에서의 선택 기준
+// struct: 데이터 모델, View (SwiftUI View는 항상 struct)
+// class: ObservableObject, 네트워크 매니저, 싱글톤
+
+// struct에서 자신을 수정하는 함수 — mutating
+struct Counter {
+    var count = 0
+
+    mutating func increment() {
+        count += 1  // mutating 없으면 컴파일 에러
+    }
+
+    mutating func reset() {
+        count = 0
+    }
+}</pre>
+      </div>
+
+      <div class="topic-questions purple">
+        <div class="tq-label">생각해보기</div>
+        <ul>
+          <li>SwiftUI View가 struct인 이유는 무엇인가? class로 만들면 어떤 문제가 생기는가?</li>
+          <li><code>let a = SomeClass()</code>로 선언된 클래스 인스턴스의 프로퍼티를 바꿀 수 있는가?</li>
+          <li>Copy-on-Write란 무엇이며 Swift의 Array/Dictionary가 이를 어떻게 활용하는가?</li>
+        </ul>
+      </div>
+
+      <div class="topic-items color-purple">
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">struct = 값 타입</div>
+            <div class="item-desc">할당/전달 시 복사. 독립적인 상태. 스레드 안전. SwiftUI View, 데이터 모델에 적합</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">class = 참조 타입</div>
+            <div class="item-desc">할당/전달 시 같은 인스턴스를 공유. 상속 가능. ObservableObject, 공유 상태에 사용</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">mutating</div>
+            <div class="item-desc">struct의 메서드가 self(인스턴스)를 수정할 때 필수. enum의 메서드에도 적용</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic 02: Computed Property -->
+    <div class="content-section" data-preview="pv-2">
+      <div class="cs-label">Topic 02</div>
       <h2 class="cs-title">Computed Property</h2>
       <div class="cs-subtitle">저장하지 않고 계산으로 만드는 프로퍼티</div>
 
@@ -174,9 +257,9 @@ struct UserProfile {
       </div>
     </div>
 
-    <!-- Topic 02: Property Observer -->
-    <div class="content-section" data-preview="pv-2">
-      <div class="cs-label">Topic 02</div>
+    <!-- Topic 03: Property Observer -->
+    <div class="content-section" data-preview="pv-3">
+      <div class="cs-label">Topic 03</div>
       <h2 class="cs-title">Property Observer — willSet / didSet</h2>
       <div class="cs-subtitle">프로퍼티 값이 바뀌기 전/후에 코드를 실행하는 방법</div>
 
@@ -261,89 +344,6 @@ struct ContentView: View {
           <div class="item-content">
             <div class="item-title">init에서는 호출 안 됨</div>
             <div class="item-desc">이니셜라이저 내부 할당에서는 observer가 호출되지 않는다. 의도적 설계</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Topic 03: struct vs class -->
-    <div class="content-section" data-preview="pv-3">
-      <div class="cs-label">Topic 03</div>
-      <h2 class="cs-title">struct vs class — 값 타입 vs 참조 타입</h2>
-      <div class="cs-subtitle">Swift에서 가장 중요한 타입 선택의 기준</div>
-
-      <div class="code-block" style="margin-bottom:20px;">
-        <div class="code-header"><div class="code-dots"><span></span><span></span><span></span></div><span class="code-lang">Swift</span></div>
-        <pre class="swift-code">// struct — 값 타입 (복사)
-struct PointS {
-    var x: Int
-    var y: Int
-}
-
-var a = PointS(x: 1, y: 2)
-var b = a        // 복사본 생성
-b.x = 99
-print(a.x) // 1  ← a는 변하지 않는다
-
-// class — 참조 타입 (같은 객체를 가리킴)
-class PointC {
-    var x: Int
-    var y: Int
-    init(x: Int, y: Int) { self.x = x; self.y = y }
-}
-
-var c = PointC(x: 1, y: 2)
-var d = c        // 같은 객체를 가리킴
-d.x = 99
-print(c.x) // 99 ← c도 바뀐다!
-
-// SwiftUI에서의 선택 기준
-// struct: 데이터 모델, View (SwiftUI View는 항상 struct)
-// class: ObservableObject, 네트워크 매니저, 싱글톤
-
-// struct에서 자신을 수정하는 함수 — mutating
-struct Counter {
-    var count = 0
-
-    mutating func increment() {
-        count += 1  // mutating 없으면 컴파일 에러
-    }
-
-    mutating func reset() {
-        count = 0
-    }
-}</pre>
-      </div>
-
-      <div class="topic-questions purple">
-        <div class="tq-label">생각해보기</div>
-        <ul>
-          <li>SwiftUI View가 struct인 이유는 무엇인가? class로 만들면 어떤 문제가 생기는가?</li>
-          <li><code>let a = SomeClass()</code>로 선언된 클래스 인스턴스의 프로퍼티를 바꿀 수 있는가?</li>
-          <li>Copy-on-Write란 무엇이며 Swift의 Array/Dictionary가 이를 어떻게 활용하는가?</li>
-        </ul>
-      </div>
-
-      <div class="topic-items color-purple">
-        <div class="topic-item">
-          <div class="item-dot"></div>
-          <div class="item-content">
-            <div class="item-title">struct = 값 타입</div>
-            <div class="item-desc">할당/전달 시 복사. 독립적인 상태. 스레드 안전. SwiftUI View, 데이터 모델에 적합</div>
-          </div>
-        </div>
-        <div class="topic-item">
-          <div class="item-dot"></div>
-          <div class="item-content">
-            <div class="item-title">class = 참조 타입</div>
-            <div class="item-desc">할당/전달 시 같은 인스턴스를 공유. 상속 가능. ObservableObject, 공유 상태에 사용</div>
-          </div>
-        </div>
-        <div class="topic-item">
-          <div class="item-dot"></div>
-          <div class="item-content">
-            <div class="item-title">mutating</div>
-            <div class="item-desc">struct의 메서드가 self(인스턴스)를 수정할 때 필수. enum의 메서드에도 적용</div>
           </div>
         </div>
       </div>
@@ -814,6 +814,24 @@ struct Product: Identifiable, Codable {
         <div class="phone-screen">
 
           <div id="pv-1" class="preview-content active">
+            <div class="preview-label">struct vs class</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:0 4px;">
+              <div style="background:#F0FFF4;border-radius:8px;padding:10px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:#2DA55D;margin-bottom:4px;">STRUCT (복사)</div>
+                <div style="font-size:11px;">a = {x:1} → b = {x:1}</div>
+                <div style="font-size:11px;color:#6B7190;">b.x = 99</div>
+                <div style="font-size:11px;">a.x = <strong>1</strong> ← 변하지 않음</div>
+              </div>
+              <div style="background:#FFF0F0;border-radius:8px;padding:10px;">
+                <div style="font-size:9px;font-family:'DM Mono',monospace;color:#DC3545;margin-bottom:4px;">CLASS (참조)</div>
+                <div style="font-size:11px;">c → d (같은 객체)</div>
+                <div style="font-size:11px;color:#6B7190;">d.x = 99</div>
+                <div style="font-size:11px;">c.x = <strong style="color:#DC3545;">99</strong> ← 같이 변함!</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="pv-2" class="preview-content">
             <div class="preview-label">Computed Property</div>
             <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 4px;">
               <div style="background:#1E1F2E;border-radius:10px;padding:10px;font-family:'DM Mono',monospace;font-size:9px;line-height:1.9;color:#E4E6F0;">
@@ -829,7 +847,7 @@ struct Product: Identifiable, Codable {
             </div>
           </div>
 
-          <div id="pv-2" class="preview-content">
+          <div id="pv-3" class="preview-content">
             <div class="preview-label">willSet / didSet</div>
             <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:0 4px;">
               <div style="display:flex;align-items:center;gap:8px;">
@@ -841,24 +859,6 @@ struct Product: Identifiable, Codable {
                 didSet ← <span style="color:#6B7190;">6,500</span>
               </div>
               <div style="background:#F0EDFF;border-radius:8px;padding:8px;font-size:11px;color:var(--purple);">목표까지 3,500보</div>
-            </div>
-          </div>
-
-          <div id="pv-3" class="preview-content">
-            <div class="preview-label">struct vs class</div>
-            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:0 4px;">
-              <div style="background:#F0FFF4;border-radius:8px;padding:10px;">
-                <div style="font-size:9px;font-family:'DM Mono',monospace;color:#2DA55D;margin-bottom:4px;">STRUCT (복사)</div>
-                <div style="font-size:11px;">a = {x:1} → b = {x:1}</div>
-                <div style="font-size:11px;color:#6B7190;">b.x = 99</div>
-                <div style="font-size:11px;">a.x = <strong>1</strong> ← 변하지 않음</div>
-              </div>
-              <div style="background:#FFF0F0;border-radius:8px;padding:10px;">
-                <div style="font-size:9px;font-family:'DM Mono',monospace;color:#DC3545;margin-bottom:4px;">CLASS (참조)</div>
-                <div style="font-size:11px;">c → d (같은 객체)</div>
-                <div style="font-size:11px;color:#6B7190;">d.x = 99</div>
-                <div style="font-size:11px;">c.x = <strong style="color:#DC3545;">99</strong> ← 같이 변함!</div>
-              </div>
             </div>
           </div>
 

@@ -10,8 +10,8 @@
   var page = path.split('/').pop() || 'index.html';
   var isEN = path.indexOf('/en/') !== -1;
 
-  var enAvailable = ['index.html','setup.html','1-1.html','1-2.html','1-3.html','1-4.html','stage2.html','2-1.html','2-2.html','2-3.html','2-4.html','clone-coding.html','swift-grammar.html'];
-  var s1Pages = ['index.html','setup.html','1-1.html','1-2.html','1-3.html','1-4.html'];
+  var enAvailable = ['index.html','stage1.html','setup.html','1-1.html','1-2.html','1-3.html','1-4.html','stage2.html','2-1.html','2-2.html','2-3.html','2-4.html','clone-coding.html','swift-grammar.html'];
+  var s1Pages = ['stage1.html','blog.html','setup.html','1-1.html','1-2.html','1-3.html','1-4.html'];
   var s2Pages = ['stage2.html','2-1.html','2-2.html','2-3.html','2-4.html'];
   var isS1 = s1Pages.indexOf(page) !== -1;
   var isS2 = s2Pages.indexOf(page) !== -1;
@@ -64,12 +64,15 @@
 
   var items = '';
 
+  // 블로그
+  items += '<li><a href="' + href('blog.html') + '"' + active('blog.html') + ' style="color:var(--purple);">' + (isEN ? 'Blog' : '블로그') + '</a></li>';
+
   // 시작하기
   items += '<li><a href="' + href('setup.html') + '"' + active('setup.html') + '>' + (isEN ? 'Setup' : '시작하기') + '</a></li>';
 
   // Stage 1 + sub
   var s1Active = (isS1 && page !== 'setup.html') ? ' class="active"' : '';
-  items += '<li><a href="' + href('index.html') + '"' + s1Active + '>Stage 1</a></li>';
+  items += '<li><a href="' + href('stage1.html') + '"' + s1Active + '>Stage 1</a></li>';
   if (isS1) {
     items += subItem('1-1.html', '1-1', 0);
     items += subItem('1-2.html', '1-2', 1);
@@ -107,7 +110,7 @@
   var nav = document.querySelector('nav.nav');
   if (nav) {
     nav.innerHTML =
-      '<a href="' + (isEN ? '../index.html' : 'index.html') + '" class="nav-logo">개발자<span>리</span></a>' +
+      '<a href="' + href('index.html') + '" class="nav-logo">개발자<span>리</span></a>' +
       '<button class="nav-hamburger" aria-label="메뉴"><span></span><span></span><span></span></button>' +
       '<ul class="nav-links">' + items + '</ul>' +
       langLink;

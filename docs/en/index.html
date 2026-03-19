@@ -3,138 +3,188 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stage 1 — Just Build It | 개발자리 CS Curriculum</title>
+  <title>개발자리 — SwiftUI Top-Down CS Curriculum</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/style.css" />
+  <meta property="og:title" content="개발자리 — SwiftUI Top-Down CS Curriculum" />
+  <meta property="og:description" content="Learn CS by building real apps. Free SwiftUI curriculum — Top-Down." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://m1zz.github.io/cs-swiftUI/og-image.png" />
+  <meta property="og:url" content="https://m1zz.github.io/cs-swiftUI/en/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://m1zz.github.io/cs-swiftUI/og-image.png" />
   <style>
-    .hero {
-      padding: 64px 40px 56px;
-      max-width: 1100px; margin: 0 auto;
-      position: relative; z-index: 1;
+    .home-hero {
+      max-width:860px; margin:0 auto; padding:96px 40px 72px;
+      position:relative; z-index:1; text-align:center;
     }
-    .hero::after {
+    .home-hero::before {
       content:''; position:absolute;
-      top:-60px; right:-80px;
-      width:420px; height:420px;
-      background: radial-gradient(circle, #FF6B2B12 0%, transparent 65%);
+      top:-80px; left:50%; transform:translateX(-50%);
+      width:700px; height:500px;
+      background:radial-gradient(circle, #FF6B2B08 0%, transparent 65%);
       pointer-events:none;
     }
-    .hero-title {
+    .hero-eyebrow {
+      font-family:'DM Mono',monospace; font-size:11px;
+      letter-spacing:.18em; text-transform:uppercase;
+      color:var(--orange); margin-bottom:24px;
+    }
+    .home-hero-title {
       font-family:'Space Grotesk',sans-serif;
-      font-size:clamp(48px,7vw,80px);
+      font-size:clamp(44px,7vw,80px);
       font-weight:800; line-height:1.0;
-      letter-spacing:-.035em; margin-bottom:16px;
+      letter-spacing:-.038em; margin-bottom:24px;
     }
-    .hero-title .accent { color:var(--orange); }
-    .hero-sub {
-      font-size:15px; color:var(--muted);
-      max-width:520px; line-height:1.75; margin-bottom:36px;
+    .home-hero-title .acc { color:var(--orange); }
+    .home-hero-sub {
+      font-size:17px; color:var(--muted);
+      max-width:520px; margin:0 auto 48px; line-height:1.85;
     }
-    .hero-meta { display:flex; gap:36px; flex-wrap:wrap; }
-    .meta-item { display:flex; flex-direction:column; gap:4px; }
-    .meta-label {
-      font-family:'DM Mono',monospace; font-size:10px;
-      letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+    .hero-cta-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; }
+    .btn-hero {
+      display:inline-flex; align-items:center; gap:10px;
+      padding:18px 40px; background:var(--orange); color:#fff;
+      border-radius:12px; text-decoration:none;
+      font-family:'Space Grotesk',sans-serif; font-size:17px; font-weight:700;
+      transition:opacity .2s, transform .15s;
+      box-shadow:0 8px 32px #FF6B2B40;
     }
-    .meta-value {
-      font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16px;
+    .btn-hero:hover { opacity:.9; transform:translateY(-2px); box-shadow:0 12px 40px #FF6B2B50; }
+    .hero-hint {
+      font-family:'DM Mono',monospace; font-size:11px;
+      color:var(--muted); letter-spacing:.04em;
     }
+    .hero-hint a {
+      color:var(--muted); text-decoration:underline;
+      text-underline-offset:3px; transition:color .2s;
+    }
+    .hero-hint a:hover { color:var(--text); }
 
-    /* Challenge cards */
-    .chapters {
-      max-width:1100px; margin:0 auto; padding:0 40px;
+    .stats-row {
+      max-width:860px; margin:0 auto; padding:0 40px 80px;
+      display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
       position:relative; z-index:1;
     }
-    .chapters-label {
-      font-family:'DM Mono',monospace; font-size:10px;
-      letter-spacing:.15em; text-transform:uppercase;
-      color:var(--muted); margin-bottom:20px;
-    }
-    .chapter-grid {
-      display:grid; grid-template-columns:repeat(2,1fr); gap:14px;
-      margin-bottom:60px;
-    }
-    .chapter-card {
+    .stat-card {
       background:var(--surface); border:1px solid var(--border);
-      border-radius:var(--radius-lg); padding:28px;
-      text-decoration:none; display:block;
-      transition:border-color .2s, transform .2s, box-shadow .2s;
+      border-radius:var(--radius-lg); padding:22px 20px; text-align:center;
+    }
+    .stat-val {
+      font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:800;
+      color:var(--orange); margin-bottom:4px;
+    }
+    .stat-label {
+      font-family:'DM Mono',monospace; font-size:10px;
+      letter-spacing:.06em; color:var(--muted);
+    }
+
+    .path-wrap {
+      max-width:860px; margin:0 auto; padding:0 40px 80px;
+      position:relative; z-index:1;
+    }
+    .section-label {
+      font-family:'DM Mono',monospace; font-size:10px;
+      letter-spacing:.18em; text-transform:uppercase;
+      color:var(--muted); margin-bottom:24px; text-align:center;
+    }
+    .path-list { display:flex; flex-direction:column; gap:10px; }
+    .path-item {
+      display:flex; align-items:center; gap:20px;
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--radius-lg); padding:22px 24px;
       position:relative; overflow:hidden;
     }
-    .chapter-card:hover {
+    .path-item::before {
+      content:''; position:absolute; left:0; top:0; bottom:0;
+      width:3px;
+    }
+    .path-item.s1::before { background:var(--orange); }
+    .path-item.sg::before { background:var(--purple); }
+    .path-item.s2::before { background:var(--border2); }
+    .path-item.cc::before { background:var(--border2); }
+    .path-step {
+      font-family:'DM Mono',monospace; font-size:11px;
+      color:var(--muted); min-width:28px; flex-shrink:0;
+    }
+    .path-body { flex:1; }
+    .path-name {
+      font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700;
+      color:var(--text); margin-bottom:3px;
+    }
+    .path-desc { font-size:12px; color:var(--muted); line-height:1.5; }
+    .path-item.active-step {
       border-color:var(--orange);
-      transform:translateY(-3px);
-      box-shadow:0 10px 36px #FF6B2B16;
+      background:linear-gradient(135deg,var(--surface),var(--orange-dim));
     }
-    .ch-num {
+    .path-item.active-step .path-name { color:var(--orange); }
+    .path-item.active-step .path-step { color:var(--orange); }
+    .path-cta-inline {
       font-family:'DM Mono',monospace; font-size:11px;
-      letter-spacing:.08em; color:var(--muted); margin-bottom:12px;
+      color:var(--orange); white-space:nowrap; flex-shrink:0;
     }
-    .ch-emoji { font-size:32px; display:block; margin-bottom:14px; }
-    .ch-title {
-      font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:800;
-      color:var(--text); margin-bottom:6px; letter-spacing:-.02em;
-    }
-    .ch-problem {
-      font-size:12px; color:var(--muted); line-height:1.6;
-      font-style:italic; margin-bottom:16px;
-    }
-    .ch-topics {
-      display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;
-    }
-    .ch-topic {
+    .path-status {
       font-family:'DM Mono',monospace; font-size:10px;
-      padding:3px 8px; border-radius:6px;
-      background:var(--tag-bg); color:var(--muted);
-      border:1px solid var(--border2); letter-spacing:.03em;
+      color:var(--muted); white-space:nowrap; flex-shrink:0; letter-spacing:.04em;
     }
-    .ch-link {
-      font-family:'DM Mono',monospace; font-size:11px;
-      color:var(--orange); letter-spacing:.06em;
-      display:inline-flex; align-items:center; gap:6px;
-      transition:gap .2s;
-    }
-    .chapter-card:hover .ch-link { gap:10px; }
 
-    /* Progress strip */
-    .progress-strip {
-      max-width:1100px; margin:0 auto 56px; padding:0 40px;
+    .why-wrap {
+      max-width:860px; margin:0 auto; padding:0 40px 80px;
       position:relative; z-index:1;
     }
-    .progress-card {
+    .why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:24px; }
+    .why-card {
       background:var(--surface); border:1px solid var(--border);
-      border-radius:var(--radius-lg); padding:24px 28px;
-      display:flex; align-items:center; gap:28px;
+      border-radius:var(--radius-lg); padding:22px 20px;
     }
-    .prog-label {
-      font-family:'DM Mono',monospace; font-size:11px;
-      letter-spacing:.08em; text-transform:uppercase; color:var(--muted);
-      white-space:nowrap;
+    .why-icon { font-size:24px; margin-bottom:10px; }
+    .why-title {
+      font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:800;
+      color:var(--text); margin-bottom:6px;
     }
-    .prog-track {
-      flex:1; height:4px; background:var(--border2);
-      border-radius:100px; overflow:hidden;
+    .why-desc { font-size:12px; color:var(--muted); line-height:1.75; }
+
+    .creator-wrap {
+      max-width:860px; margin:0 auto; padding:0 40px 80px;
+      position:relative; z-index:1;
     }
-    .prog-fill {
-      height:100%; border-radius:100px;
-      background:linear-gradient(90deg,var(--orange),var(--yellow));
-      width:0; transition:width 1s cubic-bezier(.4,0,.2,1);
+    .creator-card {
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--radius-lg); padding:28px;
+      display:flex; align-items:center; gap:20px;
     }
-    .prog-stages { display:flex; gap:20px; flex-wrap:wrap; }
-    .prog-item {
-      display:flex; align-items:center; gap:6px;
-      font-size:11px; color:var(--muted);
+    .creator-avatar {
+      width:60px; height:60px; border-radius:50%;
+      background:linear-gradient(135deg,var(--orange),#FF9B5C);
+      display:flex; align-items:center; justify-content:center;
+      font-size:26px; flex-shrink:0;
     }
-    .prog-dot { width:8px; height:8px; border-radius:50%; }
-    .prog-dot.on  { background:var(--orange); }
-    .prog-dot.off { background:var(--border2); }
+    .creator-info { flex:1; }
+    .creator-name {
+      font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:800; margin-bottom:3px;
+    }
+    .creator-role {
+      font-family:'DM Mono',monospace; font-size:10px;
+      color:var(--orange); letter-spacing:.06em; margin-bottom:6px;
+    }
+    .creator-desc { font-size:12px; color:var(--muted); line-height:1.65; }
+    .creator-links { display:flex; gap:8px; margin-top:10px; }
+    .creator-links a {
+      font-family:'DM Mono',monospace; font-size:10px;
+      padding:3px 10px; border-radius:100px;
+      border:1px solid var(--border2); color:var(--muted);
+      text-decoration:none; transition:border-color .2s, color .2s;
+    }
+    .creator-links a:hover { border-color:var(--orange); color:var(--orange); }
 
     @media(max-width:768px){
-      .hero{padding:40px 20px 40px;}
-      .chapters{padding:0 20px;}
-      .chapter-grid{grid-template-columns:1fr;}
-      .progress-strip{padding:0 20px;}
+      .home-hero { padding:56px 20px 48px; }
+      .stats-row,.path-wrap,.why-wrap,.creator-wrap { padding-left:20px; padding-right:20px; }
+      .why-grid { grid-template-columns:1fr; }
+      .creator-card { flex-direction:column; text-align:center; }
+      .creator-links { justify-content:center; }
+      .path-status { display:none; }
     }
   </style>
 </head>
@@ -143,209 +193,135 @@
 <nav class="nav"></nav>
 <script src="../assets/nav.js"></script>
 
-<a href="setup.html" style="display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 40px;background:linear-gradient(90deg,#1A1D2A,#2A2D40);color:#fff;text-decoration:none;font-size:13px;font-weight:500;position:relative;z-index:1;">
-  <span style="font-size:16px;">🔧</span>
-  <span>New here? Start with the <strong style="color:var(--orange);">Xcode & Swift Setup Guide</strong></span>
-  <span style="font-family:'DM Mono',monospace;font-size:11px;opacity:.6;margin-left:8px;">→</span>
-</a>
-
-<header class="hero fade-in">
-  <div class="badge badge-orange" style="margin-bottom:24px;">
-    <span class="badge-dot"></span>
-    Stage 1 · 4 Challenges · 16 Topics
-  </div>
-  <h1 class="hero-title">
-    🛠 Just<br>
-    <span class="accent">Build It</span>
+<!-- ── Hero ── -->
+<section class="home-hero fade-in">
+  <div class="hero-eyebrow">SwiftUI · CS · Top-Down</div>
+  <h1 class="home-hero-title">
+    Learn CS<br>
+    <span class="acc">by building apps</span>
   </h1>
-  <p class="hero-sub">
-    Starting from scratch — display something on screen, manage state, connect multiple screens, and overcome Swift syntax barriers.
+  <p class="home-hero-sub">
+    Don't start with theory.<br>
+    Encounter real problems while building real apps,<br>
+    and naturally absorb CS concepts. Stage 1 is free.
   </p>
-  <div class="hero-meta">
-    <div class="meta-item">
-      <span class="meta-label">Core Tech</span>
-      <span class="meta-value">SwiftUI</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">State Mgmt</span>
-      <span class="meta-value">@State · @Binding</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Language</span>
-      <span class="meta-value">Swift Essentials</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Output</span>
-      <span class="meta-value">Todo App</span>
-    </div>
+  <div class="hero-cta-wrap">
+    <a href="stage1.html" class="btn-hero">Start Stage 1 for Free →</a>
+    <p class="hero-hint">First time? Start with the <a href="setup.html">Xcode setup guide</a></p>
   </div>
-</header>
-
-<!-- Step 0: Get Ready -->
-<section class="chapters">
-  <div class="chapters-label">Step 0 — Get Ready</div>
-  <a href="setup.html" class="chapter-card fade-in" style="margin-bottom:14px;border-color:var(--orange);background:linear-gradient(135deg,var(--surface),var(--orange-dim));">
-    <div class="ch-num" style="color:var(--orange);">🔧 Setup</div>
-    <div class="ch-title" style="font-size:22px;">Xcode & Swift Setup</div>
-    <div class="ch-problem">↳ You need Xcode on your Mac to start the challenges</div>
-    <div class="ch-topics">
-      <span class="ch-topic">What is Swift?</span>
-      <span class="ch-topic">What is Xcode?</span>
-      <span class="ch-topic">Installation</span>
-      <span class="ch-topic">Verify</span>
-    </div>
-    <div class="ch-link">Open Setup Guide →</div>
-  </a>
 </section>
 
-<!-- Challenges -->
-<section class="chapters">
-  <div class="chapters-label">4 Challenges — In order of problems you'll face</div>
-  <div class="chapter-grid">
+<!-- ── Stats ── -->
+<div class="stats-row fade-in">
+  <div class="stat-card">
+    <div class="stat-val">Free</div>
+    <div class="stat-label">All of Stage 1</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-val">8+</div>
+    <div class="stat-label">Challenges</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-val">10yr+</div>
+    <div class="stat-label">iOS Experience</div>
+  </div>
+</div>
 
-    <a href="1-1.html" class="chapter-card fade-in delay-1">
-      <div class="ch-num">Challenge 1-1</div>
-      <span class="ch-emoji">📱</span>
-      <div class="ch-title">Display Something on Screen</div>
-      <div class="ch-problem">↳ I want to see "Hello World" in an app</div>
-      <div class="ch-topics">
-        <span class="ch-topic">View · body</span>
-        <span class="ch-topic">VStack/HStack/ZStack</span>
-        <span class="ch-topic">modifier</span>
-        <span class="ch-topic">@main</span>
-        <span class="ch-topic">Xcode Preview</span>
-        <span class="ch-topic">Layout System</span>
-      </div>
-      <div class="ch-link">Open Challenge →</div>
-    </a>
+<!-- ── Learning Path ── -->
+<section class="path-wrap fade-in">
+  <div class="section-label">Curriculum Roadmap</div>
+  <div class="path-list">
 
-    <a href="1-2.html" class="chapter-card fade-in delay-2">
-      <div class="ch-num">Challenge 1-2</div>
-      <span class="ch-emoji">🔄</span>
-      <div class="ch-title">Make the Screen Change on Tap</div>
-      <div class="ch-problem">↳ I tapped a button but the text didn't change</div>
-      <div class="ch-topics">
-        <span class="ch-topic">@State</span>
-        <span class="ch-topic">@Binding</span>
-        <span class="ch-topic">Unidirectional Data Flow</span>
-        <span class="ch-topic">TextField</span>
-        <span class="ch-topic">List + ForEach</span>
-        <span class="ch-topic">Todo App</span>
+    <div class="path-item active-step s1">
+      <div class="path-step">01</div>
+      <div class="path-body">
+        <div class="path-name">🛠 Stage 1 — Just Build It</div>
+        <div class="path-desc">View, @State, NavigationStack, Swift syntax — all the way to a working Todo app. <strong>Free.</strong></div>
       </div>
-      <div class="ch-link">Open Challenge →</div>
-    </a>
+      <div class="path-cta-inline">← Start here</div>
+    </div>
 
-    <a href="1-3.html" class="chapter-card fade-in delay-3">
-      <div class="ch-num">Challenge 1-3</div>
-      <span class="ch-emoji">🗂</span>
-      <div class="ch-title">Multiple Screens & Shared State</div>
-      <div class="ch-problem">↳ How do I share data between two screens?</div>
-      <div class="ch-topics">
-        <span class="ch-topic">NavigationStack</span>
-        <span class="ch-topic">@StateObject</span>
-        <span class="ch-topic">@ObservedObject</span>
-        <span class="ch-topic">@Observable</span>
-        <span class="ch-topic">@EnvironmentObject</span>
-        <span class="ch-topic">TabView</span>
+    <div class="path-item sg">
+      <div class="path-step">02</div>
+      <div class="path-body">
+        <div class="path-name">🔩 Swift Grammar Bridge</div>
+        <div class="path-desc">struct vs class, Protocol, Computed Property — required before Stage 2</div>
       </div>
-      <div class="ch-link">Open Challenge →</div>
-    </a>
+      <div class="path-status">After Stage 1</div>
+    </div>
 
-    <a href="1-4.html" class="chapter-card fade-in delay-4">
-      <div class="ch-num">Challenge 1-4</div>
-      <span class="ch-emoji">✏️</span>
-      <div class="ch-title">Swift Syntax That Trips You Up</div>
-      <div class="ch-problem">↳ Getting compile errors but don't know why</div>
-      <div class="ch-topics">
-        <span class="ch-topic">Optional</span>
-        <span class="ch-topic">if let / guard let</span>
-        <span class="ch-topic">Array · Dictionary · Set</span>
-        <span class="ch-topic">Closure · [weak self]</span>
-        <span class="ch-topic">Xcode Error Decoding</span>
+    <div class="path-item s2">
+      <div class="path-step">03</div>
+      <div class="path-body">
+        <div class="path-name">🏗 Stage 2 — Build It Right</div>
+        <div class="path-desc">SwiftData · URLSession · async/await · Animation · MVVM</div>
       </div>
-      <div class="ch-link">Open Challenge →</div>
-    </a>
+      <div class="path-status">After Stage 1</div>
+    </div>
+
+    <div class="path-item cc">
+      <div class="path-step">04</div>
+      <div class="path-body">
+        <div class="path-name">📱 Clone Coding — Real Projects</div>
+        <div class="path-desc">Calculator, Timer, Cart, Notes, Weather, Budget — complete code + PDF guide</div>
+      </div>
+      <div class="path-status">Paid</div>
+    </div>
 
   </div>
-
 </section>
 
-<!-- Clone Coding Suggestions -->
-<section style="max-width:1100px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
-  <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;">After Stage 1 — Clone Coding</div>
-
-  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;">
-
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
-      <div style="font-size:28px;margin-bottom:10px;">🧮</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Calculator</div>
-      <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Clone the Apple Calculator UI. Grid layout, button styling, calculation logic with @State</div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;">
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-1 Layout</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-2 @State</span>
+<!-- ── Why ── -->
+<section class="why-wrap fade-in">
+  <div class="section-label">Why Top-Down?</div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🎯</div>
+      <div class="why-title">Problem First</div>
+      <div class="why-desc">
+        "Why doesn't the screen update when I tap?" Hit the problem first, then learn @State to fix it.
       </div>
     </div>
-
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
-      <div style="font-size:28px;margin-bottom:10px;">⏱</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Timer / Stopwatch</div>
-      <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Clone the Timer tab from Apple Clock. Timer.publish, @State, circular progress bar, start/stop/reset</div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;">
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-1 Layout</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-2 @State</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-4 Closure</span>
+    <div class="why-card">
+      <div class="why-icon">🔗</div>
+      <div class="why-title">Connected</div>
+      <div class="why-desc">
+        Each challenge builds on the previous one. The whole curriculum is one connected story.
       </div>
     </div>
-
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
-      <div style="font-size:28px;margin-bottom:10px;">🛒</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Shopping Cart App</div>
-      <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Product list → add to cart → adjust quantity → calculate total. List, NavigationStack, shared state with @Observable</div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;">
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-2 List</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-3 Shared State</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-4 Higher-order fn</span>
+    <div class="why-card">
+      <div class="why-icon">🛠</div>
+      <div class="why-title">Production-Based</div>
+      <div class="why-desc">
+        Born from 10+ years of iOS production. Only the concepts that actually matter in real apps.
       </div>
     </div>
+  </div>
+</section>
 
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
-      <div style="font-size:28px;margin-bottom:10px;">📝</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Notes App (Simplified Apple Notes)</div>
-      <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Create/edit/delete notes. TabView + NavigationStack combo. UserDefaults persistence. Search with .searchable</div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;">
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-2 CRUD</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-3 Screen Structure</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-4 Optional</span>
+<!-- ── Creator ── -->
+<section class="creator-wrap fade-in">
+  <div class="creator-card">
+    <div class="creator-avatar">H</div>
+    <div class="creator-info">
+      <div class="creator-name">이현호 (Hyunho Lee)</div>
+      <div class="creator-role">iOS Developer · 개발자리 Creator</div>
+      <div class="creator-desc">
+        Teaching CS through the problems I've faced in production.
+        From "Why?" to "How?" — Top-Down, the way it should be taught.
+      </div>
+      <div class="creator-links">
+        <a href="https://github.com/M1zz" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://inf.run/4VzFE" target="_blank" rel="noopener">Inflearn</a>
       </div>
     </div>
-
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
-      <div style="font-size:28px;margin-bottom:10px;">🌤</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Weather App UI</div>
-      <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Clone Apple Weather UI (hardcoded data is OK). ScrollView, ZStack gradient backgrounds, GeometryReader scroll effects</div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;">
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-1 ZStack</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-1 GeometryReader</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-4 Modeling</span>
-      </div>
-    </div>
-
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;">
-      <div style="font-size:28px;margin-bottom:10px;">💰</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">Budget App</div>
-      <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Track income/expenses, filter by category, monthly totals. A comprehensive project that uses all of Stage 1</div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;">
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--orange-dim);color:var(--orange);border:1px solid #FF6B2B44;">All of Stage 1</span>
-      </div>
-    </div>
-
   </div>
 </section>
 
 <footer class="footer">
   개발자리 · Top-Down CS Curriculum for App Developers
 </footer>
+
 <script src="../assets/analytics.js"></script>
-<script src="../assets/progress.js"></script>
 </body>
 </html>

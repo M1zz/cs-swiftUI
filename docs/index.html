@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stage 1 — 일단 만든다 | 개발자리 CS 커리큘럼</title>
+  <title>개발자리 — SwiftUI Top-Down CS 커리큘럼</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
@@ -17,200 +17,187 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://m1zz.github.io/cs-swiftUI/og-image.png" />
   <style>
-    .hero {
-      padding: 64px 40px 56px;
-      max-width: 1100px; margin: 0 auto;
-      position: relative; z-index: 1;
+    /* ── Hero ── */
+    .home-hero {
+      max-width:860px; margin:0 auto; padding:96px 40px 72px;
+      position:relative; z-index:1; text-align:center;
     }
-    .hero::after {
+    .home-hero::before {
       content:''; position:absolute;
-      top:-60px; right:-80px;
-      width:420px; height:420px;
-      background: radial-gradient(circle, #FF6B2B12 0%, transparent 65%);
+      top:-80px; left:50%; transform:translateX(-50%);
+      width:700px; height:500px;
+      background:radial-gradient(circle, #FF6B2B08 0%, transparent 65%);
       pointer-events:none;
     }
-    .hero-title {
+    .hero-eyebrow {
+      font-family:'DM Mono',monospace; font-size:11px;
+      letter-spacing:.18em; text-transform:uppercase;
+      color:var(--orange); margin-bottom:24px;
+    }
+    .home-hero-title {
       font-family:'Space Grotesk',sans-serif;
-      font-size:clamp(48px,7vw,80px);
+      font-size:clamp(44px,7vw,80px);
       font-weight:800; line-height:1.0;
-      letter-spacing:-.035em; margin-bottom:16px;
+      letter-spacing:-.038em; margin-bottom:24px;
     }
-    .hero-title .accent { color:var(--orange); }
-    .hero-sub {
-      font-size:15px; color:var(--muted);
-      max-width:520px; line-height:1.75; margin-bottom:36px;
+    .home-hero-title .acc { color:var(--orange); }
+    .home-hero-sub {
+      font-size:17px; color:var(--muted);
+      max-width:520px; margin:0 auto 48px; line-height:1.85;
     }
-    .hero-meta { display:flex; gap:36px; flex-wrap:wrap; }
-    .meta-item { display:flex; flex-direction:column; gap:4px; }
-    .meta-label {
-      font-family:'DM Mono',monospace; font-size:10px;
-      letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+    .hero-cta-wrap { display:flex; flex-direction:column; align-items:center; gap:14px; }
+    .btn-hero {
+      display:inline-flex; align-items:center; gap:10px;
+      padding:18px 40px; background:var(--orange); color:#fff;
+      border-radius:12px; text-decoration:none;
+      font-family:'Space Grotesk',sans-serif; font-size:17px; font-weight:700;
+      transition:opacity .2s, transform .15s;
+      box-shadow:0 8px 32px #FF6B2B40;
     }
-    .meta-value {
-      font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16px;
+    .btn-hero:hover { opacity:.9; transform:translateY(-2px); box-shadow:0 12px 40px #FF6B2B50; }
+    .hero-hint {
+      font-family:'DM Mono',monospace; font-size:11px;
+      color:var(--muted); letter-spacing:.04em;
     }
+    .hero-hint a {
+      color:var(--muted); text-decoration:underline;
+      text-underline-offset:3px;
+      transition:color .2s;
+    }
+    .hero-hint a:hover { color:var(--text); }
 
-    /* Challenge cards */
-    .chapters {
-      max-width:1100px; margin:0 auto; padding:0 40px;
+    /* ── Stats ── */
+    .stats-row {
+      max-width:860px; margin:0 auto; padding:0 40px 80px;
+      display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
       position:relative; z-index:1;
     }
-    .chapters-label {
-      font-family:'DM Mono',monospace; font-size:10px;
-      letter-spacing:.15em; text-transform:uppercase;
-      color:var(--muted); margin-bottom:20px;
-    }
-    .chapter-grid {
-      display:grid; grid-template-columns:repeat(2,1fr); gap:14px;
-      margin-bottom:60px;
-    }
-    .chapter-card {
+    .stat-card {
       background:var(--surface); border:1px solid var(--border);
-      border-radius:var(--radius-lg); padding:28px;
-      text-decoration:none; display:block;
-      transition:border-color .2s, transform .2s, box-shadow .2s;
+      border-radius:var(--radius-lg); padding:22px 20px; text-align:center;
+    }
+    .stat-val {
+      font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:800;
+      color:var(--orange); margin-bottom:4px;
+    }
+    .stat-label {
+      font-family:'DM Mono',monospace; font-size:10px;
+      letter-spacing:.06em; color:var(--muted);
+    }
+
+    /* ── Path ── */
+    .path-wrap {
+      max-width:860px; margin:0 auto; padding:0 40px 80px;
+      position:relative; z-index:1;
+    }
+    .section-label {
+      font-family:'DM Mono',monospace; font-size:10px;
+      letter-spacing:.18em; text-transform:uppercase;
+      color:var(--muted); margin-bottom:24px; text-align:center;
+    }
+    .path-list { display:flex; flex-direction:column; gap:10px; }
+
+    .path-item {
+      display:flex; align-items:center; gap:20px;
+      background:var(--surface); border:1px solid var(--border);
+      border-radius:var(--radius-lg); padding:22px 24px;
       position:relative; overflow:hidden;
     }
-    .chapter-card:hover {
+    .path-item::before {
+      content:''; position:absolute; left:0; top:0; bottom:0;
+      width:3px;
+    }
+    .path-item.s1::before { background:var(--orange); }
+    .path-item.sg::before { background:var(--purple); }
+    .path-item.s2::before { background:var(--border2); }
+    .path-item.cc::before { background:var(--border2); }
+
+    .path-step {
+      font-family:'DM Mono',monospace; font-size:11px;
+      color:var(--muted); min-width:28px; flex-shrink:0;
+    }
+    .path-body { flex:1; }
+    .path-name {
+      font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700;
+      color:var(--text); margin-bottom:3px;
+    }
+    .path-desc { font-size:12px; color:var(--muted); line-height:1.5; }
+
+    /* active = Stage 1, highlighted */
+    .path-item.active-step {
       border-color:var(--orange);
-      transform:translateY(-3px);
-      box-shadow:0 10px 36px #FF6B2B16;
+      background:linear-gradient(135deg,var(--surface),var(--orange-dim));
     }
-    .ch-num {
+    .path-item.active-step .path-name { color:var(--orange); }
+    .path-item.active-step .path-step { color:var(--orange); }
+    .path-cta-inline {
       font-family:'DM Mono',monospace; font-size:11px;
-      letter-spacing:.08em; color:var(--muted); margin-bottom:12px;
+      color:var(--orange); white-space:nowrap; flex-shrink:0;
     }
-    .ch-emoji { font-size:32px; display:block; margin-bottom:14px; }
-    .ch-title {
-      font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:800;
-      color:var(--text); margin-bottom:6px; letter-spacing:-.02em;
-    }
-    .ch-problem {
-      font-size:12px; color:var(--muted); line-height:1.6;
-      font-style:italic; margin-bottom:16px;
-    }
-    .ch-topics {
-      display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;
-    }
-    .ch-topic {
+    .path-status {
       font-family:'DM Mono',monospace; font-size:10px;
-      padding:3px 8px; border-radius:6px;
-      background:var(--tag-bg); color:var(--muted);
-      border:1px solid var(--border2); letter-spacing:.03em;
+      color:var(--muted); white-space:nowrap; flex-shrink:0; letter-spacing:.04em;
     }
-    .ch-link {
-      font-family:'DM Mono',monospace; font-size:11px;
-      color:var(--orange); letter-spacing:.06em;
-      display:inline-flex; align-items:center; gap:6px;
-      transition:gap .2s;
-    }
-    .chapter-card:hover .ch-link { gap:10px; }
 
-    /* Progress strip */
-    .progress-strip {
-      max-width:1100px; margin:0 auto 56px; padding:0 40px;
+    /* ── Why ── */
+    .why-wrap {
+      max-width:860px; margin:0 auto; padding:0 40px 80px;
       position:relative; z-index:1;
     }
-    .progress-card {
+    .why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:24px; }
+    .why-card {
       background:var(--surface); border:1px solid var(--border);
-      border-radius:var(--radius-lg); padding:24px 28px;
-      display:flex; align-items:center; gap:28px;
+      border-radius:var(--radius-lg); padding:22px 20px;
     }
-    .prog-label {
-      font-family:'DM Mono',monospace; font-size:11px;
-      letter-spacing:.08em; text-transform:uppercase; color:var(--muted);
-      white-space:nowrap;
+    .why-icon { font-size:24px; margin-bottom:10px; }
+    .why-title {
+      font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:800;
+      color:var(--text); margin-bottom:6px;
     }
-    .prog-track {
-      flex:1; height:4px; background:var(--border2);
-      border-radius:100px; overflow:hidden;
-    }
-    .prog-fill {
-      height:100%; border-radius:100px;
-      background:linear-gradient(90deg,var(--orange),var(--yellow));
-      width:0; transition:width 1s cubic-bezier(.4,0,.2,1);
-    }
-    .prog-stages { display:flex; gap:20px; flex-wrap:wrap; }
-    .prog-item {
-      display:flex; align-items:center; gap:6px;
-      font-size:11px; color:var(--muted);
-    }
-    .prog-dot { width:8px; height:8px; border-radius:50%; }
-    .prog-dot.on  { background:var(--orange); }
-    .prog-dot.off { background:var(--border2); }
+    .why-desc { font-size:12px; color:var(--muted); line-height:1.75; }
 
-    /* 진행률 뱃지 */
-    .chapter-card { position:relative; }
-    .complete-badge {
-      position:absolute; top:14px; right:14px;
-      font-family:'DM Mono',monospace; font-size:9px; font-weight:600;
-      letter-spacing:.1em; padding:3px 10px; border-radius:100px;
-      background:linear-gradient(135deg,#2DA55D,#28C840); color:#fff;
-    }
-    .chapter-card.is-complete { border-color:#2DA55D44; }
-
-    /* 이메일 수집 */
-    .email-section {
-      max-width:1100px; margin:0 auto; padding:0 40px 24px;
-      position:relative; z-index:1;
-    }
-    .email-card {
-      background:linear-gradient(135deg,#1A1D2A,#2A2D40);
-      border-radius:var(--radius-lg); padding:40px 36px;
-      text-align:center; color:#fff;
-    }
-    .email-card h3 {
-      font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:800;
-      margin-bottom:8px; letter-spacing:-.02em;
-    }
-    .email-card p { font-size:13px; color:#9BA3C0; line-height:1.7; margin-bottom:24px; }
-    .email-note { font-size:11px; color:#6B7190; }
-
-    /* 크리에이터 프로필 */
-    .creator-section {
-      max-width:1100px; margin:0 auto; padding:0 40px 24px;
+    /* ── Creator ── */
+    .creator-wrap {
+      max-width:860px; margin:0 auto; padding:0 40px 80px;
       position:relative; z-index:1;
     }
     .creator-card {
       background:var(--surface); border:1px solid var(--border);
-      border-radius:var(--radius-lg); padding:32px 28px;
-      display:flex; align-items:center; gap:24px;
+      border-radius:var(--radius-lg); padding:28px;
+      display:flex; align-items:center; gap:20px;
     }
     .creator-avatar {
-      width:72px; height:72px; border-radius:50%;
+      width:60px; height:60px; border-radius:50%;
       background:linear-gradient(135deg,var(--orange),#FF9B5C);
       display:flex; align-items:center; justify-content:center;
-      font-size:32px; flex-shrink:0;
+      font-size:26px; flex-shrink:0;
     }
     .creator-info { flex:1; }
     .creator-name {
-      font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:800;
-      margin-bottom:4px;
+      font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:800; margin-bottom:3px;
     }
     .creator-role {
-      font-family:'DM Mono',monospace; font-size:11px;
-      color:var(--orange); letter-spacing:.06em; margin-bottom:8px;
+      font-family:'DM Mono',monospace; font-size:10px;
+      color:var(--orange); letter-spacing:.06em; margin-bottom:6px;
     }
-    .creator-desc { font-size:13px; color:var(--muted); line-height:1.7; }
-    .creator-links { display:flex; gap:8px; margin-top:12px; }
+    .creator-desc { font-size:12px; color:var(--muted); line-height:1.65; }
+    .creator-links { display:flex; gap:8px; margin-top:10px; }
     .creator-links a {
       font-family:'DM Mono',monospace; font-size:10px;
-      padding:4px 12px; border-radius:100px;
+      padding:3px 10px; border-radius:100px;
       border:1px solid var(--border2); color:var(--muted);
       text-decoration:none; transition:border-color .2s, color .2s;
     }
     .creator-links a:hover { border-color:var(--orange); color:var(--orange); }
 
     @media(max-width:768px){
-      .hero{padding:40px 20px 40px;}
-      .chapters{padding:0 20px;}
-      .chapter-grid{grid-template-columns:1fr;}
-      .progress-strip{padding:0 20px;}
-      .email-section{padding:0 20px 24px;}
-      .email-form{flex-direction:column;}
-      .creator-section{padding:0 20px 24px;}
-      .creator-card{flex-direction:column;text-align:center;}
-      .creator-links{justify-content:center;}
+      .home-hero { padding:56px 20px 48px; }
+      .stats-row,.path-wrap,.why-wrap,.creator-wrap { padding-left:20px; padding-right:20px; }
+      .stats-row { grid-template-columns:repeat(3,1fr); }
+      .why-grid { grid-template-columns:1fr; }
+      .creator-card { flex-direction:column; text-align:center; }
+      .creator-links { justify-content:center; }
+      .path-status { display:none; }
     }
   </style>
 </head>
@@ -219,304 +206,125 @@
 <nav class="nav"></nav>
 <script src="assets/nav.js"></script>
 
-<a href="setup.html" style="display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 40px;background:linear-gradient(90deg,#1A1D2A,#2A2D40);color:#fff;text-decoration:none;font-size:13px;font-weight:500;position:relative;z-index:1;">
-  <span style="font-size:16px;">🔧</span>
-  <span>처음이라면? <strong style="color:var(--orange);">Xcode & Swift 설치 가이드</strong>부터 시작하세요</span>
-  <span style="font-family:'DM Mono',monospace;font-size:11px;opacity:.6;margin-left:8px;">→</span>
-</a>
-
-<header class="hero fade-in">
-  <div class="badge badge-orange" style="margin-bottom:24px;">
-    <span class="badge-dot"></span>
-    Stage 1 · 4 챌린지 · 16 Topics
-  </div>
-  <h1 class="hero-title">
-    🛠 일단<br>
-    <span class="accent">만든다</span>
+<!-- ── Hero ── -->
+<section class="home-hero fade-in">
+  <div class="hero-eyebrow">코딩 경험 없어도 괜찮습니다</div>
+  <h1 class="home-hero-title">
+    처음부터<br>
+    <span class="acc">앱을 만든다</span>
   </h1>
-  <p class="hero-sub">
-    아무것도 없는 상태에서 시작해 화면을 띄우고, 상태를 관리하고, 여러 화면을 연결하고, Swift 문법의 벽을 넘는다.
+  <p class="home-hero-sub">
+    코딩을 한 번도 해본 적 없어도 됩니다.<br>
+    직접 앱을 만들면서 SwiftUI와 CS 개념을 익힙니다.<br>
+    빠르면 4주, 천천히 해도 8주면 충분합니다.
   </p>
-  <div class="hero-meta">
-    <div class="meta-item">
-      <span class="meta-label">핵심 기술</span>
-      <span class="meta-value">SwiftUI</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">상태 관리</span>
-      <span class="meta-value">@State · @Binding</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">언어</span>
-      <span class="meta-value">Swift 필수 문법</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">결과물</span>
-      <span class="meta-value">Todo 앱 완성</span>
-    </div>
-  </div>
-</header>
-
-<!-- 소셜 프루프 -->
-<section style="max-width:1100px;margin:0 auto;padding:0 40px 24px;position:relative;z-index:1;">
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;text-align:center;">
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:800;color:var(--orange);margin-bottom:4px;">10년+</div>
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.06em;color:var(--muted);">iOS 개발 경력</div>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;text-align:center;">
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:800;color:var(--orange);margin-bottom:4px;">6개</div>
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.06em;color:var(--muted);">실전 클론코딩 프로젝트</div>
-    </div>
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;text-align:center;">
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:800;color:var(--orange);margin-bottom:4px;">무료</div>
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.06em;color:var(--muted);">Stage 1 전체 커리큘럼</div>
-    </div>
+  <div class="hero-cta-wrap">
+    <a href="stage1.html" class="btn-hero">무료로 시작하기 →</a>
+    <p class="hero-hint">Mac이 있으면 됩니다 · <a href="setup.html">Xcode 설치 가이드</a> 포함</p>
   </div>
 </section>
 
-<!-- Step 0: 준비 -->
-<section class="chapters">
-  <div class="chapters-label">Step 0 — 먼저 준비</div>
-  <a href="setup.html" class="chapter-card fade-in" style="margin-bottom:14px;border-color:var(--orange);background:linear-gradient(135deg,var(--surface),var(--orange-dim));">
-    <div class="ch-num" style="color:var(--orange);">🔧 시작하기</div>
-    <div class="ch-title" style="font-size:22px;">Xcode & Swift 설치</div>
-    <div class="ch-problem">↳ 챌린지를 시작하려면 Mac에 Xcode가 필요하다</div>
-    <div class="ch-topics">
-      <span class="ch-topic">Swift란?</span>
-      <span class="ch-topic">Xcode란?</span>
-      <span class="ch-topic">설치 방법</span>
-      <span class="ch-topic">설치 확인</span>
-    </div>
-    <div class="ch-link">설치 가이드 열기 →</div>
-  </a>
-</section>
-
-<!-- Challenges -->
-<section class="chapters">
-  <div class="chapters-label">4 챌린지 — 마주치는 문제 순서대로</div>
-  <div class="chapter-grid">
-
-    <a href="1-1.html" class="chapter-card fade-in delay-1" data-chapter="1-1">
-      <div class="ch-num">챌린지 1-1</div>
-      <span class="ch-emoji">📱</span>
-      <div class="ch-title">화면에 뭔가 띄우기</div>
-      <div class="ch-problem">↳ "Hello World"를 앱에서 보고 싶다</div>
-      <div class="ch-topics">
-        <span class="ch-topic">View · body</span>
-        <span class="ch-topic">VStack/HStack/ZStack</span>
-        <span class="ch-topic">modifier</span>
-        <span class="ch-topic">@main</span>
-        <span class="ch-topic">Xcode Preview</span>
-        <span class="ch-topic">레이아웃 시스템</span>
-      </div>
-      <div class="ch-link">챌린지 열기 →</div>
-    </a>
-
-    <a href="1-2.html" class="chapter-card fade-in delay-2" data-chapter="1-2">
-      <div class="ch-num">챌린지 1-2</div>
-      <span class="ch-emoji">🔄</span>
-      <div class="ch-title">버튼 누르면 화면이 바뀌게</div>
-      <div class="ch-problem">↳ 버튼을 눌렀는데 텍스트가 안 바뀐다</div>
-      <div class="ch-topics">
-        <span class="ch-topic">@State</span>
-        <span class="ch-topic">@Binding</span>
-        <span class="ch-topic">단방향 데이터 흐름</span>
-        <span class="ch-topic">TextField</span>
-        <span class="ch-topic">List + ForEach</span>
-        <span class="ch-topic">Todo 앱 완성</span>
-      </div>
-      <div class="ch-link">챌린지 열기 →</div>
-    </a>
-
-    <a href="1-3.html" class="chapter-card fade-in delay-3" data-chapter="1-3">
-      <div class="ch-num">챌린지 1-3</div>
-      <span class="ch-emoji">🗂</span>
-      <div class="ch-title">여러 화면과 공유 상태</div>
-      <div class="ch-problem">↳ 화면이 2개인데 데이터를 어떻게 공유하는가</div>
-      <div class="ch-topics">
-        <span class="ch-topic">NavigationStack</span>
-        <span class="ch-topic">@StateObject</span>
-        <span class="ch-topic">@ObservedObject</span>
-        <span class="ch-topic">@Observable</span>
-        <span class="ch-topic">@EnvironmentObject</span>
-        <span class="ch-topic">TabView</span>
-      </div>
-      <div class="ch-link">챌린지 열기 →</div>
-    </a>
-
-    <a href="1-4.html" class="chapter-card fade-in delay-4" data-chapter="1-4">
-      <div class="ch-num">챌린지 1-4</div>
-      <span class="ch-emoji">✏️</span>
-      <div class="ch-title">막히는 Swift 문법</div>
-      <div class="ch-problem">↳ 컴파일 에러가 나는데 왜 나는지 모른다</div>
-      <div class="ch-topics">
-        <span class="ch-topic">Optional</span>
-        <span class="ch-topic">if let / guard let</span>
-        <span class="ch-topic">Array · Dictionary · Set</span>
-        <span class="ch-topic">Closure · [weak self]</span>
-        <span class="ch-topic">Xcode 에러 해석</span>
-      </div>
-      <div class="ch-link">챌린지 열기 →</div>
-    </a>
-
+<!-- ── Stats ── -->
+<div class="stats-row fade-in">
+  <div class="stat-card">
+    <div class="stat-val">무료</div>
+    <div class="stat-label">Stage 1 전체</div>
   </div>
-
-</section>
-
-<!-- Swift 핵심 문법 브릿지 -->
-<section style="max-width:1100px;margin:0 auto;padding:0 40px 24px;position:relative;z-index:1;">
-  <a href="swift-grammar.html" style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:28px 32px;background:linear-gradient(135deg,var(--surface),#7C5DC712);border:1px solid #9B7FFF44;border-radius:var(--radius-lg);text-decoration:none;flex-wrap:wrap;">
-    <div>
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:8px;">Stage 1 → Stage 2 브릿지</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:800;color:var(--text);letter-spacing:-.02em;margin-bottom:6px;">🔩 Swift 핵심 문법</div>
-      <div style="font-size:13px;color:var(--muted);line-height:1.6;">Computed Property · struct vs class · Access Control · init · Type Casting · static · lazy</div>
-    </div>
-    <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--purple);white-space:nowrap;">학습하기 →</div>
-  </a>
-</section>
-
-<!-- Stage 2 배너 -->
-<section style="max-width:1100px;margin:0 auto 60px;padding:0 40px;position:relative;z-index:1;">
-  <a href="stage2.html" style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:28px 32px;background:linear-gradient(135deg,var(--surface),var(--blue-dim));border:1px solid #5AB4FF44;border-radius:var(--radius-lg);text-decoration:none;flex-wrap:wrap;">
-    <div>
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">다음 단계</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.02em;margin-bottom:6px;">Stage 2 — 제대로 만든다 🏗</div>
-      <div style="font-size:13px;color:var(--muted);line-height:1.6;">SwiftData · URLSession · Protocol · Animation — 실제 앱이 되는 4가지 챌린지</div>
-    </div>
-    <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--blue);white-space:nowrap;">Stage 2 시작하기 →</div>
-  </a>
-</section>
-
-<!-- 클론 코딩 추천 -->
-<section style="max-width:1100px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
-  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
-    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);">Stage 1을 마쳤다면 — Clone Coding</div>
-    <a href="clone-coding.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--orange);color:#fff;border-radius:8px;text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;transition:opacity .2s;">실전 프로젝트 보러가기 →</a>
+  <div class="stat-card">
+    <div class="stat-val">8개+</div>
+    <div class="stat-label">챌린지</div>
   </div>
-
-  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;">
-
-    <a href="clone-coding.html" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;text-decoration:none;display:block;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
-      <div style="font-size:28px;margin-bottom:10px;">🧮</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">계산기</div>
-      <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Apple 기본 계산기 UI 클론. Grid 레이아웃, 버튼 스타일링, @State로 연산 로직 구현</div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px;">
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-1 레이아웃</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-2 @State</span>
-      </div>
-      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);">코드 + PDF 보기 →</div>
-    </a>
-
-    <a href="clone-coding.html" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;text-decoration:none;display:block;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
-      <div style="font-size:28px;margin-bottom:10px;">⏱</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">타이머 / 스톱워치</div>
-      <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Apple Clock 앱의 타이머 탭 클론. Timer.publish, @State, 원형 프로그레스 바, 시작/정지/리셋</div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px;">
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-1 레이아웃</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-2 @State</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-4 클로저</span>
-      </div>
-      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);">코드 + PDF 보기 →</div>
-    </a>
-
-    <a href="clone-coding.html" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;text-decoration:none;display:block;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
-      <div style="font-size:28px;margin-bottom:10px;">🛒</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">장바구니 앱</div>
-      <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">상품 목록 → 장바구니 담기 → 수량 조절 → 총 금액 계산. List, NavigationStack, @Observable로 상태 공유</div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px;">
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-2 List</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-3 상태 공유</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-4 고차함수</span>
-      </div>
-      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);">코드 + PDF 보기 →</div>
-    </a>
-
-    <a href="clone-coding.html" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;text-decoration:none;display:block;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
-      <div style="font-size:28px;margin-bottom:10px;">📝</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">메모 앱 (Apple Notes 간소판)</div>
-      <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">메모 작성/편집/삭제. TabView + NavigationStack 조합. UserDefaults 저장. 검색 기능 (.searchable)</div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px;">
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-2 CRUD</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-3 화면 구조</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-4 Optional</span>
-      </div>
-      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);">코드 + PDF 보기 →</div>
-    </a>
-
-    <a href="clone-coding.html" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;text-decoration:none;display:block;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
-      <div style="font-size:28px;margin-bottom:10px;">🌤</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">날씨 앱 UI</div>
-      <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">Apple Weather 앱 UI 클론. ScrollView, ZStack 그라디언트 배경, GeometryReader + 실제 API 연결</div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px;">
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-1 ZStack</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">1-1 GeometryReader</span>
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--tag-bg);color:var(--muted);border:1px solid var(--border);">Stage 2-2 API</span>
-      </div>
-      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);">코드 + PDF 보기 →</div>
-    </a>
-
-    <a href="clone-coding.html" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;text-decoration:none;display:block;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
-      <div style="font-size:28px;margin-bottom:10px;">💰</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:4px;">가계부 앱</div>
-      <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">수입/지출 기록, 카테고리별 필터, 월별 합계 + Swift Charts. Stage 1~2 종합 프로젝트</div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px;">
-        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;background:var(--orange-dim);color:var(--orange);border:1px solid #FF6B2B44;">Stage 1+2 전체</span>
-      </div>
-      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);">코드 + PDF 보기 →</div>
-    </a>
-
+  <div class="stat-card">
+    <div class="stat-val">10년+</div>
+    <div class="stat-label">iOS 개발 경력</div>
   </div>
-</section>
+</div>
 
-<!-- 멘토링 & 커뮤니티 -->
-<section style="max-width:1100px;margin:0 auto;padding:0 40px 24px;position:relative;z-index:1;">
-  <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">커뮤니티 & 멘토링</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+<!-- ── Learning Path ── -->
+<section class="path-wrap fade-in">
+  <div class="section-label">커리큘럼 로드맵</div>
+  <div class="path-list">
 
-    <!-- 카카오톡 오픈채팅 -->
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;display:flex;flex-direction:column;gap:16px;">
-      <div>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">커뮤니티</div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:800;color:var(--text);margin-bottom:6px;">카카오톡 오픈채팅 💬</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.7;">학습 중 막히는 부분을 나누고, 같은 길을 걷는 사람들과 함께하는 공간. QR 코드로 입장하세요.</div>
+    <a href="blog.html" class="path-item" style="text-decoration:none;border-color:var(--purple);background:linear-gradient(135deg,var(--surface),#7C5DC70A);">
+      <div class="path-step" style="color:var(--purple);">00</div>
+      <div class="path-body">
+        <div class="path-name" style="color:var(--purple);">✍️ 기술 블로그 시작하기</div>
+        <div class="path-desc">왜 기록해야 하는가, 무엇이 달라지는가, 나에게 맞는 플랫폼 선택. 코드 전에 습관부터.</div>
       </div>
-      <div style="display:flex;align-items:center;gap:16px;">
-        <img src="kakao-talk-qr.jpg" alt="카카오톡 QR" style="width:90px;height:90px;border-radius:10px;object-fit:cover;border:1px solid var(--border);">
-        <div>
-          <div style="font-size:12px;font-weight:500;color:var(--text);margin-bottom:4px;">개발자리 iOS 스터디</div>
-          <div style="font-size:11px;color:var(--muted);line-height:1.6;">QR 스캔 또는<br>카카오톡에서 검색</div>
-        </div>
+      <div class="path-cta-inline" style="color:var(--purple);">먼저 읽기 →</div>
+    </a>
+
+    <div class="path-connector"><div class="conn-line"></div></div>
+
+    <div class="path-item active-step">
+      <div class="path-step">01</div>
+      <div class="path-body">
+        <div class="path-name">🛠 Stage 1 — 일단 만든다</div>
+        <div class="path-desc">View, @State, NavigationStack, Swift 문법 — Todo 앱 완성까지. <strong>무료.</strong></div>
       </div>
-      <a href="https://open.kakao.com/o/p8FjWFli" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;background:#FEE500;color:#191919;border-radius:10px;text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;transition:opacity .2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-        💬 카카오톡 채팅방 참여하기
-      </a>
+      <div class="path-cta-inline">← 지금 여기</div>
     </div>
 
-    <!-- 멘토링 & 코드 리뷰 -->
-    <div style="background:linear-gradient(135deg,var(--surface),var(--orange-dim));border:1px solid #FF6B2B44;border-radius:var(--radius-lg);padding:28px;display:flex;flex-direction:column;gap:16px;">
-      <div>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;">1:1 멘토링</div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:800;color:var(--text);margin-bottom:6px;">멘토링 & 코드 리뷰 🧑‍💻</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.7;">커리큘럼 방향 설정, 과제 피드백, 포트폴리오 리뷰.<br>유료 코드 리뷰는 멘토링 신청 시 함께 문의해주세요.</div>
+    <div class="path-item sg">
+      <div class="path-step">02</div>
+      <div class="path-body">
+        <div class="path-name">🔩 Swift 핵심 문법 브릿지</div>
+        <div class="path-desc">struct vs class, Protocol, Computed Property — Stage 2 진입 전 필수</div>
       </div>
-      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:8px;">
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;color:var(--text);">₩20,000</div>
-        <div style="font-size:11px;color:var(--muted);">/ 30분</div>
+      <div class="path-status">Stage 1 후</div>
+    </div>
+
+    <div class="path-item s2">
+      <div class="path-step">03</div>
+      <div class="path-body">
+        <div class="path-name">🏗 Stage 2 — 제대로 만든다</div>
+        <div class="path-desc">SwiftData · URLSession · async/await · Animation · MVVM</div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <a href="https://inf.run/4VzFE" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;background:var(--orange);color:white;border-radius:10px;text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;transition:opacity .2s;">
-          멘토링 신청하기 →
-        </a>
-        <div style="font-size:11px;color:var(--muted);text-align:center;font-family:'DM Mono',monospace;">코드 리뷰 문의 포함</div>
+      <div class="path-status">Stage 1 후</div>
+    </div>
+
+    <div class="path-item cc">
+      <div class="path-step">04</div>
+      <div class="path-body">
+        <div class="path-name">📱 Clone Coding — 실전 프로젝트</div>
+        <div class="path-desc">계산기, 타이머, 장바구니, 메모 앱, 날씨 앱, 가계부 — 완성 코드 + PDF 가이드</div>
       </div>
+      <div class="path-status">유료</div>
     </div>
 
   </div>
 </section>
 
-<!-- 크리에이터 프로필 -->
-<section class="creator-section">
+<!-- ── Why ── -->
+<section class="why-wrap fade-in">
+  <div class="section-label">왜 Top-Down인가</div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🎯</div>
+      <div class="why-title">문제 우선</div>
+      <div class="why-desc">
+        "왜 버튼을 눌렀는데 화면이 안 바뀌지?" 문제를 먼저 마주치고, 해결하며 @State를 익힙니다.
+      </div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🔗</div>
+      <div class="why-title">연결된 커리큘럼</div>
+      <div class="why-desc">
+        각 챌린지는 이전 결과물 위에 쌓입니다. 커리큘럼 전체가 하나의 이야기입니다.
+      </div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🛠</div>
+      <div class="why-title">실무 기반</div>
+      <div class="why-desc">
+        10년+ iOS 실무에서 나온 커리큘럼. 현업에서 정말 쓰는 개념만 다룹니다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Creator ── -->
+<section class="creator-wrap fade-in">
   <div class="creator-card">
     <div class="creator-avatar">H</div>
     <div class="creator-info">
@@ -534,12 +342,10 @@
   </div>
 </section>
 
-
 <footer class="footer">
   개발자리 · 앱 개발자를 위한 Top-Down CS 커리큘럼
 </footer>
 
 <script src="assets/analytics.js"></script>
-<script src="assets/progress.js"></script>
 </body>
 </html>
