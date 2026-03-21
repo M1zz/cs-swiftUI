@@ -321,7 +321,7 @@
 
     <a href="1-1.html" class="chapter-card fade-in delay-1" data-chapter="1-1">
       <span style="position:absolute;top:14px;right:14px;font-family:'DM Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.08em;padding:2px 8px;border-radius:100px;background:linear-gradient(135deg,#2DA55D,#28C840);color:#fff;">FREE</span>
-      <div class="ch-num">챌린지 1-1</div>
+      <div class="ch-num" style="display:flex;justify-content:space-between;align-items:center;">챌린지 1-1 <span style="color:var(--muted);font-size:9px;">⏱ 약 4시간</span></div>
       <span class="ch-emoji">📱</span>
       <div class="ch-title">화면에 뭔가 띄우기</div>
       <div class="ch-problem">↳ "Hello World"를 앱에서 보고 싶다</div>
@@ -338,7 +338,7 @@
 
     <a href="1-2.html" class="chapter-card fade-in delay-2" data-chapter="1-2">
       <span style="position:absolute;top:14px;right:14px;font-family:'DM Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.08em;padding:2px 8px;border-radius:100px;background:linear-gradient(135deg,#2DA55D,#28C840);color:#fff;">FREE</span>
-      <div class="ch-num">챌린지 1-2</div>
+      <div class="ch-num" style="display:flex;justify-content:space-between;align-items:center;">챌린지 1-2 <span style="color:var(--muted);font-size:9px;">⏱ 약 6시간</span></div>
       <span class="ch-emoji">🔄</span>
       <div class="ch-title">버튼 누르면 화면이 바뀌게</div>
       <div class="ch-problem">↳ 버튼을 눌렀는데 텍스트가 안 바뀐다</div>
@@ -355,7 +355,7 @@
 
     <a href="1-3.html" class="chapter-card fade-in delay-3" data-chapter="1-3">
       <span style="position:absolute;top:14px;right:14px;font-family:'DM Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.08em;padding:2px 8px;border-radius:100px;background:linear-gradient(135deg,#2DA55D,#28C840);color:#fff;">FREE</span>
-      <div class="ch-num">챌린지 1-3</div>
+      <div class="ch-num" style="display:flex;justify-content:space-between;align-items:center;">챌린지 1-3 <span style="color:var(--muted);font-size:9px;">⏱ 약 5시간</span></div>
       <span class="ch-emoji">🗂</span>
       <div class="ch-title">여러 화면과 공유 상태</div>
       <div class="ch-problem">↳ 화면이 2개인데 데이터를 어떻게 공유하는가</div>
@@ -372,7 +372,7 @@
 
     <a href="1-4.html" class="chapter-card fade-in delay-4" data-chapter="1-4">
       <span style="position:absolute;top:14px;right:14px;font-family:'DM Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.08em;padding:2px 8px;border-radius:100px;background:linear-gradient(135deg,#2DA55D,#28C840);color:#fff;">FREE</span>
-      <div class="ch-num">챌린지 1-4</div>
+      <div class="ch-num" style="display:flex;justify-content:space-between;align-items:center;">챌린지 1-4 <span style="color:var(--muted);font-size:9px;">⏱ 약 7시간</span></div>
       <span class="ch-emoji">✏️</span>
       <div class="ch-title">막히는 Swift 문법</div>
       <div class="ch-problem">↳ 컴파일 에러가 나는데 왜 나는지 모른다</div>
@@ -394,7 +394,10 @@
 <section style="max-width:1100px;margin:0 auto;padding:0 40px 24px;position:relative;z-index:1;">
   <a href="swift-grammar.html" style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:28px 32px;background:linear-gradient(135deg,var(--surface),#7C5DC712);border:1px solid #9B7FFF44;border-radius:var(--radius-lg);text-decoration:none;flex-wrap:wrap;">
     <div>
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:8px;">Stage 1 → Stage 2 브릿지</div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);">Stage 1 → Stage 2 브릿지</div>
+        <span style="font-family:'DM Mono',monospace;font-size:9px;padding:2px 8px;border-radius:100px;background:#7C5DC718;color:var(--purple);border:1px solid #9B7FFF44;font-weight:600;">필수</span>
+      </div>
       <div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:800;color:var(--text);letter-spacing:-.02em;margin-bottom:6px;">🔩 Swift 핵심 문법</div>
       <div style="font-size:13px;color:var(--muted);line-height:1.6;">Computed Property · struct vs class · Access Control · init · Type Casting · static · lazy</div>
     </div>
@@ -414,17 +417,24 @@
   </a>
 </section>
 
-<!-- 클론 코딩 추천 -->
+<!-- 클론 코딩 추천 (Stage 1 완료 후) -->
 <section style="max-width:1100px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
-  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
-    <div style="display:flex;align-items:center;gap:10px;">
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);">Stage 1을 마쳤다면 — Clone Coding</div>
-      <span style="font-family:'DM Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.06em;padding:2px 8px;border-radius:100px;background:var(--orange-dim);color:var(--orange);border:1px solid #FF6B2B44;">유료 · 각 ₩9,900</span>
-    </div>
-    <a href="clone-coding.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--orange);color:#fff;border-radius:8px;text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;transition:opacity .2s;">전체 보기 →</a>
-  </div>
-
-  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;">
+  <details style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
+    <summary style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px;cursor:pointer;list-style:none;-webkit-appearance:none;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:20px;">📱</span>
+        <div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;color:var(--text);">Stage 1을 마쳤다면? 실전 프로젝트로 연습하기</div>
+          <div style="font-size:11px;color:var(--muted);">클론 코딩 6개 프로젝트 · 완성 코드 + PDF 가이드</div>
+        </div>
+      </div>
+      <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);flex-shrink:0;">펼치기 ▾</span>
+    </summary>
+    <div style="padding:0 24px 24px;">
+      <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:16px;">
+        <a href="clone-coding.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--orange);color:#fff;border-radius:8px;text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;transition:opacity .2s;">전체 보기 →</a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;">
 
     <a href="clone-coding.html" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;text-decoration:none;display:block;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='var(--border)'">
       <div style="font-size:28px;margin-bottom:10px;">🧮</div>
@@ -513,7 +523,9 @@
       </div>
     </a>
 
-  </div>
+      </div>
+    </div>
+  </details>
 </section>
 
 <!-- 멘토링 & 커뮤니티 -->

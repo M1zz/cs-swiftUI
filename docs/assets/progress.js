@@ -117,32 +117,28 @@
       '<div style="background:#fff;border-radius:20px;max-width:480px;width:100%;padding:40px 32px;text-align:center;position:relative;">' +
         '<button onclick="this.closest(\'#stage-complete-modal\').remove()" style="position:absolute;top:14px;right:14px;background:none;border:none;font-size:20px;cursor:pointer;color:#6B7190;">×</button>' +
         '<div style="font-size:48px;margin-bottom:16px;">🎉</div>' +
-        '<div style="font-family:Syne,sans-serif;font-size:24px;font-weight:800;margin-bottom:8px;">Stage 1 완료!</div>' +
-        '<div style="font-size:14px;color:#6B7190;line-height:1.7;margin-bottom:28px;">4개 챌린지를 모두 마쳤습니다.<br>다음 단계를 선택하세요.</div>' +
+        '<div style="font-family:Space Grotesk,sans-serif;font-size:24px;font-weight:800;margin-bottom:8px;">Stage 1 완료!</div>' +
+        '<div style="font-size:14px;color:#6B7190;line-height:1.7;margin-bottom:8px;">View, @State, @Binding, NavigationStack, Swift 문법을 배웠습니다.</div>' +
+        '<div style="font-size:12px;color:#9BA3C0;margin-bottom:24px;">다음 단계로 넘어가세요.</div>' +
         '<div style="display:flex;flex-direction:column;gap:10px;">' +
-          '<a href="clone-coding.html" style="display:flex;align-items:center;gap:12px;padding:16px 20px;background:linear-gradient(135deg,#FFF3ED,#fff);border:1px solid #FF6B2B44;border-radius:14px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor=\'#FF6B2B\'" onmouseout="this.style.borderColor=\'#FF6B2B44\'">' +
-            '<span style="font-size:24px;">🛠</span>' +
+          '<a href="swift-grammar.html" style="display:flex;align-items:center;gap:12px;padding:18px 20px;background:linear-gradient(135deg,#EDF6FF,#fff);border:2px solid #2E8BD8;border-radius:14px;text-decoration:none;transition:border-color .2s;">' +
+            '<span style="font-size:24px;">🔩</span>' +
             '<div style="text-align:left;flex:1;">' +
-              '<div style="font-family:Syne,sans-serif;font-size:14px;font-weight:700;color:#1A1D2A;">클론 코딩 실전 프로젝트</div>' +
-              '<div style="font-size:11px;color:#6B7190;">배운 개념으로 진짜 앱을 만들어보세요</div>' +
-            '</div>' +
-            '<span style="font-family:DM Mono,monospace;font-size:11px;color:#FF6B2B;">→</span>' +
-          '</a>' +
-          '<a href="stage2.html" style="display:flex;align-items:center;gap:12px;padding:16px 20px;background:linear-gradient(135deg,#EDF6FF,#fff);border:1px solid #5AB4FF44;border-radius:14px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor=\'#2E8BD8\'" onmouseout="this.style.borderColor=\'#5AB4FF44\'">' +
-            '<span style="font-size:24px;">🏗</span>' +
-            '<div style="text-align:left;flex:1;">' +
-              '<div style="font-family:Syne,sans-serif;font-size:14px;font-weight:700;color:#1A1D2A;">Stage 2 — 제대로 만든다</div>' +
-              '<div style="font-size:11px;color:#6B7190;">SwiftData · URLSession · Protocol · Animation</div>' +
+              '<div style="display:flex;align-items:center;gap:8px;">' +
+                '<span style="font-family:Space Grotesk,sans-serif;font-size:15px;font-weight:700;color:#1A1D2A;">Swift 핵심 문법 → Stage 2</span>' +
+                '<span style="font-family:DM Mono,monospace;font-size:9px;padding:2px 6px;border-radius:100px;background:#2E8BD814;color:#2E8BD8;">추천</span>' +
+              '</div>' +
+              '<div style="font-size:11px;color:#6B7190;">struct vs class, Protocol 복습 후 Stage 2로 넘어가세요</div>' +
             '</div>' +
             '<span style="font-family:DM Mono,monospace;font-size:11px;color:#2E8BD8;">→</span>' +
           '</a>' +
-          '<a href="https://inf.run/4VzFE" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:12px;padding:16px 20px;background:var(--surface,#F7F8FA);border:1px solid #E2E4EA;border-radius:14px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor=\'#FF6B2B\'" onmouseout="this.style.borderColor=\'#E2E4EA\'">' +
-            '<span style="font-size:24px;">🧑‍💻</span>' +
+          '<a href="clone-coding.html" style="display:flex;align-items:center;gap:12px;padding:14px 20px;background:var(--surface,#F7F8FA);border:1px solid #E2E4EA;border-radius:14px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor=\'#FF6B2B\'" onmouseout="this.style.borderColor=\'#E2E4EA\'">' +
+            '<span style="font-size:20px;">📱</span>' +
             '<div style="text-align:left;flex:1;">' +
-              '<div style="font-family:Syne,sans-serif;font-size:14px;font-weight:700;color:#1A1D2A;">1:1 멘토링 받기</div>' +
-              '<div style="font-size:11px;color:#6B7190;">방향 설정, 포트폴리오 리뷰, 코드 리뷰</div>' +
+              '<div style="font-family:Space Grotesk,sans-serif;font-size:13px;font-weight:700;color:#1A1D2A;">클론 코딩으로 연습하기</div>' +
+              '<div style="font-size:10px;color:#6B7190;">Stage 2와 병행 가능</div>' +
             '</div>' +
-            '<span style="font-family:DM Mono,monospace;font-size:11px;color:#6B7190;">→</span>' +
+            '<span style="font-family:DM Mono,monospace;font-size:10px;color:#6B7190;">→</span>' +
           '</a>' +
         '</div>' +
       '</div>';
