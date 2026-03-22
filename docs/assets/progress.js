@@ -135,8 +135,8 @@
           '<a href="clone-coding.html" style="display:flex;align-items:center;gap:12px;padding:14px 20px;background:var(--surface,#F7F8FA);border:1px solid #E2E4EA;border-radius:14px;text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor=\'#FF6B2B\'" onmouseout="this.style.borderColor=\'#E2E4EA\'">' +
             '<span style="font-size:20px;">📱</span>' +
             '<div style="text-align:left;flex:1;">' +
-              '<div style="font-family:Space Grotesk,sans-serif;font-size:13px;font-weight:700;color:#1A1D2A;">클론 코딩으로 연습하기</div>' +
-              '<div style="font-size:10px;color:#6B7190;">Stage 2와 병행 가능</div>' +
+              '<div style="font-family:Space Grotesk,sans-serif;font-size:13px;font-weight:700;color:#1A1D2A;">이미 배운 걸로 앱 만들어보기</div>' +
+              '<div style="font-size:10px;color:#6B7190;">6개 실전 프로젝트</div>' +
             '</div>' +
             '<span style="font-family:DM Mono,monospace;font-size:10px;color:#6B7190;">→</span>' +
           '</a>' +
