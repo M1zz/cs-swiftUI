@@ -975,19 +975,8 @@ struct ProgressRing: View {
   개발자리 · Stage 2 — Challenge 2-4 · Building Animated UI
 </footer>
 
+<script src="../assets/highlight.js"></script>
 <script>
-  function highlightSwift(el) {
-    let html = el.textContent;
-    html = html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    html = html.replace(/(\/\/.*)/gm,'<span class="cm">$1</span>');
-    html = html.replace(/"([^"]*?)"/g,'<span class="str">"$1</span>');
-    html = html.replace(/@(\w+)/g,'<span class="pr">@$1</span>');
-    html = html.replace(/#(\w+)/g,'<span class="pr">#$1</span>');
-    html = html.replace(/(<[^>]+>)|\b(struct|class|var|let|func|import|return|if|else|guard|for|in|case|enum|protocol|some|private|true|false|nil|self|mutating|static|init|try|throw|throws|async|await|actor|do|catch|extension|where|typealias|inout|switch|any)\b/g, (m, tag, kw) => tag || `<span class="kw">${kw}</span>`);
-    html = html.replace(/\b(\d+\.?\d*)\b/g,'<span class="num">$1</span>');
-    el.innerHTML = html;
-  }
-  document.querySelectorAll('.swift-code').forEach(highlightSwift);
 
   const sections = document.querySelectorAll('.content-section');
   const previews = document.querySelectorAll('.preview-content');

@@ -1032,18 +1032,8 @@ struct Product: Identifiable, Codable {
   devjari · Stage 1.5 — Essential Swift Grammar
 </footer>
 
+<script src="../assets/highlight.js"></script>
 <script>
-  function highlightSwift(el) {
-    let html = el.textContent;
-    html = html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    html = html.replace(/(\/\/.*)/gm,'<span class="cm">$1</span>');
-    html = html.replace(/"([^"]*?)"/g,'<span class="str">"$1"</span>');
-    html = html.replace(/@(\w+)/g,'<span class="pr">@$1</span>');
-    html = html.replace(/(<[^>]+>)|\b(struct|class|var|let|func|import|return|if|else|guard|for|in|case|enum|protocol|some|private|fileprivate|internal|public|open|true|false|nil|self|mutating|static|init|try|throw|throws|async|await|actor|do|catch|lazy|inout|defer|convenience|override|super|get|set|willSet|didSet|is|as)\b/g, (m, tag, kw) => tag || `<span class="kw">${kw}</span>`);
-    html = html.replace(/\b(\d+\.?\d*)\b/g,'<span class="num">$1</span>');
-    el.innerHTML = html;
-  }
-  document.querySelectorAll('.swift-code').forEach(highlightSwift);
 
   const sections = document.querySelectorAll('.content-section');
   const previews = document.querySelectorAll('.preview-content');
