@@ -149,6 +149,7 @@
     { pattern: /2-3\.html/,           label: 'challenge_2_3' },
     { pattern: /2-4\.html/,           label: 'challenge_2_4' },
     { pattern: /swift-grammar/,       label: 'swift_grammar' },
+    { pattern: /swift-data-structures/, label: 'next_funnel_data_structures' },
     { pattern: /setup\.html/,         label: 'setup_guide' },
     { pattern: /github\.com/,         label: 'github_profile' },
   ];
@@ -185,6 +186,14 @@
       if (ctaLabel === 'kakao_openchat') {
         gtag('event', 'conversion_kakao', base({ link_text: text }));
       }
+      // 다음 퍼널(자료구조) 클릭 전환
+      if (ctaLabel === 'next_funnel_data_structures') {
+        gtag('event', 'conversion_next_funnel', base({
+          destination: 'swift-data-structures',
+          link_text: text,
+          from_page: PAGE_TYPE
+        }));
+      }
     } else if (href) {
       // 내부 링크 클릭
       gtag('event', 'internal_click', base({
@@ -204,8 +213,10 @@
       { sel: '.path-item.s2, [data-track="stage2_section"]',       name: 'section_stage2_path' },
       { sel: '.creator-card, .creator-wrap',                       name: 'section_creator' },
       { sel: '.email-card',                                        name: 'section_notify' },
-      // stage1.html 멘토링 카드: 부모 grid의 두 번째 자식
+      // stage1.html 멘토링 카드
       { sel: '[href="https://inf.run/4VzFE"]',                     name: 'section_mentoring_cta' },
+      // 다음 퍼널 배너 (자료구조)
+      { sel: '[href*="swift-data-structures"]',                     name: 'section_next_funnel_ds' },
     ];
 
     SECTION_SELECTORS.forEach(function (item) {
@@ -305,6 +316,15 @@
   }
   if (visitedStages.clone) {
     gtag('event', 'funnel_clone_reached', base({ depth: progressDepth }));
+  }
+
+  // ── 11. 다음 퍼널 클릭 리포트 ──────────────────
+  // swift-data-structures 링크가 있는 페이지에서 노출+클릭을 추적
+  var dsLink = document.querySelector('a[href*="swift-data-structures"]');
+  if (dsLink) {
+    gtag('event', 'next_funnel_available', base({
+      destination: 'swift-data-structures'
+    }));
   }
 
 })();
