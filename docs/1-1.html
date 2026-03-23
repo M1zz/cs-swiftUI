@@ -630,184 +630,102 @@ VStack {
         <div class="phone-notch"></div>
         <div class="phone-screen">
 
-          <!-- Preview 1: ContentView 구조 -->
+          <!-- Preview 1: ContentView -->
           <div id="pv-1" class="preview-content active">
-            <div class="preview-label">ContentView.swift</div>
-            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
-              <div style="font-size:9px;color:#8E8E93;font-family:'DM Mono',monospace;letter-spacing:.05em;">struct ContentView: View</div>
-              <div style="width:90%;border:1.5px dashed #E85D1A44;border-radius:12px;padding:12px;text-align:center;">
-                <div style="font-size:8px;color:#E85D1A;font-family:'DM Mono',monospace;margin-bottom:8px;">var body: some View</div>
-                <span style="font-size:24px;font-weight:700;color:#E85D1A;">Hello, World!</span>
-              </div>
-              <div style="font-size:8px;color:#8E8E93;margin-top:4px;">body 안에 적은 것이 화면에 나타남</div>
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:28px;font-weight:700;color:#E85D1A;">Hello, World!</span>
             </div>
           </div>
 
-          <!-- Preview 2: Text, Image, Button 3종 -->
+          <!-- Preview 2: Text, Image, Button -->
           <div id="pv-2" class="preview-content">
-            <div class="preview-label">기본 뷰 3종</div>
-            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 10px;">
-              <div style="display:flex;align-items:center;gap:8px;">
-                <div style="font-size:8px;color:#8E8E93;font-family:'DM Mono',monospace;width:36px;text-align:right;">Text</div>
-                <div style="flex:1;background:rgba(0,0,0,0.03);border-radius:8px;padding:8px 12px;font-size:15px;font-weight:600;">개발자리</div>
-              </div>
-              <div style="display:flex;align-items:center;gap:8px;">
-                <div style="font-size:8px;color:#8E8E93;font-family:'DM Mono',monospace;width:36px;text-align:right;">Image</div>
-                <div style="flex:1;background:rgba(0,0,0,0.03);border-radius:8px;padding:8px 12px;text-align:center;">
-                  <span style="font-size:28px;">⭐</span>
-                  <div style="font-size:8px;color:#8E8E93;margin-top:2px;">SF Symbol</div>
-                </div>
-              </div>
-              <div style="display:flex;align-items:center;gap:8px;">
-                <div style="font-size:8px;color:#8E8E93;font-family:'DM Mono',monospace;width:36px;text-align:right;">Button</div>
-                <div style="flex:1;background:#007AFF;border-radius:10px;padding:10px;text-align:center;color:#fff;font-size:14px;font-weight:600;">시작하기</div>
-              </div>
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;">
+              <span style="font-size:22px;font-weight:700;color:#1A1D2A;">개발자리</span>
+              <span style="font-size:48px;color:#FFD60A;">&#9733;</span>
+              <span style="display:inline-block;padding:10px 28px;background:#007AFF;color:#fff;border-radius:10px;font-size:16px;font-weight:500;">시작하기</span>
             </div>
           </div>
 
-          <!-- Preview 3: VStack / HStack / ZStack -->
+          <!-- Preview 3: Stacks -->
           <div id="pv-3" class="preview-content">
-            <div class="preview-label">Stack 3종 비교</div>
-            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:0 8px;">
-              <div>
-                <div style="font-size:8px;color:#8E8E93;font-family:'DM Mono',monospace;margin-bottom:4px;">VStack — 세로 정렬</div>
-                <div style="display:flex;flex-direction:column;gap:3px;">
-                  <div style="background:#FF6B2B20;border-radius:6px;padding:5px 10px;font-size:11px;text-align:center;">A</div>
-                  <div style="background:#FF6B2B30;border-radius:6px;padding:5px 10px;font-size:11px;text-align:center;">B</div>
-                </div>
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:24px;padding:0 8px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:rgba(128,128,128,0.08);border-radius:10px;">
+                <span style="font-size:15px;">왼쪽</span>
+                <span style="font-size:15px;">오른쪽</span>
               </div>
-              <div>
-                <div style="font-size:8px;color:#8E8E93;font-family:'DM Mono',monospace;margin-bottom:4px;">HStack — 가로 정렬</div>
-                <div style="display:flex;gap:3px;">
-                  <div style="flex:1;background:#007AFF20;border-radius:6px;padding:5px;font-size:11px;text-align:center;">A</div>
-                  <div style="flex:1;background:#007AFF30;border-radius:6px;padding:5px;font-size:11px;text-align:center;">B</div>
-                  <div style="flex:1;background:#007AFF40;border-radius:6px;padding:5px;font-size:11px;text-align:center;">C</div>
-                </div>
-              </div>
-              <div>
-                <div style="font-size:8px;color:#8E8E93;font-family:'DM Mono',monospace;margin-bottom:4px;">ZStack — 겹치기</div>
-                <div style="position:relative;height:40px;">
-                  <div style="position:absolute;inset:0;background:#5856D620;border-radius:8px;"></div>
-                  <div style="position:absolute;top:6px;left:12px;right:12px;bottom:6px;background:#5856D640;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;">앞</div>
-                </div>
+              <div style="position:relative;display:flex;align-items:center;justify-content:center;height:70px;">
+                <div style="position:absolute;inset:0;background:rgba(0,122,255,0.12);border-radius:12px;"></div>
+                <span style="position:relative;font-size:15px;">ZStack 겹침</span>
               </div>
             </div>
           </div>
 
-          <!-- Preview 4: frame modifier -->
+          <!-- Preview 4: frame -->
           <div id="pv-4" class="preview-content">
-            <div class="preview-label">frame 비교</div>
-            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:14px;padding:0 8px;">
-              <div>
-                <div style="font-size:8px;color:#8E8E93;font-family:'DM Mono',monospace;margin-bottom:4px;">.frame(width: 120, height: 40)</div>
-                <div style="width:120px;height:40px;background:#FF6B2B18;border:1.5px dashed #FF6B2B66;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;">고정 120×40</div>
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:0 8px;">
+              <div style="width:130px;height:44px;display:flex;align-items:center;justify-content:center;background:rgba(232,93,26,0.15);border-radius:10px;">
+                <span style="font-size:14px;">고정 크기</span>
               </div>
-              <div>
-                <div style="font-size:8px;color:#8E8E93;font-family:'DM Mono',monospace;margin-bottom:4px;">.frame(maxWidth: .infinity)</div>
-                <div style="width:100%;height:40px;background:#007AFF14;border:1.5px dashed #007AFF44;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;">전체 너비 ∞</div>
-              </div>
-              <div>
-                <div style="font-size:8px;color:#8E8E93;font-family:'DM Mono',monospace;margin-bottom:4px;">.frame(min: 60, ideal: 100, max: 150)</div>
-                <div style="width:100px;height:40px;background:#34C75918;border:1.5px dashed #34C75944;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;">유연 60~150</div>
+              <div style="width:100%;padding:14px;display:flex;align-items:center;justify-content:center;background:rgba(0,122,255,0.12);border-radius:10px;">
+                <span style="font-size:14px;">최대 너비</span>
               </div>
             </div>
           </div>
 
-          <!-- Preview 5: padding · Spacer · offset -->
+          <!-- Preview 5: padding / Spacer -->
           <div id="pv-5" class="preview-content">
-            <div class="preview-label">간격 조절 3종</div>
-            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:0 6px;">
-              <div>
-                <div style="font-size:8px;color:#8E8E93;font-family:'DM Mono',monospace;margin-bottom:4px;">.padding(16)</div>
-                <div style="background:#FF6B2B10;border-radius:8px;padding:2px;">
-                  <div style="border:1px dashed #FF6B2B44;border-radius:6px;padding:12px;">
-                    <div style="background:#FF6B2B22;border-radius:4px;padding:6px;text-align:center;font-size:10px;">내용물</div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div style="font-size:8px;color:#8E8E93;font-family:'DM Mono',monospace;margin-bottom:4px;">Spacer()</div>
-                <div style="display:flex;align-items:center;gap:0;background:rgba(0,0,0,0.03);border-radius:6px;padding:6px 8px;">
-                  <div style="background:#007AFF;color:#fff;border-radius:4px;padding:4px 8px;font-size:10px;">좌</div>
-                  <div style="flex:1;border-bottom:1px dashed #007AFF44;margin:0 4px;"></div>
-                  <div style="font-size:7px;color:#007AFF;">← Spacer →</div>
-                  <div style="flex:1;border-bottom:1px dashed #007AFF44;margin:0 4px;"></div>
-                  <div style="background:#007AFF;color:#fff;border-radius:4px;padding:4px 8px;font-size:10px;">우</div>
-                </div>
-              </div>
-              <div>
-                <div style="font-size:8px;color:#8E8E93;font-family:'DM Mono',monospace;margin-bottom:4px;">.offset(x: 20, y: 10)</div>
-                <div style="position:relative;height:36px;background:rgba(0,0,0,0.03);border-radius:6px;">
-                  <div style="position:absolute;top:10px;left:20px;background:#5856D630;border-radius:4px;padding:3px 8px;font-size:10px;border:1px dashed #5856D644;">이동됨</div>
-                </div>
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;">
+              <div style="padding:14px 20px;background:rgba(232,93,26,0.12);border-radius:10px;">
+                <span style="font-size:15px;">가운데 정렬</span>
               </div>
             </div>
           </div>
 
           <!-- Preview 6: GeometryReader -->
           <div id="pv-6" class="preview-content">
-            <div class="preview-label">GeometryReader</div>
-            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 8px;">
-              <div style="font-size:8px;color:#8E8E93;font-family:'DM Mono',monospace;">geo.size.width 기반 레이아웃</div>
-              <div style="width:100%;border:1.5px dashed #E85D1A44;border-radius:10px;padding:8px;position:relative;">
-                <div style="font-size:7px;color:#E85D1A;position:absolute;top:2px;right:6px;">GeometryReader</div>
-                <div style="display:flex;gap:4px;margin-top:10px;">
-                  <div style="width:30%;height:50px;background:#E85D1A;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;">30%</div>
-                  <div style="width:70%;height:50px;background:#2E8BD8;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:9px;">70%</div>
-                </div>
-                <div style="font-size:8px;color:#8E8E93;margin-top:6px;text-align:center;">width = geo.size.width</div>
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:0 8px;">
+              <div style="width:100%;height:70px;border-radius:14px;overflow:hidden;display:flex;">
+                <div style="width:30%;background:#E85D1A;"></div>
+                <div style="width:70%;background:#2E8BD8;"></div>
               </div>
             </div>
           </div>
 
           <!-- Preview 7: App Lifecycle / ScenePhase -->
           <div id="pv-7" class="preview-content">
-            <div class="preview-label">App Lifecycle</div>
-            <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 8px;">
-              <div style="display:flex;align-items:center;gap:6px;">
-                <div style="width:10px;height:10px;border-radius:50%;background:#28C840;flex-shrink:0;"></div>
-                <div style="font-size:11px;font-weight:500;">.active</div>
-                <div style="font-size:9px;color:#8E8E93;flex:1;">화면 앞에 있음</div>
-              </div>
-              <div style="width:1px;height:10px;background:#E5E5EA;margin-left:4px;"></div>
-              <div style="display:flex;align-items:center;gap:6px;">
-                <div style="width:10px;height:10px;border-radius:50%;background:#FEBC2E;flex-shrink:0;"></div>
-                <div style="font-size:11px;font-weight:500;">.inactive</div>
-                <div style="font-size:9px;color:#8E8E93;flex:1;">전환 중</div>
-              </div>
-              <div style="width:1px;height:10px;background:#E5E5EA;margin-left:4px;"></div>
-              <div style="display:flex;align-items:center;gap:6px;">
-                <div style="width:10px;height:10px;border-radius:50%;background:#8E8E93;flex-shrink:0;"></div>
-                <div style="font-size:11px;font-weight:500;">.background</div>
-                <div style="font-size:9px;color:#8E8E93;flex:1;">화면 뒤</div>
-              </div>
-              <div style="margin-top:8px;border-top:0.5px solid #E5E5EA;padding-top:8px;">
-                <div style="font-size:8px;color:#8E8E93;font-family:'DM Mono',monospace;margin-bottom:4px;">View Lifecycle</div>
-                <div style="display:flex;gap:6px;">
-                  <div style="flex:1;background:#28C84018;border-radius:6px;padding:5px;text-align:center;font-size:9px;font-family:'DM Mono',monospace;">.onAppear</div>
-                  <div style="flex:1;background:#FF3B3018;border-radius:6px;padding:5px;text-align:center;font-size:9px;font-family:'DM Mono',monospace;">.onDisappear</div>
-                </div>
-              </div>
+            <div class="preview-label">Console</div>
+            <div style="font-family:'DM Mono',monospace;font-size:12px;line-height:2;padding:4px 0;">
+              <span style="color:#28C840;">앱 활성 — 화면 앞에 있음</span><br>
+              <span style="color:var(--muted);">// 홈 버튼 → 백그라운드</span><br>
+              <span style="color:#FEBC2E;">비활성 — 전환 중</span><br>
+              <span style="color:var(--muted);">백그라운드 — 화면 뒤</span><br>
+              <br>
+              <span style="color:var(--muted);">// 다시 열면</span><br>
+              <span style="color:#28C840;">화면 나타남 — 데이터 로드</span>
             </div>
           </div>
 
-          <!-- Preview 8: View 계층과 Modifier 순서 -->
+          <!-- Preview 8: Modifier order -->
           <div id="pv-8" class="preview-content">
-            <div class="preview-label">Modifier 순서</div>
-            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:0 8px;">
-              <div style="width:100%;">
-                <div style="font-size:8px;color:#8E8E93;font-family:'DM Mono',monospace;margin-bottom:4px;">.padding().background(.orange)</div>
-                <div style="background:#FF6B2B20;border-radius:8px;padding:12px;">
-                  <div style="font-size:12px;text-align:center;">텍스트</div>
+            <div class="preview-label">Preview</div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:0 8px;">
+              <div>
+                <div style="font-size:10px;color:#999;margin-bottom:6px;font-family:'DM Mono',monospace;">.padding().background()</div>
+                <div style="padding:14px 18px;background:rgba(232,93,26,0.18);border-radius:6px;">
+                  <span style="font-size:14px;">padding 먼저</span>
                 </div>
-                <div style="font-size:8px;color:#28C840;margin-top:2px;">✓ padding 포함 전체에 배경</div>
               </div>
-              <div style="width:100%;">
-                <div style="font-size:8px;color:#8E8E93;font-family:'DM Mono',monospace;margin-bottom:4px;">.background(.blue).padding()</div>
-                <div style="padding:12px;">
-                  <div style="background:#007AFF20;border-radius:6px;padding:4px;font-size:12px;text-align:center;">텍스트</div>
+              <div>
+                <div style="font-size:10px;color:#999;margin-bottom:6px;font-family:'DM Mono',monospace;">.background().padding()</div>
+                <div style="padding:14px 18px;">
+                  <span style="font-size:14px;background:rgba(0,122,255,0.18);padding:4px 6px;border-radius:4px;">background 먼저</span>
                 </div>
-                <div style="font-size:8px;color:#FF3B30;margin-top:2px;">✗ 텍스트에만 배경, padding은 투명</div>
               </div>
             </div>
           </div>
