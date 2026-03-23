@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SwiftUI 컴포넌트 레퍼런스 | 개발자리</title>
+  <meta name="description" content="SwiftUI 69개 컴포넌트 코드 레퍼런스. 검색, 카테고리 필터, Apple 공식 문서 링크 포함." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script src="assets/nav.js" defer></script>
+  <style>
+    /* ── Page Layout ── */
+    .ref-hero {
+      padding: 48px 40px 32px;
+      max-width: 1400px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .ref-hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800; letter-spacing: -.03em;
+      margin-bottom: 8px;
+    }
+    .ref-hero h1 .accent { color: var(--orange); }
+    .ref-hero p {
+      color: var(--muted); font-size: 14px; margin-bottom: 28px;
+    }
+
+    /* ── Search ── */
+    .search-wrap {
+      position: relative; max-width: 480px; margin-bottom: 20px;
+    }
+    .search-wrap input {
+      width: 100%;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px 10px 40px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 14px; color: var(--text);
+      outline: none; transition: border-color .15s;
+    }
+    .search-wrap input:focus { border-color: var(--orange); }
+    .search-wrap svg {
+      position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+      color: var(--muted);
+    }
+    .result-count {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; color: var(--muted);
+      margin-top: 6px; letter-spacing: .03em;
+    }
+
+    /* ── Filter Tabs ── */
+    .filter-row {
+      max-width: 1400px; margin: 0 auto;
+      padding: 0 40px 24px;
+      display: flex; gap: 8px; flex-wrap: wrap;
+      position: relative; z-index: 1;
+    }
+    .filter-btn {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; letter-spacing: .04em;
+      cursor: pointer; color: var(--muted);
+      transition: all .15s;
+    }
+    .filter-btn:hover { border-color: var(--orange); color: var(--text); }
+    .filter-btn.active {
+      background: var(--orange); border-color: var(--orange);
+      color: #fff; font-weight: 500;
+    }
+    .filter-btn .count {
+      display: inline-block;
+      background: rgba(255,255,255,.25);
+      border-radius: 4px; padding: 0 5px;
+      font-size: 10px; margin-left: 4px;
+    }
+    .filter-btn:not(.active) .count {
+      background: var(--surface2); color: var(--muted);
+    }
+
+    /* ── Grid ── */
+    .grid-wrap {
+      max-width: 1400px; margin: 0 auto;
+      padding: 0 40px 80px;
+      position: relative; z-index: 1;
+    }
+    .comp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 16px;
+    }
+
+    /* ── Component Card ── */
+    .comp-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color .15s, transform .15s;
+      display: flex; flex-direction: column;
+    }
+    .comp-card:hover {
+      border-color: var(--orange);
+      transform: translateY(-2px);
+    }
+    .card-header {
+      padding: 16px 18px 12px;
+      display: flex; align-items: flex-start; gap: 12px;
+    }
+    .card-emoji {
+      font-size: 28px; line-height: 1; flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .card-meta { flex: 1; min-width: 0; }
+    .card-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px; font-weight: 700;
+      letter-spacing: -.02em; margin-bottom: 2px;
+    }
+    .card-api {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; color: var(--orange);
+      margin-bottom: 4px; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    .card-badges { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .badge-cat {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: .04em;
+      padding: 2px 7px; border-radius: 5px;
+      border: 1px solid;
+    }
+    .badge-avail {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; color: var(--muted);
+      background: var(--surface2);
+      padding: 2px 7px; border-radius: 5px;
+    }
+    .card-desc {
+      padding: 0 18px 12px;
+      font-size: 13px; color: var(--muted);
+      line-height: 1.6;
+    }
+    .card-code {
+      margin: 0 14px 12px;
+      background: #0f111a;
+      border-radius: 10px;
+      padding: 14px 16px;
+      overflow-x: auto;
+      flex: 1;
+      position: relative;
+    }
+    .card-code pre {
+      font-family: 'DM Mono', monospace;
+      font-size: 11.5px; line-height: 1.7;
+      color: #c9d1d9;
+      margin: 0; white-space: pre;
+    }
+    /* Syntax highlighting */
+    .kw  { color: #ff79c6; }  /* keywords */
+    .str { color: #f1fa8c; }  /* strings */
+    .num { color: #bd93f9; }  /* numbers */
+    .cmt { color: #6272a4; font-style: italic; } /* comments */
+    .typ { color: #8be9fd; }  /* types */
+    .mdf { color: #50fa7b; }  /* modifiers */
+    .dot { color: #ffb86c; }  /* dot chains */
+
+    .copy-btn {
+      position: absolute; top: 8px; right: 8px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; color: rgba(255,255,255,.5);
+      cursor: pointer; transition: all .15s;
+    }
+    .copy-btn:hover { background: rgba(255,255,255,.15); color: #fff; }
+    .copy-btn.copied { color: #50fa7b; border-color: #50fa7b; }
+
+    .card-footer {
+      padding: 10px 18px 14px;
+      display: flex; gap: 8px; flex-wrap: wrap;
+      border-top: 1px solid var(--border);
+    }
+    .doc-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; color: var(--blue);
+      text-decoration: none; letter-spacing: .02em;
+      display: inline-flex; align-items: center; gap: 3px;
+      padding: 3px 8px;
+      background: var(--blue-dim);
+      border-radius: 5px;
+      transition: opacity .15s;
+    }
+    .doc-link:hover { opacity: .75; }
+    .plat-icons { font-size: 11px; margin-left: auto; align-self: center; }
+
+    /* ── Empty state ── */
+    .empty-state {
+      text-align: center; padding: 80px 20px;
+      color: var(--muted); display: none;
+    }
+    .empty-state .big { font-size: 48px; margin-bottom: 12px; }
+    .empty-state p { font-size: 14px; }
+
+    @media (max-width: 768px) {
+      .ref-hero { padding: 32px 20px 20px; }
+      .filter-row { padding: 0 20px 20px; }
+      .grid-wrap { padding: 0 20px 60px; }
+      .comp-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav"></nav>
+
+<div class="ref-hero">
+  <h1>SwiftUI <span class="accent">컴포넌트</span> 레퍼런스</h1>
+  <p>Apple Component Gallery에서 발췌 · 69개 컴포넌트 · 코드 예제 + 공식 문서 링크</p>
+  <div class="search-wrap">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="컴포넌트 검색 (예: Button, List, Sheet...)" />
+  </div>
+  <div class="result-count" id="resultCount"></div>
+</div>
+
+<div class="filter-row" id="filterRow"></div>
+
+<div class="grid-wrap">
+  <div class="comp-grid" id="compGrid"></div>
+  <div class="empty-state" id="emptyState">
+    <div class="big">🔍</div>
+    <p>검색 결과가 없습니다.</p>
+  </div>
+</div>
+
+<script>
+// ── Category Colors ──────────────────────────────────────────
+const CAT_COLORS = {
+  "Navigation":   { bg:"rgba(10,132,255,.1)",   text:"#0a84ff", border:"rgba(10,132,255,.25)" },
+  "Forms":        { bg:"rgba(191,90,242,.1)",   text:"#bf5af2", border:"rgba(191,90,242,.25)" },
+  "Data Display": { bg:"rgba(48,209,88,.1)",    text:"#30d158", border:"rgba(48,209,88,.25)" },
+  "Feedback":     { bg:"rgba(255,159,10,.1)",   text:"#ff9f0a", border:"rgba(255,159,10,.25)" },
+  "Actions":      { bg:"rgba(255,69,58,.1)",    text:"#ff453a", border:"rgba(255,69,58,.25)" },
+  "Layout":       { bg:"rgba(100,210,255,.1)",  text:"#64d2ff", border:"rgba(100,210,255,.25)" },
+};
+
+// ── Documentation Links ─────────────────────────────────────
+const REFS = {
+  accordion:     [{ label:"DisclosureGroup", url:"https://developer.apple.com/documentation/swiftui/disclosuregroup" }],
+  alert:         [{ label:"Alert", url:"https://developer.apple.com/documentation/swiftui/alert" },{ label:"UIAlertController", url:"https://developer.apple.com/documentation/uikit/uialertcontroller" }],
+  avatar:        [{ label:"AsyncImage", url:"https://developer.apple.com/documentation/swiftui/asyncimage" },{ label:"clipShape", url:"https://developer.apple.com/documentation/swiftui/view/clipshape(_:style:)" }],
+  badge:         [{ label:"badge(_:)", url:"https://developer.apple.com/documentation/swiftui/view/badge(_:)-84e43" }],
+  banner:        [{ label:"HStack", url:"https://developer.apple.com/documentation/swiftui/hstack" }],
+  bottomsheet:   [{ label:"sheet(isPresented:)", url:"https://developer.apple.com/documentation/swiftui/view/sheet(ispresented:ondismiss:content:)" },{ label:"PresentationDetent", url:"https://developer.apple.com/documentation/swiftui/presentationdetent" }],
+  breadcrumb:    [{ label:"NavigationPath", url:"https://developer.apple.com/documentation/swiftui/navigationpath" },{ label:"NavigationStack", url:"https://developer.apple.com/documentation/swiftui/navigationstack" }],
+  button:        [{ label:"Button", url:"https://developer.apple.com/documentation/swiftui/button" },{ label:"ButtonStyle", url:"https://developer.apple.com/documentation/swiftui/buttonstyle" }],
+  buttongroup:   [{ label:"ControlGroup", url:"https://developer.apple.com/documentation/swiftui/controlgroup" }],
+  card:          [{ label:"GroupBox", url:"https://developer.apple.com/documentation/swiftui/groupbox" }],
+  carousel:      [{ label:"TabView", url:"https://developer.apple.com/documentation/swiftui/tabview" },{ label:"PageTabViewStyle", url:"https://developer.apple.com/documentation/swiftui/pagetabviewstyle" }],
+  combobox:      [{ label:"Picker", url:"https://developer.apple.com/documentation/swiftui/picker" }],
+  contextmenu:   [{ label:"contextMenu()", url:"https://developer.apple.com/documentation/swiftui/view/contextmenu(menuitems:)" }],
+  datepicker:    [{ label:"DatePicker", url:"https://developer.apple.com/documentation/swiftui/datepicker" },{ label:"DatePickerStyle", url:"https://developer.apple.com/documentation/swiftui/datepickerstyle" }],
+  divider:       [{ label:"Divider", url:"https://developer.apple.com/documentation/swiftui/divider" }],
+  emptystate:    [{ label:"ContentUnavailableView", url:"https://developer.apple.com/documentation/swiftui/contentunavailableview" }],
+  form:          [{ label:"Form", url:"https://developer.apple.com/documentation/swiftui/form" },{ label:"Section", url:"https://developer.apple.com/documentation/swiftui/section" }],
+  gauge:         [{ label:"Gauge", url:"https://developer.apple.com/documentation/swiftui/gauge" }],
+  grid:          [{ label:"LazyVGrid", url:"https://developer.apple.com/documentation/swiftui/lazyvgrid" },{ label:"Grid", url:"https://developer.apple.com/documentation/swiftui/grid" }],
+  icon:          [{ label:"Image(systemName:)", url:"https://developer.apple.com/documentation/swiftui/image/init(systemname:)" },{ label:"SF Symbols", url:"https://developer.apple.com/sf-symbols/" }],
+  inspector:     [{ label:"inspector()", url:"https://developer.apple.com/documentation/swiftui/view/inspector(ispresented:content:)" }],
+  label:         [{ label:"Label", url:"https://developer.apple.com/documentation/swiftui/label" },{ label:"LabeledContent", url:"https://developer.apple.com/documentation/swiftui/labeledcontent" }],
+  link:          [{ label:"Link", url:"https://developer.apple.com/documentation/swiftui/link" },{ label:"NavigationLink", url:"https://developer.apple.com/documentation/swiftui/navigationlink" }],
+  list:          [{ label:"List", url:"https://developer.apple.com/documentation/swiftui/list" },{ label:"ListStyle", url:"https://developer.apple.com/documentation/swiftui/liststyle" }],
+  loading:       [{ label:"ProgressView", url:"https://developer.apple.com/documentation/swiftui/progressview" }],
+  map:           [{ label:"Map", url:"https://developer.apple.com/documentation/mapkit/map" },{ label:"MapStyle", url:"https://developer.apple.com/documentation/mapkit/mapstyle" }],
+  menu:          [{ label:"Menu", url:"https://developer.apple.com/documentation/swiftui/menu" }],
+  navbar:        [{ label:"NavigationStack", url:"https://developer.apple.com/documentation/swiftui/navigationstack" },{ label:"toolbar(content:)", url:"https://developer.apple.com/documentation/swiftui/view/toolbar(content:)-5w0tj" }],
+  notification:  [{ label:"sensoryFeedback()", url:"https://developer.apple.com/documentation/swiftui/view/sensoryfeedback(_:trigger:)" },{ label:"AnyTransition", url:"https://developer.apple.com/documentation/swiftui/anytransition" }],
+  numberinput:   [{ label:"Stepper", url:"https://developer.apple.com/documentation/swiftui/stepper" }],
+  photopicker:   [{ label:"PhotosPicker", url:"https://developer.apple.com/documentation/photokit/photospicker" }],
+  popover:       [{ label:"popover()", url:"https://developer.apple.com/documentation/swiftui/view/popover(ispresented:attachmentanchor:arrowedge:content:)" }],
+  quote:         [{ label:"HStack", url:"https://developer.apple.com/documentation/swiftui/hstack" },{ label:"VStack", url:"https://developer.apple.com/documentation/swiftui/vstack" }],
+  rating:        [{ label:"Image(systemName:)", url:"https://developer.apple.com/documentation/swiftui/image/init(systemname:)" },{ label:"symbolEffect()", url:"https://developer.apple.com/documentation/swiftui/view/symboleffect(_:options:value:)" }],
+  searchbar:     [{ label:"searchable()", url:"https://developer.apple.com/documentation/swiftui/view/searchable(text:placement:prompt:)-18a8f" }],
+  sidebar:       [{ label:"NavigationSplitView", url:"https://developer.apple.com/documentation/swiftui/navigationsplitview" }],
+  skeleton:      [{ label:"redacted(reason:)", url:"https://developer.apple.com/documentation/swiftui/view/redacted(reason:)" }],
+  slider:        [{ label:"Slider", url:"https://developer.apple.com/documentation/swiftui/slider" }],
+  spacer:        [{ label:"Spacer", url:"https://developer.apple.com/documentation/swiftui/spacer" }],
+  switch:        [{ label:"Toggle", url:"https://developer.apple.com/documentation/swiftui/toggle" },{ label:"ToggleStyle", url:"https://developer.apple.com/documentation/swiftui/togglestyle" }],
+  tabbar:        [{ label:"TabView", url:"https://developer.apple.com/documentation/swiftui/tabview" }],
+  table:         [{ label:"Table", url:"https://developer.apple.com/documentation/swiftui/table" }],
+  tabs:          [{ label:"Picker(.segmented)", url:"https://developer.apple.com/documentation/swiftui/picker" }],
+  textfield:     [{ label:"TextField", url:"https://developer.apple.com/documentation/swiftui/textfield" },{ label:"TextEditor", url:"https://developer.apple.com/documentation/swiftui/texteditor" }],
+  timeline:      [{ label:"TimelineView", url:"https://developer.apple.com/documentation/swiftui/timelineview" }],
+  tipview:       [{ label:"TipView", url:"https://developer.apple.com/documentation/tipkit/tipview" },{ label:"popoverTip()", url:"https://developer.apple.com/documentation/tipkit/view/popovertip(_:arrowedge:action:)" }],
+  toolbar:       [{ label:"toolbar(content:)", url:"https://developer.apple.com/documentation/swiftui/view/toolbar(content:)-5w0tj" }],
+  treeview:      [{ label:"OutlineGroup", url:"https://developer.apple.com/documentation/swiftui/outlinegroup" }],
+  video:         [{ label:"VideoPlayer", url:"https://developer.apple.com/documentation/avkit/videoplayer" }],
+  widget:        [{ label:"WidgetKit", url:"https://developer.apple.com/documentation/widgetkit" }],
+  colorpicker:   [{ label:"ColorPicker", url:"https://developer.apple.com/documentation/swiftui/colorpicker" }],
+  sharesheet:    [{ label:"ShareLink", url:"https://developer.apple.com/documentation/swiftui/sharelink" }],
+  scrollview:    [{ label:"ScrollView", url:"https://developer.apple.com/documentation/swiftui/scrollview" }],
+  statusbar:     [{ label:"statusBarHidden()", url:"https://developer.apple.com/documentation/swiftui/view/statusbarhidden(_:)" }],
+  asyncimage:    [{ label:"AsyncImage", url:"https://developer.apple.com/documentation/swiftui/asyncimage" }],
+  chart:         [{ label:"Chart (Swift Charts)", url:"https://developer.apple.com/documentation/charts/chart" }],
+  fab:           [{ label:"Button", url:"https://developer.apple.com/documentation/swiftui/button" },{ label:"ZStack", url:"https://developer.apple.com/documentation/swiftui/zstack" }],
+  gesture:       [{ label:"DragGesture", url:"https://developer.apple.com/documentation/swiftui/draggesture" },{ label:"MagnifyGesture", url:"https://developer.apple.com/documentation/swiftui/magnifygesture" }],
+  haptic:        [{ label:"sensoryFeedback()", url:"https://developer.apple.com/documentation/swiftui/view/sensoryfeedback(_:trigger:)" }],
+  lazystack:     [{ label:"LazyVStack", url:"https://developer.apple.com/documentation/swiftui/lazyvstack" },{ label:"LazyHStack", url:"https://developer.apple.com/documentation/swiftui/lazyhstack" }],
+  material:      [{ label:"Material", url:"https://developer.apple.com/documentation/swiftui/material" }],
+  meshgradient:  [{ label:"MeshGradient", url:"https://developer.apple.com/documentation/swiftui/meshgradient" }],
+  navlink:       [{ label:"NavigationLink", url:"https://developer.apple.com/documentation/swiftui/navigationlink" },{ label:"navigationDestination()", url:"https://developer.apple.com/documentation/swiftui/view/navigationdestination(for:destination:)" }],
+  phaseanimator: [{ label:"PhaseAnimator", url:"https://developer.apple.com/documentation/swiftui/phaseanimator" }],
+  refreshcontrol:[{ label:"refreshable()", url:"https://developer.apple.com/documentation/swiftui/view/refreshable(action:)" }],
+  safearea:      [{ label:"safeAreaInset()", url:"https://developer.apple.com/documentation/swiftui/view/safeareainset(edge:alignment:spacing:content:)" },{ label:"ignoresSafeArea()", url:"https://developer.apple.com/documentation/swiftui/view/ignoressafearea(_:edges:)" }],
+  symboleffect:  [{ label:"symbolEffect()", url:"https://developer.apple.com/documentation/swiftui/view/symboleffect(_:options:value:)" }],
+  swipeactions:  [{ label:"swipeActions()", url:"https://developer.apple.com/documentation/swiftui/view/swipeactions(edge:allowsfullswipe:content:)" }],
+  viewthatfits:  [{ label:"ViewThatFits", url:"https://developer.apple.com/documentation/swiftui/viewthatfits" }],
+};
+
+// ── Component Data ───────────────────────────────────────────
+const COMPONENTS = [
+  { id:"accordion",     emoji:"🪗", name:"DisclosureGroup",           swiftUI:"DisclosureGroup",                          desc:"접히고 펼쳐지는 섹션들의 수직 스택.",                                                       code:"DisclosureGroup(\"Settings\") {\n  Toggle(\"Wi-Fi\", isOn: $wifi)\n  Toggle(\"Bluetooth\", isOn: $bt)\n}",                                                                                                                                          cat:"Navigation",   avail:"iOS 14+", plat:["iOS","macOS"] },
+  { id:"alert",         emoji:"🚨", name:"Alert",                      swiftUI:".alert() / .confirmationDialog()",         desc:"사용자에게 중요한 정보를 전달하거나 확인을 요청하는 모달 다이얼로그.",                          code:".alert(\"Delete?\", isPresented: $show) {\n  Button(\"Delete\", role: .destructive) { }\n  Button(\"Cancel\", role: .cancel) { }\n} message: {\n  Text(\"This cannot be undone.\")\n}",                                                                    cat:"Feedback",     avail:"iOS 15+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"avatar",        emoji:"👤", name:"Avatar",                     swiftUI:"AsyncImage + clipShape(.circle)",          desc:"사용자나 엔티티를 나타내는 원형 이미지.",                                                     code:"AsyncImage(url: avatarURL) { image in\n  image.resizable()\n    .clipShape(Circle())\n    .frame(width: 44, height: 44)\n} placeholder: {\n  Circle().fill(.gray.opacity(0.3))\n}",                                                                   cat:"Data Display", avail:"iOS 15+", plat:["iOS","macOS"] },
+  { id:"badge",         emoji:"🔴", name:"Badge",                      swiftUI:".badge()",                                 desc:"숫자나 상태를 나타내는 작은 라벨.",                                                          code:"List {\n  Text(\"Inbox\")\n    .badge(5)\n  Text(\"Drafts\")\n    .badge(\"New\")\n}",                                                                                                                                                           cat:"Data Display", avail:"iOS 15+", plat:["iOS","macOS","watchOS"] },
+  { id:"banner",        emoji:"📢", name:"Banner",                     swiftUI:"Custom View (HStack)",                     desc:"화면 상단이나 콘텐츠 내에 표시되는 정보성 알림 배너.",                                        code:"HStack {\n  Image(systemName: \"info.circle.fill\")\n    .foregroundStyle(.blue)\n  Text(\"Update available\")\n  Spacer()\n  Button(\"Update\") { }\n    .buttonStyle(.borderedProminent)\n    .controlSize(.small)\n}\n.padding()\n.background(.blue.opacity(0.1))\n.clipShape(RoundedRectangle(cornerRadius: 12))", cat:"Feedback", avail:"iOS 13+", plat:["iOS","macOS"] },
+  { id:"bottomsheet",   emoji:"📋", name:"Sheet / FullScreenCover",    swiftUI:".sheet() / .fullScreenCover()",            desc:"화면 하단에서 올라오는 시트. .presentationDetents()로 높이 조절 가능.",                       code:".sheet(isPresented: $showSheet) {\n  VStack {\n    Text(\"Options\")\n  }\n  .presentationDetents([.medium, .large])\n  .presentationDragIndicator(.visible)\n}",                                                                                cat:"Navigation",   avail:"iOS 13+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"breadcrumb",    emoji:"🍞", name:"Navigation Path",            swiftUI:"NavigationPath (programmatic)",            desc:"현재 위치의 계층 경로를 보여주는 요소.",                                                     code:"HStack(spacing: 4) {\n  ForEach(path, id: \\.self) { item in\n    Text(item).foregroundStyle(.secondary)\n    if item != path.last {\n      Image(systemName: \"chevron.right\")\n        .font(.caption2)\n    }\n  }\n}",                              cat:"Navigation",   avail:"iOS 16+", plat:["macOS"] },
+  { id:"button",        emoji:"🔘", name:"Button",                     swiftUI:"Button / .buttonStyle()",                  desc:"사용자 액션을 트리거하는 기본 인터랙티브 요소.",                                             code:"Button(\"Save\", systemImage: \"square.and.arrow.down\") {\n  save()\n}\n.buttonStyle(.borderedProminent)\n.controlSize(.large)\n.tint(.blue)",                                                                                                       cat:"Actions",      avail:"iOS 13+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"buttongroup",   emoji:"🔳", name:"ControlGroup",               swiftUI:"ControlGroup",                             desc:"관련된 버튼들을 시각적으로 그룹화하는 컨테이너.",                                            code:"ControlGroup {\n  Button(\"Bold\", systemImage: \"bold\") { }\n  Button(\"Italic\", systemImage: \"italic\") { }\n  Button(\"Underline\", systemImage: \"underline\") { }\n}\n.controlGroupStyle(.navigation)",                                         cat:"Actions",      avail:"iOS 15+", plat:["iOS","macOS"] },
+  { id:"card",          emoji:"🃏", name:"GroupBox",                   swiftUI:"GroupBox / Custom View",                   desc:"관련 정보를 담는 둥근 모서리의 컨테이너.",                                                   code:"GroupBox {\n  VStack(alignment: .leading, spacing: 8) {\n    Image(\"cover\")\n      .resizable()\n      .aspectRatio(contentMode: .fill)\n    Text(\"Article Title\")\n      .font(.headline)\n    Text(\"Summary...\")\n      .font(.subheadline)\n      .foregroundStyle(.secondary)\n  }\n}",                                               cat:"Data Display", avail:"iOS 14+", plat:["iOS","macOS","watchOS"] },
+  { id:"carousel",      emoji:"🎠", name:"TabView — Page",             swiftUI:"TabView(.page) + .indexViewStyle()",       desc:"여러 콘텐츠 슬라이드를 스와이프하는 페이지 뷰. Page Control 포함.",                          code:"TabView {\n  ForEach(slides) { slide in\n    SlideView(slide: slide)\n  }\n}\n.tabViewStyle(.page)\n.indexViewStyle(\n  .page(backgroundDisplayMode: .always)\n)",                                                                             cat:"Data Display", avail:"iOS 14+", plat:["iOS","watchOS","tvOS"] },
+  { id:"combobox",      emoji:"🔽", name:"Picker",                     swiftUI:"Picker / .pickerStyle()",                  desc:"옵션 목록에서 값을 선택. .menu, .wheel, .segmented 스타일 지원.",                           code:"Picker(\"Sort by\", selection: $sortOption) {\n  Text(\"Name\").tag(SortOption.name)\n  Text(\"Date\").tag(SortOption.date)\n  Text(\"Size\").tag(SortOption.size)\n}\n.pickerStyle(.menu)",                                                               cat:"Forms",        avail:"iOS 13+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"contextmenu",   emoji:"📎", name:"Context Menu",               swiftUI:".contextMenu()",                           desc:"롱프레스(iOS) 또는 우클릭(macOS)으로 나타나는 메뉴.",                                        code:"Text(\"Photo\")\n  .contextMenu {\n    Button(\"Copy\", systemImage: \"doc.on.doc\") { }\n    Button(\"Share\", systemImage: \"square.and.arrow.up\") { }\n    Divider()\n    Button(\"Delete\", systemImage: \"trash\",\n           role: .destructive) { }\n  }",    cat:"Navigation",   avail:"iOS 13+", plat:["iOS","macOS"] },
+  { id:"datepicker",    emoji:"📅", name:"DatePicker",                 swiftUI:"DatePicker",                               desc:"날짜와 시간을 선택하는 전용 컴포넌트.",                                                     code:"DatePicker(\n  \"Start Date\",\n  selection: $date,\n  displayedComponents: [.date, .hourAndMinute]\n)\n.datePickerStyle(.graphical)",                                                                                                     cat:"Forms",        avail:"iOS 13+", plat:["iOS","macOS","watchOS"] },
+  { id:"divider",       emoji:"➖", name:"Divider",                    swiftUI:"Divider()",                                desc:"두 요소 사이의 시각적 구분선.",                                                             code:"VStack {\n  Text(\"Section 1\")\n  Divider()\n    .padding(.horizontal)\n  Text(\"Section 2\")\n}",                                                                                                                                            cat:"Layout",       avail:"iOS 13+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"emptystate",    emoji:"📭", name:"ContentUnavailableView",     swiftUI:"ContentUnavailableView",                   desc:"데이터가 없을 때 보여주는 안내 화면.",                                                      code:"ContentUnavailableView {\n  Label(\"No Results\",\n        systemImage: \"magnifyingglass\")\n} description: {\n  Text(\"Try a different search term.\")\n} actions: {\n  Button(\"Clear Search\") { query = \"\" }\n}",                               cat:"Feedback",     avail:"iOS 17+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"form",          emoji:"📝", name:"Form",                       swiftUI:"Form",                                     desc:"설정이나 데이터 입력을 위한 그룹화된 컨트롤 컨테이너.",                                      code:"Form {\n  Section(\"Profile\") {\n    TextField(\"Name\", text: $name)\n    DatePicker(\"Birthday\", selection: $bday)\n  }\n  Section(\"Preferences\") {\n    Toggle(\"Notifications\", isOn: $notif)\n    Picker(\"Theme\", selection: $theme) {\n      Text(\"System\").tag(0)\n      Text(\"Light\").tag(1)\n      Text(\"Dark\").tag(2)\n    }\n  }\n}", cat:"Forms", avail:"iOS 13+", plat:["iOS","macOS","watchOS"] },
+  { id:"gauge",         emoji:"🎯", name:"Gauge",                      swiftUI:"Gauge",                                    desc:"범위 내의 현재 값을 시각적으로 표시하는 게이지.",                                            code:"Gauge(value: battery, in: 0...100) {\n  Text(\"Battery\")\n} currentValueLabel: {\n  Text(\"\\(Int(battery))%\")\n}\n.gaugeStyle(.accessoryCircular)",                                                                                                cat:"Data Display", avail:"iOS 16+", plat:["iOS","macOS","watchOS"] },
+  { id:"grid",          emoji:"🔲", name:"LazyVGrid / Grid",           swiftUI:"LazyVGrid / LazyHGrid / Grid",             desc:"아이템을 그리드 레이아웃으로 배치하는 컨테이너.",                                            code:"let columns = [\n  GridItem(.adaptive(minimum: 160))\n]\n\nLazyVGrid(columns: columns, spacing: 16) {\n  ForEach(items) { item in\n    CardView(item: item)\n  }\n}",                                                                              cat:"Layout",       avail:"iOS 14+", plat:["iOS","macOS","tvOS"] },
+  { id:"icon",          emoji:"🎨", name:"SF Symbol",                  swiftUI:"Image(systemName:)",                       desc:"SF Symbols 라이브러리의 벡터 아이콘. 6,000+ 심볼.",                                         code:"Image(systemName: \"heart.fill\")\n  .symbolRenderingMode(.multicolor)\n  .symbolEffect(.bounce, value: liked)\n  .font(.title)\n  .foregroundStyle(.red)",                                                                                           cat:"Data Display", avail:"iOS 13+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"inspector",     emoji:"🔍", name:"Inspector",                  swiftUI:".inspector()",                             desc:"선택된 항목의 상세 정보를 보여주는 사이드 패널.",                                            code:".inspector(isPresented: $showInspector) {\n  Form {\n    Section(\"Details\") {\n      LabeledContent(\"Name\", value: item.name)\n    }\n  }\n  .inspectorColumnWidth(min: 200, ideal: 300, max: 400)\n}",                                             cat:"Navigation",   avail:"iOS 17+", plat:["iOS","macOS"] },
+  { id:"label",         emoji:"🏷️", name:"Label",                     swiftUI:"Label",                                    desc:"아이콘과 텍스트를 함께 표시하는 표준 레이블.",                                              code:"Label(\"Favorites\", systemImage: \"heart.fill\")\n  .font(.headline)\n  .foregroundStyle(.red)\n\nLabeledContent(\"Version\") {\n  Text(\"2.1.0\")\n}",                                                                                               cat:"Data Display", avail:"iOS 14+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"link",          emoji:"🔗", name:"Link",                       swiftUI:"Link / NavigationLink",                    desc:"다른 URL이나 뷰로 이동하는 탭 가능한 텍스트.",                                              code:"Link(\"Visit Apple\",\n  destination: URL(string: \"https://apple.com\")!\n)\n\nNavigationLink(\"Settings\") {\n  SettingsView()\n}",                                                                                                              cat:"Navigation",   avail:"iOS 14+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"list",          emoji:"📋", name:"List",                       swiftUI:"List",                                     desc:"수직으로 스크롤되는 데이터 행들의 컬렉션.",                                                 code:"List {\n  Section(\"Favorites\") {\n    ForEach(favorites) { item in\n      ItemRow(item: item)\n    }\n    .onDelete(perform: delete)\n    .onMove(perform: move)\n  }\n}\n.listStyle(.insetGrouped)\n.searchable(text: $searchText)",           cat:"Data Display", avail:"iOS 13+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"loading",       emoji:"⏳", name:"ProgressView",               swiftUI:"ProgressView / .progressViewStyle()",      desc:"진행 상태를 표시. .circular(무한 스피너)와 .linear(진행 바) 두 가지 스타일.",               code:"// Circular (indeterminate)\nProgressView()\n  .progressViewStyle(.circular)\n\n// Linear (determinate)\nProgressView(value: progress, total: 100)\n  .progressViewStyle(.linear)",                                                                  cat:"Feedback",     avail:"iOS 14+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"map",           emoji:"🗺️", name:"Map",                       swiftUI:"Map",                                      desc:"인터랙티브 지도 뷰.",                                                                       code:"Map(position: $position) {\n  Marker(\"Apple Park\", coordinate: loc)\n    .tint(.blue)\n  UserAnnotation()\n}\n.mapStyle(.standard(elevation: .realistic))\n.mapControls {\n  MapUserLocationButton()\n  MapCompass()\n}",                     cat:"Data Display", avail:"iOS 17+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"menu",          emoji:"☰", name:"Menu",                        swiftUI:"Menu",                                     desc:"탭하면 액션 목록을 보여주는 풀다운 메뉴.",                                                  code:"Menu(\"Options\", systemImage: \"ellipsis.circle\") {\n  Button(\"Duplicate\", systemImage: \"plus.square.on.square\") { }\n  Button(\"Rename\", systemImage: \"pencil\") { }\n  Divider()\n  Button(\"Delete\", systemImage: \"trash\", role: .destructive) { }\n}", cat:"Navigation", avail:"iOS 14+", plat:["iOS","macOS"] },
+  { id:"navbar",        emoji:"🧭", name:"Navigation Bar",             swiftUI:"NavigationStack / .toolbar()",             desc:"화면 상단의 네비게이션 바.",                                                               code:"NavigationStack {\n  ContentView()\n    .navigationTitle(\"Home\")\n    .navigationBarTitleDisplayMode(.large)\n    .toolbar {\n      ToolbarItem(placement: .primaryAction) {\n        Button(\"Add\", systemImage: \"plus\") { }\n      }\n    }\n}", cat:"Navigation", avail:"iOS 16+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"notification",  emoji:"🔔", name:"In-App Toast",               swiftUI:"Custom overlay / sensoryFeedback",         desc:"짧은 피드백 메시지를 일시적으로 표시.",                                                    code:"Text(\"Saved!\")\n  .padding(.horizontal, 16)\n  .padding(.vertical, 10)\n  .background(.ultraThinMaterial)\n  .clipShape(Capsule())\n  .transition(\n    .move(edge: .top)\n    .combined(with: .opacity)\n  )\n  .sensoryFeedback(.success, trigger: show)", cat:"Feedback", avail:"iOS 17+", plat:["iOS"] },
+  { id:"numberinput",   emoji:"🔢", name:"Stepper",                    swiftUI:"Stepper",                                  desc:"증가/감소 버튼으로 숫자 값을 조절하는 컨트롤.",                                             code:"Stepper(\n  \"Quantity: \\(quantity)\",\n  value: $quantity,\n  in: 1...99,\n  step: 1\n)",                                                                                                                                                cat:"Forms",        avail:"iOS 13+", plat:["iOS","macOS","watchOS"] },
+  { id:"photopicker",   emoji:"🖼️", name:"PhotosPicker",              swiftUI:"PhotosPicker",                             desc:"사진 라이브러리에서 이미지를 선택하는 시스템 피커.",                                        code:"PhotosPicker(\n  selection: $selectedItems,\n  maxSelectionCount: 5,\n  matching: .images\n) {\n  Label(\"Select Photos\",\n    systemImage: \"photo.on.rectangle\")\n}",                                                                       cat:"Forms",        avail:"iOS 16+", plat:["iOS","macOS"] },
+  { id:"popover",       emoji:"💬", name:"Popover",                    swiftUI:".popover()",                               desc:"다른 요소에서 튀어나오는 부유 콘텐츠.",                                                    code:"Button(\"Info\") { showPop = true }\n.popover(isPresented: $showPop) {\n  VStack {\n    Text(\"Details\")\n    Text(\"More info here...\")\n      .foregroundStyle(.secondary)\n  }\n  .padding()\n  .presentationCompactAdaptation(.popover)\n}",         cat:"Navigation",   avail:"iOS 13+", plat:["iOS","macOS"] },
+  { id:"quote",         emoji:"💎", name:"Blockquote",                 swiftUI:"Custom View + leading accent",             desc:"인용문을 강조하여 표시하는 커스텀 뷰.",                                                    code:"HStack(alignment: .top, spacing: 12) {\n  RoundedRectangle(cornerRadius: 2)\n    .fill(.blue)\n    .frame(width: 4)\n  VStack(alignment: .leading) {\n    Text(quote).font(.title3).italic()\n    Text(\"— \\(author)\")\n      .font(.caption)\n      .foregroundStyle(.secondary)\n  }\n}", cat:"Data Display", avail:"iOS 13+", plat:["iOS","macOS"] },
+  { id:"rating",        emoji:"⭐", name:"Rating",                     swiftUI:"Custom View",                              desc:"별점으로 평가를 표시하거나 입력받는 컴포넌트.",                                             code:"HStack(spacing: 4) {\n  ForEach(1...5, id: \\.self) { star in\n    Image(systemName:\n      star <= rating ? \"star.fill\" : \"star\"\n    )\n    .foregroundStyle(.yellow)\n    .onTapGesture { rating = star }\n    .symbolEffect(.bounce, value: rating)\n  }\n}", cat:"Forms", avail:"iOS 17+", plat:["iOS","macOS"] },
+  { id:"searchbar",     emoji:"🔎", name:"Search Bar",                 swiftUI:".searchable()",                            desc:"콘텐츠를 필터링하기 위한 검색 입력 필드.",                                                 code:"NavigationStack {\n  List(filtered) { item in\n    ItemRow(item: item)\n  }\n  .searchable(\n    text: $searchText,\n    prompt: \"Search...\"\n  )\n}",                                                                                          cat:"Forms",        avail:"iOS 15+", plat:["iOS","macOS"] },
+  { id:"sidebar",       emoji:"📑", name:"Sidebar",                    swiftUI:"NavigationSplitView",                      desc:"앱의 최상위 네비게이션을 제공하는 사이드바 패널.",                                          code:"NavigationSplitView {\n  List(selection: $selected) {\n    Label(\"All\", systemImage: \"tray.full\")\n    Label(\"Favorites\", systemImage: \"heart\")\n  }\n  .navigationTitle(\"Browse\")\n} detail: {\n  DetailView(item: selected)\n}",              cat:"Navigation",   avail:"iOS 16+", plat:["iOS","macOS"] },
+  { id:"skeleton",      emoji:"💀", name:"Redacted",                   swiftUI:".redacted(reason: .placeholder)",          desc:"콘텐츠 로딩 중 보여주는 플레이스홀더.",                                                   code:"VStack(alignment: .leading) {\n  Text(\"Loading Title\")\n    .font(.headline)\n  Text(\"Placeholder text here.\")\n    .font(.subheadline)\n}\n.redacted(reason: .placeholder)",                                                                    cat:"Feedback",     avail:"iOS 14+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"slider",        emoji:"🎛️", name:"Slider",                    swiftUI:"Slider",                                   desc:"범위 내에서 값을 선택하는 슬라이더.",                                                     code:"Slider(value: $brightness, in: 0...100) {\n  Text(\"Brightness\")\n} minimumValueLabel: {\n  Image(systemName: \"sun.min\")\n} maximumValueLabel: {\n  Image(systemName: \"sun.max\")\n}",                                                               cat:"Forms",        avail:"iOS 13+", plat:["iOS","macOS","watchOS"] },
+  { id:"spacer",        emoji:"⬜", name:"Spacer",                     swiftUI:"Spacer()",                                 desc:"레이아웃에서 유연한 빈 공간을 추가하는 요소.",                                              code:"HStack {\n  Text(\"Title\")\n  Spacer()\n  Button(\"Action\") { }\n}\n\nSpacer()\n  .frame(height: 20)",                                                                                                                                        cat:"Layout",       avail:"iOS 13+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"switch",        emoji:"🔛", name:"Toggle",                     swiftUI:"Toggle / .toggleStyle()",                  desc:"온/오프 상태를 전환하는 컨트롤. .switch, .checkbox, .button 스타일 지원.",                 code:"Toggle(isOn: $isEnabled) {\n  Label(\"Dark Mode\", systemImage: \"moon.fill\")\n}\n.tint(.indigo)\n\n// macOS Checkbox\nToggle(\"Enable\", isOn: $on)\n  .toggleStyle(.checkbox)",                                                                          cat:"Forms",        avail:"iOS 13+", plat:["iOS","macOS","watchOS"] },
+  { id:"tabbar",        emoji:"📱", name:"Tab Bar",                    swiftUI:"TabView",                                  desc:"앱의 주요 섹션 간 전환을 위한 하단 탭 바.",                                                code:"TabView {\n  Tab(\"Home\", systemImage: \"house.fill\") {\n    HomeView()\n  }\n  Tab(\"Search\", systemImage: \"magnifyingglass\") {\n    SearchView()\n  }\n  Tab(\"Profile\", systemImage: \"person.fill\") {\n    ProfileView()\n  }\n}\n.tabViewStyle(.sidebarAdaptable)", cat:"Navigation", avail:"iOS 18+", plat:["iOS","macOS","tvOS"] },
+  { id:"table",         emoji:"📈", name:"Table",                      swiftUI:"Table",                                    desc:"대량 데이터를 행과 열로 표시하는 테이블.",                                                  code:"Table(employees, selection: $sel,\n  sortOrder: $sortOrder\n) {\n  TableColumn(\"Name\", value: \\.name)\n  TableColumn(\"Dept\", value: \\.dept)\n  TableColumn(\"Role\", value: \\.role)\n}\n.tableStyle(.inset(alternatesRowBackgrounds: true))",            cat:"Data Display", avail:"iOS 16+", plat:["iOS","macOS"] },
+  { id:"tabs",          emoji:"🗂️", name:"TabView — Content Tabs",    swiftUI:"Picker(.segmented) + TabView",             desc:"여러 패널 간 전환하는 탭 인터페이스.",                                                    code:"VStack {\n  Picker(\"Tab\", selection: $tab) {\n    Text(\"Overview\").tag(0)\n    Text(\"Details\").tag(1)\n    Text(\"Reviews\").tag(2)\n  }\n  .pickerStyle(.segmented)\n  \n  TabView(selection: $tab) {\n    OverviewView().tag(0)\n    DetailsView().tag(1)\n    ReviewsView().tag(2)\n  }\n  .tabViewStyle(.page(indexDisplayMode: .never))\n}", cat:"Navigation", avail:"iOS 13+", plat:["iOS","macOS"] },
+  { id:"textfield",     emoji:"✏️", name:"TextField",                  swiftUI:"TextField / TextEditor",                   desc:"사용자가 텍스트를 입력하는 필드.",                                                        code:"TextField(\"Email\", text: $email)\n  .textFieldStyle(.roundedBorder)\n  .textContentType(.emailAddress)\n  .keyboardType(.emailAddress)\n  .autocorrectionDisabled()\n\nTextEditor(text: $bio)\n  .frame(height: 120)",                              cat:"Forms",        avail:"iOS 13+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"timeline",      emoji:"🕐", name:"TimelineView",               swiftUI:"TimelineView / Custom View",               desc:"시간순 이벤트를 시각적으로 표시.",                                                        code:"TimelineView(.periodic(from: .now, by: 1)) { context in\n  Text(context.date, style: .timer)\n}\n\nForEach(events) { event in\n  HStack(alignment: .top) {\n    Circle().fill(.blue).frame(width: 10)\n    VStack(alignment: .leading) {\n      Text(event.title).font(.headline)\n      Text(event.date, style: .date)\n    }\n  }\n}", cat:"Data Display", avail:"iOS 15+", plat:["iOS","macOS","watchOS"] },
+  { id:"tipview",       emoji:"💡", name:"TipView",                    swiftUI:"TipView / .popoverTip()",                  desc:"기능 설명이나 힌트를 보여주는 팁 뷰.",                                                    code:"struct FavoriteTip: Tip {\n  var title: Text { Text(\"Save Favorites\") }\n  var message: Text? { Text(\"Tap the heart to save.\") }\n  var image: Image? { Image(systemName: \"heart\") }\n}\n\nButton(\"Like\") { }\n  .popoverTip(FavoriteTip())",             cat:"Feedback",     avail:"iOS 17+", plat:["iOS","macOS"] },
+  { id:"toolbar",       emoji:"🔧", name:"Toolbar",                    swiftUI:".toolbar()",                               desc:"화면 상단이나 하단의 액션 버튼 모음.",                                                    code:".toolbar {\n  ToolbarItemGroup(placement: .primaryAction) {\n    Button(\"Share\", systemImage: \"square.and.arrow.up\") { }\n    Button(\"Edit\", systemImage: \"pencil\") { }\n  }\n  ToolbarItem(placement: .bottomBar) {\n    Button(\"Delete\", role: .destructive) { }\n  }\n}", cat:"Actions", avail:"iOS 14+", plat:["iOS","macOS"] },
+  { id:"treeview",      emoji:"🌳", name:"OutlineGroup",               swiftUI:"OutlineGroup / DisclosureGroup",           desc:"중첩 계층 데이터를 표시하는 뷰.",                                                        code:"List {\n  OutlineGroup(\n    fileSystem, children: \\.children\n  ) { item in\n    Label(item.name, systemImage: item.icon)\n  }\n}\n.listStyle(.sidebar)",                                                                                     cat:"Data Display", avail:"iOS 14+", plat:["iOS","macOS"] },
+  { id:"video",         emoji:"🎬", name:"VideoPlayer",                swiftUI:"VideoPlayer",                              desc:"비디오 콘텐츠를 재생하는 플레이어.",                                                     code:"VideoPlayer(\n  player: AVPlayer(url: videoURL)\n) {\n  VStack {\n    Spacer()\n    Text(\"Live\")\n      .padding(6)\n      .background(.red)\n      .clipShape(Capsule())\n  }\n}",                                                                   cat:"Data Display", avail:"iOS 14+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"widget",        emoji:"🧩", name:"Widget",                     swiftUI:"WidgetKit",                                desc:"홈 화면에 앱 정보를 요약하여 보여주는 위젯.",                                              code:"struct MyWidget: Widget {\n  var body: some WidgetConfiguration {\n    StaticConfiguration(\n      kind: \"MyWidget\",\n      provider: Provider()\n    ) { entry in\n      WidgetView(entry: entry)\n        .containerBackground(.fill.tertiary, for: .widget)\n    }\n    .supportedFamilies([.systemSmall, .systemMedium])\n  }\n}", cat:"Data Display", avail:"iOS 14+", plat:["iOS","macOS","watchOS"] },
+  { id:"colorpicker",   emoji:"🎨", name:"ColorPicker",                swiftUI:"ColorPicker",                              desc:"색상을 선택하는 시스템 컬러 피커.",                                                     code:"ColorPicker(\n  \"Theme Color\",\n  selection: $color,\n  supportsOpacity: true\n)",                                                                                                                                                       cat:"Forms",        avail:"iOS 14+", plat:["iOS","macOS"] },
+  { id:"sharesheet",    emoji:"📤", name:"ShareLink",                  swiftUI:"ShareLink",                                desc:"콘텐츠를 다른 앱이나 서비스로 공유.",                                                    code:"ShareLink(\n  item: url,\n  subject: Text(\"Check this out\"),\n  message: Text(\"I found this interesting.\")\n) {\n  Label(\"Share\", systemImage: \"square.and.arrow.up\")\n}",                                                                     cat:"Actions",      avail:"iOS 16+", plat:["iOS","macOS"] },
+  { id:"scrollview",    emoji:"📜", name:"ScrollView",                 swiftUI:"ScrollView",                               desc:"콘텐츠를 스크롤할 수 있는 뷰 컨테이너.",                                                code:"ScrollView {\n  LazyVStack(spacing: 12) {\n    ForEach(items) { item in\n      CardView(item: item)\n    }\n  }\n  .scrollTargetLayout()\n}\n.scrollIndicators(.hidden)\n.scrollPosition(id: $scrolledID)",                                   cat:"Layout",       avail:"iOS 13+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"statusbar",     emoji:"📶", name:"Status Bar",                 swiftUI:".statusBarHidden()",                       desc:"시간, 배터리, 신호 강도를 보여주는 시스템 상태 바.",                                      code:"ContentView()\n  .statusBarHidden(isImmersive)\n  .preferredColorScheme(.dark)",                                                                                                                                                          cat:"Layout",       avail:"iOS 13+", plat:["iOS"] },
+  { id:"asyncimage",    emoji:"🖼️", name:"AsyncImage",                swiftUI:"AsyncImage",                               desc:"URL에서 비동기로 이미지를 로드. 로딩/성공/실패 단계를 핸들링.",                            code:"AsyncImage(url: URL(string: urlString)) { phase in\n  switch phase {\n  case .empty:\n    ProgressView()\n  case .success(let image):\n    image.resizable().scaledToFill()\n  case .failure:\n    Image(systemName: \"photo.badge.exclamationmark\")\n      .foregroundStyle(.secondary)\n  @unknown default:\n    EmptyView()\n  }\n}\n.frame(width: 120, height: 120)\n.clipShape(RoundedRectangle(cornerRadius: 12))", cat:"Data Display", avail:"iOS 15+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"chart",         emoji:"📊", name:"Chart",                      swiftUI:"Chart (Swift Charts)",                     desc:"막대, 선, 파이 차트 등을 그리는 Swift Charts 프레임워크.",                               code:"Chart(data) { item in\n  BarMark(\n    x: .value(\"Month\", item.month),\n    y: .value(\"Revenue\", item.revenue)\n  )\n  .foregroundStyle(\n    by: .value(\"Category\", item.category)\n  )\n}\n.chartXAxis { AxisMarks(values: .automatic) }\n.chartLegend(.bottom)", cat:"Data Display", avail:"iOS 16+", plat:["iOS","macOS"] },
+  { id:"fab",           emoji:"➕", name:"Floating Action Button",      swiftUI:".overlay / Button",                        desc:"화면 위에 떠 있는 주요 액션 버튼. ZStack으로 구현.",                                      code:"ZStack(alignment: .bottomTrailing) {\n  ContentView()\n  Button {\n    addItem()\n  } label: {\n    Image(systemName: \"plus\")\n      .font(.title2.bold())\n      .foregroundStyle(.white)\n      .frame(width: 56, height: 56)\n      .background(.blue)\n      .clipShape(Circle())\n      .shadow(radius: 8)\n  }\n  .padding(24)\n}", cat:"Actions", avail:"iOS 13+", plat:["iOS","macOS"] },
+  { id:"gesture",       emoji:"👆", name:"Gesture",                    swiftUI:"DragGesture / TapGesture / MagnifyGesture", desc:"탭, 드래그, 핀치 등 다양한 제스처를 인식하는 모디파이어.",                               code:"View()\n  .gesture(\n    DragGesture()\n      .onChanged { value in\n        offset = value.translation\n      }\n      .onEnded { _ in\n        withAnimation(.spring) {\n          offset = .zero\n        }\n      }\n  )",                               cat:"Actions",      avail:"iOS 13+", plat:["iOS","macOS","watchOS"] },
+  { id:"haptic",        emoji:"📳", name:"Sensory Feedback",           swiftUI:".sensoryFeedback()",                       desc:"사용자 인터랙션에 햅틱 피드백을 제공하는 모디파이어.",                                      code:"// SwiftUI (iOS 17+)\nButton(\"Tap\") { tapped = true }\n  .sensoryFeedback(.impact, trigger: tapped)\n\n// UIKit\nlet generator = UIImpactFeedbackGenerator(style: .medium)\ngenerator.prepare()\ngenerator.impactOccurred()",                           cat:"Feedback",     avail:"iOS 17+", plat:["iOS","watchOS"] },
+  { id:"lazystack",     emoji:"📦", name:"LazyVStack / LazyHStack",    swiftUI:"LazyVStack / LazyHStack",                  desc:"화면에 보이는 항목만 렌더링하는 지연 로딩 스택. 대규모 리스트 성능 최적화.",                code:"ScrollView {\n  LazyVStack(spacing: 0, pinnedViews: .sectionHeaders) {\n    ForEach(sections) { section in\n      Section {\n        ForEach(section.items) { item in\n          RowView(item: item)\n        }\n      } header: {\n        SectionHeader(section.title)\n          .background(.regularMaterial)\n      }\n    }\n  }\n}", cat:"Layout", avail:"iOS 14+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"material",      emoji:"🪟", name:"Material",                   swiftUI:".background(.ultraThinMaterial)",          desc:"iOS 유리 질감 블러 머티리얼. 배경을 흐리게 처리해 깊이감을 표현.",                         code:"// All material types\n.background(.ultraThinMaterial)   // 가장 투명\n.background(.thinMaterial)\n.background(.regularMaterial)     // 기본\n.background(.thickMaterial)\n.background(.ultraThickMaterial)  // 가장 불투명",                        cat:"Layout",       avail:"iOS 15+", plat:["iOS","macOS"] },
+  { id:"meshgradient",  emoji:"🌈", name:"MeshGradient",               swiftUI:"MeshGradient",                             desc:"격자 제어점으로 유연하고 생동감 있는 그라디언트를 만드는 뷰. iOS 18 신규.",                  code:"MeshGradient(\n  width: 3, height: 3,\n  points: [\n    [0, 0], [0.5, 0], [1, 0],\n    [0, 0.5], [0.5, 0.5], [1, 0.5],\n    [0, 1], [0.5, 1], [1, 1]\n  ],\n  colors: [\n    .blue, .purple, .indigo,\n    .blue, .cyan, .purple,\n    .teal, .blue, .indigo\n  ]\n)\n.ignoresSafeArea()",               cat:"Layout",       avail:"iOS 18+", plat:["iOS","macOS"] },
+  { id:"navlink",       emoji:"🔗", name:"NavigationLink",             swiftUI:"NavigationLink",                           desc:"탭 시 새로운 뷰로 네비게이션 스택 푸시. NavigationStack과 함께 사용.",                       code:"NavigationStack {\n  List(items) { item in\n    NavigationLink(value: item) {\n      Label(item.title, systemImage: item.icon)\n    }\n  }\n  .navigationTitle(\"Browse\")\n  .navigationDestination(for: Item.self) { item in\n    DetailView(item: item)\n  }\n}", cat:"Navigation", avail:"iOS 16+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"phaseanimator", emoji:"🎞️", name:"PhaseAnimator",             swiftUI:"PhaseAnimator / KeyframeAnimator",          desc:"여러 단계를 순차적으로 애니메이션하는 뷰.",                                               code:"PhaseAnimator([0.5, 1.0, 1.2, 1.0]) { scale in\n  Circle()\n    .fill(.blue)\n    .frame(width: 80, height: 80)\n    .scaleEffect(scale)\n} animation: { phase in\n  switch phase {\n  case 1.2: return .spring(bounce: 0.6)\n  default: return .easeOut(duration: 0.3)\n  }\n}",                cat:"Feedback",     avail:"iOS 17+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"refreshcontrol",emoji:"🔄", name:"Pull to Refresh",            swiftUI:".refreshable()",                           desc:"스크롤 뷰를 당겨서 새로고침하는 인터랙션.",                                               code:"List(items) { item in\n  RowView(item: item)\n}\n.refreshable {\n  await viewModel.fetchLatest()\n}",                                                                                                                                  cat:"Actions",      avail:"iOS 15+", plat:["iOS","macOS"] },
+  { id:"safearea",      emoji:"📐", name:"Safe Area",                  swiftUI:".safeAreaInset() / .ignoresSafeArea()",    desc:"노치, 홈 인디케이터, Dynamic Island 등을 피해 콘텐츠를 배치하는 레이아웃 가이드.",            code:"ScrollView { content }\n.safeAreaInset(edge: .bottom) {\n  BottomBar()\n    .background(.regularMaterial)\n}\n\n// Extend behind safe area\nImage(\"hero\")\n  .ignoresSafeArea(edges: .top)\n\n// Add custom padding\n.safeAreaPadding(.horizontal, 16)",     cat:"Layout",       avail:"iOS 15+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"symboleffect",  emoji:"✨", name:"Symbol Effect",              swiftUI:".symbolEffect()",                          desc:"SF Symbol에 바운스, 펄스, 컬러 변화 등의 애니메이션 이펙트를 적용.",                         code:"// Bounce on tap\nImage(systemName: \"bell.fill\")\n  .symbolEffect(.bounce, value: tapped)\n\n// Continuous pulse\nImage(systemName: \"wifi\")\n  .symbolEffect(.pulse.byLayer)\n\n// Replace symbol\nImage(systemName: isPaused ? \"pause\" : \"play.fill\")\n  .contentTransition(.symbolEffect(.replace))", cat:"Data Display", avail:"iOS 17+", plat:["iOS","macOS","watchOS","tvOS"] },
+  { id:"swipeactions",  emoji:"👈", name:"Swipe Actions",              swiftUI:".swipeActions()",                          desc:"리스트 행을 스와이프해서 나타나는 액션 버튼. 삭제, 고정 등에 사용.",                          code:"List {\n  ForEach(messages) { msg in\n    MessageRow(msg)\n      .swipeActions(edge: .trailing, allowsFullSwipe: true) {\n        Button(role: .destructive) {\n          delete(msg)\n        } label: {\n          Label(\"Delete\", systemImage: \"trash\")\n        }\n      }\n  }\n}", cat:"Actions", avail:"iOS 15+", plat:["iOS","macOS"] },
+  { id:"viewthatfits",  emoji:"📏", name:"ViewThatFits",               swiftUI:"ViewThatFits",                             desc:"주어진 공간에 가장 잘 맞는 뷰를 자동으로 선택하는 적응형 레이아웃 컨테이너.",                  code:"ViewThatFits {\n  // 공간이 충분하면 HStack\n  HStack {\n    IconView()\n    TitleView()\n    SubtitleView()\n  }\n  // 좁은 공간\n  VStack {\n    IconView()\n    TitleView()\n  }\n}",                                                           cat:"Layout",       avail:"iOS 16+", plat:["iOS","macOS","watchOS","tvOS"] },
+];
+
+// ── Syntax Highlighter ────────────────────────────────────────
+function highlight(code) {
+  const e = code
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return e
+    // Comments
+    .replace(/(\/\/[^\n]*)/g, '<span class="cmt">$1</span>')
+    // String literals
+    .replace(/(&quot;[^&]*&quot;)/g, '<span class="str">$1</span>')
+    // Keywords
+    .replace(/\b(let|var|struct|class|func|return|if|else|switch|case|default|for|in|true|false|nil|some|async|await|@unknown|self)\b/g, '<span class="kw">$1</span>')
+    // Types (capitalized)
+    .replace(/\b([A-Z][A-Za-z0-9]+)\b/g, '<span class="typ">$1</span>')
+    // Dot modifier chains
+    .replace(/(\.[a-z][A-Za-z0-9]*)\(/g, '<span class="mdf">$1</span>(')
+    // Numbers
+    .replace(/\b(\d+(\.\d+)?)\b/g, '<span class="num">$1</span>');
+}
+
+// ── Render ────────────────────────────────────────────────────
+const grid = document.getElementById('compGrid');
+const filterRow = document.getElementById('filterRow');
+const searchInput = document.getElementById('searchInput');
+const resultCount = document.getElementById('resultCount');
+const emptyState = document.getElementById('emptyState');
+
+const CATS = ['All','Navigation','Forms','Data Display','Feedback','Actions','Layout'];
+let activeFilter = 'All';
+let searchQuery = '';
+
+function getCatCounts() {
+  const counts = {};
+  CATS.forEach(c => {
+    counts[c] = c === 'All' ? COMPONENTS.length
+      : COMPONENTS.filter(x => x.cat === c).length;
+  });
+  return counts;
+}
+
+function renderFilters() {
+  const counts = getCatCounts();
+  filterRow.innerHTML = CATS.map(cat => {
+    const active = activeFilter === cat ? ' active' : '';
+    return `<button class="filter-btn${active}" data-cat="${cat}">
+      ${cat}<span class="count">${counts[cat]}</span>
+    </button>`;
+  }).join('');
+  filterRow.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeFilter = btn.dataset.cat;
+      renderFilters();
+      renderCards();
+    });
+  });
+}
+
+function getFiltered() {
+  return COMPONENTS.filter(c => {
+    const catOk = activeFilter === 'All' || c.cat === activeFilter;
+    const q = searchQuery.toLowerCase();
+    const searchOk = !q ||
+      c.name.toLowerCase().includes(q) ||
+      c.id.toLowerCase().includes(q) ||
+      c.swiftUI.toLowerCase().includes(q) ||
+      c.desc.includes(q);
+    return catOk && searchOk;
+  });
+}
+
+function platIcon(plat) {
+  const map = { iOS:"📱", macOS:"💻", watchOS:"⌚", tvOS:"📺" };
+  return plat.map(p => map[p] || p).join(' ');
+}
+
+function renderCards() {
+  const filtered = getFiltered();
+  resultCount.textContent = `${filtered.length} / ${COMPONENTS.length} 개`;
+  emptyState.style.display = filtered.length ? 'none' : 'block';
+  grid.innerHTML = filtered.map(c => {
+    const col = CAT_COLORS[c.cat] || {};
+    const refs = REFS[c.id] || [];
+    const docLinks = refs.map(r =>
+      `<a class="doc-link" href="${r.url}" target="_blank" rel="noopener">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        ${r.label}
+      </a>`
+    ).join('');
+
+    return `<div class="comp-card">
+      <div class="card-header">
+        <div class="card-emoji">${c.emoji}</div>
+        <div class="card-meta">
+          <div class="card-name">${c.name}</div>
+          <div class="card-api">${c.swiftUI}</div>
+          <div class="card-badges">
+            <span class="badge-cat" style="background:${col.bg||''};color:${col.text||''};border-color:${col.border||''}">${c.cat}</span>
+            <span class="badge-avail">${c.avail}</span>
+          </div>
+        </div>
+      </div>
+      <div class="card-desc">${c.desc}</div>
+      <div class="card-code">
+        <button class="copy-btn" onclick="copyCode(this, \`${c.code.replace(/`/g,'\\`').replace(/\\/g,'\\\\')}\`)">복사</button>
+        <pre>${highlight(c.code)}</pre>
+      </div>
+      ${docLinks || refs.length === 0 ? `<div class="card-footer">
+        ${docLinks}
+        <span class="plat-icons" title="${c.plat.join(', ')}">${platIcon(c.plat)}</span>
+      </div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function copyCode(btn, code) {
+  // Unescape the code
+  const decoded = code.replace(/\\n/g, '\n').replace(/\\t/g, '\t');
+  navigator.clipboard.writeText(decoded).then(() => {
+    btn.textContent = '✓ 복사됨';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '복사';
+      btn.classList.remove('copied');
+    }, 1500);
+  });
+}
+
+searchInput.addEventListener('input', e => {
+  searchQuery = e.target.value;
+  renderCards();
+});
+
+renderFilters();
+renderCards();
+</script>
+
+</body>
+</html>

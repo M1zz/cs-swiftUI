@@ -93,6 +93,9 @@
     items += subItem('2-4.html', '2-4', 3);
   }
 
+  // Component Reference
+  items += '<li><a href="' + href('component-ref.html') + '"' + activeStyled('component-ref.html', 'color:var(--green);') + '>컴포넌트</a></li>';
+
   // Clone Coding
   items += '<li><a href="' + href('clone-coding.html') + '"' + activeStyled('clone-coding.html', 'color:var(--orange);') + '>Clone Coding</a></li>';
 
