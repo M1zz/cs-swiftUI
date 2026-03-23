@@ -381,6 +381,7 @@
         <span class="ch-topic">if let / guard let</span>
         <span class="ch-topic">Array · Dictionary · Set</span>
         <span class="ch-topic">Closure · [weak self]</span>
+        <span class="ch-topic">throws · do-catch</span>
         <span class="ch-topic">Xcode 에러 해석</span>
       </div>
       <div class="ch-link">챌린지 열기 →</div>
@@ -400,21 +401,107 @@
       </div>
       <div style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:800;color:var(--text);letter-spacing:-.02em;margin-bottom:6px;">🔩 Swift 핵심 문법</div>
       <div style="font-size:13px;color:var(--muted);line-height:1.6;">Computed Property · struct vs class · Access Control · init · Type Casting · static · lazy</div>
+      <div style="margin-top:8px;font-size:11px;color:var(--muted);">S2 (자료구조·알고리즘) 진입 전 필수 — 이 문법을 모르면 Big-O 코드를 읽을 수 없다</div>
     </div>
     <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--purple);white-space:nowrap;">학습하기 →</div>
   </a>
 </section>
 
-<!-- Stage 2 배너 -->
-<section style="max-width:1100px;margin:0 auto 60px;padding:0 40px;position:relative;z-index:1;">
-  <a href="stage2.html" style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:28px 32px;background:linear-gradient(135deg,var(--surface),var(--blue-dim));border:1px solid #5AB4FF44;border-radius:var(--radius-lg);text-decoration:none;flex-wrap:wrap;">
-    <div>
-      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;">다음 단계</div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.02em;margin-bottom:6px;">Stage 2 — 제대로 만든다 🏗</div>
-      <div style="font-size:13px;color:var(--muted);line-height:1.6;">SwiftData · URLSession · Protocol · Animation — 실제 앱이 되는 4가지 챌린지</div>
+<!-- S1 한계 인식 + 다음 단계 로드맵 -->
+<section style="max-width:1100px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
+
+  <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;">S1을 마친 후 — 다음에 마주칠 벽</div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 28px;margin-bottom:14px;">
+    <div style="font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:800;color:var(--text);letter-spacing:-.02em;margin-bottom:6px;">할 일 앱은 완성했다. 이제 뭘 모르는가</div>
+    <div style="font-size:13px;color:var(--muted);line-height:1.75;">S1을 끝낸 지금, <strong style="color:var(--text);">동작하는 앱</strong>은 만들 수 있다. 그러나 앱이 조금만 커지면 4가지 벽이 순서대로 나타난다. 각 벽은 서로 다른 이유에서 오고, 서로 다른 Stage에서 해결된다.</div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:8px;">
+
+    <!-- Gap 1 → S2 -->
+    <a href="stage2.html" data-gap-type="performance" data-to-stage="s2" style="display:flex;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);background:var(--surface);text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='#5AB4FF'" onmouseout="this.style.borderColor='var(--border)'">
+      <div style="width:3px;background:#5AB4FF;flex-shrink:0;"></div>
+      <div style="flex:1;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:5px;">곧 이런 생각이 든다</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.5;">"목록이 1000개 되니까 스크롤이 버벅인다. Array.contains가 왜 느린지 모르겠다."</div>
+          <div style="font-size:11px;color:var(--muted);">자료구조를 감으로 고르고 있다 · Big-O를 모른다</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid #5AB4FF44;border-radius:10px;background:#5AB4FF08;flex-shrink:0;">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;color:#5AB4FF;margin-bottom:2px;">STAGE 2</div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;color:var(--text);">왜 이렇게 느려?</div>
+          </div>
+          <span style="font-size:11px;color:#5AB4FF;">→</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Gap 2 → S3 -->
+    <div data-gap-type="structure" data-to-stage="s3" style="display:flex;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);background:var(--surface);cursor:default;">
+      <div style="width:3px;background:#2DA55D;flex-shrink:0;"></div>
+      <div style="flex:1;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:5px;">곧 이런 생각이 든다</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.5;">"View 파일이 1000줄이 됐다. 수정하면 다른 곳이 깨진다. 어디서부터 손대야 할지 모르겠다."</div>
+          <div style="font-size:11px;color:var(--muted);">코드 구조가 없다 · 책임이 한 곳에 몰려있다</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid #2DA55D44;border-radius:10px;background:#2DA55D08;flex-shrink:0;">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;color:#2DA55D;margin-bottom:2px;">STAGE 3</div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;color:var(--text);">코드에 구조가 생긴다</div>
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);">준비 중</span>
+        </div>
+      </div>
     </div>
-    <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--blue);white-space:nowrap;">Stage 2 시작하기 →</div>
-  </a>
+
+    <!-- Gap 3 → S4 -->
+    <div data-gap-type="memory" data-to-stage="s4" style="display:flex;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);background:var(--surface);cursor:default;">
+      <div style="width:3px;background:#FFD166;flex-shrink:0;"></div>
+      <div style="flex:1;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:5px;">곧 이런 생각이 든다</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.5;">"[weak self]를 쓰라는데 왜 써야 하는지 모른다. 화면을 닫아도 뭔가 메모리에 남는 것 같다."</div>
+          <div style="font-size:11px;color:var(--muted);">ARC를 모른다 · 순환 참조가 뭔지 모른다</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid #FFD16644;border-radius:10px;background:#FFD16608;flex-shrink:0;">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;color:#FFD166;margin-bottom:2px;">STAGE 4</div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;color:var(--text);">iOS Concept Lab</div>
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);">준비 중</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gap 4 → S5 -->
+    <div data-gap-type="networking" data-to-stage="s5" style="display:flex;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);background:var(--surface);cursor:default;">
+      <div style="width:3px;background:#9B7FFF;flex-shrink:0;"></div>
+      <div style="flex:1;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:5px;">곧 이런 생각이 든다</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.5;">"서버에서 날씨 데이터를 받아오고 싶다. URLSession 코드를 봤는데 너무 복잡하다."</div>
+          <div style="font-size:11px;color:var(--muted);">HTTP를 모른다 · async/await이 낯설다</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid #9B7FFF44;border-radius:10px;background:#9B7FFF08;flex-shrink:0;">
+          <div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;color:#9B7FFF;margin-bottom:2px;">STAGE 5</div>
+            <div style="font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;color:var(--text);">서버 데이터가 필요하다</div>
+          </div>
+          <span style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);">준비 중</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:14px;padding:14px 20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);display:flex;align-items:center;gap:10px;">
+    <span style="font-size:16px;">💡</span>
+    <div style="font-size:12px;color:var(--muted);line-height:1.6;"><strong style="color:var(--text);">순서 추천:</strong> S1 → S2 (성능 원리) → S3 (구조) → S4 (메모리) → S5 (네트워크). 단, 벽을 실제로 마주친 순서대로 가는 것이 더 오래 기억된다.</div>
+  </div>
+
 </section>
 
 <!-- 클론 코딩 추천 (Stage 1 완료 후) -->

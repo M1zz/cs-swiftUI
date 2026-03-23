@@ -81,6 +81,7 @@
     <span class="chip blue">List + ForEach</span>
     <span class="chip blue">NavigationStack</span>
     <span class="chip blue">UserDefaults + Codable</span>
+    <span class="chip blue">Property Wrappers</span>
   </div>
 </header>
 
@@ -245,6 +246,13 @@ struct ChildView: View {
           <div class="item-content">
             <div class="item-title">단방향 데이터 흐름</div>
             <div class="item-desc">상태는 위에서 아래로. View는 상태를 그릴 뿐, 상태를 소유하지 않는 것이 원칙</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">Property Wrapper란</div>
+            <div class="item-desc">@State, @Binding처럼 @ 기호가 붙는 것들. 프로퍼티에 특별한 동작을 추가하는 Swift 문법. SwiftUI는 이를 통해 값 변경을 감지하고 화면을 다시 그린다</div>
           </div>
         </div>
       </div>

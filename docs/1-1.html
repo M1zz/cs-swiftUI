@@ -80,6 +80,7 @@
     <span class="chip orange">modifier 체이닝</span>
     <span class="chip orange">frame · padding · Spacer</span>
     <span class="chip orange">@main · App · Scene</span>
+    <span class="chip orange">ScenePhase · onAppear</span>
     <span class="chip orange">Xcode Preview</span>
     <span class="chip orange">GeometryReader</span>
   </div>
@@ -481,11 +482,11 @@
       </div>
     </div>
 
-    <!-- Section 7: @main · App · WindowGroup -->
+    <!-- Section 7: @main · App · WindowGroup · App Lifecycle -->
     <div class="content-section" data-preview="pv-7">
       <div class="cs-label">Topic 07</div>
-      <h2 class="cs-title">@main · App · WindowGroup</h2>
-      <div class="cs-subtitle">앱의 진입점과 Scene 구조</div>
+      <h2 class="cs-title">@main · App · Scene · Lifecycle</h2>
+      <div class="cs-subtitle">앱의 진입점, Scene 구조, 생명주기 상태</div>
 
       <div class="code-block" style="margin-bottom:20px;">
         <div class="code-header">
@@ -494,10 +495,36 @@
         </div>
         <pre class="swift-code">@main
 struct MyApp: App {
+    @Environment(\.scenePhase) var phase
+
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
+        .onChange(of: phase) { _, newPhase in
+            switch newPhase {
+            case .active:
+                print("앱 활성 — 화면 앞에 있음")
+            case .inactive:
+                print("비활성 — 전환 중")
+            case .background:
+                print("백그라운드 — 화면 뒤")
+            @unknown default: break
+            }
+        }
+    }
+}
+
+// View Lifecycle
+struct HomeView: View {
+    var body: some View {
+        Text("홈")
+            .onAppear {
+                print("화면 나타남 — 데이터 로드")
+            }
+            .onDisappear {
+                print("화면 사라짐 — 타이머 정지")
+            }
     }
 }</pre>
       </div>
@@ -506,8 +533,9 @@ struct MyApp: App {
         <div class="tq-label">생각해보기</div>
         <ul>
           <li><code>@main</code>을 두 개의 struct에 붙이면 어떻게 되는가?</li>
-          <li><code>WindowGroup</code>은 왜 단순히 "Window"가 아니라 "Group"인가?</li>
           <li>App → Scene → View 계층에서 각각의 역할은 무엇인가?</li>
+          <li>앱이 백그라운드로 가는 시점에 저장 작업을 하려면 어디에 코드를 넣어야 하는가?</li>
+          <li><code>.onAppear</code>는 View가 화면에 나타날 때마다 매번 실행되는가?</li>
         </ul>
       </div>
 
@@ -522,15 +550,22 @@ struct MyApp: App {
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">App 프로토콜</div>
-            <div class="item-desc">body: some Scene 요구. SwiftUI 앱의 최상위 구조체</div>
+            <div class="item-title">App → Scene → View 계층</div>
+            <div class="item-desc">App은 앱 전체. Scene(WindowGroup)은 UI 컨테이너. View는 화면 조각. 이 순서대로 생성됨</div>
           </div>
         </div>
         <div class="topic-item">
           <div class="item-dot"></div>
           <div class="item-content">
-            <div class="item-title">WindowGroup</div>
-            <div class="item-desc">기본 Scene 타입. iPad/Mac에서 여러 창을 지원하는 이유</div>
+            <div class="item-title">ScenePhase — 앱 생명주기</div>
+            <div class="item-desc">.active(화면 앞) / .inactive(전환 중) / .background(화면 뒤). @Environment(\.scenePhase)로 읽음</div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <div class="item-dot"></div>
+          <div class="item-content">
+            <div class="item-title">onAppear / onDisappear — View 생명주기</div>
+            <div class="item-desc">onAppear: View가 화면에 나타날 때마다 실행 (NavigationStack 뒤로 후 다시 올 때도). 데이터 로드, 타이머 시작에 적합</div>
           </div>
         </div>
       </div>
@@ -662,11 +697,17 @@ VStack {
             </div>
           </div>
 
-          <!-- Preview 7: App 실행 결과 — ContentView -->
+          <!-- Preview 7: App Lifecycle / ScenePhase -->
           <div id="pv-7" class="preview-content">
-            <div class="preview-label">Preview</div>
-            <div style="flex:1;display:flex;align-items:center;justify-content:center;">
-              <span style="font-size:28px;font-weight:700;color:#E85D1A;">Hello, World!</span>
+            <div class="preview-label">Console</div>
+            <div style="font-family:'DM Mono',monospace;font-size:12px;line-height:2;padding:4px 0;">
+              <span style="color:#28C840;">앱 활성 — 화면 앞에 있음</span><br>
+              <span style="color:var(--muted);">// 홈 버튼 → 백그라운드</span><br>
+              <span style="color:#FEBC2E;">비활성 — 전환 중</span><br>
+              <span style="color:var(--muted);">백그라운드 — 화면 뒤</span><br>
+              <br>
+              <span style="color:var(--muted);">// 다시 열면</span><br>
+              <span style="color:#28C840;">화면 나타남 — 데이터 로드</span>
             </div>
           </div>
 
