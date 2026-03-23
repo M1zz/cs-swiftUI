@@ -10,8 +10,8 @@
   --surface2:  #EEF0F4;
   --border:    #E2E4EA;
   --border2:   #D0D3DC;
-  --orange:    #E85D1A;
-  --orange-dim:#E85D1A14;
+  --orange:    #e04a1c;
+  --orange-dim:#e04a1c14;
   --blue:      #2E8BD8;
   --blue-dim:  #2E8BD812;
   --green:     #2DA55D;
@@ -150,7 +150,7 @@ body::before {
   border-radius: 100px;
 }
 
-.badge-orange { color: var(--orange); background: var(--orange-dim); border: 1px solid #FF6B2B44; }
+.badge-orange { color: var(--orange); background: var(--orange-dim); border: 1px solid #e04a1c44; }
 .badge-blue   { color: var(--blue);   background: var(--blue-dim);   border: 1px solid #5AB4FF44; }
 .badge-green  { color: var(--green);  background: var(--green-dim);  border: 1px solid #4ADE8044; }
 .badge-yellow { color: var(--yellow); background: var(--yellow-dim); border: 1px solid #FFD16644; }
@@ -181,7 +181,7 @@ body::before {
   letter-spacing: 0.04em;
 }
 
-.chip.orange { border-color:#FF6B2B44; color:var(--orange); }
+.chip.orange { border-color:#e04a1c44; color:var(--orange); }
 .chip.blue   { border-color:#5AB4FF44; color:var(--blue);   }
 .chip.green  { border-color:#4ADE8044; color:var(--green);  }
 .chip.yellow { border-color:#FFD16644; color:var(--yellow); }
