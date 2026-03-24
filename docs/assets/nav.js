@@ -10,7 +10,7 @@
   var page = path.split('/').pop() || 'index.html';
   var isEN = path.indexOf('/en/') !== -1;
 
-  var enAvailable = ['index.html','stage1.html','setup.html','1-1.html','1-2.html','1-3.html','1-4.html','stage2.html','2-1.html','2-2.html','2-3.html','2-4.html','clone-coding.html','swift-grammar.html'];
+  var enAvailable = ['index.html','stage1.html','setup.html','1-1.html','1-2.html','1-3.html','1-4.html','stage2.html','2-1.html','2-2.html','2-3.html','2-4.html','swift-grammar.html'];
   var s1Pages = ['stage1.html','blog.html','setup.html','1-1.html','1-2.html','1-3.html','1-4.html'];
   var s2Pages = ['stage2.html','2-1.html','2-2.html','2-3.html','2-4.html'];
   var isS1 = s1Pages.indexOf(page) !== -1;
@@ -95,9 +95,6 @@
 
   // Component Reference
   items += '<li><a href="' + href('component-ref.html') + '"' + activeStyled('component-ref.html', 'color:var(--green);') + '>컴포넌트</a></li>';
-
-  // Clone Coding
-  items += '<li><a href="' + href('clone-coding.html') + '"' + activeStyled('clone-coding.html', 'color:var(--orange);') + '>Clone Coding</a></li>';
 
   // 언어 토글 링크
   var langToggleStyle = 'font-family:\'DM Mono\',monospace;font-size:10px;padding:4px 10px;border-radius:100px;border:1px solid var(--border2);color:var(--muted);text-decoration:none;margin-left:auto;';

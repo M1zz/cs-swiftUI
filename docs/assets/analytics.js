@@ -63,7 +63,7 @@
     ch14:    journey.some(function(p){ return p === '1-4.html'; }),
     grammar: journey.some(function(p){ return p === 'swift-grammar.html'; }),
     stage2:  journey.some(function(p){ return p === 'stage2.html'; }),
-    clone:   journey.some(function(p){ return p === 'clone-coding.html'; })
+    ds:      journey.some(function(p){ return /swift-data-structures/.test(p); })
   };
 
   // 진행 깊이 (0~9)
@@ -135,9 +135,7 @@
   // ── 4. CTA 버튼 클릭 식별 ────────────────────
   // 주요 버튼을 텍스트/href로 분류해 어떤 CTA가 클릭됐는지 파악
   var CTA_PATTERNS = [
-    { pattern: /inf\.run/,            label: 'mentoring_inflearn' },
     { pattern: /open\.kakao/,         label: 'kakao_openchat' },
-    { pattern: /clone-coding/,        label: 'goto_clone_coding' },
     { pattern: /stage2/,              label: 'goto_stage2' },
     { pattern: /stage1/,              label: 'goto_stage1' },
     { pattern: /1-1\.html/,           label: 'challenge_1_1' },
@@ -178,11 +176,7 @@
         link_text: text
       }));
 
-      // 멘토링 클릭은 별도 전환 이벤트
-      if (ctaLabel === 'mentoring_inflearn') {
-        gtag('event', 'conversion_mentoring', base({ link_text: text }));
-      }
-      // 카카오 클릭도 별도 전환
+      // 카카오 클릭 전환
       if (ctaLabel === 'kakao_openchat') {
         gtag('event', 'conversion_kakao', base({ link_text: text }));
       }
@@ -213,8 +207,6 @@
       { sel: '.path-item.s2, [data-track="stage2_section"]',       name: 'section_stage2_path' },
       { sel: '.creator-card, .creator-wrap',                       name: 'section_creator' },
       { sel: '.email-card',                                        name: 'section_notify' },
-      // stage1.html 멘토링 카드
-      { sel: '[href="https://inf.run/4VzFE"]',                     name: 'section_mentoring_cta' },
       // 다음 퍼널 배너 (자료구조)
       { sel: '[href*="swift-data-structures"]',                     name: 'section_next_funnel_ds' },
     ];
@@ -313,9 +305,6 @@
   }
   if (visitedStages.ch14) {
     gtag('event', 'funnel_stage1_complete', base({ depth: progressDepth }));
-  }
-  if (visitedStages.clone) {
-    gtag('event', 'funnel_clone_reached', base({ depth: progressDepth }));
   }
 
   // ── 11. 다음 퍼널 클릭 리포트 ──────────────────
