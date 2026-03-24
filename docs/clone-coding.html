@@ -4,255 +4,85 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clone Coding 실전 프로젝트 | 개발자리</title>
-  <meta name="description" content="SwiftUI 클론 코딩 프로젝트 6개. 계산기, 타이머, 장바구니, 메모 앱, 날씨 앱, 가계부를 직접 만들며 포트폴리오를 완성합니다." />
+  <meta name="description" content="SwiftUI 클론 코딩 6개 프로젝트. 계산기, 타이머, 장바구니, 메모 앱, 날씨 앱, 가계부를 직접 만들며 실력을 키웁니다. 무료." />
   <link rel="canonical" href="https://m1zz.github.io/cs-swiftUI/clone-coding.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/style.css" />
   <meta property="og:title" content="Clone Coding 실전 프로젝트 | 개발자리" />
-  <meta property="og:description" content="커리큘럼에서 배운 개념을 실제 앱으로. 계산기부터 가계부까지 6개 프로젝트 완성 코드 + PDF 가이드." />
+  <meta property="og:description" content="커리큘럼에서 배운 개념을 실제 앱으로. 6개 프로젝트 무료 학습 가이드." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://m1zz.github.io/cs-swiftUI/og-image.png" />
   <meta property="og:url" content="https://m1zz.github.io/cs-swiftUI/clone-coding.html" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://m1zz.github.io/cs-swiftUI/og-image.png" />
   <style>
-    /* ── Hero ── */
     .cc-hero {
-      max-width:1100px; margin:0 auto; padding:64px 40px 56px;
+      max-width:1100px; margin:0 auto; padding:64px 40px 48px;
       position:relative; z-index:1;
     }
-    .cc-hero::after {
-      content:''; position:absolute;
-      top:-60px; right:-80px;
-      width:480px; height:480px;
-      background:radial-gradient(circle, #FF6B2B10 0%, transparent 65%);
-      pointer-events:none;
-    }
-    .cc-hero-eyebrow {
-      font-family:'DM Mono',monospace; font-size:11px;
-      letter-spacing:.15em; text-transform:uppercase;
-      color:var(--orange); margin-bottom:20px;
-    }
-    .cc-hero-title {
+    .cc-hero h1 {
       font-family:'Space Grotesk',sans-serif;
-      font-size:clamp(40px,6vw,72px);
-      font-weight:800; line-height:1.0;
-      letter-spacing:-.035em; margin-bottom:18px;
+      font-size:clamp(36px,6vw,64px);
+      font-weight:800; line-height:1.05;
+      letter-spacing:-.035em; margin-bottom:16px;
     }
-    .cc-hero-title .acc { color:var(--orange); }
-    .cc-hero-sub {
+    .cc-hero h1 .acc { color:var(--orange); }
+    .cc-hero p {
       font-size:15px; color:var(--muted);
-      max-width:580px; line-height:1.8; margin-bottom:40px;
+      max-width:540px; line-height:1.8; margin-bottom:32px;
     }
-
-    /* ── What's included banner ── */
-    .included-bar {
-      max-width:1100px; margin:0 auto; padding:0 40px 56px;
+    .proj-grid {
+      max-width:1100px; margin:0 auto; padding:0 40px 60px;
+      display:grid; grid-template-columns:repeat(2,1fr); gap:16px;
       position:relative; z-index:1;
     }
-    .included-grid {
-      display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
-    }
-    .included-item {
-      background:var(--surface); border:1px solid var(--border);
-      border-radius:var(--radius-lg); padding:24px 22px;
-      display:flex; align-items:flex-start; gap:16px;
-    }
-    .inc-icon {
-      font-size:28px; flex-shrink:0; margin-top:2px;
-    }
-    .inc-title {
-      font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:700;
-      color:var(--text); margin-bottom:4px;
-    }
-    .inc-desc {
-      font-size:12px; color:var(--muted); line-height:1.65;
-    }
-
-    /* ── Project grid ── */
-    .projects-wrap {
-      max-width:1100px; margin:0 auto; padding:0 40px 80px;
-      position:relative; z-index:1;
-    }
-    .projects-label {
-      font-family:'DM Mono',monospace; font-size:10px;
-      letter-spacing:.15em; text-transform:uppercase;
-      color:var(--muted); margin-bottom:20px;
-    }
-    .project-grid {
-      display:grid; grid-template-columns:repeat(2,1fr); gap:20px;
-    }
-
-    /* ── Project card ── */
     .proj-card {
       background:var(--surface); border:1px solid var(--border);
-      border-radius:var(--radius-lg); overflow:hidden;
-      display:flex; flex-direction:column;
-      transition:border-color .2s, box-shadow .2s;
+      border-radius:var(--radius-lg); padding:28px;
+      text-decoration:none; display:flex; flex-direction:column; gap:12px;
+      transition:border-color .2s, transform .15s;
     }
     .proj-card:hover {
-      border-color:var(--orange);
-      box-shadow:0 10px 40px #FF6B2B14;
+      border-color:var(--orange); transform:translateY(-2px);
     }
-
-    /* mockup header */
-    .proj-mockup {
-      background:linear-gradient(135deg,#1a1d2a,#0d0f17);
-      padding:28px 28px 0; display:flex; justify-content:center;
-      border-bottom:1px solid var(--border);
-      min-height:280px; position:relative; overflow:hidden;
-    }
-    .proj-mockup::before {
-      content:''; position:absolute; inset:0;
-      background:radial-gradient(ellipse at 50% 120%, var(--mockup-glow,#FF6B2B18) 0%, transparent 70%);
-    }
-    .mock-phone {
-      width:150px; height:300px; background:#1c1c1e;
-      border-radius:26px; border:2px solid #333;
-      overflow:hidden; position:relative; z-index:1;
-      box-shadow:0 20px 60px #00000080;
-      flex-shrink:0;
-    }
-    .mock-status {
-      height:22px; background:#000;
-      display:flex; align-items:center; justify-content:center;
-    }
-    .mock-notch {
-      width:50px; height:10px; background:#1c1c1e;
-      border-radius:0 0 8px 8px;
-    }
-    .mock-screen {
-      padding:8px 8px 14px;
-    }
-
-    /* body */
-    .proj-body { padding:24px; flex:1; display:flex; flex-direction:column; gap:16px; }
-    .proj-header { display:flex; align-items:flex-start; gap:14px; }
+    .proj-head { display:flex; align-items:flex-start; gap:14px; }
     .proj-emoji { font-size:32px; flex-shrink:0; }
-    .proj-info { flex:1; }
     .proj-title {
       font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:800;
-      color:var(--text); margin-bottom:4px; letter-spacing:-.02em;
+      color:var(--text); letter-spacing:-.02em;
     }
-    .proj-difficulty {
+    .proj-diff {
       font-family:'DM Mono',monospace; font-size:10px;
-      letter-spacing:.06em; color:var(--muted);
+      color:var(--muted); letter-spacing:.04em;
     }
     .proj-desc {
-      font-size:12px; color:var(--muted); line-height:1.75;
+      font-size:12px; color:var(--muted); line-height:1.7;
     }
-    .proj-topics {
-      display:flex; flex-wrap:wrap; gap:5px;
-    }
+    .proj-topics { display:flex; flex-wrap:wrap; gap:5px; }
     .proj-topic {
       font-family:'DM Mono',monospace; font-size:9px;
       padding:3px 8px; border-radius:5px;
       background:var(--tag-bg); color:var(--muted);
       border:1px solid var(--border2); letter-spacing:.03em;
     }
-
-    /* steps */
-    .proj-steps {
-      display:flex; flex-direction:column; gap:8px;
+    .proj-links {
+      display:flex; gap:8px; margin-top:auto; flex-wrap:wrap;
     }
-    .proj-steps-label {
-      font-family:'DM Mono',monospace; font-size:9px;
-      letter-spacing:.1em; text-transform:uppercase;
-      color:var(--muted); margin-bottom:2px;
-    }
-    .step-row {
-      display:flex; align-items:center; gap:10px;
-    }
-    .step-num {
+    .proj-link {
       font-family:'DM Mono',monospace; font-size:10px;
-      color:var(--orange); width:20px; flex-shrink:0;
+      padding:5px 12px; border-radius:8px;
+      text-decoration:none; transition:opacity .15s;
     }
-    .step-text {
-      font-size:12px; color:var(--muted); line-height:1.5;
+    .proj-link:hover { opacity:.8; }
+    .proj-link-guide {
+      background:var(--orange); color:#fff;
     }
-
-    /* CTA */
-    .proj-cta {
-      margin-top:auto; padding-top:8px;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px; flex-wrap:wrap;
+    .proj-link-code {
+      background:var(--surface2); color:var(--text);
+      border:1px solid var(--border);
     }
-    .proj-price {
-      display:flex; flex-direction:column; gap:2px;
-    }
-    .proj-price-label {
-      font-family:'DM Mono',monospace; font-size:9px;
-      letter-spacing:.08em; text-transform:uppercase; color:var(--muted);
-    }
-    .proj-price-val {
-      font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:800;
-      color:var(--text);
-    }
-    .proj-price-sub {
-      font-size:10px; color:var(--muted);
-    }
-    .btn-inflearn {
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 18px;
-      background:linear-gradient(135deg,#00C471,#00a35f);
-      color:#fff; border-radius:10px; text-decoration:none;
-      font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:700;
-      transition:opacity .2s, transform .15s;
-      white-space:nowrap;
-    }
-    .btn-inflearn:hover { opacity:.88; transform:translateY(-1px); }
-    .btn-inflearn svg { width:16px; height:16px; flex-shrink:0; }
-
-    /* ── Bundle ── */
-    .bundle-wrap {
-      max-width:1100px; margin:0 auto; padding:0 40px 80px;
-      position:relative; z-index:1;
-    }
-    .bundle-card {
-      background:linear-gradient(135deg,var(--surface),#FF6B2B08);
-      border:1px solid var(--orange);
-      border-radius:var(--radius-lg); padding:40px;
-      display:grid; grid-template-columns:1fr auto; gap:32px;
-      align-items:center;
-    }
-    .bundle-eyebrow {
-      font-family:'DM Mono',monospace; font-size:10px;
-      letter-spacing:.12em; text-transform:uppercase;
-      color:var(--orange); margin-bottom:10px;
-    }
-    .bundle-title {
-      font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:800;
-      color:var(--text); margin-bottom:10px; letter-spacing:-.02em;
-    }
-    .bundle-desc {
-      font-size:13px; color:var(--muted); line-height:1.75; max-width:520px;
-    }
-    .bundle-cta { display:flex; flex-direction:column; gap:8px; align-items:flex-end; }
-    .bundle-price {
-      font-family:'Space Grotesk',sans-serif; font-size:32px; font-weight:800;
-      color:var(--orange); text-align:right;
-    }
-    .bundle-price-orig {
-      font-size:13px; color:var(--muted); text-align:right;
-      text-decoration:line-through;
-    }
-    .btn-bundle {
-      display:inline-flex; align-items:center; gap:8px; padding:14px 28px;
-      background:var(--orange); color:#fff; border-radius:10px;
-      text-decoration:none; font-family:'Space Grotesk',sans-serif;
-      font-size:14px; font-weight:700;
-      transition:opacity .2s; white-space:nowrap;
-    }
-    .btn-bundle:hover { opacity:.88; }
-
     @media(max-width:768px){
-      .cc-hero{padding:40px 20px 40px;}
-      .included-bar,.projects-wrap,.bundle-wrap{padding-left:20px;padding-right:20px;}
-      .included-grid{grid-template-columns:1fr;}
-      .project-grid{grid-template-columns:1fr;}
-      .bundle-card{grid-template-columns:1fr;}
-      .bundle-cta{align-items:flex-start;}
+      .cc-hero { padding:40px 20px 32px; }
+      .proj-grid { padding:0 20px 40px; grid-template-columns:1fr; }
     }
   </style>
 </head>
@@ -261,510 +91,166 @@
 <nav class="nav"></nav>
 <script src="assets/nav.js"></script>
 
-<!-- ── Hero ── -->
 <header class="cc-hero fade-in">
-  <div class="cc-hero-eyebrow">실전 프로젝트 패키지</div>
-  <h1 class="cc-hero-title">
-    직접 만들어야<br>
-    <span class="acc">진짜 실력</span>이다
-  </h1>
-  <p class="cc-hero-sub">
-    커리큘럼에서 배운 개념을 실제 앱으로 적용합니다.<br>
-    완성 코드 + 단계별 PDF 가이드로 혼자서도 끝낼 수 있습니다.
-  </p>
+  <div class="badge badge-orange" style="margin-bottom:20px;">
+    <span class="badge-dot"></span>
+    6 프로젝트 · 무료 · 학습 가이드 + 소스 코드
+  </div>
+  <h1>직접 만들어야<br><span class="acc">진짜 실력</span>이다</h1>
+  <p>커리큘럼에서 배운 개념을 실제 앱으로 적용합니다. 각 프로젝트마다 학습 가이드와 start/final 코드가 포함되어 있습니다.</p>
   <div style="display:flex;gap:12px;flex-wrap:wrap;">
-    <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);">
-      <span style="width:8px;height:8px;border-radius:50%;background:var(--orange);display:inline-block;"></span>
-      완성 Xcode 프로젝트 코드 포함
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--orange);"></span>
+      학습 가이드 (웹)
     </div>
-    <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);">
-      <span style="width:8px;height:8px;border-radius:50%;background:var(--orange);display:inline-block;"></span>
-      단계별 PDF 학습 가이드 포함
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--orange);"></span>
+      start 코드 (직접 구현)
     </div>
-    <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);">
-      <span style="width:8px;height:8px;border-radius:50%;background:var(--orange);display:inline-block;"></span>
-      인프런에서 평생 소장
+    <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);">
+      <span style="width:6px;height:6px;border-radius:50%;background:var(--orange);"></span>
+      final 코드 (정답)
     </div>
   </div>
 </header>
 
-<!-- ── What's included ── -->
-<section class="included-bar fade-in">
-  <div class="included-grid">
-    <div class="included-item">
-      <div class="inc-icon">📦</div>
+<div class="proj-grid">
+
+  <!-- 1. 계산기 -->
+  <div class="proj-card fade-in">
+    <div class="proj-head">
+      <div class="proj-emoji">🧮</div>
       <div>
-        <div class="inc-title">완성 Xcode 프로젝트</div>
-        <div class="inc-desc">빌드 즉시 실행 가능한 완성 코드. 주석으로 핵심 포인트를 설명해두었습니다.</div>
+        <div class="proj-title">계산기</div>
+        <div class="proj-diff">⭐ 입문 · Stage 1-1, 1-2</div>
       </div>
     </div>
-    <div class="included-item">
-      <div class="inc-icon">📄</div>
-      <div>
-        <div class="inc-title">단계별 PDF 학습 가이드</div>
-        <div class="inc-desc">직접 따라 만들 수 있도록 설계 → UI → 로직 → 완성 순서로 구성된 학습 문서.</div>
-      </div>
+    <div class="proj-desc">Apple 기본 계산기 UI 클론. LazyVGrid로 버튼을 배치하고, @Observable로 계산 로직을 분리합니다.</div>
+    <div class="proj-topics">
+      <span class="proj-topic">LazyVGrid</span>
+      <span class="proj-topic">@Observable</span>
+      <span class="proj-topic">enum</span>
+      <span class="proj-topic">ForEach + 2D Array</span>
     </div>
-    <div class="included-item">
-      <div class="inc-icon">🔗</div>
-      <div>
-        <div class="inc-title">커리큘럼 연계 설명</div>
-        <div class="inc-desc">Stage 1/2 중 어떤 챕터의 개념을 쓰는지 명시. 모르는 부분을 바로 찾아볼 수 있습니다.</div>
-      </div>
+    <div class="proj-links">
+      <a href="projects/calculator-guide.html" class="proj-link proj-link-guide">학습 가이드 →</a>
     </div>
   </div>
-</section>
 
-<!-- ── Projects ── -->
-<section class="projects-wrap">
-  <div class="projects-label">6 실전 프로젝트 — 난이도 순</div>
-  <div class="project-grid">
-
-    <!-- 1. 계산기 -->
-    <div class="proj-card fade-in delay-1" style="--mockup-glow:#FF6B2B18;">
-      <div class="proj-mockup">
-        <div class="mock-phone">
-          <div class="mock-status"><div class="mock-notch"></div></div>
-          <div class="mock-screen" style="background:#000;padding:10px 6px;">
-            <div style="color:#fff;font-size:24px;font-family:'Space Grotesk',sans-serif;font-weight:300;text-align:right;padding:0 4px 6px;">123</div>
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:30px;gap:3px;">
-              <div style="background:#a5a5a5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#000;font-weight:600;">AC</div>
-              <div style="background:#a5a5a5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#000;">+/-</div>
-              <div style="background:#a5a5a5;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#000;">%</div>
-              <div style="background:#FF9500;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;">÷</div>
-              <div style="background:#333;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;">7</div>
-              <div style="background:#333;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;">8</div>
-              <div style="background:#333;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;">9</div>
-              <div style="background:#FF9500;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;">×</div>
-              <div style="background:#333;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;">4</div>
-              <div style="background:#333;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;">5</div>
-              <div style="background:#333;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;">6</div>
-              <div style="background:#FF9500;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;">-</div>
-              <div style="background:#333;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;">1</div>
-              <div style="background:#333;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;">2</div>
-              <div style="background:#333;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;">3</div>
-              <div style="background:#FF9500;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;">+</div>
-              <div style="background:#333;grid-column:span 2;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;">0</div>
-              <div style="background:#333;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;">.</div>
-              <div style="background:#FF9500;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;">=</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-header">
-          <div class="proj-emoji">🧮</div>
-          <div class="proj-info">
-            <div class="proj-title">계산기</div>
-            <div class="proj-difficulty">⭐ 입문 · Stage 1-1, 1-2</div>
-          </div>
-        </div>
-        <p class="proj-desc">Apple 기본 계산기 UI를 완성 클론합니다. LazyVGrid로 버튼을 배치하고, enum으로 연산자를 모델링하고, @State로 계산 로직을 구현합니다.</p>
-        <div class="proj-topics">
-          <span class="proj-topic">LazyVGrid</span>
-          <span class="proj-topic">@State</span>
-          <span class="proj-topic">enum</span>
-          <span class="proj-topic">Button</span>
-          <span class="proj-topic">ViewModifier</span>
-        </div>
-        <div class="proj-steps">
-          <div class="proj-steps-label">PDF 구성 — 4단계</div>
-          <div class="step-row"><div class="step-num">01</div><div class="step-text">앱 구조 설계 — 화면 분해 & 데이터 모델 정의</div></div>
-          <div class="step-row"><div class="step-num">02</div><div class="step-text">버튼 그리드 UI 구성 (LazyVGrid + 커스텀 ButtonStyle)</div></div>
-          <div class="step-row"><div class="step-num">03</div><div class="step-text">연산 로직 구현 (@State + enum 연산자)</div></div>
-          <div class="step-row"><div class="step-num">04</div><div class="step-text">엣지 케이스 처리 & 완성</div></div>
-        </div>
-        <div class="proj-cta">
-          <div class="proj-price">
-            <div class="proj-price-label">인프런 가격</div>
-            <div class="proj-price-val">₩9,900</div>
-            <div class="proj-price-sub">코드 + PDF 포함</div>
-          </div>
-          <a href="#notify-section" class="btn-inflearn" style="background:linear-gradient(135deg,#1A1D2A,#2A2D40);" onclick="if(typeof gtag==='function')gtag('event','purchase_click',{project:'계산기',action:'notify'})">
-            <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg>
-            출시 알림 받기
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2. 타이머 -->
-    <div class="proj-card fade-in delay-2" style="--mockup-glow:#5AB4FF18;">
-      <div class="proj-mockup" style="background:linear-gradient(135deg,#0d1520,#0a0d17);">
-        <div class="mock-phone">
-          <div class="mock-status"><div class="mock-notch"></div></div>
-          <div class="mock-screen" style="background:#000;padding:10px 8px;">
-            <div style="text-align:center;color:#888;font-size:9px;margin-bottom:8px;">타이머</div>
-            <div style="display:flex;justify-content:center;margin-bottom:10px;">
-              <svg width="80" height="80" viewBox="0 0 80 80">
-                <circle cx="40" cy="40" r="34" fill="none" stroke="#222" stroke-width="6"/>
-                <circle cx="40" cy="40" r="34" fill="none" stroke="#FF9500" stroke-width="6"
-                  stroke-dasharray="213 213" stroke-dashoffset="60" stroke-linecap="round"
-                  transform="rotate(-90 40 40)"/>
-                <text x="40" y="45" text-anchor="middle" fill="#fff" font-size="14" font-family="monospace">3:42</text>
-              </svg>
-            </div>
-            <div style="display:flex;justify-content:center;gap:10px;">
-              <div style="background:#1c1c1e;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#FF9500;">취소</div>
-              <div style="background:#FF9500;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;">시작</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-header">
-          <div class="proj-emoji">⏱</div>
-          <div class="proj-info">
-            <div class="proj-title">타이머 / 스톱워치</div>
-            <div class="proj-difficulty">⭐⭐ 초급 · Stage 1-1, 1-2, 1-4</div>
-          </div>
-        </div>
-        <p class="proj-desc">Apple Clock 앱의 타이머 탭을 클론합니다. Timer.publish로 1초마다 상태를 업데이트하고, Path로 원형 프로그레스 바를 직접 그립니다.</p>
-        <div class="proj-topics">
-          <span class="proj-topic">Timer.publish</span>
-          <span class="proj-topic">Path / Shape</span>
-          <span class="proj-topic">@State</span>
-          <span class="proj-topic">onReceive</span>
-          <span class="proj-topic">TabView</span>
-        </div>
-        <div class="proj-steps">
-          <div class="proj-steps-label">PDF 구성 — 5단계</div>
-          <div class="step-row"><div class="step-num">01</div><div class="step-text">TabView로 타이머/스톱워치 탭 구조 구성</div></div>
-          <div class="step-row"><div class="step-num">02</div><div class="step-text">원형 프로그레스 바 (Path + trim)</div></div>
-          <div class="step-row"><div class="step-num">03</div><div class="step-text">Timer.publish + onReceive로 카운트다운</div></div>
-          <div class="step-row"><div class="step-num">04</div><div class="step-text">스톱워치 랩 기록 기능</div></div>
-          <div class="step-row"><div class="step-num">05</div><div class="step-text">알림음 & 진동 (AudioServicesPlaySystemSound)</div></div>
-        </div>
-        <div class="proj-cta">
-          <div class="proj-price">
-            <div class="proj-price-label">인프런 가격</div>
-            <div class="proj-price-val">₩9,900</div>
-            <div class="proj-price-sub">코드 + PDF 포함</div>
-          </div>
-          <a href="#notify-section" class="btn-inflearn" style="background:linear-gradient(135deg,#1A1D2A,#2A2D40);" onclick="if(typeof gtag==='function')gtag('event','purchase_click',{project:'타이머',action:'notify'})">
-            <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg>
-            출시 알림 받기
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. 장바구니 앱 -->
-    <div class="proj-card fade-in delay-3" style="--mockup-glow:#a855f718;">
-      <div class="proj-mockup" style="background:linear-gradient(135deg,#130d20,#0d0a17);">
-        <div class="mock-phone">
-          <div class="mock-status"><div class="mock-notch"></div></div>
-          <div class="mock-screen" style="background:#1c1c1e;padding:8px;">
-            <div style="color:#fff;font-size:10px;font-weight:700;margin-bottom:6px;">상품 목록</div>
-            <div style="display:flex;flex-direction:column;gap:4px;">
-              <div style="background:#2c2c2e;border-radius:6px;padding:6px 8px;display:flex;align-items:center;justify-content:space-between;">
-                <div style="font-size:9px;color:#fff;">아이폰 케이스</div>
-                <div style="font-size:9px;color:#a855f7;">+ 담기</div>
-              </div>
-              <div style="background:#2c2c2e;border-radius:6px;padding:6px 8px;display:flex;align-items:center;justify-content:space-between;">
-                <div style="font-size:9px;color:#fff;">에어팟 파우치</div>
-                <div style="font-size:9px;color:#a855f7;">+ 담기</div>
-              </div>
-              <div style="background:#2c2c2e;border-radius:6px;padding:6px 8px;display:flex;align-items:center;justify-content:space-between;">
-                <div style="font-size:9px;color:#fff;">맥북 스티커</div>
-                <div style="font-size:9px;color:#a855f7;">+ 담기</div>
-              </div>
-            </div>
-            <div style="margin-top:8px;background:#a855f7;border-radius:8px;padding:6px;text-align:center;font-size:9px;color:#fff;">장바구니 (3) — ₩27,000</div>
-          </div>
-        </div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-header">
-          <div class="proj-emoji">🛒</div>
-          <div class="proj-info">
-            <div class="proj-title">장바구니 앱</div>
-            <div class="proj-difficulty">⭐⭐ 초급 · Stage 1-2, 1-3</div>
-          </div>
-        </div>
-        <p class="proj-desc">상품 목록 → 장바구니 담기 → 수량 조절 → 총 금액 계산 흐름을 구현합니다. @Observable로 여러 화면이 장바구니 상태를 공유하는 패턴을 익힙니다.</p>
-        <div class="proj-topics">
-          <span class="proj-topic">@Observable</span>
-          <span class="proj-topic">NavigationStack</span>
-          <span class="proj-topic">List</span>
-          <span class="proj-topic">.swipeActions</span>
-          <span class="proj-topic">reduce</span>
-        </div>
-        <div class="proj-steps">
-          <div class="proj-steps-label">PDF 구성 — 5단계</div>
-          <div class="step-row"><div class="step-num">01</div><div class="step-text">Product / CartItem 모델 설계</div></div>
-          <div class="step-row"><div class="step-num">02</div><div class="step-text">상품 목록 화면 (List + NavigationLink)</div></div>
-          <div class="step-row"><div class="step-num">03</div><div class="step-text">@Observable CartStore — 공유 상태</div></div>
-          <div class="step-row"><div class="step-num">04</div><div class="step-text">장바구니 화면 (수량 조절 + 삭제)</div></div>
-          <div class="step-row"><div class="step-num">05</div><div class="step-text">총 금액 계산 (reduce + Computed Property)</div></div>
-        </div>
-        <div class="proj-cta">
-          <div class="proj-price">
-            <div class="proj-price-label">인프런 가격</div>
-            <div class="proj-price-val">₩9,900</div>
-            <div class="proj-price-sub">코드 + PDF 포함</div>
-          </div>
-          <a href="#notify-section" class="btn-inflearn" style="background:linear-gradient(135deg,#1A1D2A,#2A2D40);" onclick="if(typeof gtag==='function')gtag('event','purchase_click',{project:'장바구니',action:'notify'})">
-            <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg>
-            출시 알림 받기
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 4. 메모 앱 -->
-    <div class="proj-card fade-in delay-4" style="--mockup-glow:#FFD60A18;">
-      <div class="proj-mockup" style="background:linear-gradient(135deg,#1a1500,#0d0f00);">
-        <div class="mock-phone">
-          <div class="mock-status"><div class="mock-notch"></div></div>
-          <div class="mock-screen" style="background:#1c1c1e;padding:8px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-              <div style="color:#fff;font-size:10px;font-weight:700;">메모</div>
-              <div style="color:#FFD60A;font-size:14px;">✏️</div>
-            </div>
-            <div style="background:#2c2c2e;border-radius:4px;padding:4px 6px;margin-bottom:4px;font-size:8px;color:#888;">🔍 검색</div>
-            <div style="display:flex;flex-direction:column;gap:4px;">
-              <div style="background:#2c2c2e;border-radius:6px;padding:6px 8px;">
-                <div style="font-size:9px;color:#fff;margin-bottom:2px;">SwiftUI 공부 메모</div>
-                <div style="font-size:8px;color:#888;">오늘 · @State는 뷰 안에서...</div>
-              </div>
-              <div style="background:#2c2c2e;border-radius:6px;padding:6px 8px;">
-                <div style="font-size:9px;color:#fff;margin-bottom:2px;">프로젝트 아이디어</div>
-                <div style="font-size:8px;color:#888;">어제 · 운동 기록 앱 만들기...</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-header">
-          <div class="proj-emoji">📝</div>
-          <div class="proj-info">
-            <div class="proj-title">메모 앱</div>
-            <div class="proj-difficulty">⭐⭐ 초급 · Stage 1-2, 1-3, 1-4</div>
-          </div>
-        </div>
-        <p class="proj-desc">Apple Notes 간소판. 메모 작성/편집/삭제 CRUD를 구현하고 UserDefaults에 저장합니다. .searchable로 검색 기능까지 완성합니다.</p>
-        <div class="proj-topics">
-          <span class="proj-topic">CRUD</span>
-          <span class="proj-topic">UserDefaults</span>
-          <span class="proj-topic">Codable</span>
-          <span class="proj-topic">.searchable</span>
-          <span class="proj-topic">TabView</span>
-        </div>
-        <div class="proj-steps">
-          <div class="proj-steps-label">PDF 구성 — 5단계</div>
-          <div class="step-row"><div class="step-num">01</div><div class="step-text">Memo 모델 (Codable + Identifiable)</div></div>
-          <div class="step-row"><div class="step-num">02</div><div class="step-text">메모 목록 화면 (List + NavigationLink)</div></div>
-          <div class="step-row"><div class="step-num">03</div><div class="step-text">메모 작성/편집 화면 (TextEditor)</div></div>
-          <div class="step-row"><div class="step-num">04</div><div class="step-text">UserDefaults 저장 & 불러오기</div></div>
-          <div class="step-row"><div class="step-num">05</div><div class="step-text">.searchable 검색 + 정렬 필터</div></div>
-        </div>
-        <div class="proj-cta">
-          <div class="proj-price">
-            <div class="proj-price-label">인프런 가격</div>
-            <div class="proj-price-val">₩9,900</div>
-            <div class="proj-price-sub">코드 + PDF 포함</div>
-          </div>
-          <a href="#notify-section" class="btn-inflearn" style="background:linear-gradient(135deg,#1A1D2A,#2A2D40);" onclick="if(typeof gtag==='function')gtag('event','purchase_click',{project:'메모앱',action:'notify'})">
-            <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg>
-            출시 알림 받기
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 5. 날씨 앱 -->
-    <div class="proj-card fade-in delay-1" style="--mockup-glow:#2E8BD818;">
-      <div class="proj-mockup" style="background:linear-gradient(160deg,#1a3a6e,#0a1a3a);">
-        <div class="mock-phone">
-          <div class="mock-status"><div class="mock-notch"></div></div>
-          <div class="mock-screen" style="background:linear-gradient(180deg,#1a3a6e,#0d2040);padding:10px 8px;">
-            <div style="text-align:center;margin-bottom:4px;">
-              <div style="color:#fff;font-size:10px;opacity:.8;">서울</div>
-              <div style="font-size:28px;">☀️</div>
-              <div style="color:#fff;font-size:20px;font-weight:300;">22°</div>
-              <div style="color:#aad;font-size:8px;">맑음</div>
-            </div>
-            <div style="display:flex;justify-content:space-around;background:rgba(255,255,255,.1);border-radius:8px;padding:6px 4px;margin-top:6px;">
-              <div style="text-align:center;"><div style="font-size:8px;color:#aad;">월</div><div style="font-size:8px;">🌤</div><div style="font-size:8px;color:#fff;">19°</div></div>
-              <div style="text-align:center;"><div style="font-size:8px;color:#aad;">화</div><div style="font-size:8px;">🌧</div><div style="font-size:8px;color:#fff;">15°</div></div>
-              <div style="text-align:center;"><div style="font-size:8px;color:#aad;">수</div><div style="font-size:8px;">☀️</div><div style="font-size:8px;color:#fff;">23°</div></div>
-              <div style="text-align:center;"><div style="font-size:8px;color:#aad;">목</div><div style="font-size:8px;">⛅</div><div style="font-size:8px;color:#fff;">20°</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-header">
-          <div class="proj-emoji">🌤</div>
-          <div class="proj-info">
-            <div class="proj-title">날씨 앱 UI</div>
-            <div class="proj-difficulty">⭐⭐⭐ 중급 · Stage 1 전체 + Stage 2-2</div>
-          </div>
-        </div>
-        <p class="proj-desc">Apple Weather 앱 UI를 클론합니다. GeometryReader로 스크롤 시 배경이 변하는 parallax 효과를 구현하고, 실제 날씨 API까지 연결합니다.</p>
-        <div class="proj-topics">
-          <span class="proj-topic">GeometryReader</span>
-          <span class="proj-topic">ScrollView</span>
-          <span class="proj-topic">ZStack 그라디언트</span>
-          <span class="proj-topic">URLSession</span>
-          <span class="proj-topic">async/await</span>
-        </div>
-        <div class="proj-steps">
-          <div class="proj-steps-label">PDF 구성 — 6단계</div>
-          <div class="step-row"><div class="step-num">01</div><div class="step-text">날씨 데이터 모델 설계 (Codable)</div></div>
-          <div class="step-row"><div class="step-num">02</div><div class="step-text">메인 화면 — 그라디언트 배경 + 온도 표시</div></div>
-          <div class="step-row"><div class="step-num">03</div><div class="step-text">시간별 / 주간 예보 스크롤 섹션</div></div>
-          <div class="step-row"><div class="step-num">04</div><div class="step-text">GeometryReader parallax 스크롤 효과</div></div>
-          <div class="step-row"><div class="step-num">05</div><div class="step-text">Open-Meteo API 연결 (URLSession + async/await)</div></div>
-          <div class="step-row"><div class="step-num">06</div><div class="step-text">도시 목록 관리 (추가/삭제)</div></div>
-        </div>
-        <div class="proj-cta">
-          <div class="proj-price">
-            <div class="proj-price-label">인프런 가격</div>
-            <div class="proj-price-val">₩14,900</div>
-            <div class="proj-price-sub">코드 + PDF 포함</div>
-          </div>
-          <a href="#notify-section" class="btn-inflearn" style="background:linear-gradient(135deg,#1A1D2A,#2A2D40);" onclick="if(typeof gtag==='function')gtag('event','purchase_click',{project:'날씨앱',action:'notify'})">
-            <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg>
-            출시 알림 받기
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 6. 가계부 앱 -->
-    <div class="proj-card fade-in delay-2" style="--mockup-glow:#30D15818;">
-      <div class="proj-mockup" style="background:linear-gradient(135deg,#0d1f12,#0a1a0d);">
-        <div class="mock-phone">
-          <div class="mock-status"><div class="mock-notch"></div></div>
-          <div class="mock-screen" style="background:#1c1c1e;padding:8px;">
-            <div style="color:#30D158;font-size:9px;font-weight:700;margin-bottom:2px;">3월 잔액</div>
-            <div style="color:#fff;font-size:18px;font-weight:300;margin-bottom:8px;">₩485,000</div>
-            <div style="display:flex;gap:6px;margin-bottom:8px;">
-              <div style="flex:1;background:#2c2c2e;border-radius:6px;padding:5px;text-align:center;">
-                <div style="color:#30D158;font-size:7px;">수입</div>
-                <div style="color:#fff;font-size:9px;">₩1,200,000</div>
-              </div>
-              <div style="flex:1;background:#2c2c2e;border-radius:6px;padding:5px;text-align:center;">
-                <div style="color:#FF453A;font-size:7px;">지출</div>
-                <div style="color:#fff;font-size:9px;">₩715,000</div>
-              </div>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:3px;">
-              <div style="background:#2c2c2e;border-radius:5px;padding:5px 6px;display:flex;justify-content:space-between;">
-                <div style="font-size:8px;color:#fff;">🍔 식비</div>
-                <div style="font-size:8px;color:#FF453A;">-₩12,000</div>
-              </div>
-              <div style="background:#2c2c2e;border-radius:5px;padding:5px 6px;display:flex;justify-content:space-between;">
-                <div style="font-size:8px;color:#fff;">💰 월급</div>
-                <div style="font-size:8px;color:#30D158;">+₩2,500,000</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-header">
-          <div class="proj-emoji">💰</div>
-          <div class="proj-info">
-            <div class="proj-title">가계부 앱</div>
-            <div class="proj-difficulty">⭐⭐⭐⭐ 심화 · Stage 1 + 2 전체</div>
-          </div>
-        </div>
-        <p class="proj-desc">Stage 1~2를 총동원하는 종합 프로젝트. 수입/지출 기록, 카테고리별 필터, 월별 합계, SwiftData 영구 저장, 차트 시각화까지 완성합니다.</p>
-        <div class="proj-topics">
-          <span class="proj-topic">SwiftData</span>
-          <span class="proj-topic">Swift Charts</span>
-          <span class="proj-topic">@Query</span>
-          <span class="proj-topic">.searchable</span>
-          <span class="proj-topic">DatePicker</span>
-          <span class="proj-topic">Predicate</span>
-        </div>
-        <div class="proj-steps">
-          <div class="proj-steps-label">PDF 구성 — 7단계</div>
-          <div class="step-row"><div class="step-num">01</div><div class="step-text">Transaction 모델 (SwiftData @Model)</div></div>
-          <div class="step-row"><div class="step-num">02</div><div class="step-text">지출 입력 폼 (DatePicker, Picker, TextField)</div></div>
-          <div class="step-row"><div class="step-num">03</div><div class="step-text">거래 목록 — 월별 섹션 + swipeActions 삭제</div></div>
-          <div class="step-row"><div class="step-num">04</div><div class="step-text">요약 대시보드 (잔액, 수입, 지출 계산)</div></div>
-          <div class="step-row"><div class="step-num">05</div><div class="step-text">카테고리 필터 (@Query Predicate)</div></div>
-          <div class="step-row"><div class="step-num">06</div><div class="step-text">Swift Charts 월별 막대 차트</div></div>
-          <div class="step-row"><div class="step-num">07</div><div class="step-text">검색 + 정렬 + 카테고리 관리</div></div>
-        </div>
-        <div class="proj-cta">
-          <div class="proj-price">
-            <div class="proj-price-label">인프런 가격</div>
-            <div class="proj-price-val">₩19,900</div>
-            <div class="proj-price-sub">코드 + PDF 포함</div>
-          </div>
-          <a href="#notify-section" class="btn-inflearn" style="background:linear-gradient(135deg,#1A1D2A,#2A2D40);" onclick="if(typeof gtag==='function')gtag('event','purchase_click',{project:'가계부',action:'notify'})">
-            <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/></svg>
-            출시 알림 받기
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── Bundle ── -->
-<section class="bundle-wrap fade-in">
-  <div class="bundle-card">
-    <div>
-      <div class="bundle-eyebrow">전체 패키지 — 포트폴리오 6개 완성</div>
-      <div class="bundle-title">이 순서대로 만들면 실력이 쌓인다 🎯</div>
-      <p class="bundle-desc">
-        계산기(레이아웃) → 타이머(상태관리) → 장바구니(화면공유) → 메모앱(CRUD) → 날씨앱(API) → 가계부(종합).<br>
-        난이도순으로 설계된 6개 프로젝트를 완주하면 iOS 포트폴리오가 완성됩니다.
-      </p>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;">
-        <span style="font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:6px;background:var(--orange-dim);color:var(--orange);border:1px solid #FF6B2B33;">6개 완성 Xcode 프로젝트</span>
-        <span style="font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:6px;background:var(--orange-dim);color:var(--orange);border:1px solid #FF6B2B33;">6개 PDF 학습 가이드</span>
-        <span style="font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:6px;background:var(--orange-dim);color:var(--orange);border:1px solid #FF6B2B33;">인프런 평생 소장</span>
-      </div>
-    </div>
-    <div class="bundle-cta">
-      <div class="bundle-price-orig">개별 구매 시 ₩74,500</div>
-      <div class="bundle-price">₩49,000</div>
-      <a href="#notify-section" class="btn-bundle" onclick="if(typeof gtag==='function')gtag('event','purchase_click',{project:'번들',action:'notify'})">
-        출시 알림 받기 →
-      </a>
-      <div style="font-size:11px;color:var(--muted);text-align:right;">인프런에서 결제 · 평생 소장</div>
-    </div>
-  </div>
-</section>
-
-<!-- 멘토링 + 커뮤니티 -->
-<section style="max-width:1100px;margin:0 auto;padding:0 40px 24px;position:relative;z-index:1;">
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-    <a href="https://inf.run/4VzFE" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:16px;padding:22px 24px;background:linear-gradient(135deg,var(--surface),var(--orange-dim));border:1px solid #FF6B2B44;border-radius:var(--radius-lg);text-decoration:none;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--orange)'" onmouseout="this.style.borderColor='#FF6B2B44'">
-      <div style="font-size:24px;flex-shrink:0;">🧑‍💻</div>
-      <div style="flex:1;">
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px;">프로젝트 막힐 때? 1:1 멘토링</div>
-        <div style="font-size:11px;color:var(--muted);">₩20,000 / 30분 · 코드 리뷰 · 포트폴리오 피드백</div>
-      </div>
-      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--orange);">→</div>
-    </a>
-    <div style="display:flex;align-items:center;gap:16px;padding:22px 24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);">
-      <img src="kakao-talk-qr.jpg" alt="카카오톡 QR" style="width:56px;height:56px;border-radius:8px;border:1px solid var(--border);flex-shrink:0;">
+  <!-- 2. 타이머 -->
+  <div class="proj-card fade-in">
+    <div class="proj-head">
+      <div class="proj-emoji">⏱</div>
       <div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px;">카카오톡 오픈채팅 💬</div>
-        <div style="font-size:11px;color:var(--muted);">학습 질문 · 코드 리뷰 · <a href="https://open.kakao.com/o/p8FjWFli" target="_blank" rel="noopener" style="color:var(--orange);text-decoration:underline;text-underline-offset:2px;">링크로 참여</a></div>
+        <div class="proj-title">타이머 / 스톱워치</div>
+        <div class="proj-diff">⭐⭐ 초급 · Stage 1-1, 1-2, 1-4</div>
       </div>
     </div>
+    <div class="proj-desc">Apple Clock 앱의 타이머 탭 클론. Timer.publish로 카운트다운, Path로 원형 프로그레스 바를 그립니다.</div>
+    <div class="proj-topics">
+      <span class="proj-topic">Timer.publish</span>
+      <span class="proj-topic">Path / Shape</span>
+      <span class="proj-topic">@State</span>
+      <span class="proj-topic">TabView</span>
+    </div>
+    <div class="proj-links">
+      <a href="projects/timer-guide.html" class="proj-link proj-link-guide">학습 가이드 →</a>
+    </div>
   </div>
-</section>
 
-<!-- ── 뉴스레터 구독 ── -->
-<section id="notify-section" style="max-width:1100px;margin:0 auto;padding:0 40px 80px;position:relative;z-index:1;">
-  <div style="background:linear-gradient(135deg,#1A1D2A,#2A2D40);border-radius:var(--radius-lg);padding:40px 36px;text-align:center;color:#fff;">
-    <div style="font-size:36px;margin-bottom:16px;">📬</div>
-    <h3 style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;margin-bottom:8px;letter-spacing:-.02em;">뉴스레터 구독</h3>
-    <p style="font-size:13px;color:#9BA3C0;line-height:1.7;margin-bottom:24px;">클론 코딩 출시, 새 Stage 업데이트, iOS 개발 팁을<br>이메일로 가장 먼저 받으세요.</p>
-    <div style="display:flex;justify-content:center;">
-      <iframe src="https://leeo25.substack.com/embed" width="480" height="320" style="border:1px solid #3A3D50;background:#2A2D40;border-radius:12px;max-width:100%;" frameborder="0" scrolling="no"></iframe>
+  <!-- 3. 장바구니 -->
+  <div class="proj-card fade-in">
+    <div class="proj-head">
+      <div class="proj-emoji">🛒</div>
+      <div>
+        <div class="proj-title">장바구니 앱</div>
+        <div class="proj-diff">⭐⭐ 초급 · Stage 1-2, 1-3</div>
+      </div>
+    </div>
+    <div class="proj-desc">상품 목록 → 장바구니 담기 → 수량 조절 → 총 금액 계산. @Observable로 여러 화면이 상태를 공유합니다.</div>
+    <div class="proj-topics">
+      <span class="proj-topic">@Observable</span>
+      <span class="proj-topic">NavigationStack</span>
+      <span class="proj-topic">List</span>
+      <span class="proj-topic">reduce</span>
+    </div>
+    <div class="proj-links">
+      <a href="projects/cart-guide.html" class="proj-link proj-link-guide">학습 가이드 →</a>
+    </div>
+  </div>
+
+  <!-- 4. 메모 앱 -->
+  <div class="proj-card fade-in">
+    <div class="proj-head">
+      <div class="proj-emoji">📝</div>
+      <div>
+        <div class="proj-title">메모 앱</div>
+        <div class="proj-diff">⭐⭐ 초급 · Stage 1-2, 1-3, 1-4</div>
+      </div>
+    </div>
+    <div class="proj-desc">Apple Notes 간소판. 메모 CRUD + UserDefaults 저장 + .searchable 검색 기능까지 완성합니다.</div>
+    <div class="proj-topics">
+      <span class="proj-topic">CRUD</span>
+      <span class="proj-topic">UserDefaults</span>
+      <span class="proj-topic">Codable</span>
+      <span class="proj-topic">.searchable</span>
+    </div>
+    <div class="proj-links">
+      <a href="projects/memo-guide.html" class="proj-link proj-link-guide">학습 가이드 →</a>
+    </div>
+  </div>
+
+  <!-- 5. 날씨 앱 -->
+  <div class="proj-card fade-in">
+    <div class="proj-head">
+      <div class="proj-emoji">🌤</div>
+      <div>
+        <div class="proj-title">날씨 앱 UI</div>
+        <div class="proj-diff">⭐⭐⭐ 중급 · Stage 1 + Stage 2-2</div>
+      </div>
+    </div>
+    <div class="proj-desc">Apple Weather 앱 UI 클론. GeometryReader parallax 효과 + 실제 날씨 API까지 연결합니다.</div>
+    <div class="proj-topics">
+      <span class="proj-topic">GeometryReader</span>
+      <span class="proj-topic">ScrollView</span>
+      <span class="proj-topic">URLSession</span>
+      <span class="proj-topic">async/await</span>
+    </div>
+    <div class="proj-links">
+      <a href="projects/weather-guide.html" class="proj-link proj-link-guide">학습 가이드 →</a>
+    </div>
+  </div>
+
+  <!-- 6. 가계부 -->
+  <div class="proj-card fade-in">
+    <div class="proj-head">
+      <div class="proj-emoji">💰</div>
+      <div>
+        <div class="proj-title">가계부 앱</div>
+        <div class="proj-diff">⭐⭐⭐⭐ 심화 · Stage 1 + 2 전체</div>
+      </div>
+    </div>
+    <div class="proj-desc">Stage 1~2 종합 프로젝트. 수입/지출 기록, 카테고리 필터, SwiftData 영구 저장, Swift Charts 시각화.</div>
+    <div class="proj-topics">
+      <span class="proj-topic">SwiftData</span>
+      <span class="proj-topic">Swift Charts</span>
+      <span class="proj-topic">@Query</span>
+      <span class="proj-topic">Predicate</span>
+    </div>
+    <div class="proj-links">
+      <a href="projects/budget-guide.html" class="proj-link proj-link-guide">학습 가이드 →</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- 커뮤니티 -->
+<section style="max-width:1100px;margin:0 auto;padding:0 40px 60px;position:relative;z-index:1;">
+  <div style="display:flex;align-items:center;gap:16px;padding:20px 24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);">
+    <img src="kakao-talk-qr.jpg" alt="카카오톡 QR" style="width:48px;height:48px;border-radius:8px;border:1px solid var(--border);flex-shrink:0;">
+    <div style="flex:1;">
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px;">프로젝트 하다 막히면 💬</div>
+      <div style="font-size:11px;color:var(--muted);">카카오톡 오픈채팅 · <a href="https://open.kakao.com/o/p8FjWFli" target="_blank" rel="noopener" style="color:var(--orange);text-decoration:underline;text-underline-offset:2px;">링크로 참여</a></div>
     </div>
   </div>
 </section>
